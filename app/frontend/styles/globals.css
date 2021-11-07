@@ -14,3 +14,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.primary-color {
+  color: #141850;
+}
+
+.secondary-color {
+  color: #FFFF;
+}
+
+.primary-bg-color {
+  background-color: #141850;
+}
+
+.secondary-bg-color {
+  background-color: #FFFF;
+}

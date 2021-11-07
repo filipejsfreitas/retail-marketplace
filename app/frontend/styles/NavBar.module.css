@@ -1,0 +1,39 @@
+.btn {
+    color: white;
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+}
+
+.btn:hover {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+}
+
+.navbar {
+    height: 64px;
+}
+
+.searchBtn {
+    color: #303179;
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+    transform: translateX(-35px);
+    
+}
+
+.searchBtn svg {
+    width: 23px; 
+    height: auto;
+}
+
+.searchBox {
+    border-radius: 0.25rem !important;
+}
+
+.searchBox:focus {
+    z-index: 0 !important;
+}
+
