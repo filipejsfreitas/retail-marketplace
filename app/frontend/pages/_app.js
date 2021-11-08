@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-<<<<<<< HEAD
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Layout from '../components/Layout'
 
@@ -10,11 +10,6 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </Layout>
     )
-=======
-
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
->>>>>>> 8dc3eb85835729b757a8237b7ed4fd0bbaf5233e
 }
 
 export default MyApp

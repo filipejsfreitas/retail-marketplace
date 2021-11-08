@@ -20,8 +20,9 @@
     background-color: transparent;
     border-color: transparent;
     padding: 0;
-    transform: translateX(-35px);
-    
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 .searchBtn svg {
@@ -35,5 +36,9 @@
 
 .searchBox:focus {
     z-index: 0 !important;
+}
+
+.sinput {
+    min-width: 230px !important;
 }
 

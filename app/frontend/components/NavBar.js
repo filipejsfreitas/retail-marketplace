@@ -6,7 +6,7 @@ import styles from "../styles/NavBar.module.css"
 const NavBar = () => {
     return (
         <Navbar className={ `primary-bg-color ${styles.navbar} `}>
-            <Container fluid className="navbarContainer">
+            <Container fluid >
                 <Container className="d-flex align-items-center py-0">
                     <button className={styles.btn} >
                         <BsJustify size={48}/>
@@ -15,7 +15,7 @@ const NavBar = () => {
                         <h1 className="ps-2 my-0 secondary-color">Retail Marketplace</h1>
                     </Navbar.Brand >
                 </Container>
-                <InputGroup className="d-flex flex-row">
+                <InputGroup className={`d-flex flex-row ${styles.sinput}`}>
                     <FormControl className={styles.searchBox} placeholder="Search"/>
                     <button className={styles.searchBtn} >
                         <BsSearch/>
