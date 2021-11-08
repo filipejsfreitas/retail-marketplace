@@ -1,14 +1,14 @@
-import { Container, Navbar, Form, FormControl, Button, InputGroup } from "react-bootstrap"
+import { Container, Navbar, FormControl, InputGroup } from "react-bootstrap"
 import { BsJustify, BsPersonCircle, BsBagFill, BsSearch  } from 'react-icons/bs'
 
 import styles from "../styles/NavBar.module.css"
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
         <Navbar className={ `primary-bg-color ${styles.navbar} `}>
-            <Container fluid >
+            <Container fluid>
                 <Container className="d-flex align-items-center py-0">
-                    <button className={styles.btn} >
+                    <button className={styles.btn} onClick={props.handleShow}>
                         <BsJustify size={48}/>
                     </button>
                     <Navbar.Brand href="/" className>
