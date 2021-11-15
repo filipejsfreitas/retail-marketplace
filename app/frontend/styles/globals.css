@@ -15,18 +15,8 @@ a {
   box-sizing: border-box;
 }
 
-.primary-color {
-  color: #141850;
+:root {
+  --bs-primary: #141850;
+  --bs-primary-rgb: 20,24,80;
 }
 
-.secondary-color {
-  color: #FFFF;
-}
-
-.primary-bg-color {
-  background-color: #141850;
-}
-
-.secondary-bg-color {
-  background-color: #FFFF;
-}
