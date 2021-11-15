@@ -5,14 +5,14 @@ import styles from "../styles/NavBar.module.css"
 
 const NavBar = (props) => {
     return (
-        <Navbar className={ `primary-bg-color ${styles.navbar} `}>
+        <Navbar className={styles.navbar} bg="primary" >
             <Container fluid>
                 <Container className="d-flex align-items-center py-0">
                     <button className={styles.btn} onClick={props.handleShow}>
                         <BsJustify size={48}/>
                     </button>
                     <Navbar.Brand href="/" className>
-                        <h1 className="ps-2 my-0 secondary-color">Retail Marketplace</h1>
+                        <h1 className="ps-2 my-0 text-white">Retail Marketplace</h1>
                     </Navbar.Brand >
                 </Container>
                 <InputGroup className={`d-flex flex-row ${styles.sinput}`}>

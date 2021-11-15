@@ -9,7 +9,7 @@ const SideBar = (props) => {
     return (
         <Offcanvas show={props.show} onHide={props.handleClose}>
             <Offcanvas.Header className="p-0">
-                <Container className={`primary-bg-color ${styles.topRec} d-flex align-items-center`}>
+                <Container className={`${styles.topRec} d-flex align-items-center bg-primary`}>
                     <button className={styles.closeBtn} onClick={props.handleClose}>
                         <BsX size={48}/>
                     </button>
