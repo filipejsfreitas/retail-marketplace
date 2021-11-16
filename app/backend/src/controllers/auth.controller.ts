@@ -7,6 +7,7 @@ import { authMiddleware } from '@middlewares/auth.middleware';
 import { validationMiddleware } from '@middlewares/validation.middleware';
 import { AuthService } from '@services/auth.service';
 
+
 @Controller()
 export class AuthController {
   public authService = new AuthService();
