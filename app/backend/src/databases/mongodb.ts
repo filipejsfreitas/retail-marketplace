@@ -7,7 +7,6 @@ export const dbConnection = {
   url: `mongodb://${host}:${port}/${database}`,
   options: {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
+    useUnifiedTopology: true
   },
 };
