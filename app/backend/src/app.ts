@@ -8,15 +8,15 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
-import { connect, set } from 'mongoose';
+import mongoose from 'mongoose';
 import { useExpressServer, getMetadataArgsStorage } from 'routing-controllers';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import swaggerUi from 'swagger-ui-express';
-import { dbConnection } from '@databases';
-import errorMiddleware from '@middlewares/error.middleware';
+import { dbConnection } from '@/databases/mongodb';
+import { errorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 
-class App {
+export class App {
   public app: express.Application;
   public port: string | number;
   public env: string;
@@ -48,10 +48,12 @@ class App {
   
   private connectToDatabase() {
     if (this.env !== 'production') {
-      set('debug', true);
+      mongoose.set('debug', true);
     }
 
-    connect(dbConnection.url, dbConnection.options);
+    mongoose.connect(dbConnection.url, dbConnection.options as mongoose.ConnectOptions)
+      .then(() => logger.info('Connected to the database.'))
+      .catch(e => logger.error('Error connecting to the database.'));
   }
 
   private initializeMiddlewares() {
@@ -112,5 +114,3 @@ class App {
     this.app.use(errorMiddleware);
   }
 }
-
-export default App;
