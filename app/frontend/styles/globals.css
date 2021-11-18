@@ -15,6 +15,23 @@ a {
   box-sizing: border-box;
 }
 
+.btn-primary {
+  color: #fff;
+  background-color: #303179;
+  border-color: #141850;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus  {
+  color: #fff;
+  background-color: #141850;
+  border-color: #303179;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 .25rem rgba(49,132,253,.5);
+}
+
+
 :root {
   --bs-primary: #141850;
   --bs-primary-rgb: 20,24,80;
