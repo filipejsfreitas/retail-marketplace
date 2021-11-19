@@ -18,7 +18,9 @@ const Layout = ({children}) => {
         <>
             <NavBar handleShow={handleShow} />
             <SideBar handleClose={handleClose} show={show} />
-            {children}
+            <div className="page_content">
+                {children}
+            </div>
         </>
     )
 }
