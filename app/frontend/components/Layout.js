@@ -14,22 +14,13 @@ const Layout = ({children}) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // In the login page there is no NavBar or SideBar, so this components won't be rendered
-    if(router.asPath === '/login' || '/register') {
-        return (
-            <>
+    return (
+        <>
+            <NavBar handleShow={handleShow} />
+            <SideBar handleClose={handleClose} show={show} />
             {children}
-            </>
-        )
-    } else {
-        return (
-            <>
-            <NavBar handleShow={handleShow}/>
-            <SideBar handleClose={handleClose} show={show}/>
-            {children}
-            </>
-        )
-    }
+        </>
+    )
 }
 
 export default Layout
