@@ -15,7 +15,7 @@ const Layout = ({children}) => {
     const handleShow = () => setShow(true);
 
     // In the login page there is no NavBar or SideBar, so this components won't be rendered
-    if(router.asPath === '/login') {
+    if(router.asPath === '/login' || '/register') {
         return (
             <>
             {children}
