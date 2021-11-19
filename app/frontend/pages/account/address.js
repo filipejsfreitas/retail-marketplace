@@ -1,12 +1,10 @@
 
 import Account from "components/Account"
 
-const Acc = Account("address")
-
 export default function AccountAddress() {
     return (
-        <Acc>
+        <Account selected="address">
             <h4>Addresses</h4>
-        </Acc>
+        </Account>
     );
 }

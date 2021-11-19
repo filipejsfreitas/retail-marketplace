@@ -1,11 +1,11 @@
 import { Row, Col } from "react-bootstrap"
-import Link from 'next/link'
 
 import Layout from "../components/Layout"
 
 import styles from '../styles/account.module.css'
 
-const Account = selected => ({ children }) => {
+const Account = (props) => {
+    const selected = props.selected
     const menu = [
         { id: "info", text: "Account Information" },
         { id: "contact", text: "My Contacts" },
@@ -15,9 +15,9 @@ const Account = selected => ({ children }) => {
         const disabled = x["id"] === selected
         x["html"] =
             <a href={"/account/" + x["id"]} disabled={disabled}>
-            <button className={styles.button} disabled={disabled}>
-                <h4> {x["text"]} </h4>
-            </button>
+                <button className={styles.button} disabled={disabled}>
+                    <h4> {x["text"]} </h4>
+                </button>
             </a>
         return x;
     })
@@ -33,7 +33,6 @@ const Account = selected => ({ children }) => {
                     {menu[3]["html"]} <br />
                 </Col>
                 <Col>
-                    {children}
                 </Col>
             </Row>
         </Layout>
