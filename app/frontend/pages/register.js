@@ -1,68 +1,105 @@
 import { Container, Button, Form, Row, Col } from "react-bootstrap"
+import { useState } from "react"
+
 
 import Logo from "../components/Logo"
 
 import styles from "../styles/login.module.css"
 
-
 export default function Register() {
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
+
   return (
     <>
       <Container fluid className={styles.main} >
-          <Container className={styles.edges} />
-
+        <Container className={styles.edges} />
           <Container className={styles.center}>
-
-            {/*Without this Container the image does not render, maybe a nextjs bug */}
-            <Container className={styles.imgContainer}><Logo /></Container> 
-
+            <Container className={styles.imgContainer}><Logo/></Container> 
             <Container fluid className={styles.formContainer}>
-            
-              <Form>
-
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicFirstName">
-                              <Form.Label>First Name</Form.Label>
-                              <Form.Control type="text" placeholder="First Name"/>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group className="mb-3" controlId="formBasicLastName">
-                              <Form.Label>Last Name</Form.Label>
-                              <Form.Control type="text" placeholder="Last Name" />
-                        </Form.Group>
-                    </Col>
+                  <Col>
+                    <Form.Group className="mb-3" controlId="formBasicFirstName">
+                      <Form.Label>First name</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        placeholder="First name"
+                        required
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Invalid input!
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group className="mb-3" controlId="formBasicLastName">
+                      <Form.Label>Last name</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        placeholder="Last name"
+                        required
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Invalid input!
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  </Col>
                 </Row>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="name@example.com" />
+                <Row >
+                  <Form.Group className="mb-3" controlId="formBasicFirstEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" placeholder="name@example.com" required />
+                    <Form.Control.Feedback type="invalid">
+                      Invalid Email!
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicFirstPass">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" required aria-describedby="passwordHelpBlock" />
+                    <Form.Text id="passwordHelpBlock" muted>
+                      Your password must be 8-20 characters, contain letters, numbers, special characters.
+                    </Form.Text>
+                    <Form.Control.Feedback type="invalid">
+                      Invalid Passord!
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicFirstConfirmPass">
+                    <Form.Label>Confirm password</Form.Label>
+                    <Form.Control type="password" placeholder="Confirm Password" required />
+                    <Form.Control.Feedback type="invalid">
+                      Invalid Passord!
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Row>
+                <Form.Group className="mb-3">
+                  <Form.Check
+                    required
+                    label="Agree to terms and conditions"
+                    feedbackType="invalid"
+                  />
                 </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password"/>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
-                  <Form.Label>Phone Number</Form.Label>
-                  <Form.Control type="phone" defaultValue="+351" />
-                </Form.Group>
-
-
-                <Button variant="primary" size="lg" className={styles.btn}>
-                  Register
+                <Button type="submit" variant="primary" size="lg" className={styles.btn}>
+                    Register
                 </Button>
               </Form>
-
             </Container>
-
           </Container>
-
-          <Container className={styles.edges} />
-      </Container>
+        <Container className={styles.edges} />
+      </Container> 
     </>
-
-  )
+  );
 }
+
