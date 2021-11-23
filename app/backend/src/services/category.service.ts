@@ -1,4 +1,4 @@
-import { Category } from '@interfaces/category.interface';
+import { Category, CategoryTree } from '@interfaces/category.interface';
 import { CategoryModel } from '@models/category.model';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
@@ -59,7 +59,10 @@ export class CategoryService {
         if (isEmpty(categoryId)) throw new HttpException(400, "You're not categoryId");
     
         const findCategory: Category = await this.category.findOne({ _id: categoryId });
+        console.log(findCategory);
         if (!findCategory) throw new HttpException(409, "You're not category");
+
+        
     
         return findCategory;
       }
@@ -76,17 +79,28 @@ export class CategoryService {
     public async findCategorybyLevel(level: number): Promise<Category []> {
         if (isEmpty(level)) throw new HttpException(400, "You're not level");
     
-        const findCategory: Category []= await this.category.find({ level: level });
+        const findCategory: Category [] = await this.category.find({ level: level });
+        console.log(findCategory);
         if (!findCategory) throw new HttpException(409, "You're not level");
 
         return findCategory;
     }
-/*/
-    public async findCategoryTree(): Promise<Category []> {
+/*
+    public async findCategoryTree(): Promise<CategoryTree> {
         const findCategory: Category []= await this.category.find();
+        
         if (!findCategory) throw new HttpException(409, "No categories found");
-
+        findCategory.sort((catA,catB) => catA.level -catB.level)
 
         return findCategory;
-    }/*/
+    }
+*/
+    public picChildren(catT: Category, possChildren: CategoryTree []) : CategoryTree {
+        const children = possChildren.filter( elem => elem._id = catT._id);
+        return { _id: catT._id, parent_id: catT.parent_id, name: catT.name, level: catT.level, children:children } ;
+    }
+
+    public createtree(cat : Category): CategoryTree {    
+        return { _id:cat._id , name: cat.name , parent_id: cat.parent_id , level: cat.level, children: [] };
+    }
 }
