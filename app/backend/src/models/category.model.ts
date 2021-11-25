@@ -3,6 +3,11 @@ import { Category } from '@interfaces/category.interface';
 
 
 const categorySchema: Schema = new Schema({
+    _id: { 
+      type: String ,
+      required: true,
+      unique: true,
+    },
     name: {
       type: String,
       required: true,

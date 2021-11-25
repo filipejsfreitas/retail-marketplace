@@ -67,6 +67,10 @@ export class App {
   }
 
   private initializeRoutes(controllers: Function[]) {
+    require('class-transformer')['classToPlain'] = function (obj: any)  {
+      return JSON.parse(JSON.stringify(obj));
+    };
+
     useExpressServer(this.app, {
       cors: {
         origin: config.get('cors.origin'),
