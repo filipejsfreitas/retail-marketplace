@@ -1,56 +1,72 @@
-import Layout from "../components/Layout"
-import styles from '../styles/account.module.css'
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from "react-bootstrap"
+import styles from 'styles/account.module.css'
 
-const AccountPanel = (props) => {
+export default function AccountAddress(props) {
+
+    const fields =
+        props.fields.map((row, i) => {
+            const cols = row.map((col, j) => {
+                console.assert(col.label, "Missing label for fields[" + i + "]" + "[" + j + "]")
+                return <Col key={"col-" + j}>
+                    <Form.Group as={Row} nogutters="true" className="mb-3" controlId="formHorizontalEmail">
+                        <Form.Label lg="auto" column>{col.label}</Form.Label>
+                        <Col><Form.Control type="fname" disabled={true} /></Col>
+                    </Form.Group>
+                </Col>
+            })
+            return <Row key={"row-" + i}>{cols}</Row>
+        })
+
     return (
-        <div class={styles.panel}>
-            <h4>Contact Information</h4>
+        <div className={styles.panel}>
+            <h4>{props.title}</h4>
             <Container>
-                <Row>
-                    <Col>
-                        <Form.Group as={Row} noGutters={true} className="mb-3" controlId="formHorizontalEmail">
-                            <Form.Label lg="auto" column>First Name:</Form.Label>
-                            <Col><Form.Control type="fname" disabled="true" /></Col>
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group as={Row} noGutters={true} className="mb-3" controlId="formHorizontalEmail">
-                            <Form.Label lg="auto" column>Last Name:</Form.Label>
-                            <Col><Form.Control type="lname" disabled="true" /></Col>
-                        </Form.Group>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Form.Group as={Row} noGutters={true} className="mb-3" controlId="formHorizontalEmail">
-                            <Form.Label lg="auto" column>Email:</Form.Label>
-                            <Col><Form.Control type="email" disabled="true" /></Col>
-                        </Form.Group>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Form.Group as={Row} noGutters={true} className="mb-3" controlId="formHorizontalEmail">
-                            <Form.Label lg="auto" column>Phone Number:</Form.Label>
-                            <Col><Form.Control type="phone" disabled="true" /></Col>
-                        </Form.Group>
-                    </Col>
-                </Row>
-                <Row noGutters={true}>
-                    <Col></Col>
-                    <Col lg="auto" hidden="true">
-                        <Button variant="primary" className={styles.btn_panel}>Cancel</Button>
-                    </Col>
-                    <Col lg="auto" hidden="true">
-                        <Button variant="primary" className={styles.btn_panel}>Save</Button>
-                    </Col>
-                    <Col lg="auto">
-                        <Button variant="primary" className={styles.btn_panel}>Edit</Button>
-                    </Col>
-                </Row>
+                {fields}
+                {props.children}
             </Container>
         </div>
     )
 }
 
-export default AccountPanel
+export function AccountPanelEditButtons(props) {
+    const [isEditing, setEditing] = useState(false);
+
+    return <Row nogutters="true">
+        <Col></Col>
+        <Col lg="auto" hidden={!isEditing}>
+            <Button
+                variant="primary" className={styles.btn_panel}
+                onClick={() => setEditing(false)}
+            >
+                Cancel
+            </Button>
+        </Col>
+        <Col lg="auto" hidden={!isEditing}>
+            <Button variant="primary" className={styles.btn_panel}>Save</Button>
+        </Col>
+        <Col lg="auto" hidden={isEditing}>
+            <Button
+                variant="primary" className={styles.btn_panel}
+                onClick={() => setEditing(true)}
+            >
+                Edit
+            </Button>
+        </Col>
+    </Row>
+}
+
+export function AccountPanelOpenOrderButtons(props) {
+    console.assert(props.orderno, "Missing order number for details button.")
+
+    return <Row nogutters="true">
+        <Col></Col>
+        <Col lg="auto">
+            <a href={props.orderno === undefined ? "/404" : "/orders/" + props.orderno}>
+                <Button variant="primary" className={styles.btn_panel} >
+                    Details
+                </Button>
+            </a>
+        </Col>
+    </Row>
+}

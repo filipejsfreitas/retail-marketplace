@@ -8,7 +8,6 @@ const Account = (props) => {
     const selected = props.selected
     const menu = [
         { id: "info", text: "Account Information" },
-        { id: "contact", text: "My Contacts" },
         { id: "address", text: "My Addresses" },
         { id: "order", text: "My Orders" },
     ].map((x) => {
@@ -30,7 +29,6 @@ const Account = (props) => {
                     {menu[0]["html"]} <br />
                     {menu[1]["html"]} <br />
                     {menu[2]["html"]} <br />
-                    {menu[3]["html"]} <br />
                 </Col>
                 <Col>
                     {props.children}

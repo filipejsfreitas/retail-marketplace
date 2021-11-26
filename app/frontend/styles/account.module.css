@@ -9,6 +9,7 @@
 }
 
 .panel {
+    margin: 20px;
     padding: 20px;
     background-color: #E5E5E5;
     border-radius: 10px;
