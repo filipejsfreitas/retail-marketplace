@@ -33,6 +33,7 @@ const Account = (props) => {
                     {menu[3]["html"]} <br />
                 </Col>
                 <Col>
+                    {props.children}
                 </Col>
             </Row>
         </Layout>
