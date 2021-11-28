@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { Container, Button, Form } from "react-bootstrap"
 
 import { BsGoogle } from 'react-icons/bs'
@@ -41,7 +43,9 @@ export default function Login() {
 
             </Container>
 
-            <a className={styles.registerLink} href="/register">New to Retail Marketplace?</a>
+            <Link href="/register">
+              <a className={styles.registerLink}>New to Retail Marketplace?</a>
+            </Link>
 
           </Container>
 
