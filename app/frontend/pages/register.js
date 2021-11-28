@@ -35,7 +35,6 @@ export default function Register() {
                         required
                         type="text"
                         placeholder="First name"
-                        required
                       />
                       <Form.Control.Feedback type="invalid">
                         Invalid input!
@@ -49,7 +48,6 @@ export default function Register() {
                         required
                         type="text"
                         placeholder="Last name"
-                        required
                       />
                       <Form.Control.Feedback type="invalid">
                         Invalid input!
