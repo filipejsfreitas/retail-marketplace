@@ -7,9 +7,9 @@ export default function AccountContact() {
             <h4>My Contacts</h4>
             <AccountPanel title="Contact Information" fields={ 
                 [
-                    [{ label: "First Name:" }, { label: "Last Name:" }],
-                    [{ label: "Email:"}],
-                    [{ label: "Phone Number:"}]
+                    //[{ label: "First Name:" }, { label: "Last Name:" }],
+                    //[{ label: "Email:"}],
+                    //[{ label: "Phone Number:"}]
                 ]
             }>
             </AccountPanel>

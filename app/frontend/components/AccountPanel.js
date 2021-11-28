@@ -7,12 +7,8 @@ export default function AccountAddress(props) {
     const fields =
         props.fields.map((row, i) => {
             const cols = row.map((col, j) => {
-                console.assert(col.label, "Missing label for fields[" + i + "]" + "[" + j + "]")
                 return <Col key={"col-" + j}>
-                    <Form.Group as={Row} nogutters="true" className="mb-3" controlId="formHorizontalEmail">
-                        <Form.Label lg="auto" column>{col.label}</Form.Label>
-                        <Col><Form.Control type="fname" disabled={true} /></Col>
-                    </Form.Group>
+                    {col}
                 </Col>
             })
             return <Row key={"row-" + i}>{cols}</Row>
@@ -27,6 +23,23 @@ export default function AccountAddress(props) {
             </Container>
         </div>
     )
+}
+
+export function AccountPanelForm(props) {
+    console.assert(props.label, "Missing label field on " + AccountPanelForm.name)
+    return <Form.Group as={Row} nogutters="true" className="mb-3" controlId="formHorizontalEmail">
+            <Form.Label lg="auto" column>{props.label}</Form.Label>
+            <Col><Form.Control type="fname" disabled={true} /></Col>
+        </Form.Group>
+}
+
+export function AccountPanelDescription(props) {
+    console.assert(props.label, "Missing label field on " + AccountPanelDescription.name)
+    console.assert(props.text, "Missing text field on " + AccountPanelDescription.name)
+    return <div>
+        <h5>{props.label}</h5> 
+        <h6 style={{"font-weight": "normal"}}>{props.text}</h6>
+    </div>
 }
 
 export function AccountPanelEditButtons(props) {

@@ -1,6 +1,8 @@
 import Account from "components/Account"
 import AccountPanel from "components/AccountPanel"
-import { AccountPanelEditButtons } from "components/AccountPanel"
+import { AccountPanelEditButtons, AccountPanelForm } from "components/AccountPanel"
+import { Row, Col, Button } from "react-bootstrap"
+import styles from 'styles/account.module.css'
 
 export default function AccountInfo() {
     return (
@@ -9,36 +11,48 @@ export default function AccountInfo() {
             <AccountPanel title="Contact Information"
                 fields={
                     [
-                        [{ label: "First Name:" }, { label: "Last Name:" }],
-                        [{ label: "Email:" }],
-                        [{ label: "Phone Number:" }]
+                        [<AccountPanelForm label="First Name:" />, <AccountPanelForm label="Last Name:" />],
+                        [<AccountPanelForm label="Email:" />],
+                        [<AccountPanelForm label="Phone Number:" />]
                     ]
                 } >
-                <AccountPanelEditButtons/>
+                <Row nogutters="true"> <Col></Col>
+                    <Col lg="auto" >
+                        <a href={"/404"}>
+                            <Button variant="primary" className={styles.btn_panel}> Edit </Button>
+                        </a>
+                    </Col>
+                </Row>
             </AccountPanel>
-            <AccountPanel title="Default Shipping Address"
+            <AccountPanel title="Shipping Address"
                 fields={
                     [
-                        [{ label: "Name:" }, { label: "Phone Number:" }],
-                        [{ label: "Country:" }, { label: "City:" }],
-                        [{ label: "Address:" }],
-                        [{ label: "ZIP code:" }, { label: "Number/Floor:" }],
-                        [{ label: "NIF:" }],
+                        [<AccountPanelForm label="Name:" />, <AccountPanelForm label="Phone Number:" />],
+                        [<AccountPanelForm label="Country:" />, <AccountPanelForm label="City:" />],
+                        [<AccountPanelForm label="Address:" />],
+                        [<AccountPanelForm label="ZIP code:" />, <AccountPanelForm label="Number/Floor:" />],
+                        [<AccountPanelForm label="NIF:" />],
                     ]
                 } >
-                <AccountPanelEditButtons/>
+                <Row nogutters="true"> <Col></Col>
+                    <Col lg="auto" >
+                        <a href={"/account/address"}>
+                            <Button variant="primary" className={styles.btn_panel}> Edit </Button>
+                        </a>
+                    </Col>
+                </Row>
             </AccountPanel>
             <AccountPanel title="Default Billing Address"
                 fields={
                     [
-                        [{ label: "Name:" }, { label: "Phone Number:" }],
-                        [{ label: "Country:" }, { label: "City:" }],
-                        [{ label: "Address:" }],
-                        [{ label: "ZIP code:" }, { label: "Number/Floor:" }],
-                        [{ label: "NIF:" }],
+                        [<AccountPanelForm label="Name:" />, <AccountPanelForm label="Phone Number:" />],
+                        [<AccountPanelForm label="Country:" />, <AccountPanelForm label="City:" />],
+                        [<AccountPanelForm label="Address:" />],
+                        [<AccountPanelForm label="ZIP code:" />, <AccountPanelForm label="Number/Floor:" />],
+                        [<AccountPanelForm label="NIF:" />],
                     ]
                 } >
-                <AccountPanelEditButtons/>
+                <AccountPanelEditButtons />
             </AccountPanel>
 
         </Account>
