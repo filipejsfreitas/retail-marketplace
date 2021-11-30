@@ -1,0 +1,80 @@
+.main {
+    display: inline-flex;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    height: 100%;
+}
+
+.edges{
+    flex-shrink: 1;
+    min-width: 0px;
+    padding: 0;
+    margin: 0;
+}
+
+.center {
+    flex-basis: 31.25vw;
+    flex-shrink: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 360px;
+}
+
+.imgContainer {
+    padding: 0;
+    position: static;
+    margin-top: 55px;
+    margin-bottom: 75px;
+    width: 31.25vw;
+    min-width: 360px;
+}
+
+.formContainer {
+    padding: 0;
+    margin: 0;
+    width: 28.05vw;
+    min-width: 360px;
+}
+
+.break {
+    height: 1px;
+    background-color: #141850;
+    text-align: center;
+    margin: 2rem 0 2rem 0;
+}
+
+.breakText {
+    background-color: white;
+    position: relative;
+    top: -0.8rem;
+    text-align: center;
+    padding: 16px;
+    font-family: Alef;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #141850;
+}
+
+.btn{
+    font-size: 20px;
+    line-height: 30px;
+    width: 28.05vw;
+    font-family: Fira Sans;
+    min-width: 360px;
+    margin-top: 1rem;
+}
+
+.registerLink{
+    position: absolute;
+    bottom: 5.64vh;
+    color: #303179;
+    font-family: Fira Sans;
+    font-size: 16px;
+    align-self: center;
+    justify-self: center;
+}
