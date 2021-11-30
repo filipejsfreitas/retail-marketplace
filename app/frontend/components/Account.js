@@ -20,7 +20,7 @@ const Account = (props) => {
             </a>
         return x;
     })
-    console.assert(menu.some(i => i.id === selected), "No account menu item has been selected.")
+    //console.assert(menu.some(i => i.id === selected), "No account menu item has been selected.")
     return (
         <Layout>
             <Row>
