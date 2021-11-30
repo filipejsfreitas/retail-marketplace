@@ -4,7 +4,7 @@ import { useState } from "react"
 
 import Logo from "../components/Logo"
 
-import styles from "../styles/login.module.css"
+import styles from "../styles/register.module.css"
 
 export default function Register() {
   const [validated, setValidated] = useState(false);
