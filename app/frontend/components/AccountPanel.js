@@ -70,7 +70,7 @@ export function AccountPanelEditButtons(props) {
 }
 
 export function AccountPanelOpenOrderButtons(props) {
-    console.assert(props.orderno, "Missing order number for details button.")
+    //console.assert(props.orderno, "Missing order number for details button.")
 
     return <Row nogutters="true">
         <Col></Col>
