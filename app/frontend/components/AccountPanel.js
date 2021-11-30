@@ -38,7 +38,7 @@ export function AccountPanelDescription(props) {
     //console.assert(props.text, "Missing text field on " + AccountPanelDescription.name)
     return <div>
         <h5>{props.label}</h5> 
-        <h6 style={{"font-weight": "normal"}}>{props.text}</h6>
+        <h6 style={{fontWeight: "normal"}}>{props.text}</h6>
     </div>
 }
 
