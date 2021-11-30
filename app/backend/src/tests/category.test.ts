@@ -12,7 +12,7 @@ var app = new App([AuthController, IndexController, UsersController, CategoryCon
 describe("POST / - registo de uma categoria", () => {
   it("tenta registar uma categoria", async () => {
     const result = await request(app).post("/category/")
-    .send({name:'categoria teste2keubnt' ,parent_id: 'null'});
+    .send({name:'categoria teste2keubntudagisgreo'});
     expect(result.statusCode).toEqual(200);
   });
 });
@@ -40,7 +40,7 @@ describe("GET / - a simple api endpoint", () => {
 describe("PuT / - update de uma categoria", () => {
   it("tenta mudar uma categoria", async () => {
     const result = await request(app).put("/category/61a4c71ef2d604032f7d735c")
-    .send({name:'categoria teste2000',parent_id: 'null'});
+    .send({name:'categoria teste2000',parent_id: 'srdtfgyihojpk'});
     expect(result.statusCode).toEqual(200);
 
 
