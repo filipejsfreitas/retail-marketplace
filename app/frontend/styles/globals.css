@@ -37,3 +37,8 @@ a {
   --bs-primary-rgb: 20,24,80;
 }
 
+.page_content {
+  padding-top: 20px;
+  margin: auto;
+  max-width: 80%;
+}
