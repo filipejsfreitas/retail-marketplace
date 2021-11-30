@@ -26,7 +26,7 @@ export default function AccountAddress(props) {
 }
 
 export function AccountPanelForm(props) {
-    console.assert(props.label, "Missing label field on " + AccountPanelForm.name)
+    //console.assert(props.label, "Missing label field on " + AccountPanelForm.name)
     return <Form.Group as={Row} nogutters="true" className="mb-3" controlId="formHorizontalEmail">
             <Form.Label lg="auto" column>{props.label}</Form.Label>
             <Col><Form.Control type="fname" disabled={true} /></Col>
