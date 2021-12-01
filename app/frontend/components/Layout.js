@@ -25,7 +25,9 @@ const Layout = ({children}) => {
             <NavBar handleShowSideBar={handleShowSideBar} handleShowCheckout={handleShowCheckout}/>
             <SideBar handleClose={handleCloseSideBar} show={showSideBar} />
             <Checkout handleClose={handleCloseCheckout} show={showCheckout} />
-            {children}
+            <div className="page_content">
+                {children}
+            </div>
         </>
     )
 }
