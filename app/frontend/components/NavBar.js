@@ -8,7 +8,7 @@ const NavBar = (props) => {
         <Navbar className={styles.navbar} bg="primary" >
             <Container fluid>
                 <Container className="d-flex align-items-center py-0">
-                    <button className={styles.btn} onClick={props.handleShow}>
+                    <button className={styles.btn} onClick={props.handleShowSideBar}>
                         <BsJustify size={48}/>
                     </button>
                     <Navbar.Brand href="/" className>
@@ -22,7 +22,7 @@ const NavBar = (props) => {
                     </button>
                 </InputGroup>
                 <Container className="d-flex flex-row-reverse">
-                    <button className={styles.btn} >
+                    <button className={styles.btn} onClick={props.handleShowCheckout} >
                         <BsBagFill size={48}/>
                     </button>
                     <button className={styles.btn}  >

@@ -1,23 +1,30 @@
 import { useState } from "react"
 import { useRouter } from 'next/router'
 
-import NavBar from "./NavBar"
-import SideBar from "./SideBar"
+import NavBar from "components/NavBar"
+import SideBar from "components/SideBar"
+import Checkout from "components/checkout"
 
 
 const Layout = ({children}) => {
 
     const router = useRouter()
 
-    const [show, setShow] = useState(false);
+    const [showSideBar, setShowSideBar] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleCloseSideBar = () => setShowSideBar(false);
+    const handleShowSideBar = () => setShowSideBar(true);
+
+    const [showCheckout, setShowCheckout] = useState(false);
+
+    const handleCloseCheckout = () => setShowCheckout(false);
+    const handleShowCheckout = () => setShowCheckout(true);
 
     return (
         <>
-            <NavBar handleShow={handleShow} />
-            <SideBar handleClose={handleClose} show={show} />
+            <NavBar handleShowSideBar={handleShowSideBar} handleShowCheckout={handleShowCheckout}/>
+            <SideBar handleClose={handleCloseSideBar} show={showSideBar} />
+            <Checkout handleClose={handleCloseCheckout} show={showCheckout} />
             {children}
         </>
     )
