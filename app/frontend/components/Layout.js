@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import NavBar from "components/NavBar"
 import SideBar from "components/SideBar"
-import Checkout from "components/checkout"
+import Checkout from "components/Checkout"
 
 
 const Layout = ({children}) => {
