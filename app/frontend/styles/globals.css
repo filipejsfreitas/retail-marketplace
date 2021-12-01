@@ -15,6 +15,9 @@ a {
   box-sizing: border-box;
 }
 
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+
 .btn-primary {
   color: #fff;
   background-color: #303179;
