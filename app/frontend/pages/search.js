@@ -36,7 +36,7 @@ function sort_by() {
 
 function price() {
     const router = useRouter()
-    console.log(router.query["min"])
+    //console.log(router.query["min"])
     return {
         checker: <>
             <h4>Price</h4>
