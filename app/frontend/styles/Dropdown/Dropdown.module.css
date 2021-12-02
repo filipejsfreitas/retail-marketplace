@@ -1,0 +1,60 @@
+.dd_enter {
+  transform: translateY(-100px);
+  opacity: 0;
+  z-index: 0;
+}
+.dd_enter_active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 500ms;
+  z-index: 1;
+}
+.dd_exit {
+  opacity: 1;
+  z-index: 0;
+}
+.dd_exit_active {
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 300ms, transform 500ms;
+}
+
+.dd_wrapper {
+  position: absolute;
+  top: 64px;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 250px;
+  z-index: 0;
+}
+
+.dd_top {
+  display: flex;
+  width: 100%;
+  height: 50%;
+  background-color: #141850;
+  font-style: italic;
+  font-weight: 800;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #FFFFFF;
+  font-size: 30px;
+  padding: 25px;
+
+}
+
+.dd_bot {
+  display: flex;
+  width: 100%;
+  height: 50%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #E5E5E5;
+}
+
+.dd_bot button {
+  height: 50px;
+  width: 160px;
+}
