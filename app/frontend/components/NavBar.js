@@ -38,7 +38,7 @@ const NavBar = (props) => {
                     </Container>
                 </Container>
             </Navbar>
-            <Dropdown btnRef={dropButtonRef} state={[showDropdown, setshowDropdown]}/>
+            <Dropdown user={{username:"Diogo"}} btnRef={dropButtonRef} state={[showDropdown, setshowDropdown]}/>
         </>
     )
 }
