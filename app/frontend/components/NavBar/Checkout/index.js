@@ -1,8 +1,8 @@
 import { Offcanvas, Container, Button } from "react-bootstrap"
 import { BsX } from 'react-icons/bs'
-import Item from "components/Checkout/item"
+import Item from "components/NavBar/Checkout/item"
 
-import styles from 'styles/Checkout/Checkout.module.css'
+import styles from 'styles/NavBar/Checkout/Checkout.module.css'
 
 const calc_total = (items) => {
     return 128;

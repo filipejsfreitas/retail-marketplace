@@ -1,9 +1,9 @@
-import Dropdown from "components/Dropdown"
+import Dropdown from "components/NavBar/Dropdown"
 import { useRef, useState } from "react"
 import { Container, Navbar, FormControl, InputGroup } from "react-bootstrap"
 import { BsJustify, BsPersonCircle, BsBagFill, BsSearch  } from 'react-icons/bs'
 
-import styles from "../styles/NavBar.module.css"
+import styles from "styles/NavBar/NavBar.module.css"
 
 const NavBar = (props) => {
 

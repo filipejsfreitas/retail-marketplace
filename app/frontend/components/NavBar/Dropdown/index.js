@@ -3,9 +3,9 @@ import { CSSTransition } from 'react-transition-group'
 import { Button } from 'react-bootstrap'
 import Link from 'next/link'
 
-import OutsideHandler from 'components/Dropdown/OutsideHandler'
+import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
 
-import styles from 'styles/Dropdown/Dropdown.module.css'
+import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
 
 // Custom dropdown component with animation
 // Needs to be given a btnRef prop with the reference

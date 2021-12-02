@@ -1,14 +1,11 @@
 import { useState } from "react"
-import { useRouter } from 'next/router'
 
-import NavBar from "components/NavBar"
-import SideBar from "components/SideBar"
-import Checkout from "components/Checkout"
+import NavBar from "components/NavBar/NavBar"
+import SideBar from "components/NavBar/SideBar"
+import Checkout from "components/NavBar/Checkout"
 
 
 const Layout = ({children}) => {
-
-    const router = useRouter()
 
     const [showSideBar, setShowSideBar] = useState(false);
 
