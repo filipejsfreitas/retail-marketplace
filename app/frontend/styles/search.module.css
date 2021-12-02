@@ -4,3 +4,15 @@
     grid-auto-flow: dense;
     grid-template-columns: repeat(4,1fr);
 }
+
+.btn {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+}
+
+.btn:hover {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+}

@@ -20,8 +20,7 @@ const NavBar = (props) => {
                 <InputGroup className={`d-flex flex-row ${styles.sinput}`}>
                     <FormControl autoFocus={true} className={styles.searchBox} name="search" placeholder="Search" maxLength="128" defaultValue={router.query.query}
                         onKeyUp={event => {
-                            if (event.key.match(/[a-z]/i))
-                                props.handleSearch(event.target.value)
+                            props.handleSearch(event.target.value)
                         }}
                     />
                     <button type="submit" className={styles.searchBtn}>
