@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from 'react-bootstrap'
+import Link from 'next/link'
 
 import OutsideHandler from 'components/Dropdown/OutsideHandler'
 
@@ -39,8 +40,10 @@ const Dropdown = (props) => {
             Welcome
           </div>
           <div className={styles.dd_bot}>
-            <Button variant="secondary">Sign In</Button>
-            <Button variant="secondary">Register</Button>
+            {/* eslint-disable-next-line @next/next/link-passhref */}
+            <Link href="/login" ><Button variant="secondary">Log In</Button></Link>
+            {/* eslint-disable-next-line @next/next/link-passhref */}
+            <Link href="/register" ><Button variant="secondary">Register</Button></Link>
           </div>
         </div>
       </OutsideHandler>
