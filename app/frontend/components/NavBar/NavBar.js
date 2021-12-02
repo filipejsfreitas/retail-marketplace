@@ -1,11 +1,13 @@
 import Dropdown from "components/NavBar/Dropdown"
 import { useRef, useState } from "react"
+import { useRouter } from 'next/router'
 import { Container, Navbar, FormControl, InputGroup } from "react-bootstrap"
 import { BsJustify, BsPersonCircle, BsBagFill, BsSearch  } from 'react-icons/bs'
 
 import styles from "styles/NavBar/NavBar.module.css"
 
 const NavBar = (props) => {
+    const router = useRouter()
 
     const [showDropdown, setshowDropdown] = useState(false)
     const dropButtonRef = useRef(null)
@@ -23,7 +25,10 @@ const NavBar = (props) => {
                         </Navbar.Brand >
                     </Container>
                     <InputGroup className={`d-flex flex-row ${styles.sinput}`}>
-                        <FormControl className={styles.searchBox} placeholder="Search"/>
+                        <FormControl autoFocus={true} className={styles.searchBox} placeholder="Search"
+                            defaultValue={router.query.query} onKeyUp={event => {
+                                props.handleSearch(event.target.value)
+                            }} />
                         <button className={styles.searchBtn} >
                             <BsSearch/>
                         </button>
