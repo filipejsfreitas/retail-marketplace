@@ -18,7 +18,7 @@ const Layout = (props) => {
 
     const handleCloseCheckout = () => setShowCheckout(false);
     const handleShowCheckout = () => setShowCheckout(true);
-    const handleSearch = (value) => router.push({ pathname: "search", query: {"query": value}})
+    const handleSearch = (value) => router.push({ pathname: "/search", query: {"query": value}})
 
     return (
         <>
