@@ -1,7 +1,7 @@
 import { Offcanvas, Container } from "react-bootstrap"
 import { BsX } from 'react-icons/bs'
 
-import styles from '../styles/SideBar.module.css'
+import styles from 'styles/NavBar/SideBar.module.css'
 
 
 const SideBar = (props) => {

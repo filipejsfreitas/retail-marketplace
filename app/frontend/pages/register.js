@@ -2,7 +2,7 @@ import { Container, Button, Form, Row, Col } from "react-bootstrap"
 import { useState } from "react"
 
 
-import Logo from "../components/Logo"
+import Logo from "../components/Logo/Logo"
 
 import styles from "../styles/register.module.css"
 

@@ -121,7 +121,7 @@ export default function Search() {
                     res_sort_by.checker,
                     res_price.checker,
                     res_rating.checker,
-                ].map((x, i) => <Row key={"menu-" + i} style={{ "margin-top": "10px" }}>{x}</Row>)}
+                ].map((x, i) => <Row key={"menu-" + i} style={{ "marginTop": "10px" }}>{x}</Row>)}
             </Col>
             <Col>
                 <Container className={styles.frame}>
