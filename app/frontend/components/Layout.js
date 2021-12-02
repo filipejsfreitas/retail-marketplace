@@ -5,7 +5,7 @@ import NavBar from "./NavBar"
 import SideBar from "./SideBar"
 
 
-const Layout = ({children}) => {
+const Layout = (props) => {
 
     const router = useRouter()
 
@@ -13,13 +13,14 @@ const Layout = ({children}) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleSearch = (value) => router.push({ pathname: "search", query: {"query": value}})
 
     return (
         <>
-            <NavBar handleShow={handleShow} />
+            <NavBar handleShow={handleShow} handleSearch={props.handleSearch || handleSearch}/>
             <SideBar handleClose={handleClose} show={show} />
             <div className="page_content">
-                {children}
+                {props.children}
             </div>
         </>
     )

@@ -83,8 +83,14 @@ export default function Search() {
 
     const result_len = "1-50"
     const result_total = "500"
+    const handleSearch = (value) => {
+        if (!value) delete router.query.query
+        router.push({
+            pathname: router.pathname, query: value ? { ...router.query, "query": value } : router.query
+        })
+    }
 
-    return <Layout>
+    return <Layout handleSearch={handleSearch}>
         <Row>
             <Col xs={3}>
                 <h4>Showing {result_len} Results of {result_total} </h4>
