@@ -1,0 +1,31 @@
+.itemImg {
+    border: 1px;
+    border-color: grey;
+    border-style: solid;
+    box-shadow: 1px 1px 2px grey;
+    width: 110px;
+    height: 110px;
+    padding: 0;
+    margin: 0;
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 5px 0px 5px 15px;
+}
+
+.productTitle {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.productQuantity {
+    font-size: 16px;
+}
+
+.productPrice {
+    font-size: 16px;
+}
