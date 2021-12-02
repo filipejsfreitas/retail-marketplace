@@ -19,9 +19,7 @@ export default function Reviews(props1) {
     return (
         <ListGroup> 
             {props1.props1.map((key, value) => (
-            <ListGroupItem  key={value}>
-                {console.log(key.title)}
-                {console.log("ola")}
+            <ListGroupItem key={value}>
                 <div className={styles.reviewTitle}>{key.title}</div> 
                 <Row md={12}>
                     <Col md={2} >

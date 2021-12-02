@@ -23,7 +23,9 @@ function ProductPage(){
 
     const product = {
         name : "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
-        photo: "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+        photo: ["https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"],
         stars: 3.5,
         price: 45.69,
         retailer: "Retailer name",
@@ -65,7 +67,7 @@ function ProductPage(){
 
         reviews: [
             {
-            title: "Review Review  TitleReview TitleReview Title Title",
+            title: "Very nice product",
             username: "Jorge Programador",
             stars: 4.5,
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
@@ -81,7 +83,7 @@ function ProductPage(){
             d gravida ante tempus et. Donec nec quam nec mi aliquet posuere.'
             },
             {
-                title: "Review Review TitleReview TitleReview TitleReview Title Title",
+                title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
                 username: "Jorge Programador",
                 stars: 1.5,
                 text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
@@ -95,7 +97,16 @@ function ProductPage(){
                 finibus. Integer semper eget tellus non pretium. Suspendisse hendrerit\
                 neque vitae tortor consectetur interdum. Nullam vestibulum leo dolor, i\
                 d gravida ante tempus et. Donec nec quam nec mi aliquet posuere.'
-                }
+                },
+                {
+                    title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
+                    username: "Jorge Programador",
+                    stars: 5,
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
+                    tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
+                    s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
+                    Donec nec consequat ex.'
+                    }
         ]
 
     }
@@ -111,7 +122,7 @@ function ProductPage(){
                 <Col md={6}>
                     <Row>
                         <Container className={styles.carousel}> 
-                            <CarouselComponent/>
+                            <CarouselComponent props={product.photo}/>
                         </Container>
                         
                     </Row>
@@ -171,9 +182,7 @@ function ProductPage(){
             <Row md={12}>
                 <h2 className={styles.reviewName}>Reviews</h2>
                 <Container className={styles.panelReviews}>
-                <ListGroup> 
                     <Reviews props1={product.reviews}/>
-                </ListGroup>
                 </Container> 
             </Row>
             
