@@ -1,4 +1,4 @@
-import { Container, ListGroup, Button, Table, Row, Col } from "react-bootstrap"
+import { Container, ListGroup, Button, Table, Row, Col, ListGroupItem } from "react-bootstrap"
 import React, {useEffect} from "react"
 import Layout from "../components/Layout"
 import styles from "../styles/product.module.css"
@@ -45,9 +45,25 @@ function ProductPage(){
             "Weigth":"40 kg",
             "Cenas": "Nice2",
             "Cenas2": "Nice"
-        }
+        },
+        techDescription:[
+            "Operador: Livre",
+            "Dual SIM: Sim, Dual SIM (Nano-SIM, dual stand-by)",
+            "Rede: 4G LTE",
+            "Sistema Operativo: Android 11",
+            "Chipset: Qualcomm Snapdragon 860 (7 nm)",
+            "Processador: Octa-core (1x2.96 GHz Kryo 485 Gold & 3x2.42 GHz Kryo 485 Gold & 4x1.78 GHz Kryo 485 Silver)",
+            "Gráficos: Adreno 640",
+            "Armazenamento: 256GB (espaço utilizável será inferior) - expansível via microSD (utilizando um dos slots SIM)",
+            "Memória RAM: 8GB",
+            "Sensores: Impressão digital (montado na lateral), acelerômetro, giroscópio, proximidade, bússola",
+            "Câmara Frontal: 20 MP, f/2.2, (wide), 1/3.4, 0.8µm",
+            "Dimensões: 165.3 x 76.8 x 9.4 mm",
+            "Peso: 215 g"
+        ]
 
     }
+
     useEffect(() => {
     },[])
 
@@ -65,7 +81,7 @@ function ProductPage(){
                     </Row>
                     <Row>
                         <Container className={styles.carousel}>
-                            <h3>Also Recomended:</h3>
+                            <h3 className={styles.technicalDescription}>Also Recomended:</h3>
                             <RecomendedProducts/>
                         </Container>
                     </Row>
@@ -104,9 +120,14 @@ function ProductPage(){
                                     </td>
                                 </tbody>
                             </Table>
-                        </Container>
-
-                        <div>{product.description}</div>
+                        </Container>       
+                        <div className={styles.description}>{product.description}</div>
+                        <h3 className={styles.technicalDescription}>Technical Description</h3>
+                            <ListGroup>
+                                {Object.values(product.techDescription).map((key, value) => (
+                                <ListGroupItem  key={value}>{key}</ListGroupItem>
+                                ))}      
+                            </ListGroup>
                     </Container> 
                 </Col>   
             </Row>

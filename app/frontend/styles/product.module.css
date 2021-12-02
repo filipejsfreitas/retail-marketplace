@@ -51,13 +51,29 @@
     padding-right: 10px;
 }
 
+.description    {
+    color: #000000;
+    font-family: FiraSans;
+    font-size:  18px;
+    padding-top: 15px;
+    text-align: justify;
+}
+
+.technicalDescription{
+    color: #000000;
+    font-family: FiraSans;
+    font-size:  25px;
+    padding-top: 20px;
+    font-weight: 600;
+}
+
 .price {
     color: #ED7966;
     font-family: FiraSans;
     font-size: 40px;
     font-weight: 900;
-
 }
+
 .table1{
     color: black;
     font-family: FiraSans;
