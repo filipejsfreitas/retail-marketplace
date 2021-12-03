@@ -1,15 +1,9 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import styles from "styles/Product/product.module.css"
 
-function RecomendedProducts() {
-    const photo1 = ["https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-    "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-    "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-    "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-    "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"]
-
-    //const photo = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+function RecomendedProducts(props) {
 
     const responsive = {
         desktop: {
@@ -47,12 +41,18 @@ function RecomendedProducts() {
         itemClass="carousel-item-padding-40-px"
         >
         
-        {photo1.map((key, elem) =>(
-            <div key={elem}>
-            <img
-            className="d-block w-100"
-            src={key}
-            />
+        {props.props.map((key, elem) =>(
+            <div key={elem} align="center">
+              <div className={styles.recommended}>
+              <img
+                className={styles.recommendedPhoto}              
+                src={key.photo}
+              />
+              </div >
+              <div className={styles.textProd}>
+                <div className={styles.product_name}>{key.name}</div>
+                <div className={styles.product_name} >{key.price}€</div>
+              </div>
             </div>
         ))}
         
@@ -63,31 +63,3 @@ function RecomendedProducts() {
 };
 
 export default RecomendedProducts;
-//        <div>
-//            <div className='container-fluid' >
-//                <Carousel >
-//                    <Carousel.Item>
-//                        <Row>
-//                            <Col>
-//                                <img
-//                                className="d-block w-100"    
-//                                src={photo}
-//                                />
-//                            </Col>
-//                            <Col>
-//                                <img
-//                                className="d-block w-100"
-//                                src={photo}
-//                                />
-//                            </Col>
-//                            <Col>
-//                                <img
-//                                className="d-block w-100"
-//                                src={photo}
-//                                />
-//                            </Col>
-//                        </Row>
-//                    </Carousel.Item>
-//                </Carousel>
-//            </div>
-//        </div>

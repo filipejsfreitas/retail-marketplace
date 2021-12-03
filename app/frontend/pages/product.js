@@ -23,12 +23,14 @@ function ProductPage(){
 
     const product = {
         name : "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
-        photo: ["https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"],
+        photo: ["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/8/8/8899.jpg",
+            "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/_/1_p033017.jpg",
+            "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/2/_/2_p033017.jpg",
+            "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/4/_/4_p033017.jpg",
+            "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+        ],
         stars: 3.5,
         price: 45.69,
-        retailer: "Retailer name",
         nreviews: 500,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
                      tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
@@ -83,33 +85,55 @@ function ProductPage(){
             d gravida ante tempus et. Donec nec quam nec mi aliquet posuere.'
             },
             {
-                title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
-                username: "Jorge Programador",
-                stars: 1.5,
-                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
-                tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
-                s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
-                Donec nec consequat ex. Duis lacinia leo vitae risus hendrerit portti\
-                tor eget eget urna. Ut dapibus enim eu massa dictum posuere. Nulla et\
-                eros ligula. Nam eget turpis sapien. Mauris viverra tellus nulla, no\
-                n sagittis turpis ultrices sit amet. Nullam tortor diam, elementum a\
-                c erat vel, sodales hendrerit lectus. Mauris et tortor in enim volutpat\
-                finibus. Integer semper eget tellus non pretium. Suspendisse hendrerit\
-                neque vitae tortor consectetur interdum. Nullam vestibulum leo dolor, i\
-                d gravida ante tempus et. Donec nec quam nec mi aliquet posuere.'
-                },
-                {
-                    title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
-                    username: "Jorge Programador",
-                    stars: 5,
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
-                    tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
-                    s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
-                    Donec nec consequat ex.'
-                    }
+            title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
+            username: "Jorge Programador",
+            stars: 1.5,
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
+            tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
+            s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
+            Donec nec consequat ex. Duis lacinia leo vitae risus hendrerit portti\
+            tor eget eget urna. Ut dapibus enim eu massa dictum posuere. Nulla et\
+            eros ligula. Nam eget turpis sapien. Mauris viverra tellus nulla, no\
+            n sagittis turpis ultrices sit amet. Nullam tortor diam, elementum a\
+            c erat vel, sodales hendrerit lectus. Mauris et tortor in enim volutpat\
+            finibus. Integer semper eget tellus non pretium. Suspendisse hendrerit\
+            neque vitae tortor consectetur interdum. Nullam vestibulum leo dolor, i\
+            d gravida ante tempus et. Donec nec quam nec mi aliquet posuere.'
+            },
+            {
+            title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
+            username: "Jorge Programador",
+            stars: 5,
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
+            tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
+            s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
+            Donec nec consequat ex.'
+            }
         ]
-
     }
+
+    const recomended = [
+        {
+          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg",
+          name: "Very nice and long pruduct pruduct pruduct name",
+          price: "20"
+        },
+        {
+          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg",
+          name: "Very nice and long pruduct product name",
+          price: "20"
+        },
+        {
+          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg",
+          name: "Very nice and long name",
+          price: "20"
+        },
+        {
+          photo:"https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+          name: "Very nice and long pruduct name",
+          price: "20"
+        }
+      ]
 
     useEffect(() => {
     },[])
@@ -129,7 +153,7 @@ function ProductPage(){
                     <Row>
                         <Container className={styles.carousel}>
                             <h3 className={styles.technicalDescription}>Also Recommended:</h3>
-                            <RecomendedProducts/>
+                            <RecomendedProducts props={recomended} />
                         </Container>
                     </Row>
                 </Col>
