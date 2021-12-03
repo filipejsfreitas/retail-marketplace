@@ -19,11 +19,19 @@ function OutsideHandler(props) {
           setOpen(false);
         }
       }
+
+      function handleKey(event) {
+        if(event.key === 'Escape'){
+          setOpen(false);
+        }
+      }
       // Bind the event listener
       document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKey);
       return () => {
         // Unbind the event listener on clean up
         document.removeEventListener("mousedown", handleClickOutside);
+        document.removeEventListener("keydown", handleKey);
       };
     }, [wrapperRef,open,setOpen,buttonRef]);
   
