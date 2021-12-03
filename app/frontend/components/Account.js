@@ -22,7 +22,7 @@ const Account = (props) => {
     })
     //console.assert(menu.some(i => i.id === selected), "No account menu item has been selected.")
     return (
-        <Layout>
+        <Layout categories={props.categories}>
             <Row>
                 <Col xs={3}>
                     <h3>Hi, Name</h3> <br />

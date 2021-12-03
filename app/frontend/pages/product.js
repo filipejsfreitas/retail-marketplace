@@ -7,6 +7,8 @@ import CarouselComponent from "../components/Product/Carousel"
 import { BsFillStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import Reviews from "../components/Product/Review"
 
+import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
+
 function computeStars(stars) {
     var r = []
     for(var i=0; i<5; i++, stars--){
@@ -19,7 +21,7 @@ function computeStars(stars) {
     </>
 }
 
-function ProductPage(){
+function ProductPage({ categories }){
 
     const product = {
         name : "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
@@ -116,7 +118,7 @@ function ProductPage(){
 
 
     return(
-        <Layout>
+        <Layout categories={categories} >
 
             <Row md={12}>
                 <Col md={6}>
@@ -191,3 +193,24 @@ function ProductPage(){
 }
 
 export default ProductPage
+
+// This function gets called at build time on server-side.
+// Next.js will attempt to re-generate the page:
+// - When a request comes in
+// - At most once every X seconds, X being the value in the 
+// revalidate const.
+// In development (npm run dev) this function is called on every 
+// request
+export async function getStaticProps() {
+
+    const categories = await fetchCategories();
+    const revTime = revalidateTime()
+  
+    return {
+      props: {
+        categories,
+      },
+  
+      revalidate: revTime, 
+    }
+  }

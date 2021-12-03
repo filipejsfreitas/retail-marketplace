@@ -6,6 +6,8 @@ import RemoveQuery from "components/Search/RemoveQuery"
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { useRouter } from 'next/router'
 
+import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
+
 import styles from "styles/search.module.css"
 
 function sort_by() {
@@ -92,7 +94,7 @@ function rating() {
     }
 }
 
-export default function Search() {
+export default function Search({ categories }) {
     const router = useRouter()
 
     const result_len = "1-50"
@@ -107,7 +109,7 @@ export default function Search() {
     const res_price = price()
     const res_rating = rating()
 
-    return <Layout handleSearch={handleSearch}>
+    return <Layout handleSearch={handleSearch} categories={categories} >
         <Row>
             <Col xs={3}>
                 {[
@@ -136,3 +138,24 @@ export default function Search() {
         </Row>
     </Layout>
 }
+
+// This function gets called at build time on server-side.
+// Next.js will attempt to re-generate the page:
+// - When a request comes in
+// - At most once every X seconds, X being the value in the 
+// revalidate const.
+// In development (npm run dev) this function is called on every 
+// request
+export async function getStaticProps() {
+  
+    const categories = await fetchCategories();
+    const revTime = revalidateTime()
+  
+    return {
+      props: {
+        categories,
+      },
+  
+      revalidate: revTime, 
+    }
+  }
