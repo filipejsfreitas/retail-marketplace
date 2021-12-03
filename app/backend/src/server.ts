@@ -8,8 +8,9 @@ import { IndexController } from '@controllers/index.controller';
 import { UsersController } from '@controllers/users.controller';
 import { validateEnv } from '@utils/validateEnv';
 import { CategoryController } from './controllers/category.controller';
+import { ProductController } from './controllers/product.controller';
 
 validateEnv();
 
-const app = new App([AuthController, IndexController, UsersController, CategoryController]);
+const app = new App([AuthController, IndexController, UsersController, CategoryController, ProductController]);
 app.listen();

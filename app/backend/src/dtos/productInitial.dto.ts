@@ -3,7 +3,7 @@ import { IsArray, IsBoolean, IsString } from "class-validator";
 
 
 
-export class CreateProductDto {
+export class CreateProductInitialDto {
     @IsString()
     name: string;
 
@@ -14,7 +14,7 @@ export class CreateProductDto {
     category_id: string;
     
     @IsArray()
-    images: Array<string>;
+    images: Array<File>;
 
     @IsArray()
     characteristic: Array<Characteristic>;
