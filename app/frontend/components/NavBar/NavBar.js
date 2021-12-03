@@ -1,8 +1,10 @@
-import Dropdown from "components/NavBar/Dropdown"
 import { useRef, useState } from "react"
 import { useRouter } from 'next/router'
 import { Container, Navbar, FormControl, InputGroup } from "react-bootstrap"
 import { BsJustify, BsPersonCircle, BsBagFill, BsSearch  } from 'react-icons/bs'
+
+import Dropdown from "components/NavBar/Dropdown"
+import LogoReversed from "components/Logos/LogoReversed"
 
 import styles from "styles/NavBar/NavBar.module.css"
 
@@ -20,9 +22,11 @@ const NavBar = (props) => {
                         <button className={styles.btn} onClick={props.handleShowSideBar}>
                             <BsJustify size={48}/>
                         </button>
-                        <Navbar.Brand href="/" className>
-                            <h1 className="ps-2 my-0 text-white">Retail Marketplace</h1>
-                        </Navbar.Brand >
+                        <Container className={styles.brand}>
+                            <Navbar.Brand href="/">
+                                <LogoReversed height={50} width={170}/>
+                            </Navbar.Brand >
+                        </Container>
                     </Container>
                     <InputGroup className={`d-flex flex-row ${styles.sinput}`}>
                         <FormControl autoFocus={true} className={styles.searchBox} placeholder="Search"
