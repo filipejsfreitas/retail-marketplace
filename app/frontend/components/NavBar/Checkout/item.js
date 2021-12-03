@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap"
 import Image from "next/dist/client/image"
 
-import styles from "styles/Checkout/item.module.css"
+import styles from "styles/NavBar/Checkout/item.module.css"
 
 
 const Item = (props) => {

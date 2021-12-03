@@ -1,10 +1,11 @@
 import { Container, ListGroup, Button, Table, Row, Col, ListGroupItem } from "react-bootstrap"
 import React, {useEffect} from "react"
 import Layout from "../components/Layout"
-import styles from "../styles/product.module.css"
-import RecomendedProducts from "../components/Carousel2"
-import CarouselComponent from "../components/Carousel"
+import styles from 'styles/Product/product.module.css'
+import RecomendedProducts from "../components/Product/Carousel2"
+import CarouselComponent from "../components/Product/Carousel"
 import { BsFillStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import Reviews from "../components/Product/Review"
 
 function computeStars(stars) {
     var r = []
@@ -21,12 +22,14 @@ function computeStars(stars) {
 function ProductPage(){
 
     const product = {
-        "name": "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
-        photo: "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+        name : "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
+        photo: ["https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"],
         stars: 3.5,
         price: 45.69,
         retailer: "Retailer name",
-        reviews: 500,
+        nreviews: 500,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
                      tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
                      s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
@@ -60,6 +63,50 @@ function ProductPage(){
             "Câmara Frontal: 20 MP, f/2.2, (wide), 1/3.4, 0.8µm",
             "Dimensões: 165.3 x 76.8 x 9.4 mm",
             "Peso: 215 g"
+        ],
+
+        reviews: [
+            {
+            title: "Very nice product",
+            username: "Jorge Programador",
+            stars: 4.5,
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
+            tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
+            s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
+            Donec nec consequat ex. Duis lacinia leo vitae risus hendrerit portti\
+            tor eget eget urna. Ut dapibus enim eu massa dictum posuere. Nulla et\
+            eros ligula. Nam eget turpis sapien. Mauris viverra tellus nulla, no\
+            n sagittis turpis ultrices sit amet. Nullam tortor diam, elementum a\
+            c erat vel, sodales hendrerit lectus. Mauris et tortor in enim volutpat\
+            finibus. Integer semper eget tellus non pretium. Suspendisse hendrerit\
+            neque vitae tortor consectetur interdum. Nullam vestibulum leo dolor, i\
+            d gravida ante tempus et. Donec nec quam nec mi aliquet posuere.'
+            },
+            {
+                title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
+                username: "Jorge Programador",
+                stars: 1.5,
+                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
+                tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
+                s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
+                Donec nec consequat ex. Duis lacinia leo vitae risus hendrerit portti\
+                tor eget eget urna. Ut dapibus enim eu massa dictum posuere. Nulla et\
+                eros ligula. Nam eget turpis sapien. Mauris viverra tellus nulla, no\
+                n sagittis turpis ultrices sit amet. Nullam tortor diam, elementum a\
+                c erat vel, sodales hendrerit lectus. Mauris et tortor in enim volutpat\
+                finibus. Integer semper eget tellus non pretium. Suspendisse hendrerit\
+                neque vitae tortor consectetur interdum. Nullam vestibulum leo dolor, i\
+                d gravida ante tempus et. Donec nec quam nec mi aliquet posuere.'
+                },
+                {
+                    title: "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
+                    username: "Jorge Programador",
+                    stars: 5,
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobor\
+                    tis ante quam, sit amet gravida tellus elementum ac. Duis non sodale\
+                    s magna. Ut volutpat mollis eros, at aliquet nunc vulputate sit amet.\
+                    Donec nec consequat ex.'
+                    }
         ]
 
     }
@@ -75,13 +122,13 @@ function ProductPage(){
                 <Col md={6}>
                     <Row>
                         <Container className={styles.carousel}> 
-                            <CarouselComponent/>
+                            <CarouselComponent props={product.photo}/>
                         </Container>
                         
                     </Row>
                     <Row>
                         <Container className={styles.carousel}>
-                            <h3 className={styles.technicalDescription}>Also Recomended:</h3>
+                            <h3 className={styles.technicalDescription}>Also Recommended:</h3>
                             <RecomendedProducts/>
                         </Container>
                     </Row>
@@ -93,7 +140,7 @@ function ProductPage(){
                             <Row>
                                 <Col>
                                     <span className={styles.stars}>{computeStars(product.stars)}</span> 
-                                    <span className={styles.reviews}>{product.reviews} reviews</span>
+                                    <span className={styles.reviews}>{product.nreviews} reviews</span>
                                     <div>Seller: {product.seller}</div>
                                     <div className={styles.price}>{product.price}€</div>
                                 </Col>
@@ -125,7 +172,7 @@ function ProductPage(){
                         <h3 className={styles.technicalDescription}>Technical Description</h3>
                             <ListGroup>
                                 {Object.values(product.techDescription).map((key, value) => (
-                                <ListGroupItem  key={value}>{key}</ListGroupItem>
+                                <ListGroupItem  key={value}><span className={styles.description2}>{key.split(":")[0]+":"}</span> <span>{key.split(":")[1]}</span></ListGroupItem>
                                 ))}      
                             </ListGroup>
                     </Container> 
@@ -133,8 +180,9 @@ function ProductPage(){
             </Row>
     
             <Row md={12}>
-                <Container className={styles.panel}>
-                        <h1>Reviews</h1>
+                <h2 className={styles.reviewName}>Reviews</h2>
+                <Container className={styles.panelReviews}>
+                    <Reviews props1={product.reviews}/>
                 </Container> 
             </Row>
             
