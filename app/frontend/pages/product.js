@@ -128,7 +128,7 @@ function ProductPage(){
                     </Row>
                     <Row>
                         <Container className={styles.carousel}>
-                            <h3 className={styles.technicalDescription}>Also Recomended:</h3>
+                            <h3 className={styles.technicalDescription}>Also Recommended:</h3>
                             <RecomendedProducts/>
                         </Container>
                     </Row>
