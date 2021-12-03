@@ -3,6 +3,7 @@
     min-width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #303179;
     padding: 0px 15px 15px 15px !important;
 }
 

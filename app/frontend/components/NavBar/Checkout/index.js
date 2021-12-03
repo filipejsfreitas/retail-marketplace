@@ -16,7 +16,7 @@ const Checkout = (props) => {
 
     return (
         <Offcanvas show={props.show} onHide={props.handleClose} placement="end" style={{width: "450px"}}>
-            <Offcanvas.Header className={`${styles.topRec} p-0 justify-content-between bg-primary`} >
+            <Offcanvas.Header className={`${styles.topRec} p-0 justify-content-between`} >
                 <Container className="d-flex flex-row justify-content-between align-items-center p-0 m-0">
                     <div className={styles.title}>
                         Shopping Cart
