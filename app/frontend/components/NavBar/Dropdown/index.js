@@ -1,11 +1,13 @@
 import { useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import { Button } from 'react-bootstrap'
+import { Button, Navbar } from 'react-bootstrap'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
 
 import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
+
 
 // Custom dropdown component with animation
 // Needs to be given a btnRef prop with the reference
@@ -16,6 +18,20 @@ import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
 // for example, if it is not shows button to login if the user
 // prop is supplied it shows information relative to the user account
 const Dropdown = (props) => {
+
+  /* 
+  * The checkout page has a colored title under the Navbar
+  * so this component needs to behave differently, in specific 
+  * it needs to be placed at 164px from the top of the page 
+  * instead of the usual 64px. given that specific CSS class is
+  * is needed for this situation.
+  */ 
+  const router = useRouter();
+  const inCheckoutPage = router.asPath === "/checkout"
+
+  const mainClass = inCheckoutPage
+    ? styles.dd_wrapper_checkout
+    : styles.dd_wrapper;
 
   const nodeRef = useRef(null);
   const buttonRef = props.btnRef;
@@ -41,7 +57,7 @@ const Dropdown = (props) => {
       >
         { props.user
           ?
-          <div ref={nodeRef} className={styles.dd_wrapper}>
+          <div ref={nodeRef} className={mainClass}>
             <div className={styles.dd_top_user}>
               <div className={styles.dd_top_user_welcome_div}>
                 Welcome
@@ -64,7 +80,7 @@ const Dropdown = (props) => {
             </div>
           </div>
           :
-          <div ref={nodeRef} className={styles.dd_wrapper}>
+          <div ref={nodeRef} className={mainClass}>
             <div className={styles.dd_top}>
               Welcome
             </div>
