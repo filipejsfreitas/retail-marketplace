@@ -4,7 +4,7 @@ import { Container, Button, Form } from "react-bootstrap"
 
 import { BsGoogle } from 'react-icons/bs'
 
-import Logo from "../components/Logo/Logo"
+import Logo from "../components/Logos/Logo"
 
 import styles from "../styles/login.module.css"
 

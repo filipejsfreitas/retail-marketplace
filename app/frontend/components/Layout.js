@@ -23,7 +23,7 @@ const Layout = (props) => {
     return (
         <>
             <NavBar handleShowSideBar={handleShowSideBar} handleShowCheckout={handleShowCheckout} handleSearch={props.handleSearch || handleSearch}/>
-            <SideBar handleClose={handleCloseSideBar} show={showSideBar} />
+            <SideBar categories={props.categories} handleClose={handleCloseSideBar} show={showSideBar} />
             <Checkout handleClose={handleCloseCheckout} show={showCheckout} />
             <div className="page_content">
                 {props.children}
