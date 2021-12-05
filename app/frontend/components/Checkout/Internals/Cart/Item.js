@@ -8,7 +8,7 @@ import styles from 'styles/Checkout/Internals/Cart/Item.module.css'
 
 function adjustQuantity(id,quantity,[curentState,setCurrentState]){
     const newState = curentState.slice().map(item =>
-        item.id === id ? { ...item, quantity: quantity } : item
+        item.id === id ? { ...item, quantity: (quantity <= 0 ? 0 : quantity) } : item
     );
     setCurrentState(newState)
 }
