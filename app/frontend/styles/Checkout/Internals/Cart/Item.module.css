@@ -1,0 +1,53 @@
+.box {
+    padding: 0px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+}
+
+.itemImg {
+    border: 1px;
+    border-color: grey;
+    border-style: solid;
+    box-shadow: 1px 1px 2px grey;
+    padding: 0;
+    margin: 0;
+}
+
+.itemDesc, .itemPrice, .itemQuantity, .itemTotal {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    word-wrap: break-word;
+    justify-content: center;
+    margin: 0px;
+    padding: 2px;
+}
+
+.itemImg, .itemQuantity {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.itemDesc {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
+.itemPrice, .itemTotal {
+    flex: 0 0 15%;
+    max-width: 15%;
+}
+
+.itemQuantity div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.itemQuantity div button {
+    position: relative;
+    top: -2px;
+    background-color: transparent;
+    border: 0px;
+}

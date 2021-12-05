@@ -1,0 +1,17 @@
+.box {
+    display: flex;
+    flex-direction: row;
+    margin-top: 70px;
+    padding: 0px;
+    justify-content: space-between;
+    min-width: 100%;
+}
+
+.cart {
+    flex: 0 0 67%;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0px;
+}

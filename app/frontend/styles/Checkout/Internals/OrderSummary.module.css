@@ -1,0 +1,50 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    max-width: 360px;
+    margin: 0;
+}
+
+.summaryBox {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #E5E5E5;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    color: #ED7966;
+    padding-top: 8px;
+}
+
+.summary {
+    padding: 36px 24px 36px 24px;
+    text-align: start;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    color: #ED7966;
+}
+
+.summary div {
+    display: flex;
+}
+
+.summary div div {
+    color: #212529;
+    font-style: italic;
+}
+
+.buttonBox {
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 20px 0px 20px 0px;
+    column-gap: 20%;
+}
+
+.buttonBox button{
+    width: 100%;
+    height: 48px;
+}

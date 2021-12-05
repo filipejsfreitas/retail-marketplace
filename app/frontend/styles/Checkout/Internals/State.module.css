@@ -1,0 +1,28 @@
+.step, .selected {
+    color: black;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 400;
+    font-style: normal;
+    color: #343A40;
+}
+
+
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 1;
+    padding: 0;
+}
+
+.selected, .step:hover {
+    font-weight: 900;
+    color: rgb(22, 22, 22);
+    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.50);
+    cursor: pointer;
+}
+
+.step:hover {
+    color: rgb(50, 50, 50);
+}
