@@ -1,59 +1,46 @@
 import bcrypt from 'bcrypt';
-import config from 'config';
 import jwt from 'jsonwebtoken';
-import { CreateUserDto } from '@dtos/users.dto';
-import { HttpException } from '@exceptions/HttpException';
-import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
-import { User } from '@interfaces/users.interface';
-import { UserModel } from '@models/users.model';
-import { isEmpty } from '@utils/util';
+import { Singleton } from 'typescript-ioc';
+import { CreateUserDto } from '../dtos/users.dto';
+import { HttpException } from '../exceptions/HttpException';
+import { JwtTokenPayload, TokenData } from '../interfaces/auth.interface';
+import { User } from '../interfaces/users.interface';
+import { UserModel } from '../models/users.model';
+import { isEmpty } from '../utils/util';
+import { nanoid } from 'nanoid';
 
+@Singleton
 export class AuthService {
   public async signup(userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
-    const findUser: User = await UserModel.findOne({ email: userData.email });
-    if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
+    const user: User = await UserModel.findOne({ email: userData.email });
+    if (user) throw new HttpException(409, `Your email ${userData.email} already exists`);
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const createUserData: User = await UserModel.create({ ...userData, password: hashedPassword });
 
-    return createUserData;
+    return await UserModel.create({ ...userData, password: hashedPassword });
   }
 
-  public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
-    if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
+  public async logout(user: UserModel, token: JwtTokenPayload): Promise<void> {
+    user.invalidTokens.push(token.jti);
 
-    const findUser: User = await UserModel.findOne({ email: userData.email });
-    if (!findUser) throw new HttpException(409, `You're email ${userData.email} not found`);
-
-    const isPasswordMatching: boolean = await bcrypt.compare(userData.password, findUser.password);
-    if (!isPasswordMatching) throw new HttpException(409, "You're password not matching");
-
-    const tokenData = this.createToken(findUser);
-    const cookie = this.createCookie(tokenData);
-
-    return { cookie, findUser };
-  }
-
-  public async logout(userData: User): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
-
-    const findUser: User = await UserModel.findOne({ email: userData.email, password: userData.password });
-    if (!findUser) throw new HttpException(409, `You're email ${userData.email} not found`);
-
-    return findUser;
+    await user.save();
   }
 
   public createToken(user: User): TokenData {
-    const dataStoredInToken: DataStoredInToken = { _id: user._id };
-    const secretKey: string = config.get('secretKey');
+    const dataStoredInToken: JwtTokenPayload = {
+      _id: user._id,
+      email: user.email,
+
+      jti: nanoid(16),
+      aud: process.env.JWT_AUDIENCE,
+      iss: process.env.JWT_ISSUER,
+    };
+
+    const secretKey: string = process.env.SECRET_KEY;
     const expiresIn: number = 60 * 60;
 
     return { expiresIn, token: jwt.sign(dataStoredInToken, secretKey, { expiresIn }) };
-  }
-
-  public createCookie(tokenData: TokenData): string {
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn};`;
   }
 }

@@ -1,148 +1,143 @@
-import { ProductModel } from "@/models/product.model";
-import { CommentChecker, CommentProduct, Product } from '@interfaces/product.interface';
-import { CreateProductDto } from '@dtos/product.dto';
-import { HttpException } from '@exceptions/HttpException';
-import { isEmpty } from '@utils/util';
-import { Console } from "console";
+import { ProductModel } from '../models/product.model';
+import { CommentChecker, CommentProduct, Product } from '../interfaces/product.interface';
+import { CreateProductDto } from '../dtos/product.dto';
+import { HttpException } from '../exceptions/HttpException';
+import { isEmpty } from '../utils/util';
 
-export class ProductService{
-    public products = ProductModel;
+export class ProductService {
+  public products = ProductModel;
 
-    public async getproducts(): Promise<Product []> {
-        const prodList: Product [] = await this.products.find();
+  public async getproducts(): Promise<Product[]> {
+    const prodList: Product[] = await this.products.find();
 
-        return prodList;
-    }
+    return prodList;
+  }
 
-    public async createProduct(productData: CreateProductDto): Promise<Product> {
-        if (isEmpty(productData)) throw new HttpException(400, "You're not product");
+  public async createProduct(productData: CreateProductDto): Promise<Product> {
+    if (isEmpty(productData)) throw new HttpException(400, "You're not product");
 
-        const createProductData: Product = await this.products.create({ ...productData,number_scores: 0, 
-            score:0,number_views:0,comments: [], best_offer:0 });
+    const createProductData: Product = await this.products.create({
+      ...productData,
+      number_scores: 0,
+      score: 0,
+      number_views: 0,
+      comments: [],
+      best_offer: 0,
+    });
 
-        return createProductData;
-    }
+    return createProductData;
+  }
 
-    public async updateProduct(productData: CreateProductDto, prodId: string): Promise<Product> {
-        if (isEmpty(productData)) throw new HttpException(400, "You're not product");
+  public async updateProduct(productData: CreateProductDto, prodId: string): Promise<Product> {
+    if (isEmpty(productData)) throw new HttpException(400, "You're not product");
 
-        const product: Product = await this.products.findOne({_id: prodId});
-        if(!product) throw new HttpException(409, `You're product does not exists`);
-        const updateProductData: Product = await this.products.findOneAndUpdate({_id: prodId},{ ...productData},{new: true});
+    const product: Product = await this.products.findOne({ _id: prodId });
+    if (!product) throw new HttpException(409, `You're product does not exists`);
+    const updateProductData: Product = await this.products.findOneAndUpdate({ _id: prodId }, { ...productData }, { new: true });
 
-        return updateProductData;
-    }
+    return updateProductData;
+  }
 
-    public async findProductById(prodId: string): Promise<Product>{ 
-        if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
-        
-        const findProduct: Product = await this.products.findOne({ _id: prodId });
-        
-        if (!findProduct) throw new HttpException(409, "You're not product");
-    
-        return findProduct;
-    }
+  public async findProductById(prodId: string): Promise<Product> {
+    if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
 
-    public async commentProduct(prodId: string, comment: CommentChecker): Promise<Product>{
-        if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
-        
-        const findProduct: Product = await this.products.findOne({ _id: prodId });
-        
-        if (!findProduct) throw new HttpException(409, "You're not product");
+    const findProduct: Product = await this.products.findOne({ _id: prodId });
 
-        var newNumberScores = findProduct.number_scores + 1;
+    if (!findProduct) throw new HttpException(409, "You're not product");
 
-        var newScore = (findProduct.score * findProduct.number_scores + comment.score) / newNumberScores; 
+    return findProduct;
+  }
 
-        const updateProductData: Product = await this.products.findOneAndUpdate({_id: prodId},{score:newScore,number_scores: newNumberScores,
-            $addToSet:{comments: comment}}, { new: true });
+  public async commentProduct(prodId: string, comment: CommentChecker): Promise<Product> {
+    if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
 
-        return updateProductData;
-    }
+    const findProduct: Product = await this.products.findOne({ _id: prodId });
 
-    public async getOneImageId(prodId: string): Promise<string> {
-        const prod: Product = await this.findProductById(prodId); 
+    if (!findProduct) throw new HttpException(409, "You're not product");
 
-        return prod.images[0];
-    }
+    const newNumberScores = findProduct.number_scores + 1;
 
-    public async updateComment(prodId: string, commentId: string, comment: CommentChecker): Promise<Product> {
-        if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
-        
-        const findProduct = await this.products.findById( prodId);
+    const newScore = (findProduct.score * findProduct.number_scores + comment.score) / newNumberScores;
 
-        var newScore = 0;
+    const updateProductData: Product = await this.products.findOneAndUpdate(
+      { _id: prodId },
+      { score: newScore, number_scores: newNumberScores, $addToSet: { comments: comment } },
+      { new: true },
+    );
 
-        findProduct.comments.forEach(element => {
-            
-            if(element._id.toString() === commentId){
+    return updateProductData;
+  }
 
-                console.log("encontrou comentário")
-                if( !(element.client_id.toString() === comment.client_id) ){
-                    throw new HttpException(400, "You're not authorized");
-                }
+  public async getOneImageId(prodId: string): Promise<string> {
+    const prod: Product = await this.findProductById(prodId);
 
-                newScore = (findProduct.score * findProduct.number_scores + comment.score - element.score) / findProduct.number_scores; 
+    return prod.images[0];
+  }
 
-            
-                element.comment = comment.comment;
-                element.title = comment.title;
-                element.date = new Date();
-                element.score = comment.score;
+  public async updateComment(prodId: string, commentId: string, comment: CommentChecker): Promise<Product> {
+    if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
 
-                
-            }
+    const findProduct = await this.products.findById(prodId);
 
-        });
+    let newScore = 0;
 
-        
+    findProduct.comments.forEach(element => {
+      if (element._id.toString() === commentId) {
+        console.log('encontrou comentário');
+        if (!(element.client_id.toString() === comment.client_id)) {
+          throw new HttpException(400, "You're not authorized");
+        }
 
-        
-        /*
+        newScore = (findProduct.score * findProduct.number_scores + comment.score - element.score) / findProduct.number_scores;
+
+        element.comment = comment.comment;
+        element.title = comment.title;
+        element.date = new Date();
+        element.score = comment.score;
+      }
+    });
+
+    /*
         //findProduct.comments.id(commentId)
 
-        
+
         const parent1 : Product = await this.products.findOneAndUpdate({_id: prodId, "comments._id": commentId},{ $set:{"comments.$.title":comment.title} });
         //const parent : Product = await this.products.findOneAndUpdate({_id: prodId},{ score:newScore},{ new: true });
         */
-        const result = await findProduct.save()
+    const result = await findProduct.save();
 
-        return result;
-        
+    return result;
+  }
+
+  public async deleteComment(prodId: string, commentId: string, clientId: string): Promise<Product> {
+    if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
+
+    const findProduct: Product = await this.products.findById(prodId);
+
+    console.log(findProduct);
+
+    const oldComment: CommentProduct = findProduct.comments.find(element => element._id.toString() === commentId);
+
+    console.log(oldComment);
+
+    if (oldComment.client_id.toString() === clientId) {
+    } else {
+      throw new HttpException(400, "You're not authorized");
     }
 
-    public async deleteComment(prodId: string, commentId: string, clientId: string): Promise<Product>{
-        if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
+    const newNumberScores = findProduct.number_scores - 1;
 
-        const findProduct: Product = await this.products.findById( prodId);
+    let newScore = 0;
 
-        console.log(findProduct);
-
-        const oldComment : CommentProduct = findProduct.comments.find(element => element._id.toString() === commentId);
-
-        console.log(oldComment);
-        
-        if(oldComment.client_id.toString() === clientId){
-            
-        }else{
-            throw new HttpException(400, "You're not authorized");
-
-        }
-        
-        var newNumberScores = findProduct.number_scores - 1;
-
-        var newScore = 0;
-
-        if(newNumberScores > 0){
-            newScore = (findProduct.score * findProduct.number_scores - oldComment.score) /  newNumberScores; 
-        }
-
-         
-       
-
-        const parent : Product = await this.products.findOneAndUpdate({_id: prodId},{score:newScore,number_scores: newNumberScores, $pull: { comments: { _id: commentId} } },
-            { new: true });
-        return parent;
+    if (newNumberScores > 0) {
+      newScore = (findProduct.score * findProduct.number_scores - oldComment.score) / newNumberScores;
     }
 
+    const parent: Product = await this.products.findOneAndUpdate(
+      { _id: prodId },
+      { score: newScore, number_scores: newNumberScores, $pull: { comments: { _id: commentId } } },
+      { new: true },
+    );
+    return parent;
+  }
 }

@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose';
-import { Category } from '@interfaces/category.interface';
+import { Category } from '../interfaces/category.interface';
 
 const categorySchema: Schema = new Schema({
     name: {
@@ -16,5 +16,5 @@ const categorySchema: Schema = new Schema({
       required: true,
     }
   });
-  
+
   export const CategoryModel = model<Category & Document>('Category', categorySchema);

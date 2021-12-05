@@ -1,8 +1,16 @@
 import { Request } from 'express';
-import { User } from '@interfaces/users.interface';
+import { UserModel } from '../models/users.model';
 
-export interface DataStoredInToken {
+export interface JwtTokenPayload {
   _id: string;
+  email: string;
+
+  jti: string;
+  aud: string;
+  iss: string;
+
+  iat?: number;
+  exp?: number;
 }
 
 export interface TokenData {
@@ -11,5 +19,6 @@ export interface TokenData {
 }
 
 export interface RequestWithUser extends Request {
-  user: User;
+  user?: UserModel;
+  token?: JwtTokenPayload;
 }
