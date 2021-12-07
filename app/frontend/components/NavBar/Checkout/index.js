@@ -1,5 +1,7 @@
 import { Offcanvas, Container, Button } from "react-bootstrap"
 import { BsX } from 'react-icons/bs'
+import { useRouter } from 'next/router'
+
 import Item from "components/NavBar/Checkout/item"
 
 import styles from 'styles/NavBar/Checkout/Checkout.module.css'
@@ -10,7 +12,7 @@ const calc_total = (items) => {
 
 const Checkout = (props) => {
 
-    
+    const router = useRouter()
 
     const total = calc_total(props.items);
 
@@ -29,7 +31,7 @@ const Checkout = (props) => {
                     <div className={styles.total}>
                         {`Total: ${total}€`}
                     </div>
-                    <Button variant="secondary" className={styles.checkoutBtn}>
+                    <Button variant="secondary" className={styles.checkoutBtn} onClick={ () => router.push("/checkout") } >
                         Checkout
                     </Button>
                 </Container>
