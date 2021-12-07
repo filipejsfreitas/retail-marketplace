@@ -20,7 +20,7 @@
   transition: opacity 300ms, transform 500ms;
 }
 
-.dd_wrapper, .dd_wrapper_checkout {
+.dd_wrapper {
   position: absolute;
   top: 64px;
   right: 0px;
@@ -117,12 +117,4 @@
   font-size: 24px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 15px;
-}
-
-/* class used for specific situations where the dropdown
-*  needs to be on an abnormal position, for ex the
-*  checkout page
-*/
-.dd_wrapper_checkout {
-  top: 128px;
 }
