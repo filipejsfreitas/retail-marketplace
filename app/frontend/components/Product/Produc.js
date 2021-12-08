@@ -8,7 +8,7 @@ import Reviews from "./Review"
 import MyModal from "./Comment"
 
 
-function computeStars(stars) {
+export function computeStars(stars) {
     var r = []
     for(var i=0; i<5; i++, stars--){
         if(stars <= 0) r[i] = <BsStar key={"star-" + i}/>

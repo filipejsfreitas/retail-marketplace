@@ -1,19 +1,8 @@
 import React from "react";
 import {Row ,Col,ListGroup, ListGroupItem} from 'react-bootstrap';
 import styles from "styles/Product/product.module.css"
-import { BsFillStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import { computeStars } from "components/Product/Produc";
 
-
-function computeStars(stars) {
-    var r = []
-    for(var i=0; i<5; i++, stars--){
-        if(stars <= 0) r[i] = <BsStar key={"star-" + i}/>
-        else if(stars <= 0.5) r[i] = <BsStarHalf key={"star-" + i}/>
-        else r[i] = <BsFillStarFill key={"star-" + i}/>
-    }
-    return <>
-        {r}
-    </>}
 
 export default function Reviews(props1) {
     return (
