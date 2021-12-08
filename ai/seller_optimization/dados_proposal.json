@@ -1,0 +1,244 @@
+
+  {
+    "products": [
+      {
+        "id": 0,
+        "name": "Speakers"
+      },
+      {
+        "id": 1,
+        "name": "Computer"
+      },
+      {
+        "id": 2,
+        "name": "Calculator"
+      },
+      {
+        "id": 3,
+        "name": "Air conditioner"
+      },
+      {
+        "id": 4,
+        "name": "Tablet"
+      },
+      {
+        "id": 5,
+        "name": "Smartphone"
+      },
+      {
+        "id": 6,
+        "name": "ipod"
+      },
+      {
+        "id": 7,
+        "name": "Blutooth speaker"
+      },
+      {
+        "id": 8,
+        "name": "panasonic tv"
+      },
+      {
+        "id": 9,
+        "name": "sony tv"
+      },
+      
+      {
+        "id": 10,
+        "name": "Coffe machine"
+      },
+      {
+        "id": 11,
+        "name": "christmas Tree"
+      }
+    ],
+    "sellers": [
+      {
+        "id": 0,
+        "score": 5
+      },
+      {
+        "id": 1,
+        "score": 4
+      },
+      {
+        "id": 2,
+        "score": 2
+      },
+      {
+        "id": 3,
+        "score": 2
+      },
+      {
+        "id": 4,
+        "score": 5
+      },
+      {
+        "id": 5,
+        "score": 5
+      },
+      {
+        "id": 6,
+        "score": 4
+      },
+      {
+        "id": 7,
+        "score": 5
+      },
+      {
+        "id": 8,
+        "score": 5
+      },
+      {
+        "id": 9,
+        "score": 3
+      }
+    ],
+    "proposals": [
+      {
+        "id": 0,
+        "id_seller": 1,
+        "id_product": 11,
+        "price": 20,
+        "shipping_price": 6,
+        "stock": 8
+      },
+      {
+        "id": 1,
+        "id_seller": 2,
+        "id_product": 10,
+        "price": 587,
+        "shipping_price": 7,
+        "stock": 7
+      },
+      {
+        "id": 2,
+        "id_seller": 10,
+        "id_product": 10,
+        "price": 898,
+        "shipping_price": 8,
+        "stock": 9
+      },
+      
+      {
+        "id": 4,
+        "id_seller": 6,
+        "id_product": 6,
+        "price": 551,
+        "shipping_price": 7,
+        "stock": 10
+      },
+      {
+        "id": 5,
+        "id_seller": 1,
+        "id_product": 9,
+        "price": 684,
+        "shipping_price": 7,
+        "stock": 5
+      },
+      {
+        "id": 6,
+        "id_seller": 4,
+        "id_product": 0,
+        "price": 706,
+        "shipping_price": 6,
+        "stock": 10
+      },
+      {
+        "id": 7,
+        "id_seller": 8,
+        "id_product": 3,
+        "price": 674,
+        "shipping_price": 6,
+        "stock": 7
+      },
+      {
+        "id": 8,
+        "id_seller": 6,
+        "id_product": 4,
+        "price": 993,
+        "shipping_price": 5,
+        "stock": 10
+      },
+      {
+        "id": 9,
+        "id_seller": 2,
+        "id_product": 4,
+        "price": 346,
+        "shipping_price": 7,
+        "stock": 9
+      },
+      {
+        "id": 10,
+        "id_seller": 7,
+        "id_product": 3,
+        "price": 275,
+        "shipping_price": 3,
+        "stock": 9
+      },
+      {
+        "id": 11,
+        "id_seller": 8,
+        "id_product": 10,
+        "price": 175,
+        "shipping_price": 6,
+        "stock": 9
+      },
+      {
+        "id": 12,
+        "id_seller": 5,
+        "id_product": 10,
+        "price": 680,
+        "shipping_price": 4,
+        "stock": 5
+      },
+      {
+        "id": 13,
+        "id_seller": 1,
+        "id_product": 0,
+        "price": 176,
+        "shipping_price": 6,
+        "stock": 6
+      },
+      {
+        "id": 14,
+        "id_seller": 0,
+        "id_product": 10,
+        "price": 656,
+        "shipping_price": 3,
+        "stock": 5
+      },
+      
+      {
+        "id": 16,
+        "id_seller": 6,
+        "id_product": 10,
+        "price": 715,
+        "shipping_price": 3,
+        "stock": 8
+      },
+      {
+        "id": 17,
+        "id_seller": 0,
+        "id_product": 1,
+        "price": 777,
+        "shipping_price": 8,
+        "stock": 8
+      },
+      {
+        "id": 18,
+        "id_seller": 3,
+        "id_product": 10,
+        "price": 954,
+        "shipping_price": 5,
+        "stock": 7
+      },
+      {
+        "id": 19,
+        "id_seller": 4,
+        "id_product": 2,
+        "price": 416,
+        "shipping_price": 6,
+        "stock": 7
+      }
+    ]
+  }
