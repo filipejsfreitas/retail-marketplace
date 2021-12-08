@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Container } from "react-bootstrap";
 
-import State from 'components/Checkout/Internals/State'
-import OrderSummary from "components/Checkout/Internals/OrderSummary";
-import Cart from 'components/Checkout/Internals/Cart/Cart'
+import TopBanner from "./TopBanner";
+import Content from "./Content";
 
 import styles from 'styles/Checkout/Checkout.module.css'
 
@@ -46,21 +44,12 @@ export default function Checkout(props) {
     // the API supports the checkout functionality
     const [itemsInBag,setItemsInBag] = useState(testBag);
     
-    const [step,setStep] = useState(1)
+    const step = useState(1)
 
     return (
-      <Container className={styles.box}>
-        <Container className={styles.cart}>
-          <State state={[step, setStep]} />
-          <Cart state={[itemsInBag, setItemsInBag]} />
-        </Container>
-        <OrderSummary
-          total={calcTotal(itemsInBag)}
-          products={calcQuantity(itemsInBag)}
-          className={styles.orderSum}
-          state={[step, setStep]}
-          bag={itemsInBag}
-        />
-      </Container>
+      <div className={styles.bg}>
+        <TopBanner/>
+        <Content step={step} />
+      </div>
     );
 }
