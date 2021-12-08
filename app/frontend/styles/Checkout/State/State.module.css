@@ -1,0 +1,98 @@
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 616px;
+    padding: 0;
+}
+
+.outside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 616px;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper:hover .ship, .wrapper:hover .basket, .wrapper:hover .pay {
+    color: #ED7966;
+    cursor: pointer;
+}
+
+.wrapper:hover .notStep {
+    background-color: #ED7966;
+    cursor: pointer;
+}
+
+.empty {
+    min-width: 200px;
+}
+
+.basket, .ship, .pay {
+    text-align: center;
+    color: #989898;
+    min-width: 72px;
+    font-weight: 500;
+    font-size: 26px;
+}
+
+.selected {
+    color: #ED7966;
+}
+
+.step, .notStep {
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ED7966;
+    width: 72px;
+    height: 72px;
+    border-radius: 100%;
+    font-size: 35px;
+    line-height: 72px;
+    color: white;
+    margin: 0 100px 0 100px;
+}
+
+.step {
+    cursor: default;
+}
+
+.notStep {
+    background-color: #989898;
+    cursor: pointer;
+}
+
+.lines {
+    display: flex;
+    align-items: center;
+    width: 472px;
+    position: relative;
+    top: -75px;
+}
+
+.notStepLine, .stepLine {
+    border: 0;
+    border-top: 1px solid #989898;
+    width: 100px;
+}
+
+.stepLine {
+    border-top: 3px solid #ED7966;
+    cursor: default;
+}
+
+.notStepLine {
+    cursor: pointer;
+}
+
+#state2 {
+    margin-left: 72px;
+    z-index: -1;
+}
+
