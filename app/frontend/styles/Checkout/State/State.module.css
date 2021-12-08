@@ -30,6 +30,10 @@
     cursor: pointer;
 }
 
+.wrapper:hover .step {
+    cursor: pointer;
+}
+
 .empty {
     min-width: 200px;
 }
