@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 
 import styles from 'styles/Checkout/State/State.module.css'
 
-export default function Checkout({state}) {
+export default function State({state}) {
     const [step,setStep] = state
 
     switch(step) {
