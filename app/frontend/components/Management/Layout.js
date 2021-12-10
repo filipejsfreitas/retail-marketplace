@@ -17,8 +17,10 @@ export const SELLER_SIDEBAR = {
 export const ADMIN_SIDEBAR = {
     rootpath: "/admin",
     contents: [
-        { text: "Add Category", url: "/"},
-        { text: "List Categories", url: "/"},
+        { text: "Home", url: "/"},
+        { text: "Manage Categories", url: "/category"},
+        { text: "Manage Sellers", url: "/"},
+        { text: "Add Product", url: "/product/add"},
     ],
 }
 

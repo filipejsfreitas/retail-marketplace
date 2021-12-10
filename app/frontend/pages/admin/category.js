@@ -26,7 +26,7 @@ function AddCategoryModal(props) {
                         method: 'POST',
                         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                         body: JSON.stringify({ parent_id: props.id, name: name })
-                    }).then(() => router.reload(window.location.pathname))
+                    }).then(() => router.reload())
                         .catch((error) => console.log(error))
                 }
             }} variant="primary" type="submit"> Submit </Button>
@@ -50,7 +50,7 @@ function RemoveCategoryModal(props) {
             <Button onClick={async () => {
                 fetch(`${process.env.NEXT_PUBLIC_HOST}/category/${props.id}`, {
                     method: 'DELETE',
-                }).then(() => router.reload(window.location.pathname))
+                }).then(() => router.reload())
                     .catch((error) => console.log(error))
             }} variant="primary" type="submit"> Remove </Button>
             <Button onClick={props.onHide}>Close</Button>
@@ -100,15 +100,16 @@ function categoriesToMenuWithRoot(categories) {
 
 }
 
-export default function Home() {
+export default function Category() {
     const [menu, setMenu] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     useEffect(async () => {
-        const categories = await fetch(`${process.env.NEXT_PUBLIC_HOST}/category/`)
-            .then(res => res.json()).then(data => data.data)
+        fetch(`${process.env.NEXT_PUBLIC_HOST}/category/`)
+            .then(res => res.json()).then(data => data.data).then(categories => {
+                setMenu(categoriesToMenuWithRoot(categories))
+                setIsLoading(false)
+            })
             .catch((error) => console.log(error))
-        setMenu(categoriesToMenuWithRoot(categories))
-        setIsLoading(false)
     }, []);
     return <Layout sidebar={ADMIN_SIDEBAR} isLoading={isLoading}>
         <Menu menu={menu}>
