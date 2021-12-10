@@ -3,7 +3,18 @@ export interface Characteristic{
     value: string;
 }
 
+
+export interface CommentChecker{
+    title: string;
+    score: number;
+    comment: string; 
+    date: Date; 
+    client_id: string;
+    name: string;
+}
+
 export interface CommentProduct{
+    _id: string;
     title: string;
     score: number;
     comment: string; 
