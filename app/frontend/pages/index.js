@@ -85,19 +85,17 @@ export default function Home({ categories }) {
     <Layout categories={categories}>
       <h2 className={styles.titles} >Trending</h2>
       <RootCarousel props={newP} number={6}/>
-      <Row md={12}  className={styles.row}>
+      <Row md={12} className={styles.row}>
         <Col md={6} className={styles.col1}>
           <h2  className={styles.titles} >New</h2>
           <RootCarousel props={newP} number={3}/>
         </Col>
-        <Col md={6}  className={styles.col2}>
-          <h2  className={styles.titles}>On Sale</h2>
+        <Col md={6} className={styles.col2}>
+          <h2 className={styles.titles}>On Sale</h2>
           <RootCarousel props={newP} number={3}/>
         </Col>
       </Row>
-
-
-      <h2  className={styles.titles}>Best Sellers</h2>
+      <h2 className={styles.titles}>Best Sellers</h2>
       <RootCarousel props={newP} number={6}/>
     </Layout>
   )

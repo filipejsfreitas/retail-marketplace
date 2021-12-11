@@ -1,8 +1,7 @@
-
 export default async function fetchProducts() {
 
-    const product = await fetch(`${process.env.HOST}/product/61afaee1ddb0e41ebe75e6a6`)
+    const product = await fetch(`${process.env.HOST}/product/61b3e59643d4336ac0a7a809`)
                             .then( (res) => res.json() )
                             .then( (data) => data.data )
     return product
-    }
+}

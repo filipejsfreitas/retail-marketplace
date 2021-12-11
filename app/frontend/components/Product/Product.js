@@ -6,7 +6,7 @@ import CarouselComponent from "./Carousel"
 import { BsFillStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import Reviews from "./Review"
 import MyModal from "./Comment"
-
+import Sellers from "./Sellers"
 
 export function computeStars(stars) {
     var r = []
@@ -24,6 +24,7 @@ const Product = (props) => {
     
     const [modalShow, setModalShow] = React.useState(false);
 
+    const image1 = "http://localhost:3001/"
 
     const recomended = [
         {
@@ -42,9 +43,9 @@ const Product = (props) => {
           price: "20"
         },
         {
-          photo:"https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+          photo: image1 + "6375daa7-d6be-41bd-bc97-666a27d17e43/Captura de ecrã de 2021-12-10 23-41-01.png",
           name: "Very nice and long pruduct name",
-          price: "20"
+          price: "40"
         }
       ]
     
@@ -56,10 +57,8 @@ const Product = (props) => {
                 <Col md={6}>
                     <Row>
                         <Container className={styles.carousel}> 
-                            <CarouselComponent props={prod.images}/>
-                        
+                            <CarouselComponent props={prod.photo}/>
                         </Container>
-                        
                     </Row>
                     <Row>
                         <Container className={styles.carousel}>
@@ -72,7 +71,8 @@ const Product = (props) => {
                     <Container className={styles.panel}>
                         <div className={styles.productName}>{prod.name}</div>
                         <Container>
-                            <Row>
+                            <Sellers />
+                            {/*<Row>
                                 <Col>
                                     <span className={styles.stars}>{computeStars(prod.stars)}</span> 
                                     <span className={styles.reviews}>{prod.nreviews} reviews</span>
@@ -84,7 +84,7 @@ const Product = (props) => {
                                     ADD TO CARD
                                     </Button>
                                 </Col>
-                            </Row>
+                            </Row>*/}
                         </Container>
 
                         <Container className={styles.table1}>
@@ -131,7 +131,7 @@ const Product = (props) => {
                 </span>
                 </div>
                 <Container className={styles.panelReviews}>
-                    <Reviews props1={prod.comments}/>
+                    <Reviews props1={prod.reviews}/>
                 </Container> 
             </Row>
         </>

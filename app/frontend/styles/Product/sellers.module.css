@@ -1,0 +1,62 @@
+.list{
+    height: 300px;
+    overflow:hidden; 
+    overflow-y:scroll;
+    scrollbar-width: none;
+}
+
+.listItem{
+    align-self: center;
+    width: 600px;
+    height: 150px;
+
+}
+
+.button {
+    background-color: #ED7966;
+    border-color: #ED7966;
+    padding: 10px;
+    margin-top: 25px;
+    margin-left: 120px;
+    font-family: FiraSans;
+    font-weight: bold;
+    font-size: 20px;
+    color: #fbfbfb;
+}
+
+.stars{
+    color: #000000;
+    font-family: FiraSans;
+    font-weight: initial;
+    font-size: 20px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.price {
+    color: #ED7966;
+    font-family: FiraSans;
+    font-size: 30px;
+    font-weight: 600;
+    float: right;
+}
+
+.nameSeller{
+    color: #000000;
+    font-family: FiraSans;
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 5px;
+
+}
+
+.closeBtn {
+    color: white;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.closeBtn svg {
+    position: relative;
+    left: 21px;
+}

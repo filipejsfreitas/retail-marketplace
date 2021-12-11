@@ -2,8 +2,9 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "styles/Root/root.module.css"
-import { computeStars } from "components/Product/Produc";
+import { computeStars } from "components/Product/Product";
 import { Row, Col } from "react-bootstrap";
+import Link from "next/link"
 
 const  RootCarousel = (props) =>{
     const responsive = {
@@ -41,7 +42,8 @@ const  RootCarousel = (props) =>{
               />
               </div >
               <div className={styles.textProd}>
-                <div className={styles.product_name}>{key.name}</div>
+                {/* Trocar name para id no LINK*/}
+                <div className={styles.product_name}><Link href={`/${key.name}`}>{`${key.name}`}</Link></div>
                 <Row>
                     <Col className={styles.product_stars}> {computeStars(key.stars)} </Col>  
                     <Col className={styles.product_price}>{key.price}€</Col>
