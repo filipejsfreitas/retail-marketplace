@@ -24,7 +24,7 @@ const Product = (props) => {
     
     const [modalShow, setModalShow] = React.useState(false);
 
-    const image1 = "http://localhost:3001/"
+    //const image1 = "http://localhost:3001/"
 
     const recomended = [
         {
@@ -43,7 +43,7 @@ const Product = (props) => {
           price: "20"
         },
         {
-          photo: image1 + "6375daa7-d6be-41bd-bc97-666a27d17e43/Captura de ecrã de 2021-12-10 23-41-01.png",
+          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg",
           name: "Very nice and long pruduct name",
           price: "40"
         }
@@ -54,7 +54,7 @@ const Product = (props) => {
     return (            
            <>
             <Row md={12}>
-                
+                {/*Ver os argumentos da categoria que vem no pedido para completar*/}
                 <div> Home<BsArrowRightCircle className={styles.arrow}/>
                       Tecnologia<BsArrowRightCircle className={styles.arrow}/>  
                       Smartphones<BsArrowRightCircle className={styles.arrow}/> 
