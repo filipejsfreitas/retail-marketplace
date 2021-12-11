@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 function adjustQuantity(id,quantity,[curentState,setCurrentState]){
     const newState = curentState.slice().map(item =>
-        item.id === id ? { ...item, quantity: (quantity < 1 ? 1 : quantity) } : item
+        item.id === id ? { ...item, quantity: (quantity < 1 ? 1 : Number(quantity)) } : item
     );
     setCurrentState(newState)
 }
