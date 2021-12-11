@@ -12,7 +12,4 @@ export class CreateCommentDto{
     @IsPositive()
     score: number;
 
-    @IsDate()
-    date: Date;
-
 }

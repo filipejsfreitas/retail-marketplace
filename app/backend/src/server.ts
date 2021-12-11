@@ -9,8 +9,9 @@ import { UsersController } from '@controllers/users.controller';
 import { validateEnv } from '@utils/validateEnv';
 import { CategoryController } from './controllers/category.controller';
 import { ProductController } from './controllers/product.controller';
+import { ProposalController } from './controllers/proposal.controller';
 
 validateEnv();
 
-const app = new App([AuthController, IndexController, UsersController, CategoryController, ProductController]);
+const app = new App([AuthController, IndexController, UsersController, CategoryController, ProductController, ProposalController]);
 app.listen();
