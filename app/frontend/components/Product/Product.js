@@ -3,7 +3,7 @@ import React from "react"
 import styles from 'styles/Product/product.module.css'
 import RecomendedProducts from "./Carousel2"
 import CarouselComponent from "./Carousel"
-import { BsFillStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import { BsFillStarFill, BsStarHalf, BsStar, BsArrowRightCircle} from "react-icons/bs";
 import Reviews from "./Review"
 import MyModal from "./Comment"
 import Sellers from "./Sellers"
@@ -54,6 +54,13 @@ const Product = (props) => {
     return (            
            <>
             <Row md={12}>
+                
+                <div> Home<BsArrowRightCircle className={styles.arrow}/>
+                      Tecnologia<BsArrowRightCircle className={styles.arrow}/>  
+                      Smartphones<BsArrowRightCircle className={styles.arrow}/> 
+                      {prod.name}
+                </div>
+
                 <Col md={6}>
                     <Row>
                         <Container className={styles.carousel}> 
@@ -71,20 +78,15 @@ const Product = (props) => {
                     <Container className={styles.panel}>
                         <div className={styles.productName}>{prod.name}</div>
                         <Container>
-                            <Sellers />
-                            {/*<Row>
-                                <Col>
-                                    <span className={styles.stars}>{computeStars(prod.stars)}</span> 
-                                    <span className={styles.reviews}>{prod.nreviews} reviews</span>
-                                    <div>Seller: {prod.seller}</div>
-                                    <div className={styles.price}>{prod.price}€</div>
-                                </Col>
-                                <Col>
-                                    <Button type="submit" variant="secundary" size="lg" className={styles.button}>
-                                    ADD TO CARD
-                                    </Button>
-                                </Col>
-                            </Row>*/}
+                            <Row className={styles.prodStats} >
+                                <span>
+                                    <div className={styles.reviews}>{prod.nreviews} reviews</div>
+                                    <div className={styles.stars}>{computeStars(prod.stars)}</div> 
+                                </span>
+                            </Row>
+                            <Row>
+                                <Sellers />
+                            </Row>
                         </Container>
 
                         <Container className={styles.table1}>

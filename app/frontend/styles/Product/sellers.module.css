@@ -7,8 +7,9 @@
 
 .listItem{
     align-self: center;
-    width: 600px;
+    width: 650px;
     height: 150px;
+    position: relative;
 
 }
 
@@ -16,12 +17,11 @@
     background-color: #ED7966;
     border-color: #ED7966;
     padding: 10px;
-    margin-top: 25px;
-    margin-left: 120px;
     font-family: FiraSans;
-    font-weight: bold;
-    font-size: 20px;
+    font-weight: 300;
+    font-size: 15px;
     color: #fbfbfb;
+    float: inline-end;
 }
 
 .stars{
@@ -29,25 +29,52 @@
     font-family: FiraSans;
     font-weight: initial;
     font-size: 20px;
-    padding-top: 0px;
-    margin-top: 0px;
+    margin-bottom: 4px;
 }
+
+.col1{
+    position: relative;
+    overflow: hidden;
+}
+
+.col2{
+    padding: 5px;
+    align-self: center;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.col3{
+    padding: 5px;
+    align-self: center;
+    position: relative;
+}
+
 
 .price {
     color: #ED7966;
     font-family: FiraSans;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 600;
-    float: right;
+
+}
+
+.shipping{
+    color: #07af07;
+    font-family: FiraSans;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 5px;
 }
 
 .nameSeller{
     color: #000000;
     font-family: FiraSans;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 5px;
-
+    margin-top: 2px;
+    margin-bottom: 3px;
 }
 
 .closeBtn {
@@ -59,4 +86,11 @@
 .closeBtn svg {
     position: relative;
     left: 21px;
+}
+
+.grey, .smallerGrey {
+    color: #989898;
+    font-size: 18px;
+    padding:0px;
+    margin:0px;
 }
