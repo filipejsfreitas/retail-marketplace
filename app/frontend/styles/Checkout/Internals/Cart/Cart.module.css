@@ -1,0 +1,38 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+    padding: 0px;
+    margin: 0px;
+    margin-right: auto;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    padding: 0px;
+    text-align: center;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    margin: 0px;
+    gap: 4px;
+}
+
+.titleProd, .titleQuant {
+    flex: 0 0 20%;
+}
+
+.titleDesc {
+    flex: 0 0 30%;
+}
+
+.titlePrice, .titleTotal {
+    flex: 0 0 15%;
+}

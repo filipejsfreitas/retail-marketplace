@@ -1,0 +1,29 @@
+.status {
+    display: inline-flex;
+}
+
+.lastUnits, .available, .outOfStock {
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.lastUnits {
+    color: #FFA500;
+}
+
+.available {
+    color: #008000;
+}
+
+.outOfStock {
+    color: #FF0000;
+}
+
+.outOfStockTxt, .lastUnitsTxt, .availableTxt {
+    position: relative;
+    top: 1.5px;
+    left: 4px;
+}
