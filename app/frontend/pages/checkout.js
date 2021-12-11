@@ -1,18 +1,14 @@
-import Layout from "components/Layout"
-import Checkout from "components/Checkout/Checkout";
+import Checkout from "components/Checkout";
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
-import { Container } from "react-bootstrap";
 
 import styles from 'styles/checkout.module.css'
 
 export default function Home({ categories }) {
     const selected = 1
   return (
-    <Layout categories={categories}>
-        <div className={`bg-primary ${styles.titleBackground}`}></div>
-        <Container className={`${styles.titleContainer}`}>Checkout</Container>
-        <Checkout/>
-    </Layout>
+    <div className={styles.main}>
+      <Checkout/>
+    </div>
   )
 }
 

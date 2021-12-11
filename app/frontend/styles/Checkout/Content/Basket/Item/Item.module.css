@@ -1,0 +1,89 @@
+.box {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid var(--bs-secondary);
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.itemImg {
+    display: flex;
+    align-items: center;
+}
+
+.itemInfoWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.itemInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 24px;
+}
+
+.categorie {
+    font-size: 18px;
+    color: #696969;
+}
+
+.soldBy {
+    font-size: 18px;
+}
+
+.priceWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 25px;
+    align-items: flex-end;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.status {
+    flex:1;
+    align-items: center;
+}
+
+.form_select {
+    padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 1rem;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-top-color: rgb(206, 212, 218);
+    border-right-color: rgb(206, 212, 218);
+    border-bottom-color: rgb(206, 212, 218);
+    border-left-color: rgb(206, 212, 218);
+    border-radius: .25rem;
+    width: 70px;
+}
+
+.quantity {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cross {
+    padding-right: 10px;
+}
+
+.quantity button { 
+    background-color: transparent;
+    border: transparent;
+}

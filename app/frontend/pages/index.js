@@ -1,10 +1,8 @@
-import Layout from "components/Layout"
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
 export default function Home({ categories }) {
   return (
-    <Layout categories={categories}>
-    </Layout>
+    <></>
   )
 }
 
