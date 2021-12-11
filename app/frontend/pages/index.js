@@ -1,4 +1,3 @@
-import Layout from "components/Layout"
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 import RootCarousel from "components/Root/RootCarousel";
 import { Row, Col } from "react-bootstrap";
@@ -82,6 +81,7 @@ export default function Home({ categories }) {
   ]
 
   return (
+<<<<<<< HEAD
     <Layout categories={categories}>
       <h2 className={styles.titles} >Trending</h2>
       <RootCarousel props={newP} number={6}/>
@@ -98,6 +98,9 @@ export default function Home({ categories }) {
       <h2 className={styles.titles}>Best Sellers</h2>
       <RootCarousel props={newP} number={6}/>
     </Layout>
+=======
+    <></>
+>>>>>>> 646c743fd1b18e00f2b6ac4b512f3eecd07feca0
   )
 }
 

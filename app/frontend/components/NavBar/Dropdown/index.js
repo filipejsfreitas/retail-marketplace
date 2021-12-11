@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from 'react-bootstrap'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
@@ -16,6 +17,8 @@ import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
 // for example, if it is not shows button to login if the user
 // prop is supplied it shows information relative to the user account
 const Dropdown = (props) => {
+
+  const router = useRouter();
 
   const nodeRef = useRef(null);
   const buttonRef = props.btnRef;
@@ -48,8 +51,7 @@ const Dropdown = (props) => {
                 <div>{props.user.username}</div>
               </div>
               <div>
-                {/* eslint-disable-next-line @next/next/link-passhref */}
-                <Link href="/logout" ><Button className={styles.dd_logoutBtn} variant="secondary">Log Out</Button></Link>
+                <Button className={styles.dd_logoutBtn} variant="secondary" onClick={ () => router.push('/logout') }>Log Out</Button>
               </div>
             </div>
             <div className={styles.dd_bot_user}>
@@ -69,10 +71,8 @@ const Dropdown = (props) => {
               Welcome
             </div>
             <div className={styles.dd_bot}>
-              {/* eslint-disable-next-line @next/next/link-passhref */}
-              <Link href="/login" ><Button variant="secondary">Log In</Button></Link>
-              {/* eslint-disable-next-line @next/next/link-passhref */}
-              <Link href="/register" ><Button variant="secondary">Register</Button></Link>
+              <Button variant="secondary" onClick={ () => router.push('/login') } >Log In</Button>
+              <Button variant="secondary" onClick={ () => router.push('/register') } >Register</Button>
             </div>
           </div>
         }
