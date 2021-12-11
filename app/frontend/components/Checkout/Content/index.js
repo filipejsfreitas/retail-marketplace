@@ -4,16 +4,20 @@ import styles from "styles/Checkout/Content/Content.module.css"
 import Basket from "./Basket";
 import Summary from "./Summary";
 
+
+// This function filters products with 0 stock
 function calcQuantity(state) {
-    return state.map( item => item.quantity ).reduce( (prev,next) => prev + next )
+    return state.filter(item => item.stock > 0).map( item => item.quantity ).reduce( (prev,next) => prev + next )
 }
 
+// This function filters products with 0 stock
 function calcTotalForProducts(state) {
-    return state.map( item => ({quantity:item.quantity, price:item.price}) ).reduce( (acc,item) => acc + item.quantity*item.price, 0) / 100
+    return state.filter(item => item.stock > 0).map( item => ({quantity:item.quantity, price:item.price}) ).reduce( (acc,item) => acc + item.quantity*item.price, 0) / 100
 }
 
+// This function filters products with 0 stock
 function calcShipping(state) {
-    return state.map( item => item.shipping ).reduce( (prev,next) => prev + next ) / 100
+    return state.filter(item => item.stock > 0).map( item => item.shipping ).reduce( (prev,next) => prev + next ) / 100
 }
 
 
