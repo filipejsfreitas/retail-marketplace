@@ -1,32 +1,24 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import styles from "styles/Product/product.module.css"
+import styles from "styles/Root/root.module.css"
+import { computeStars } from "components/Product/Product";
+import { Row, Col } from "react-bootstrap";
+import Link from "next/link"
 
-const  RecomendedProducts = (props) => {
-
+const  RootCarousel = (props) =>{
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 3,
+          items: props.number,
           slidesToSlide: 1
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 2,
-          slidesToSlide: 2 
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1,
-          slidesToSlide: 1 
         }
       };
-
+      
     return (
         <Carousel
         draggable={false}
-        showDots={true}
+        showDots={false}
         infinite={true}
         responsive={responsive}
         ssr={true} // means to render carousel on server-side.
@@ -36,13 +28,13 @@ const  RecomendedProducts = (props) => {
         keyBoardControl={true}
         customTransition="all .5"
         containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
+        partialVisible={false}
         >
-        
+
         {props.props.map((key, elem) =>(
-            <div key={elem} align="center">
+            <div key={elem} className={styles.root}>
               <div className={styles.recommended}>
               <img
                 className={styles.recommendedPhoto}              
@@ -50,10 +42,14 @@ const  RecomendedProducts = (props) => {
               />
               </div >
               <div className={styles.textProd}>
-                <div className={styles.product_name}>{key.name}</div>
-                <div className={styles.product_name} >{key.price}€</div>
+                {/* Trocar name para id no LINK*/}
+                <div className={styles.product_name}><Link href={`/${key.name}`}>{`${key.name}`}</Link></div>
+                <Row>
+                    <Col className={styles.product_stars}> {computeStars(key.stars)} </Col>  
+                    <Col className={styles.product_price}>{key.price}€</Col>
+                </Row>
               </div>
-            </div>
+            </div>  
         ))}
         
 
@@ -62,4 +58,4 @@ const  RecomendedProducts = (props) => {
     
 };
 
-export default RecomendedProducts;
+export default RootCarousel;
