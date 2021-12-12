@@ -120,5 +120,6 @@ dist
 # Database path for testing
 .dbpath
 
-# auto generated files (?)
+# backend auto generated files
 test12/
+public/
