@@ -1,9 +1,102 @@
-import Layout from "components/Layout"
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
+import RootCarousel from "components/Root/RootCarousel";
+import { Row, Col } from "react-bootstrap";
+import styles from '../styles/Root/root.module.css'
+import Layout from "components/Layout";
 
 export default function Home({ categories }) {
+
+  const newP = [
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg",
+      name: "Very nice and sac s acasca s aca pruduct pruduct pruduct name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg",
+      name: "Very nice and long pruduct product name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg",
+      name: "Very nice and long name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+      name: "Very nice and long pruduct name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg",
+      name: "Very nice and long pruduct pruduct pruduct name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg",
+      name: "Very nice and long pruduct product name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg",
+      name: "Very nice and long name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+      name: "Very nice and long pruduct name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg",
+      name: "Very nice and long pruduct pruduct pruduct name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg",
+      name: "Very nice and long pruduct product name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg",
+      name: "Very nice and long name",
+      price: "20",
+      stars: 3
+    },
+    {
+      photo:"https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+      name: "Very nice and long pruduct name",
+      price: "20",
+      stars: 3
+    }
+  ]
+
   return (
     <Layout categories={categories}>
+      <h2 className={styles.titles} >Trending</h2>
+      <RootCarousel props={newP} number={6}/>
+      <Row md={12} className={styles.row}>
+        <Col md={6} className={styles.col1}>
+          <h2  className={styles.titles} >New</h2>
+          <RootCarousel props={newP} number={3}/>
+        </Col>
+        <Col md={6} className={styles.col2}>
+          <h2 className={styles.titles}>On Sale</h2>
+          <RootCarousel props={newP} number={3}/>
+        </Col>
+      </Row>
+      <h2 className={styles.titles}>Best Sellers</h2>
+      <RootCarousel props={newP} number={6}/>
     </Layout>
   )
 }

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ImageGallery from 'react-image-gallery'
 
-function ProductImage(props){
+const ProductImage = (props) => {
   
     var images = [];
     const[Images, setImages] = useState([])
+
+    console.log(props.props),
+    console.log("---------------------"),
     useEffect(()=> {  
         props.props.forEach((elem) => {
           images.push(

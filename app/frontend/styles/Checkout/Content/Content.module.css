@@ -1,0 +1,25 @@
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edge {
+    flex:1;
+    position: relative;
+    top: -20px;
+    color: #989898;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 50px;
+    align-self: center;
+}
+
+.bot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.margin {
+    flex: 0 1 100px;
+}
