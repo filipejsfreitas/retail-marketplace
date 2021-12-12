@@ -119,3 +119,6 @@ dist
 
 # Database path for testing
 .dbpath
+
+# auto generated files (?)
+test12/
