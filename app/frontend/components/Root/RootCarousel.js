@@ -14,7 +14,9 @@ const  RootCarousel = (props) =>{
           slidesToSlide: 1
         }
       };
-      
+    
+    const imagesrc = "http://localhost:3001/"
+    const defImg = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     return (
         <Carousel
         draggable={false}
@@ -32,20 +34,20 @@ const  RootCarousel = (props) =>{
         itemClass="carousel-item-padding-40-px"
         partialVisible={false}
         >
-
-        {props.props.map((key, elem) =>(
+        
+        {
+        props.props.map((key, elem) =>(
             <div key={elem} className={styles.root}>
               <div className={styles.recommended}>
               <img
                 className={styles.recommendedPhoto}              
-                src={key.photo}
+                src={key.images.length!=0 ? imagesrc + key.images[0] : defImg}
               />
               </div >
               <div className={styles.textProd}>
-                {/* Trocar name para id no LINK*/}
-                <div className={styles.product_name}><Link href={`/${key.name}`}>{`${key.name}`}</Link></div>
+                <div className={styles.product_name}><Link href={`/product/${key._id}`}>{`${key.name}`}</Link></div>
                 <Row>
-                    <Col className={styles.product_stars}> {computeStars(key.stars)} </Col>  
+                    <Col className={styles.product_stars}> {computeStars(key.score)} </Col>  
                     <Col className={styles.product_price}>{key.price}€</Col>
                 </Row>
               </div>
