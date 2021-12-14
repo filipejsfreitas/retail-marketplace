@@ -7,6 +7,12 @@ import { isEmpty } from '@utils/util';
 export class ProductService{
     public products = ProductModel;
 
+    public async getproducts(): Promise<Product []> {
+        const prodList: Product [] = await this.products.find();
+
+        return prodList;
+    }
+
     public async createProduct(productData: CreateProductDto): Promise<Product> {
         if (isEmpty(productData)) throw new HttpException(400, "You're not product");
 

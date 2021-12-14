@@ -26,6 +26,13 @@ export class ProductController{
     public productService = new ProductService();
     public imageService = new ImageService();
 
+    @Get('/list')
+    @OpenAPI({summary:'get product list'})
+    async getProducts() {
+        const prodData = await this.productService.getproducts();
+        return { data: prodData, message: 'found Product' };
+    }
+
     @Get('/:id')
     @OpenAPI({summary:'get product info'})
     async getProduct(@Param('id') prodId: string) {
@@ -210,6 +217,10 @@ export class ProductController{
         
         return {data: product, message: 'Product updated'}
     }
-
+    /*
+    @Get('/search')
+    @OpenAPI({summary: 'update product'})
+    async productSearch(@Q)
+    */
     
 }
