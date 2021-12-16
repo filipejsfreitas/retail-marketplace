@@ -2,23 +2,20 @@ import React from "react"
 import Layout from "../../components/Layout"
 import Product from "../../components/Product/Product"
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
-import fetchProduct from "helper/fetchProduct";
+import fetchProducts from "helper/fetchProduct";
 
+export const getStaticPaths = async () => {
+  
+  const data = await fetchProducts();
 
-//export const getStaticPaths = async () => {
-//  const res = await fetch(`${process.env.HOST}/category`)
-//  const posts = await res.json()
-//  const data = posts.data
-//  // Get the paths we want to pre-render based on posts
-//  const paths = data.map((post) => ({
-//    params: { id: post.name },
-//  }))
-//  // We'll pre-render only these paths at build time.
-//  // { fallback: false } means other routes should 404.
-//  return { paths, fallback: true }
-//}
+  const paths = data.map((post) => ({
+    params: { id: post._id },
+  }))
 
-const product = {
+  return { paths, fallback: 'blocking' }
+}
+
+/*const product = {
   name : "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
   photo: ["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/8/8/8899.jpg",
       "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/_/1_p033017.jpg",
@@ -108,17 +105,22 @@ const product = {
       Donec nec consequat ex.'
       }
   ]
+}*/
+export default function ProductPage({categories,product}){
+
+  return ( 
+      <Layout categories={categories} >
+          <Product props={product}></Product>
+      </Layout>
+  )
 }
 
 export async function getStaticProps(context) {
 
-  //context.params.id= "61b3e59643d4336ac0a7a809"
-  //const id = context.params.id;
-  //console.log(context)
-  //const res = await fetch(`${process.env.HOST}/product/` + id)
-  //const data = await res.json()
-  //const product = data.data
-
+  const id = context.params.id;
+  const res = await fetch(`${process.env.HOST}/product/${id}`)
+  const data = await res.json()
+  const product = data.data
 
   const categories = await fetchCategories();
   const revTime = revalidateTime()
@@ -126,21 +128,13 @@ export async function getStaticProps(context) {
   return {
     props: {
       categories,
+      product
     },
 
     revalidate: revTime, 
   }
 }
 
-export default function ProductPage({ categories}){
-
-    return ( 
-        
-        <Layout categories={categories} >
-            <Product props={product}></Product>
-        </Layout>
-    )
-}
 
 
 // This function gets called at build time on server-side.
