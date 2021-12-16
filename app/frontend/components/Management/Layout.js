@@ -19,7 +19,7 @@ export const ADMIN_SIDEBAR = {
     contents: [
         { text: "Home", url: "/"},
         { text: "Manage Categories", url: "/category"},
-        { text: "Manage Sellers", url: "/"},
+        { text: "Manage Sellers", url: "/seller/list"},
         { text: "Add Product", url: "/product/add"},
     ],
 }

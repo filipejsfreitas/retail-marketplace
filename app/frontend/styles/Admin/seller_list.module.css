@@ -1,0 +1,16 @@
+
+.seller {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    transition: 0.3s;
+}
+
+.seller > * {
+    margin-right: 10px;
+}
+
+.seller > *:hover {
+    color: #ED7966;
+    cursor: pointer;
+}
