@@ -18,7 +18,7 @@ const ProductImage = (props) => {
             });
             setImages(images)
         }
-    })
+    }, [])
     
     return(
         <div>

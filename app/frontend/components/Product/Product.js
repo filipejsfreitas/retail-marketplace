@@ -53,7 +53,7 @@ const Product = (props) => {
       ]
     
     const prod = props.props
-
+    const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
     return (            
            <>
             <Row md={12}>
@@ -132,11 +132,12 @@ const Product = (props) => {
                     <MyModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
+                      id={prod._id}
                     />
                 </span>
                 </div>
                 <Container className={styles.panelReviews}>
-                    <Reviews props1={prod.comments}/>
+                    <Reviews props1={commentsOrd} id={prod._id}/>
                 </Container> 
             </Row>
         </>
