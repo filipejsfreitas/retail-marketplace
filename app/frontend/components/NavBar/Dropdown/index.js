@@ -1,13 +1,12 @@
 import { useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
-import { Button, Navbar } from 'react-bootstrap'
-import Link from 'next/link'
+import { Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
 
 import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
-
 
 // Custom dropdown component with animation
 // Needs to be given a btnRef prop with the reference
@@ -19,19 +18,7 @@ import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
 // prop is supplied it shows information relative to the user account
 const Dropdown = (props) => {
 
-  /* 
-  * The checkout page has a colored title under the Navbar
-  * so this component needs to behave differently, in specific 
-  * it needs to be placed at 164px from the top of the page 
-  * instead of the usual 64px. given that specific CSS class is
-  * is needed for this situation.
-  */ 
   const router = useRouter();
-  const inCheckoutPage = router.asPath === "/checkout"
-
-  const mainClass = inCheckoutPage
-    ? styles.dd_wrapper_checkout
-    : styles.dd_wrapper;
 
   const nodeRef = useRef(null);
   const buttonRef = props.btnRef;
@@ -57,15 +44,14 @@ const Dropdown = (props) => {
       >
         { props.user
           ?
-          <div ref={nodeRef} className={mainClass}>
+          <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top_user}>
               <div className={styles.dd_top_user_welcome_div}>
                 Welcome
                 <div>{props.user.username}</div>
               </div>
               <div>
-                {/* eslint-disable-next-line @next/next/link-passhref */}
-                <Link href="/logout" ><Button className={styles.dd_logoutBtn} variant="secondary">Log Out</Button></Link>
+                <Button className={styles.dd_logoutBtn} variant="secondary" onClick={ () => router.push('/logout') }>Log Out</Button>
               </div>
             </div>
             <div className={styles.dd_bot_user}>
@@ -80,15 +66,13 @@ const Dropdown = (props) => {
             </div>
           </div>
           :
-          <div ref={nodeRef} className={mainClass}>
+          <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top}>
               Welcome
             </div>
             <div className={styles.dd_bot}>
-              {/* eslint-disable-next-line @next/next/link-passhref */}
-              <Link href="/login" ><Button variant="secondary">Log In</Button></Link>
-              {/* eslint-disable-next-line @next/next/link-passhref */}
-              <Link href="/register" ><Button variant="secondary">Register</Button></Link>
+              <Button variant="secondary" onClick={ () => router.push('/login') } >Log In</Button>
+              <Button variant="secondary" onClick={ () => router.push('/register') } >Register</Button>
             </div>
           </div>
         }

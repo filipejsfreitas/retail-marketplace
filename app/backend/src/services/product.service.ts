@@ -1,11 +1,17 @@
 import { ProductModel } from "@/models/product.model";
-import { CommentProduct, Product } from '@interfaces/product.interface';
+import { CommentChecker, CommentProduct, Product } from '@interfaces/product.interface';
 import { CreateProductDto } from '@dtos/product.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
 
 export class ProductService{
     public products = ProductModel;
+
+    public async getproducts(): Promise<Product []> {
+        const prodList: Product [] = await this.products.find();
+
+        return prodList;
+    }
 
     public async createProduct(productData: CreateProductDto): Promise<Product> {
         if (isEmpty(productData)) throw new HttpException(400, "You're not product");
@@ -36,18 +42,19 @@ export class ProductService{
         return findProduct;
     }
 
-    public async commentProduct(prodId: string, comment: CommentProduct): Promise<Product>{
+    public async commentProduct(prodId: string, comment: CommentChecker): Promise<Product>{
         if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
         
         const findProduct: Product = await this.products.findOne({ _id: prodId });
         
         if (!findProduct) throw new HttpException(409, "You're not product");
 
-        var newScore = findProduct.score * findProduct.number_scores + comment.score;
+        var newNumberScores = findProduct.number_scores + 1;
 
-        var newNumber_view = findProduct.number_views + 1;
-        const updateProductData: Product = await this.products.findOneAndUpdate({_id: prodId},{score:newScore, number_views: newNumber_view,
-            $addToSet:{comments: comment}});
+        var newScore = (findProduct.score * findProduct.number_scores + comment.score) / newNumberScores; 
+
+        const updateProductData: Product = await this.products.findOneAndUpdate({_id: prodId},{score:newScore,number_scores: newNumberScores,
+            $addToSet:{comments: comment}}, { new: true });
 
         return updateProductData;
     }
@@ -56,6 +63,57 @@ export class ProductService{
         const prod: Product = await this.findProductById(prodId); 
 
         return prod.images[0];
+    }
+
+    public async updateComment(prodId: string, commentId: string, comment: CommentChecker): Promise<Product> {
+        if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
+        
+        const findProduct: Product = await this.products.findById( prodId);
+
+        const oldComment : CommentProduct = findProduct.comments.find(element => element._id.toString() === commentId);
+
+        if(oldComment.client_id.toString() === comment.client_id){
+            
+        }else{
+            throw new HttpException(400, "You're not authorized");
+        }
+
+        //findProduct.comments.id(commentId)
+
+        var newScore = (findProduct.score * findProduct.number_scores + comment.score - oldComment.score) / findProduct.number_scores; 
+        const parent1 : Product = await this.products.findOneAndUpdate({_id: prodId, "comments._id": commentId},{ $set:{"comments.$.title":comment.title} });
+        //const parent : Product = await this.products.findOneAndUpdate({_id: prodId},{ score:newScore},{ new: true });
+        
+        
+        return parent1;
+    }
+
+    public async deleteComment(prodId: string, commentId: string, clientId: string): Promise<Product>{
+        if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
+
+        const findProduct: Product = await this.products.findById( prodId);
+
+        console.log(findProduct);
+
+        const oldComment : CommentProduct = findProduct.comments.find(element => element._id.toString() === commentId);
+
+        console.log(oldComment);
+        
+        if(oldComment.client_id.toString() === clientId){
+            
+        }else{
+            throw new HttpException(400, "You're not authorized");
+
+        }
+        
+        var newNumberScores = findProduct.number_scores - 1;
+
+        var newScore = (findProduct.score * findProduct.number_scores - oldComment.score) /  newNumberScores; 
+       
+
+        const parent : Product = await this.products.findOneAndUpdate({_id: prodId},{score:newScore,number_scores: newNumberScores, $pull: { comments: { _id: commentId} } },
+            { new: true });
+        return parent;
     }
 
 }

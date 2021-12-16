@@ -16,7 +16,7 @@ import multer from 'multer';
 import path from 'path';
 import { idText } from "typescript";
 import { Product } from "@/interfaces/product.interface";
-
+ 
 const upload = multer({dest:'./uploads'})
 
 type File = Express.Multer.File;
@@ -25,6 +25,13 @@ type File = Express.Multer.File;
 export class ProductController{
     public productService = new ProductService();
     public imageService = new ImageService();
+
+    @Get('/list')
+    @OpenAPI({summary:'get product list'})
+    async getProducts() {
+        const prodData = await this.productService.getproducts();
+        return { data: prodData, message: 'found Product' };
+    }
 
     @Get('/:id')
     @OpenAPI({summary:'get product info'})
@@ -38,8 +45,27 @@ export class ProductController{
     @OpenAPI({summary: 'comment product'})
     async commentProduct(@Param('id') prodId: string, @Body() prodData: CreateCommentDto) {
         const client_id = "123456";
-        const product = await this.productService.commentProduct(prodId,{...prodData,client_id: client_id, name: "nome"});
+        const date : Date =  new Date();
+        const product = await this.productService.commentProduct(prodId,{...prodData,client_id: client_id, name: "nome", date: date});
         return {data: product, message: 'Product commented'}
+    }
+
+    @Put('/:id/comment/:comment_id')
+    @UseBefore(validationMiddleware(CreateCommentDto, 'body'))
+    @OpenAPI({summary: 'delete comment'})
+    async updateComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string, @Body() prodData: CreateCommentDto) {
+        const client_id = "123456";
+        const date : Date =  new Date();
+        const product = await this.productService.updateComment(prodId,comment_Id,{...prodData,client_id: client_id, name: "nome", date: date});
+        return {data: product, message: 'Comment deleted'};
+    }
+
+    @Delete('/:id/comment/:comment_id')
+    @OpenAPI({summary: 'delete comment'})
+    async deleteComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string) {
+        const client_id = "123456";
+        const product = await this.productService.deleteComment(prodId,comment_Id,client_id);
+        return {data: product, message: 'Comment deleted'};
     }
 
     @Post('/')
@@ -56,32 +82,30 @@ export class ProductController{
 
         var tecnical = JSON.parse(productData.tecnical);
 
-        fs.mkdir('./test12/'+foldername, {recursive: true },(err) => {
+        fs.mkdir('./public/'+foldername, {recursive: true },(err) => {
             if(err) {
                 throw new HttpException(500, err.message)
             }
 
             imagens.forEach(element => {
                 //console.log(element);
-                fs.writeFile('./test12/'+foldername + '/'+element.originalname,element.buffer, (err) => {
+                fs.writeFile('./public/'+foldername + '/'+element.originalname,element.buffer, (err) => {
                     if(err) {
                         console.log(err)
                         throw new HttpException(500, err.message)
                     }
                 })
 
-                
-                imagePaths.push({path:('./test12/'+foldername + '/'+element.originalname)});
-                console.log(imagePaths);
             });
         } )
 
         imagens.forEach(element => {
             //console.log(element);
-            imagePaths.push({path:('./test12/'+foldername + '/'+element.originalname)});
+            imagePaths.push(foldername + '/'+element.originalname);
             //console.log(imagePaths);
         })
         console.log(imagePaths);
+        /*
         var tempimages = await this.imageService.createImages(imagePaths);
         
         var imagesId = [];
@@ -89,8 +113,9 @@ export class ProductController{
             imagesId.push(element._id.toString());
         });
         console.log(imagesId);
+        */
         const product = await this.productService.createProduct({name: productData.name, description: productData.description,category_id: 
-        productData.category_id,characteristic: chars,tecnical: tecnical, forSale:forSale, images: imagesId});
+        productData.category_id,characteristic: chars,tecnical: tecnical, forSale:forSale, images: imagePaths});
         //return {data: product, message: 'Product created'}
         return { message: 'Product created'}
     }
@@ -117,6 +142,16 @@ export class ProductController{
 
         var imagesDeleted = JSON.parse(productData.imagesToDelete);
         console.log(imagesDeleted);
+
+        imagesDeleted.forEach(element => {
+            fs.unlink('./public/'+element, (err) => {
+                if(err) {
+                    console.log(err)
+                    throw new HttpException(500, err.message)
+                }
+            })
+        });
+
         /*
         imagesDeleted.forEach(element => {
             var index = productData.images.indexOf(element);
@@ -140,31 +175,28 @@ export class ProductController{
 
         if(imagens.length > 0){
 
-            fs.mkdir('./test12/'+foldername, {recursive: true },(err) => {
+            fs.mkdir('./public/'+foldername, {recursive: true },(err) => {
                 if(err) {
                     throw new HttpException(500, err.message)
                 }
 
                 imagens.forEach(element => {
                     //console.log(element);
-                    fs.writeFile('./test12/'+foldername + '/'+element.originalname,element.buffer, (err) => {
+                    fs.writeFile('./public/'+foldername + '/'+element.originalname,element.buffer, (err) => {
                         if(err) {
                             console.log(err)
                             throw new HttpException(500, err.message)
                         }
                     })
-
-                    
-                    imagePaths.push({path:('./test12/'+foldername + '/'+element.originalname)});
-                    console.log(imagePaths);
                 });
             } )
 
             imagens.forEach(element => {
                 //console.log(element);
-                imagePaths.push({path:('./test12/'+foldername + '/'+element.originalname)});
+                imagePaths.push(foldername + '/'+element.originalname);
                 //console.log(imagePaths);
             })
+            /*
             console.log(imagePaths);
             var tempimages = await this.imageService.createImages(imagePaths);
             
@@ -172,10 +204,10 @@ export class ProductController{
             tempimages.forEach(element => {
                 imagesId.push(element._id.toString());
             });
-
+            */
 
             product = await this.productService.updateProduct({name: productData.name, description: productData.description,category_id: 
-                productData.category_id,characteristic: chars,tecnical: tecnical, forSale:forSale, images: oldImages.concat(imagesId)},prodId);
+                productData.category_id,characteristic: chars,tecnical: tecnical, forSale:forSale, images: oldImages.concat(imagePaths)},prodId);
         }else{
             product = await this.productService.updateProduct({name: productData.name, description: productData.description,category_id: 
                 productData.category_id,characteristic: chars,tecnical: tecnical, forSale:forSale, images: oldImages},prodId);
@@ -185,6 +217,10 @@ export class ProductController{
         
         return {data: product, message: 'Product updated'}
     }
-
+    /*
+    @Get('/search')
+    @OpenAPI({summary: 'update product'})
+    async productSearch(@Q)
+    */
     
 }

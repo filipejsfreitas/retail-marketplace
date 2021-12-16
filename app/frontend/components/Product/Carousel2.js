@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "styles/Product/product.module.css"
 
-function RecomendedProducts(props) {
+const  RecomendedProducts = (props) => {
 
     const responsive = {
         desktop: {
