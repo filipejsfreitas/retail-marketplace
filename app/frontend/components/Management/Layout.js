@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import NavBar from "components/Management/Bar/NavBar"
+import { Spinner } from "react-bootstrap"
 
 import styles from "/styles/Management/Layout.module.css"
 
@@ -16,8 +17,10 @@ export const SELLER_SIDEBAR = {
 export const ADMIN_SIDEBAR = {
     rootpath: "/admin",
     contents: [
-        { text: "Add Category", url: "/"},
-        { text: "List Categories", url: "/"},
+        { text: "Home", url: "/"},
+        { text: "Manage Categories", url: "/category"},
+        { text: "Manage Sellers", url: "/"},
+        { text: "Add Product", url: "/product/add"},
     ],
 }
 
@@ -44,7 +47,7 @@ export default function Layout(props) {
                     <SideBar sidebar={props.sidebar} />
                 </div>
                 <div className={styles.page_content}>
-                    {props.children}
+                    {props.isLoading ? <Spinner animation="border" /> : props.children}
                 </div>
             </div>
         </>

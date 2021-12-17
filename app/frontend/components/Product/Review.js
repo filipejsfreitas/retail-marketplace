@@ -1,25 +1,62 @@
 import React from "react";
-import {Row ,Col,ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Row ,Col,ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 import styles from "styles/Product/product.module.css"
 import { computeStars } from "components/Product/Product";
-
+import { BsFillPencilFill, BsFillXCircleFill } from "react-icons/bs";
+import EditComment from "./EditComment";
+import { useRouter } from 'next/router'
+import DeleteComment from "./DeleteComment";
 
 export default function Reviews(props1) {
+    
+    const [commentDel, setCommentDel] = React.useState({active: false, id: ""});
+    const [commentEdit, setCommentEdit] = React.useState({active: false, old: ""});
+
     return (
         <ListGroup> 
             {props1.props1.map((key, value) => (
             <ListGroupItem key={value}>
-                <div className={styles.reviewTitle}>{key.title}</div> 
+                 <Row md={12}>
+                    <Col md={11} >
+                    </Col>
+                    <Col md={1}>
+                        <Button 
+                            className={styles.reviewCol2}  
+                            type="submit"
+                            onClick={()=>setCommentEdit({active: true, old:key})}
+                            >
+                            <BsFillPencilFill/>
+                        </Button>
+                        <EditComment
+                            show={commentEdit}
+                            old={commentEdit.old}
+                            setC={setCommentEdit}
+                        />
+                        <Button 
+                            className={styles.reviewCol2}  
+                            type="submit"
+                            onClick={()=>setCommentDel({active: true, id:key._id})}>
+                           
+                            <BsFillXCircleFill/>
+                        </Button>
+                        <DeleteComment
+                            show={commentDel}
+                            idC={commentDel.id}
+                            setC={setCommentDel}
+                        />
+                    </Col>
+                 </Row>
+                <div className={styles.reviewTitle}>{key.title}</div>
                 <Row md={12}>
                     <Col md={2} >
-                    <div className={styles.reviewUser}><p>{key.username}</p><p>{computeStars(key.stars)}</p><p>{key.date}</p></div>
+                    <div className={styles.reviewUser}><p>{key.name}</p><p>{computeStars(key.score)}</p><p>{key.date.split("T")[0]}</p></div>
                     </Col>
                     <Col md={10}>
-                    <div className={styles.reviewDescription}>{key.text}</div>
+                    <div className={styles.reviewDescription}>{key.comment}</div>
                     </Col>
                 </Row>
             </ListGroupItem>
         ))}
         </ListGroup>
     )
-};
+}

@@ -1,0 +1,48 @@
+
+.menu {
+    background-color: inherit;
+}
+
+.menu_ul {
+    list-style-type: none;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.title > * {
+    text-align: center;
+    margin-right: 10px;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.dropdown:hover {
+    color: #ED7966;
+    cursor: pointer;
+}
+
+.extra {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.extra > * {
+    margin-right: 10px;
+}
+
+.extra > *:hover {
+    color: #ED7966;
+    cursor: pointer;
+}

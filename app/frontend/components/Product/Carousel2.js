@@ -1,10 +1,17 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import styles from "styles/Product/product.module.css"
+import styles from "styles/Root/root.module.css"
+import Link from "next/link"
+import { Row, Col } from "react-bootstrap";
+import { computeStars } from "components/Product/Product";
+
+
 
 const  RecomendedProducts = (props) => {
 
+    const imagesrc = "http://localhost:3001/"
+    const defImg = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
@@ -41,19 +48,25 @@ const  RecomendedProducts = (props) => {
         itemClass="carousel-item-padding-40-px"
         >
         
-        {props.props.map((key, elem) =>(
-            <div key={elem} align="center">
+        {
+        props.props.map((key, elem) =>(
+            <div key={elem} className={styles.root}>
               <div className={styles.recommended}>
+              {/*Adicionar imagesrc*/}
               <img
                 className={styles.recommendedPhoto}              
-                src={key.photo}
+                src={key.images.length!=0 ? key.images[0] : defImg}
               />
               </div >
               <div className={styles.textProd}>
-                <div className={styles.product_name}>{key.name}</div>
-                <div className={styles.product_name} >{key.price}€</div>
+                {/* Trocar name para id no LINK*/}
+                <div className={styles.product_name}><Link href={`/product/${key._id}`}>{`${key.name}`}</Link></div>
+                <Row>
+                    <Col className={styles.product_stars}> {computeStars(key.score)} </Col>  
+                    <Col className={styles.product_price}>{key.price}€</Col>
+                </Row>
               </div>
-            </div>
+            </div>  
         ))}
         
 
