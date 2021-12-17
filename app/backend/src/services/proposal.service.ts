@@ -12,11 +12,11 @@ export class ProposalService{
     public products = ProductModel;
 
     public async createProposal(prop : CreateProposalDto, seller: string): Promise<Proposal>{
-        if(this.alreadyExists(prop.product_id, seller)){
+        if(await this.alreadyExists(prop.product_id, seller)){
             throw new HttpException(400, "You already have a proposal on this product");
         }
-        const proposal : Proposal = await this.proposals.create({...prop,seller_id:seller});
-        this.updateBestPrice(prop.product_id);
+        const proposal : Proposal = await this.proposals.create({...prop,seller_id:seller, reservations: []});
+        await this.updateBestPrice(prop.product_id);
         /*
         const product : Product = await this.products.findById({_id: prop.product_id}) 
         if(product.best_price < (prop.price + prop.shipping)){
@@ -39,7 +39,7 @@ export class ProposalService{
         
         const proposal : Proposal = await this.proposals.findByIdAndUpdate({_id: id}, {...prop},{new: true});
 
-        this.updateBestPrice(proposal.product_id);
+        await this.updateBestPrice(proposal.product_id);
         /*
         const product : Product = await this.products.findById({_id: proposal.product_id})
         if(product.best_price < (prop.price + prop.shipping)){
@@ -55,7 +55,7 @@ export class ProposalService{
         }
 
         const proposal :Proposal = await this.proposals.findByIdAndDelete({_id: id});
-        this.updateBestPrice(proposal.product_id);
+        await this.updateBestPrice(proposal.product_id);
         /*
         const product : Product = await this.products.findById({_id: proposal.product_id})
         if(product.best_price === (proposal.price + proposal.shipping)){
