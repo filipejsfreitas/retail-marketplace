@@ -7,10 +7,12 @@ import styles from "/styles/Management/Layout.module.css"
 export const SELLER_SIDEBAR = {
     rootpath: "/seller",
     contents: [
-        { text: "Add Product", url: "/"},
-        { text: "Order History", url: "/"},
-        { text: "Active Orders", url: "/"},
-        { text: "Remove Product", url: "/"},
+        { text: "Home", url: "/"},
+        { text: "Add Proposal", url: "/proposal/add/"},
+        //{ text: "Add Product", url: "/"},
+        //{ text: "Order History", url: "/"},
+        //{ text: "Active Orders", url: "/"},
+        //{ text: "Remove Product", url: "/"},
     ],
 }
 
@@ -20,6 +22,7 @@ export const ADMIN_SIDEBAR = {
         { text: "Home", url: "/"},
         { text: "Manage Categories", url: "/category"},
         { text: "Manage Sellers", url: "/seller/list"},
+        { text: "Manage Products", url: "/product/list"},
         { text: "Add Product", url: "/product/add"},
     ],
 }

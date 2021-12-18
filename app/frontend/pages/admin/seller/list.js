@@ -42,8 +42,8 @@ function Seller(props) {
             }
         })} /> : <></>}
         <BsDashLg onClick={() => props.setModal({
-            show: true, title: "Confirm Removal",
-            body: `Are you sure you want to remove ${props.seller.email}?`,
+            show: true, title: "Confirm Block",
+            body: `Are you sure you want to block ${props.seller.email}?`,
             submit: () => {
                 console.log(`${props.seller.email} removed.`)
                 props.setSellers(props.sellers.filter(s => s != props.seller))
@@ -52,7 +52,7 @@ function Seller(props) {
     </div>
 }
 
-export default function ProductAdd() {
+export default function SellerList() {
     const [confirmModal, setConfirmModal] =
         useState({ show: false, title: "", body: "", submit: (e) => e })
     const [sellers, setSellers] = useState([])
