@@ -3,6 +3,7 @@ import { CommentChecker, CommentProduct, Product } from '@interfaces/product.int
 import { CreateProductDto } from '@dtos/product.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
+import { Console } from "console";
 
 export class ProductService{
     public products = ProductModel;
@@ -68,24 +69,46 @@ export class ProductService{
     public async updateComment(prodId: string, commentId: string, comment: CommentChecker): Promise<Product> {
         if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
         
-        const findProduct: Product = await this.products.findById( prodId);
+        const findProduct = await this.products.findById( prodId);
 
-        const oldComment : CommentProduct = findProduct.comments.find(element => element._id.toString() === commentId);
+        var newScore = 0;
 
-        if(oldComment.client_id.toString() === comment.client_id){
+        findProduct.comments.forEach(element => {
             
-        }else{
-            throw new HttpException(400, "You're not authorized");
-        }
+            if(element._id.toString() === commentId){
 
+                console.log("encontrou comentário")
+                if( !(element.client_id.toString() === comment.client_id) ){
+                    throw new HttpException(400, "You're not authorized");
+                }
+
+                newScore = (findProduct.score * findProduct.number_scores + comment.score - element.score) / findProduct.number_scores; 
+
+            
+                element.comment = comment.comment;
+                element.title = comment.title;
+                element.date = new Date();
+                element.score = comment.score;
+
+                
+            }
+
+        });
+
+        
+
+        
+        /*
         //findProduct.comments.id(commentId)
 
-        var newScore = (findProduct.score * findProduct.number_scores + comment.score - oldComment.score) / findProduct.number_scores; 
+        
         const parent1 : Product = await this.products.findOneAndUpdate({_id: prodId, "comments._id": commentId},{ $set:{"comments.$.title":comment.title} });
         //const parent : Product = await this.products.findOneAndUpdate({_id: prodId},{ score:newScore},{ new: true });
+        */
+        const result = await findProduct.save()
+
+        return result;
         
-        
-        return parent1;
     }
 
     public async deleteComment(prodId: string, commentId: string, clientId: string): Promise<Product>{

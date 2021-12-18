@@ -24,33 +24,36 @@ const Product = (props) => {
     
     const [modalShow, setModalShow] = React.useState(false);
 
-    //const image1 = "http://localhost:3001/"
 
     const recomended = [
         {
-          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg",
+          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg"],
           name: "Very nice and long pruduct pruduct pruduct name",
-          price: "20"
+          price: "20",
+          score: 2
         },
         {
-          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg",
+          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg"],
           name: "Very nice and long pruduct product name",
-          price: "20"
+          price: "20",
+          score: 2
         },
         {
-          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg",
+          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg"],
           name: "Very nice and long name",
-          price: "20"
+          price: "20",
+          score: 4
         },
         {
-          photo:"https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg",
+          images:[],
           name: "Very nice and long pruduct name",
-          price: "40"
+          price: "40",
+          score: 3
         }
       ]
     
     const prod = props.props
-
+    const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
     return (            
            <>
             <Row md={12}>
@@ -64,7 +67,7 @@ const Product = (props) => {
                 <Col md={6}>
                     <Row>
                         <Container className={styles.carousel}> 
-                            <CarouselComponent props={prod.photo}/>
+                            <CarouselComponent props={prod.images}/>
                         </Container>
                     </Row>
                     <Row>
@@ -80,8 +83,8 @@ const Product = (props) => {
                         <Container>
                             <Row className={styles.prodStats} >
                                 <span>
-                                    <div className={styles.reviews}>{prod.nreviews} reviews</div>
-                                    <div className={styles.stars}>{computeStars(prod.stars)}</div> 
+                                    <div className={styles.reviews}>{prod.number_scores} reviews</div>
+                                    <div className={styles.stars}>{computeStars(prod.score)}</div> 
                                 </span>
                             </Row>
                             <Row>
@@ -129,11 +132,12 @@ const Product = (props) => {
                     <MyModal
                       show={modalShow}
                       onHide={() => setModalShow(false)}
+                      id={prod._id}
                     />
                 </span>
                 </div>
                 <Container className={styles.panelReviews}>
-                    <Reviews props1={prod.reviews}/>
+                    <Reviews props1={commentsOrd} id={prod._id}/>
                 </Container> 
             </Row>
         </>

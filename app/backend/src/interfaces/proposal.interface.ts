@@ -7,4 +7,5 @@ export interface Proposal{
     stock: number;
     maxPerPurchase: number;
     special_conditions: string;
+    reservations: Array<{_id: string, cartItem_id: string, quantity: number, timestamp: Date}>
 }
