@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react"
-import { useRouter } from 'next/router'
 import Layout from "components/Management/Layout"
 import { SELLER_SIDEBAR } from "components/Management/Layout"
 import ToggleDropdown from "components/Management/ToggleDropdown"
 import { Modal, Button, Form, Alert } from "react-bootstrap"
-import { BsPlusLg } from "react-icons/bs";
 
 import styles from "/styles/Seller/proposal/add.module.css"
 
@@ -30,14 +28,19 @@ function AddProductModal(props) {
         <Modal.Body>
             <h5>Category:</h5> {`${categoryName}`}
             <h5>Description:</h5> {`${product.description}`}
+            <br />
             <h5>Price:</h5>
             <Form.Control id="form-prop-price" placeholder="1.00" />
+            <br />
             <h5>Shipping:</h5>
             <Form.Control id="form-prop-shipping" placeholder="1.00" />
+            <br />
             <h5>Stock:</h5>
             <Form.Control id="form-prop-stock" placeholder="10" />
+            <br />
             <h5>Maximum purchases per client:</h5>
             <Form.Control id="form-prop-max" placeholder="2" />
+            <br />
             <h5>Extra Conditions:</h5>
             <Form.Control id="form-prop-conditions" as="textarea" placeholder="Extra conditions here" />
             <br />
@@ -65,7 +68,7 @@ function AddProductModal(props) {
                     body: JSON.stringify(request)
                 }).then((reply) => {
                     console.log(reply)
-                    if(reply.ok) setProduct(undefined)
+                    if (reply.ok) setProduct(undefined)
                     else setShowAlert("Unable to add proposal, maybe you have already added one to this product?")
                 }).catch(error => {
                     console.log(error)
