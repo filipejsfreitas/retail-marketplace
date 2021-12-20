@@ -2,9 +2,9 @@ import { Container, Button, Form, Row, Col } from "react-bootstrap"
 import { useState } from "react"
 
 
-import Logo from "../components/Logos/Logo"
+import Logo from "components/Logos/Logo"
 
-import styles from "../styles/register.module.css"
+import styles from "styles/register/client.module.css"
 
 export default function Register() {
   const [validated, setValidated] = useState(false);
