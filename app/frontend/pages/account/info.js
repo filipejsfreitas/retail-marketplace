@@ -3,10 +3,14 @@ import AccountPanel from "components/AccountPanel"
 import { AccountPanelEditButtons, AccountPanelForm } from "components/AccountPanel"
 import { Row, Col, Button } from "react-bootstrap"
 import styles from 'styles/account.module.css'
+import Error from "next/error"
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
 export default function AccountInfo({ categories }) {
+    if( !categories )
+        return (<Error statusCode={503} />)
+
     return (
         <Account categories={categories} selected="info">
             <h4>Account Information</h4>

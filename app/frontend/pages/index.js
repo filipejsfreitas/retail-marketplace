@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import styles from '../styles/Root/root.module.css'
 import Layout from "components/Layout";
 import fetchProducts from "helper/fetchProduct";
+import Error from "next/error";
 
 export default function Home({ categories, products }) {
 
@@ -82,7 +83,8 @@ export default function Home({ categories, products }) {
   //    stars: 3
   //  }
   //]
-
+  if( !categories || !products )
+    return (<Error statusCode={503} />)
 
   return (
     <Layout categories={categories}>

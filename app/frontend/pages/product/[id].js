@@ -3,6 +3,7 @@ import Layout from "../../components/Layout"
 import Product from "../../components/Product/Product"
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 import fetchProducts from "helper/fetchProduct";
+import Error from "next/error";
 
 export const getStaticPaths = async () => {
   
@@ -107,6 +108,9 @@ export const getStaticPaths = async () => {
   ]
 }*/
 export default function ProductPage({categories,product}){
+
+  if( !categories || !products )
+    return (<Error statusCode={503} />)
 
   return ( 
       <Layout categories={categories} >

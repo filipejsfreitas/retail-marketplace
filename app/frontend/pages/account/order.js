@@ -1,10 +1,13 @@
 import Account from "components/Account"
 import AccountPanel from "components/AccountPanel"
 import { AccountPanelDescription, AccountPanelOpenOrderButtons } from "components/AccountPanel"
+import Error from "next/error";
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
 export default function AccountInfo({ categories }) {
+    if( !categories )
+        return (<Error statusCode={503} />)
     return (
         <Account categories={categories} selected="order">
             <h4>Account Information</h4>

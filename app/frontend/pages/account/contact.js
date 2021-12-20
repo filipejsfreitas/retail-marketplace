@@ -1,9 +1,14 @@
 import Account from "components/Account"
 import AccountPanel from "components/AccountPanel"
 
+import Error from "next/error";
+
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
 export default function AccountContact({ categories }) {
+    if( !categories)
+        return (<Error statusCode={503} />)
+
     return (
         <Account categories={categories} selected="contact">
             <h4>My Contacts</h4>

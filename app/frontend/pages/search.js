@@ -5,6 +5,7 @@ import Layout from "components/Layout"
 import RemoveQuery from "components/Search/RemoveQuery"
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import { useRouter } from 'next/router'
+import Error from "next/error"
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
@@ -95,6 +96,10 @@ function rating() {
 }
 
 export default function Search({ categories }) {
+
+    if( !categories )
+        return (<Error statusCode={503} />)
+
     const router = useRouter()
 
     const result_len = "1-50"
