@@ -13,10 +13,6 @@ const SideBar = (props) => {
     // If in a sub categorie menu categorie id else 0
     const [subCategorie,setSubCategorie] = useState(false)
 
-    useEffect( () => {
-        console.log("CHANGED:", subCategorie)
-    }, [subCategorie])
-
     // Receives an array of categories from the backend API
     // Returns the respective links for each of the categories
     const renderCategories = (categories) => {
