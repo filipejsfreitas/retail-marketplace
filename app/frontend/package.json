@@ -17,6 +17,7 @@
     "react-icons": "^4.3.1",
     "react-image-gallery": "^1.2.7",
     "react-multi-carousel": "^2.6.5",
+    "react-phone-number-input": "^3.1.44",
     "react-transition-group": "^4.4.2"
   },
   "devDependencies": {
@@ -24,4 +25,3 @@
     "eslint-config-next": "12.0.2"
   }
 }
-
