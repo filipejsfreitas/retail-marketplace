@@ -18,3 +18,8 @@ export class UpdateCartItemDto{
     quantity: number;
 
 }
+
+export class ConcludePurchaseDto{
+    @IsString()
+    address_id: string;
+}
