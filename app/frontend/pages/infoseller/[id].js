@@ -4,7 +4,19 @@ import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper"
 import Info from "components/InfoSeller/Info";
 import Proposals from "components/InfoSeller/Proposals";
 
-export default function ProductPage({categories}){
+export async function getStaticPaths(){
+
+  const data = [];
+
+  const paths = data.map((post) => ({
+    params: { id: post._id },
+  }))
+
+  return { paths, fallback: 'blocking' }
+}
+
+
+export default function SellerPage({categories}){
 
   return ( 
       <Layout categories={categories} >

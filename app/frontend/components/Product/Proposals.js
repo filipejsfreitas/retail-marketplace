@@ -4,9 +4,10 @@ import styles from "styles/Product/sellers\.module.css"
 import { computeStars } from "components/Product/Product";
 import Status from "components/common/Status";
 import { BsBasket, BsCashCoin, BsTruck } from "react-icons/bs";
+import Link from "next/link"
 
 
-export default function Reviews() {
+export default function Proposals(proposals) {
     const sellers=[
         {
             name: "HouseMarket.pt",
@@ -32,16 +33,17 @@ export default function Reviews() {
         },
     ]
 
-    const sellers2 = sellers.sort((a, b) => a.price - b.price)
+    const proposalsOrd = proposals.proposals.sort((a, b) => a.price - b.price)
     
     return (
         
         <ListGroup  className={styles.list}>
-            {Object.values(sellers2).map((key, value) => (
+            {Object.values(proposalsOrd).map((key, value) => (
             <ListGroupItem key={value} className={styles.listItem}> 
                 <Row md={12}>
                     <Col md={6} className={styles.col1}>
-                        <p className={styles.nameSeller}>{key.name}</p> 
+                        {/*Meter nome e rating do seller */}
+                        <p className={styles.nameSeller}><Link href={`/infoseller/${key.seller_id}`}>{key.seller_id}</Link></p> 
                         <p className={styles.stars}>{computeStars(key.rating)}</p>
                         <p> <Status stock={key.stock}></Status></p>
                     </Col>
