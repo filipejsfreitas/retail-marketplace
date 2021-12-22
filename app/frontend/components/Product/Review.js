@@ -18,6 +18,7 @@ export default function Reviews(props1) {
             <ListGroupItem key={value}>
                  <Row md={12}>
                     <Col md={11} >
+                    <div className={styles.reviewTitle}>{key.title}</div>
                     </Col>
                     <Col md={1}>
                         <Button 
@@ -46,7 +47,7 @@ export default function Reviews(props1) {
                         />
                     </Col>
                  </Row>
-                <div className={styles.reviewTitle}>{key.title}</div>
+                
                 <Row md={12}>
                     <Col md={2} >
                     <div className={styles.reviewUser}><p>{key.name}</p><p>{computeStars(key.score)}</p><p>{key.date.split("T")[0]}</p></div>

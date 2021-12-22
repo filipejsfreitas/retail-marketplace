@@ -37,21 +37,24 @@ const  RootCarousel = (props) =>{
         
         {
         props.props.map((key, elem) =>(
-            <div key={elem} className={styles.root}>
-              <div className={styles.recommended}>
-              <img
-                className={styles.recommendedPhoto}              
-                src={key.images.length!=0 ? imagesrc + key.images[0] : defImg}
-              />
-              </div >
-              <div className={styles.textProd}>
-                <div className={styles.product_name}><Link href={`/product/${key._id}`}>{`${key.name}`}</Link></div>
-                <Row>
-                    <Col className={styles.product_stars}> {computeStars(key.score)} </Col>  
-                    <Col className={styles.product_price}>{key.price}€</Col>
-                </Row>
+            <div key={elem} className={styles.root}><Link href={`/product/${key._id}`}>
+              <div className={styles.title}>
+                <div className={styles.recommended}>
+                <img
+                  className={styles.recommendedPhoto}              
+                  src={key.images.length!=0 ? imagesrc + key.images[0] : defImg}
+                />
+                </div>
+                <div className={styles.textProd}>
+                  <div className={styles.product_name}>{`${key.name}`}</div>
+                  <Row>
+                      <Col className={styles.product_stars}> {computeStars(key.score)} </Col>  
+                      <Col className={styles.product_price}>{key.best_offer}€</Col>
+                  </Row>
+                </div>
               </div>
-            </div>  
+              </Link>
+            </div> 
         ))}
         
 

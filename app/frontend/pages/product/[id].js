@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../../components/Layout"
 import Product from "../../components/Product/Product"
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
-import fetchProducts from "helper/fetchProduct";
+import fetchProducts, { fetchProposals, fetchProduct } from "helper/ProductPageHelper";
 import Error from "next/error";
 
 export const getStaticPaths = async () => {
@@ -107,14 +107,13 @@ export const getStaticPaths = async () => {
       }
   ]
 }*/
-export default function ProductPage({categories,product}){
+export default function ProductPage({categories,product, proposals}){
 
-  if( !categories || !products )
+  if( !categories || !product )
     return (<Error statusCode={503} />)
-
   return ( 
       <Layout categories={categories} >
-          <Product props={product}></Product>
+          <Product props={product} proposals={proposals}></Product>
       </Layout>
   )
 }
@@ -122,16 +121,15 @@ export default function ProductPage({categories,product}){
 export async function getStaticProps(context) {
 
   const id = context.params.id;
-  const res = await fetch(`${process.env.HOST}/product/${id}`)
-  const data = await res.json()
-  const product = data.data
-
+  const product = await fetchProduct(id);
+  const proposals = await fetchProposals(id);
   const categories = await fetchCategories();
   const revTime = revalidateTime()
 
   return {
     props: {
       categories,
+      proposals,
       product
     },
 

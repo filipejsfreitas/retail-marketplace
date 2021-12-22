@@ -3,21 +3,25 @@ import {Modal,Form,Col,FloatingLabel, Button} from 'react-bootstrap';
 import { useRouter } from 'next/router'
 
 const Comment = (props) =>{ 
-  const router = useRouter()
+    const router = useRouter()
+    
+    function handleSubmit(event) {
+      event.preventDefault();
+    }
+
     return(
         <Modal
         {...props}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-      >
+        >
+        <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             New Review
           </Modal.Title>
         </Modal.Header>
-        <Form>
-
         <Modal.Body >
             <Form.Group className="mb-3" controlId="commentTitle">  
                 <Form.Control placeholder="Review Title" required />

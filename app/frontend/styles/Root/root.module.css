@@ -98,3 +98,13 @@
     align-items: center;
     background-color: #ffffff;
 }
+
+.title,
+    .title:hover,
+    .title:active,
+    .title:visited,
+    .title:focus {
+      text-decoration:none;
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+    }
