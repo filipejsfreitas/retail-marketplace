@@ -2,9 +2,9 @@ import { Container, Button, Form, Row, Col } from "react-bootstrap"
 import { useState } from "react"
 
 
-import Logo from "../components/Logos/Logo"
+import Logo from "../../components/Logos/Logo"
 
-import styles from "../styles/registerSeller.module.css"
+import styles from "styles/register/registerSeller.module.css"
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
