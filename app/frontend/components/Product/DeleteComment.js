@@ -5,6 +5,11 @@ import { useRouter } from 'next/router'
 const DeleteComment = (props) =>{ 
     const router = useRouter()
     const pathC = router.query.id
+
+    function handleSubmit(event) {
+      event.preventDefault();
+    }
+
     return(
         <Modal
         show={props.show.active}
@@ -12,7 +17,7 @@ const DeleteComment = (props) =>{
         aria-labelledby="contained-modal-title-vcenter"
         centered
         >
-        <Form>
+        <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton onClick={()=>props.setC({active: false})} >
           <Modal.Title id="contained-modal-title-vcenter">
             Delete Review
