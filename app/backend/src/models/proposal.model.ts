@@ -22,9 +22,6 @@ const proposalSchema: Schema = new Schema({
       type: Number,
       required: true,
     },
-    reservations: {
-      type: [{cartItem_id: String, quantity: Number, timestamp: Date}]
-    },
     maxPerPurchase: {
       type: Number,
       required: true,

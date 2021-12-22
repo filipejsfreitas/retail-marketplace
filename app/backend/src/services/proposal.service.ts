@@ -15,7 +15,7 @@ export class ProposalService{
         if(await this.alreadyExists(prop.product_id, seller)){
             throw new HttpException(400, "You already have a proposal on this product");
         }
-        const proposal : Proposal = await this.proposals.create({...prop,seller_id:seller, reservations: []});
+        const proposal : Proposal = await this.proposals.create({...prop,seller_id:seller});
         await this.updateBestPrice(prop.product_id);
         /*
         const product : Product = await this.products.findById({_id: prop.product_id}) 
