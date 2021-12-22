@@ -58,6 +58,7 @@ export default function Proposals(proposals) {
                          disabled={(key.stock <= 0 ? true: false)}>
                             ADD TO CARD
                         </Button>
+                        {/*{key._id} é o id da proposta*/}
                     </Col>
                 </Row>
             </ListGroupItem>
