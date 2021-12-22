@@ -25,10 +25,6 @@
     top: 10px;
 }
 
-.link {
-    margin: 4px 0px 4px 0px;
-}
-
 .body {
     display: flex;
     flex-direction: column;
@@ -41,8 +37,13 @@
     line-height: 28.8px;
 }
 
-.button {
+.link {
     background-color: transparent;
     border-color: transparent;
     padding: 0px;
+    
+}
+
+.link:hover, .link a:hover  {
+    color: #ED7966;
 }

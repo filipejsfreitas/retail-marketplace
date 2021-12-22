@@ -1,0 +1,67 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 400px;
+    padding: 10px 20px 10px 20px;
+}
+
+.categorieBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.categorieBox div {
+    flex: 1;
+}
+
+.categorie {
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: #ED7966;
+}
+
+.back {
+    color: #ED7966;
+    cursor: pointer;
+    flex: 1;
+}
+
+.wrapperSubSub {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapperSubSub {
+    display: flex;
+    flex-direction: column;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    margin-left: 15px;
+}
+
+.subCategorie {
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    background: transparent;
+    border: transparent;
+    margin: 0;
+}
+
+.wrapperSubSub a:hover, .subCategorie a:hover , .categorie a:hover{
+    color: #ED7966;
+}
+
+.line {
+    border-top: 1px solid #ED7966;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
