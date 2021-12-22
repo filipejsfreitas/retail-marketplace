@@ -109,7 +109,7 @@ export const getStaticPaths = async () => {
 }*/
 export default function ProductPage({categories,product}){
 
-  if( !categories || !products )
+  if( !categories || !product )
     return (<Error statusCode={503} />)
 
   return ( 
