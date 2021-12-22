@@ -1,55 +1,45 @@
 import Layout from "components/Management/Layout"
 import { ADMIN_SIDEBAR } from "components/Management/Layout"
 import { Form, Row, Col, Container, Button, Alert } from "react-bootstrap"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
-function calculateCategorySelector(selected, setSelected, categories, selectId, categoryId, depth = 0) {
-    if (!categories || depth > selected.length) return []
-    var r = []
+function CalculateSelector(props) {
+    const depth = props.depth
+    const selected = props.selected
+    const depthselect = selected[depth] + 1 || 0
+    var cats = props.categories
+    for (var i = 0; i < props.depth; i++)
+        cats = cats[selected[i]].children
 
-    r.push(<Form.Select id={selectId(depth)} key={selectId(depth)} onChange={e => {
-        if (e.target.selectedIndex === 0) setSelected([...selected.slice(0, depth)])
-        else setSelected([...selected.slice(0, depth), e.target.selectedIndex - 1])
+    if (!cats || depth > selected.length || cats.length === 0) return <></>
+
+    return <Form.Select value={(cats[selected[depth]]??{})._id || ""} onChange={e => {
+        const sel = e.target.selectedIndex
+        props.setSelected(s => sel === 0 ? s.slice(0, depth) : [...s.slice(0, depth), sel - 1])
     }}>
-        <option key={`categoryempty-${depth}`} />
-        {categories.map(category => <option value={category._id} key={categoryId(category.name)}>
-            {category.name}
+        <option value={""}/>
+        {cats.map((cat, i) => <option key={`selector-${props.depth}-${i}`} value={cat._id}
+            ref={ depth+1 === selected.length && i+1 === depthselect ? props.refs : undefined}
+            >
+            {cat.name}
         </option>)}
-    </Form.Select>)
-
-    if (depth < selected.length) {
-        const subcategories = categories[selected[depth]]
-        if (subcategories)
-            r.push(calculateCategorySelector(selected, setSelected, subcategories.children, selectId, categoryId, depth + 1))
-    }
-
-    return r
+    </Form.Select>
 }
 
-function categorySelector(props) {
-    const selectId = (depth) => `category-selector-${depth}`
-    const categoryId = (name) => `category-selector-category-${name}`
-    return [() => {
-        var selector = document.getElementById(selectId(0))
-        for (var i = 1; document.getElementById(selectId(i)); i++) {
-            if (document.getElementById(selectId(i)).selectedIndex === 0) break;
-            else selector = document.getElementById(selectId(i))
-        }
-        return selector[selector.selectedIndex].value
-    }, (props) => {
-        const [categories, setCategories] = useState([])
-        const [selected, setSelected] = useState([])
-        useEffect(async () => {
-            fetch(`${process.env.NEXT_PUBLIC_HOST}/category/`)
-                .then(res => res.json()).then(data => data.data)
-                .then(cats => setCategories(cats))
-                .catch((error) => console.log(error))
-        }, []);
-        return <>
-            {calculateCategorySelector(selected, setSelected, categories, selectId, categoryId)}
-        </>
-    }
-    ]
+function CategorySelector(props) {
+    const [categories, setCategories] = useState([])
+    const [selected, setSelected] = useState([])
+    useEffect(async () => {
+        fetch(`${process.env.NEXT_PUBLIC_HOST}/category/`).then(res => res.json()).then(data => data.data)
+            .then(cats => setCategories(cats))
+            .catch((error) => console.log(error))
+    }, []);
+    return <>
+        {[...Array(selected.length+1).keys()].map(i =>
+            <CalculateSelector key={`selector-${i}`} 
+                refs={props.refs} categories={categories} selected={selected} setSelected={setSelected} depth={i} />
+        )}
+    </>
 }
 
 function keyValueForm(keyId, valId) {
@@ -90,30 +80,30 @@ function keyValueForm(keyId, valId) {
 }
 
 export default function ProductAdd() {
+    const ref = { name: useRef(), description: useRef(), category_id: useRef() }
     const techKeyId = (i) => `technicalInfo-key-${i}`
     const techValId = (i) => `technicalInfo-val-${i}`
     const characteristicsKeyId = (i) => `characteristics-key-${i}`
     const characteristicsValId = (i) => `characteristics-val-${i}`
     const [getTechnicalInfo, TechnicalInfoForm] = keyValueForm(techKeyId, techValId)
     const [getCharacteristics, CharacteristicsForm] = keyValueForm(characteristicsKeyId, characteristicsValId)
-    const [getCategory, CategorySelector] = categorySelector()
     const [alert, setAlert] = useState({})
     return <Layout sidebar={ADMIN_SIDEBAR}>
         <h2>Add Product</h2>
         <br />
         <Container>
             <h4>Product Name</h4>
-            <Form.Control type="text" id="product-name-form" />
+            <Form.Control ref={ref.name} type="text" />
         </Container>
         <br />
         <Container>
             <h4>Description</h4>
-            <Form.Control as="textarea" rows={3} id="product-description-form" />
+            <Form.Control ref={ref.description} as="textarea" rows={3} />
         </Container>
         <br />
         <Container>
             <h4>Category</h4>
-            <CategorySelector />
+            <CategorySelector refs={ref.category_id} />
         </Container>
         <br />
         <Container>
@@ -143,10 +133,10 @@ export default function ProductAdd() {
             <Button variant="primary" onClick={async (event) => {
                 event.target.disabled = true
                 var req = {}
-                req.name = document.getElementById("product-name-form").value
-                req.description = document.getElementById("product-description-form").value
+                req.name = ref.name.current.value
+                req.description = ref.description.current.value
                 req.images = document.getElementById("product-images-form").files
-                req.category_id = getCategory()
+                req.category_id = ref.category_id.current && ref.category_id.current.value
                 req.characteristic = []
                 req.tecnical = []
                 for (const [key, val] of Object.entries(getCharacteristics()))
@@ -159,13 +149,13 @@ export default function ProductAdd() {
                 data.append("description", req.description);
                 data.append("category_id", req.category_id);
                 data.append("forSale", "false");
-                data.append("characteristic",JSON.stringify(req.characteristic));
+                data.append("characteristic", JSON.stringify(req.characteristic));
                 data.append("tecnical", JSON.stringify(req.tecnical));
                 data.append("imagesToDelete", "[]");
                 data.append("score", "0");
                 data.append("number_scores", "0");
                 data.append("best_offer", "0");
-                for(var i=0; i<req.images.length; i++)
+                for (var i = 0; i < req.images.length; i++)
                     data.append("images", req.images[i], `img-${i}.png`);
 
                 if (!req.name) setAlert({ variant: "danger", message: "Missing product name." })
@@ -179,8 +169,10 @@ export default function ProductAdd() {
                         body: data
                     }).then((reply) => {
                         console.log(reply)
-                        if(reply.ok) setAlert({ variant: "success", message: "Product added with success." })
+                        if (reply.ok) setAlert({ variant: "success", message: "Product added with success." })
                         else setAlert({ variant: "danger", message: "Unable to add product." })
+                        ref.name.current.value = ""
+                        ref.description.current.value = ""
                     })
                         .catch((error) => setAlert({ variant: "danger", message: "Unable to add product." }))
                 }
