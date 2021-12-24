@@ -27,7 +27,7 @@ const cartItemSchema: Schema = new Schema({
         required: true
     },
     timestamp: {
-        type: String,
+        type: Date,
         required: false
     },
     quantity: {
@@ -41,6 +41,14 @@ const cartItemSchema: Schema = new Schema({
     shipping: {
         type: Number,
         required: true
+    },
+    seller_id: {
+        type: String,
+        required: true
+    },
+    special_conditions: {
+        type: String,
+        required:true
     }
 })
 

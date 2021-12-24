@@ -3,7 +3,7 @@ import RootCarousel from "components/Root/RootCarousel";
 import { Row, Col } from "react-bootstrap";
 import styles from '../styles/Root/root.module.css'
 import Layout from "components/Layout";
-import fetchProducts from "helper/fetchProduct";
+import fetchProducts from "helper/ProductPageHelper";
 import Error from "next/error";
 
 export default function Home({ categories, products }) {

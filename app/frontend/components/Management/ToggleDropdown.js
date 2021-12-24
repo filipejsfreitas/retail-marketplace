@@ -12,7 +12,9 @@ export default function ToggleDropdown(props) {
             {`(${props.children ? props.children.length : 0})`}
         </div>
         <div className={styles.children}>
-            {open ? props.children : <></>}
+            <div hidden={!open}>
+                {props.children ?? []}
+            </div>
         </div>
     </>
 }

@@ -6,7 +6,7 @@ import CarouselComponent from "./Carousel"
 import { BsFillStarFill, BsStarHalf, BsStar, BsArrowRightCircle} from "react-icons/bs";
 import Reviews from "./Review"
 import MyModal from "./Comment"
-import Sellers from "./Sellers"
+import Proposals from "./Proposals"
 
 export function computeStars(stars) {
     var r = []
@@ -23,8 +23,6 @@ export function computeStars(stars) {
 const Product = (props) => {
     
     const [modalShow, setModalShow] = React.useState(false);
-
-
     const recomended = [
         {
           images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg"],
@@ -53,6 +51,7 @@ const Product = (props) => {
       ]
     
     const prod = props.props
+    const proposals = props.proposals
     const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
     return (            
            <>
@@ -88,7 +87,7 @@ const Product = (props) => {
                                 </span>
                             </Row>
                             <Row>
-                                <Sellers />
+                                <Proposals proposals={proposals}/>
                             </Row>
                         </Container>
 

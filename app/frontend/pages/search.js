@@ -9,7 +9,7 @@ import Error from "next/error"
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
-import styles from "styles/search.module.css"
+import styles from "styles/Search/search.module.css"
 
 function sort_by() {
     const router = useRouter()

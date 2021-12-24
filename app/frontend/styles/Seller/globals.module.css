@@ -1,0 +1,8 @@
+.link {
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: #ED7966;
+    cursor: pointer;
+}

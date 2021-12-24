@@ -82,7 +82,7 @@ function AddProductModal(props) {
     </Modal>
 }
 
-export default function SellerList() {
+export default function ProposalAdd() {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(undefined)

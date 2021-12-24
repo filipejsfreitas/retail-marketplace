@@ -3,7 +3,7 @@ import { CartItemService } from "@/services/cartItem.service";
 import { Controller, Get , JsonController, Param, Post, UseBefore,Body, Put, Delete} from "routing-controllers";
 import { OpenAPI } from "routing-controllers-openapi";
 import { validationMiddleware } from '@middlewares/validation.middleware';
-import { CreateCartItemDto, UpdateCartItemDto } from "@/dtos/cartItem.dto";
+import { ConcludePurchaseDto, CreateCartItemDto, UpdateCartItemDto } from "@/dtos/cartItem.dto";
 
 @Controller('/cart')
 export class CartController{
@@ -17,6 +17,25 @@ export class CartController{
         return { data: item, message: 'Cart items retrived' };
     }
 
+    @Post('/lock')
+    @OpenAPI({summary: 'fazer lock cart items'})
+    async lockCart(){
+        const userId = "123456";
+        await this.cartItemService.lockClientItems(userId);
+
+        return { message: 'Items locked'};
+    }
+
+    @Post('/buy')
+    @UseBefore(validationMiddleware(ConcludePurchaseDto, 'body'))
+    async purchase(@Body() data: ConcludePurchaseDto){
+        const userId = "123456";
+        const addressId = data.address_id;
+        await this.cartItemService.concludePurchase(userId,addressId);
+        return { message: 'Items purchsed'};
+    }
+
+
     @Get('/:id')
     @OpenAPI({summary: 'returns information on the cart item'})
     async getCartItem(@Param('id') cartItemId: string) {
@@ -29,6 +48,7 @@ export class CartController{
     @UseBefore(validationMiddleware(CreateCartItemDto, 'body'))
     @OpenAPI({summary: 'create cart item'})
     async createCartItem(@Body() itemData: CreateCartItemDto) {
+        console.log(itemData);
         const userId = "123456";
         const item : CartItem = await this.cartItemService.addItem(itemData, userId);
         return {data: item, message: 'Item added to cart'}
@@ -52,5 +72,5 @@ export class CartController{
         return {data: item, message: 'Item deleted'}
     }
 
-
+    
 }
