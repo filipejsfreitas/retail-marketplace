@@ -2,7 +2,7 @@
 import { BsX } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 
-import styles from "styles/search.module.css"
+import styles from "styles/Search/search.module.css"
 
 export default function RemoveQuery(props) {
     const router = useRouter()
