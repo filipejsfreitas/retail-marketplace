@@ -15,12 +15,12 @@ export const getStaticPaths = async () => {
     {categories.map(({ name, children }) => 
       {
       const father = name;
-      path.push({params: { slug: [`${name}`] }})
+      path.push({params: { categorie: [`${name}`] }})
         {children.map(({ name , children}) => {
           const father2 = name;
-          path.push({params: { slug: [`${father}`, `${name}`] }})
+          path.push({params: { categorie: [`${father}`, `${name}`] }})
           {children.map(({ name }) => {
-            path.push({params: { slug: [`${father}`,`${father2}`, `${name}`] }})
+            path.push({params: { categorie: [`${father}`,`${father2}`, `${name}`] }})
             })}
         })}
       }
