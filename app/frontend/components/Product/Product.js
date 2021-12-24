@@ -3,10 +3,12 @@ import React from "react"
 import styles from 'styles/Product/product.module.css'
 import RecomendedProducts from "./Carousel2"
 import CarouselComponent from "./Carousel"
-import { BsFillStarFill, BsStarHalf, BsStar, BsArrowRightCircle} from "react-icons/bs";
+import { BsFillStarFill, BsStarHalf, BsStar, BsArrowRightCircle, BsHeart, BsHeartFill} from "react-icons/bs";
 import Reviews from "./Review"
 import MyModal from "./Comment"
 import Proposals from "./Proposals"
+import {useState} from "react";
+
 
 export function computeStars(stars) {
     var r = []
@@ -49,7 +51,16 @@ const Product = (props) => {
           score: 3
         }
       ]
-    
+    const [favBC, setfavBC] = useState("rgb(0, 0, 0)")
+    const [fav, setfav] = useState(false)
+    const appStyles={
+      background:"#ffffff",
+      border: 0,
+      color:`${favBC}`,
+      outline: 0,
+      boxShadow:"0px 0px 0px 0px black"
+    }
+        
     const prod = props.props
     const proposals = props.proposals
     const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
@@ -81,10 +92,21 @@ const Product = (props) => {
                         <div className={styles.productName}>{prod.name}</div>
                         <Container>
                             <Row className={styles.prodStats} >
-                                <span>
+                                <Col>
+                                    <div className={styles.favorite}>
+                                        <Button style={appStyles}
+                                                onClick={ !fav ? () => {setfavBC("rgb(255, 0, 0)"), setfav(true)} :
+                                                                 () => {setfavBC("rgb(0, 0, 0)"), setfav(false)} }  
+                                                >
+                                            <div className={styles.buttonFav} >{!fav ? <BsHeart/> : <BsHeartFill/>} Favorite</div>
+                                        </Button>
+                                    </div>
+
+                                </Col>
+                                <Col>
                                     <div className={styles.reviews}>{prod.number_scores} reviews</div>
                                     <div className={styles.stars}>{computeStars(prod.score)}</div> 
-                                </span>
+                                </Col>
                             </Row>
                             <Row>
                                 <Proposals proposals={proposals}/>
