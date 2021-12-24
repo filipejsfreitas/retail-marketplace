@@ -7,8 +7,10 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    max-width: 80%;
-    max-height: 80%;
+    width: 60%;
+    max-height: 60%;
+    object-fit: scale-down;
+    overflow: hidden;
 }
 
 .product_name {
@@ -17,4 +19,13 @@
     -webkit-box-orient: vertical;  
     overflow: hidden;
     text-align: center;
+}
+
+.link {
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: #ED7966;
+    cursor: pointer;
 }
