@@ -9,6 +9,7 @@ export const SELLER_SIDEBAR = {
     contents: [
         { text: "Home", url: "/"},
         { text: "Add Proposal", url: "/proposal/add/"},
+        { text: "Manage Proposals", url: "/proposal/list/"},
         //{ text: "Add Product", url: "/"},
         //{ text: "Order History", url: "/"},
         //{ text: "Active Orders", url: "/"},
