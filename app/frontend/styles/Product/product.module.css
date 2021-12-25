@@ -61,6 +61,21 @@
     font-size: 25px;
     float: right;
 }
+
+.favorite {
+    font-weight: initial;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.buttonFav {
+    font-family: FiraSans;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0px;
+    margin: 0px;
+}
+
 .stars{
     color: #000000;
     font-family: FiraSans;
