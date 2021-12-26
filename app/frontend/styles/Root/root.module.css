@@ -7,15 +7,20 @@
 }
 
 .product_name {
-    font-family: FiraSans;
     font-size:  20px;
-    font-weight: 600;
-    height: 66px;
-    width: 250px;
+    font-weight: 400;
+    height: 62px;
+    width: 245px;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #000000;
+    transition: 0.3s;
+}
+
+.product_name:hover {
+    color: #ED7966;
+    cursor: pointer;
 }
 
 .titles{
@@ -49,7 +54,7 @@
     text-align: right;
     padding: 0px;
     float: right;
-    padding-right: 30px
+    padding-right: 30px;
 }
 
 
@@ -59,7 +64,7 @@
     font-weight: 600    ;
     height: 50px;
     width: 250px;
-    color:#ED7966;
+    color:#000000;
     text-align: right;
     float: right;
     padding: 0px;
@@ -98,13 +103,3 @@
     align-items: center;
     background-color: #ffffff;
 }
-
-.title,
-    .title:hover,
-    .title:active,
-    .title:visited,
-    .title:focus {
-      text-decoration:none;
-      cursor: pointer;
-      color: rgb(255, 255, 255);
-    }

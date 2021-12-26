@@ -10,8 +10,7 @@ import { computeStars } from "components/Product/Product";
 
 const  RecomendedProducts = (props) => {
 
-    const imagesrc = "http://localhost:3001/"
-    const defImg = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+    const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
@@ -46,26 +45,30 @@ const  RecomendedProducts = (props) => {
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
+        partialVisible={false}
         >
         
         {
         props.props.map((key, elem) =>(
             <div key={elem} className={styles.root}>
+              <Link className={styles.title} href={`/product/${key._id}`}>
+              <a className={styles.title}>
               <div className={styles.recommended}>
-              {/*Adicionar imagesrc*/}
+              {/*Adicionar ${process.env.NEXT_PUBLIC_HOST} ao src da img/*/}
               <img
                 className={styles.recommendedPhoto}              
-                src={key.images.length!=0 ? key.images[0] : defImg}
+                src={(key.images[0] && `${key.images[0]}`) || fallback}
               />
               </div >
               <div className={styles.textProd}>
-                {/* Trocar name para id no LINK*/}
-                <div className={styles.product_name}><Link href={`/product/${key._id}`}>{`${key.name}`}</Link></div>
+                <div className={styles.product_name}>{`${key.name}`}</div>
                 <Row>
                     <Col className={styles.product_stars}> {computeStars(key.score)} </Col>  
                     <Col className={styles.product_price}>{key.price}€</Col>
                 </Row>
               </div>
+              </a>
+              </Link>
             </div>  
         ))}
         
