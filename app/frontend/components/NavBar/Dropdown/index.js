@@ -60,7 +60,6 @@ const Dropdown = (props) => {
                 <Link href="/account/info">Account</Link>
                 <Link href="/account/order">Orders</Link>
                 <Link href="/account/address">Addresses</Link>
-                <Link href="/account/watchlist">Watchlist</Link>
                 <Link href="/account/favorites">Favorites</Link>
               </div>
             </div>
