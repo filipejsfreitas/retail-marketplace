@@ -51,12 +51,11 @@ const Product = (props) => {
           score: 3
         }
       ]
-    const [favBC, setfavBC] = useState("rgb(0, 0, 0)")
     const [fav, setfav] = useState(false)
     const appStyles={
       background:"#ffffff",
       border: 0,
-      color:`${favBC}`,
+      color: !fav ? "rgb(0, 0, 0)" : "rgb(255, 0, 0)",
       outline: 0,
       boxShadow:"0px 0px 0px 0px black"
     }
@@ -95,8 +94,7 @@ const Product = (props) => {
                                 <Col>
                                     <div className={styles.favorite}>
                                         <Button style={appStyles}
-                                                onClick={ !fav ? () => {setfavBC("rgb(255, 0, 0)"), setfav(true)} :
-                                                                 () => {setfavBC("rgb(0, 0, 0)"), setfav(false)} }  
+                                                onClick={() => setfav(f => !f)}
                                                 >
                                             <div className={styles.buttonFav} >{!fav ? <BsHeart/> : <BsHeartFill/>} Favorite</div>
                                         </Button>
