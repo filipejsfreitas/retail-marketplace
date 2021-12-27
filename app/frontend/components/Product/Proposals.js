@@ -1,13 +1,17 @@
-import React from "react";
 import {Row ,Col,ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 import styles from "styles/Product/sellers\.module.css"
 import { computeStars } from "components/Product/Product";
 import Status from "components/common/Status";
 import { BsBasket, BsCashCoin, BsTruck } from "react-icons/bs";
 import Link from "next/link"
+import { useContext } from 'react';
+import CartContext from 'components/NavBar/Checkout/context';
 
 
 export default function Proposals(proposals) {
+
+    const cart = useContext(CartContext)
+
     const sellers=[
         {
             name: "HouseMarket.pt",
@@ -55,7 +59,7 @@ export default function Proposals(proposals) {
                     </Col>
                     <Col md={2} className={styles.col3}>
                         <Button type="submit" variant="secundary"  className={styles.button}
-                         disabled={(key.stock <= 0 ? true: false)}>
+                         disabled={(key.stock <= 0 ? true: false)} onClick={ () => {cart.addItem(key._id,1);cart.handleVisible()}} >
                             ADD TO CARD
                         </Button>
                         {/*{key._id} é o id da proposta*/}
