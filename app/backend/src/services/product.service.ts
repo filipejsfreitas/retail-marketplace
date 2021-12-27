@@ -131,7 +131,13 @@ export class ProductService{
         
         var newNumberScores = findProduct.number_scores - 1;
 
-        var newScore = (findProduct.score * findProduct.number_scores - oldComment.score) /  newNumberScores; 
+        var newScore = 0;
+
+        if(newNumberScores > 0){
+            newScore = (findProduct.score * findProduct.number_scores - oldComment.score) /  newNumberScores; 
+        }
+
+         
        
 
         const parent : Product = await this.products.findOneAndUpdate({_id: prodId},{score:newScore,number_scores: newNumberScores, $pull: { comments: { _id: commentId} } },

@@ -15,8 +15,8 @@ const  RootCarousel = (props) =>{
         }
       };
     
-    const imagesrc = "http://localhost:3001/"
-    const defImg = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+    const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+
     return (
         <Carousel
         draggable={false}
@@ -37,12 +37,13 @@ const  RootCarousel = (props) =>{
         
         {
         props.props.map((key, elem) =>(
-            <div key={elem} className={styles.root}><Link href={`/product/${key._id}`}>
-              <div className={styles.title}>
+            <div key={elem} className={styles.root}>
+              <Link className={styles.title} href={`/product/${key._id}`}>
+              <a className={styles.title}>  
                 <div className={styles.recommended}>
                 <img
                   className={styles.recommendedPhoto}              
-                  src={key.images.length!=0 ? imagesrc + key.images[0] : defImg}
+                  src={(key.images[0] && `${process.env.NEXT_PUBLIC_HOST}/${key.images[0]}`) || fallback}
                 />
                 </div>
                 <div className={styles.textProd}>
@@ -52,7 +53,7 @@ const  RootCarousel = (props) =>{
                       <Col className={styles.product_price}>{key.best_offer}€</Col>
                   </Row>
                 </div>
-              </div>
+              </a>
               </Link>
             </div> 
         ))}
