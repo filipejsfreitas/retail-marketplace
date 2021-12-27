@@ -43,8 +43,11 @@ export class CartItemService {
             throw new HttpException(400, "Unsuficient stock to satisfy request");
         }
 
-        const prod : Product = await this.products.findOne({_id:prop.product_id, forSale:true});
+        const prod : Product = await this.products.findOne({ _id:prop.product_id, forSale:true});
 
+        if(!(prod)){
+            throw new HttpException(400, "Invalid product, or product not for sale");
+        }
 
         const cartItem :  CartItem = await this.cartItems.create({product_id: prod._id, name: prod.name, client_id: client_id,
                                                                 proposal_id: prop._id, price: prop.price, shipping: prop.shipping,
