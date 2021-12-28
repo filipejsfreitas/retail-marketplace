@@ -1,0 +1,31 @@
+
+.frame {
+    max-width: 100%;
+}
+
+.img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    max-height: 60%;
+    object-fit: scale-down;
+    overflow: hidden;
+}
+
+.product_name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-align: center;
+}
+
+.link {
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: #ED7966;
+    cursor: pointer;
+}

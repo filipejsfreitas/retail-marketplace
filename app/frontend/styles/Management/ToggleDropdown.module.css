@@ -1,0 +1,16 @@
+
+.title {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    transition: 0.3s;
+}
+
+.title:hover {
+    color: #ED7966;
+    cursor: pointer;
+}
+
+.children {
+    margin-left: 20px;
+}

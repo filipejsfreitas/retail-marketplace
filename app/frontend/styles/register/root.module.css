@@ -1,0 +1,72 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.logo {
+    width: 450px;
+    height: 138px;
+    margin: 20px auto auto auto;
+}
+
+.registerOpt {
+    display: flex;
+    flex-direction: row;
+    margin: auto 80px auto 80px;
+}
+
+.grayscale {
+    -webkit-filter: grayscale(1);
+}
+
+.registerOpt > * {
+    transform: scale(0.8);
+    transition: 0.5s;
+}
+
+.registerOpt > .client:hover,.seller:hover {
+    transform: scale(0.9);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.client {
+    width: 800px;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    background-image: url("client.svg");
+    background-position: right bottom;
+    background-repeat: no-repeat;
+}
+
+.seller {
+    width: 800px;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    background-image: url("seller.svg");
+    background-position: right bottom;
+    background-repeat: no-repeat;
+}
+
+.client span, .seller span {
+    font-family: Fira Sans;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 68px;
+    color: black;
+    line-height: 82px;
+}
+
+.btn {
+    max-width: 300px;
+}
+
+.line {
+    border-left: 1px solid #ED7966;
+    margin: 0px 80px 0px 80px;
+}

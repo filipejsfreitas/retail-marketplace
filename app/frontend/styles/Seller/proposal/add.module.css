@@ -1,0 +1,9 @@
+
+.product {
+    margin-right: 10px;
+}
+
+.product:hover {
+    color: #ED7966;
+    cursor: pointer;
+}

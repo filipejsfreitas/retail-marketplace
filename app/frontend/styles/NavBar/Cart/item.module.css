@@ -1,0 +1,37 @@
+.itemImg {
+    max-width: 100px;
+    padding: 0;
+    margin: 0;
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 5px 0px 5px 15px;
+    line-height: 26px;
+}
+
+.close {
+    flex-grow: 1;
+    min-height: 14px;
+    min-width: 14px;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.productTitle {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.productQuantity {
+    font-size: 16px;
+}
+
+.productPrice {
+    font-size: 16px;
+}

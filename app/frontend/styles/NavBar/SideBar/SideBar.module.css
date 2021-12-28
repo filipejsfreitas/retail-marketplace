@@ -1,0 +1,49 @@
+.topRec {
+    height: 128px;
+    min-width: 400px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #303179;
+}
+
+.line {
+    width: 100%;
+    min-height: 1px;
+    background-color:#3E3E3E;
+    margin: 20px 0px 20px 0px;
+}
+
+.closeBtn {
+    color: white;
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 400px;
+    padding: 50px 35px 50px 35px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28.8px;
+}
+
+.link {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0px;
+    
+}
+
+.link:hover, .link a:hover  {
+    color: #ED7966;
+}

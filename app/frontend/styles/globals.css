@@ -2,8 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Fira Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -14,3 +14,54 @@ a {
 * {
   box-sizing: border-box;
 }
+
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+
+.btn-primary {
+  color: #fff;
+  background-color: #303179;
+  border-color: #141850;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus  {
+  color: #fff;
+  background-color: #141850;
+  border-color: #303179;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 .25rem rgba(49,132,253,.5);
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #ED7966;
+  border-color: #f06a56;
+}
+
+.btn-secondary:hover, .btn-secondary:active, .btn-secondary:focus  {
+  color: #fff;
+  background-color: #f06a56;
+  border-color: #ED7966;
+}
+
+.btn-secondary:focus {
+  box-shadow: 0 0 0 .25rem rgba(237,121,102,.5);
+}
+
+.page_content {
+  position: relative;
+  padding-top: 20px;
+  margin: auto;
+  max-width: 80%;
+  z-index: 0;
+} 
+
+:root {
+  --bs-primary: #141850;
+  --bs-primary-rgb: 20,24,80;
+  --bs-secondary: #ED7966;
+  --bs-secondary-rgb: 237,121,102;
+}
+
