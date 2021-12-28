@@ -5,7 +5,7 @@ import Status from "components/common/Status";
 import { BsBasket, BsCashCoin, BsTruck } from "react-icons/bs";
 import Link from "next/link"
 import { useContext } from 'react';
-import CartContext from 'components/NavBar/Checkout/context';
+import CartContext from 'components/NavBar/Cart/context';
 
 
 export default function Proposals(proposals) {

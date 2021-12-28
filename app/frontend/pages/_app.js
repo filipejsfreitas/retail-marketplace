@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css'
-import CartContext from "components/NavBar/Checkout/context"
+import CartContext from "components/NavBar/Cart/context"
 import useCart from 'hooks/useCart';
 
 

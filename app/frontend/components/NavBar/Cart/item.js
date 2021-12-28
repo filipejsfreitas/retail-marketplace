@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap"
 import { BsXLg } from "react-icons/bs"
 import Image from "next/dist/client/image"
 
-import styles from "styles/NavBar/Checkout/item.module.css"
+import styles from "styles/NavBar/Cart/item.module.css"
 
 
 const Item = (props) => {

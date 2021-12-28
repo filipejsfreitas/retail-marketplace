@@ -3,8 +3,8 @@ import { useRouter } from 'next/router'
 
 import NavBar from "components/NavBar/NavBar"
 import SideBar from "components/NavBar/SideBar"
-import Checkout from "components/NavBar/Checkout"
-import CartContext from "./NavBar/Checkout/context"
+import Cart from "components/NavBar/Cart"
+import CartContext from "./NavBar/Cart/context"
 
 
 const Layout = (props) => {
@@ -24,7 +24,7 @@ const Layout = (props) => {
         <>
             <NavBar handleShowSideBar={handleShowSideBar} handleShowCheckout={() => cart.handleVisible()} handleSearch={props.handleSearch || handleSearch}/>
             <SideBar categories={props.categories} handleClose={handleCloseSideBar} show={showSideBar} />
-            <Checkout handleClose={cart.handleVisible} show={cart.visible} />
+            <Cart handleClose={cart.handleVisible} show={cart.visible} />
             <div className="page_content">
                 {props.children}
             </div>

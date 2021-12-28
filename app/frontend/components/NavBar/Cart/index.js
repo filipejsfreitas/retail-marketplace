@@ -2,17 +2,17 @@ import { Offcanvas, Container, Button } from "react-bootstrap"
 import { BsX } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 import { useContext } from "react"
-import CartContext from 'components/NavBar/Checkout/context';
+import CartContext from 'components/NavBar/Cart/context';
 
-import Item from "components/NavBar/Checkout/item"
+import Item from "components/NavBar/Cart/item"
 
-import styles from 'styles/NavBar/Checkout/Checkout.module.css'
+import styles from 'styles/NavBar/Cart/Checkout.module.css'
 
 const calc_total = (items) => {
     return items.map( item => ({quantity:item.quantity, price:item.price}) ).reduce( (acc,item) => acc + item.quantity*item.price, 0)
 }
 
-const Checkout = (props) => {
+const Cart = (props) => {
 
     const context = useContext(CartContext)
 
@@ -52,4 +52,4 @@ const Checkout = (props) => {
     )
 }
 
-export default Checkout
+export default Cart
