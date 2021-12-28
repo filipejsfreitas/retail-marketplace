@@ -6,21 +6,25 @@ import { Container, Row, Col } from "react-bootstrap"
 import { useRouter } from "next/router";
 import { BsArrowRightCircle} from "react-icons/bs";
 import Link from "next/link";
+import Error from "next/error";
 
 export const getStaticPaths = async () => {
     
-    const categories = await fetchCategories();
+    let categories = await fetchCategories();
+
+    if ( !categories )
+      categories = []
     
     const path = []
     {categories.map(({ name, children }) => 
       {
       const father = name;
-      path.push({params: { slug: [`${name}`] }})
+      path.push({params: { categorie: [`${name}`] }})
         {children.map(({ name , children}) => {
           const father2 = name;
-          path.push({params: { slug: [`${father}`, `${name}`] }})
+          path.push({params: { categorie: [`${father}`, `${name}`] }})
           {children.map(({ name }) => {
-            path.push({params: { slug: [`${father}`,`${father2}`, `${name}`] }})
+            path.push({params: { categorie: [`${father}`,`${father2}`, `${name}`] }})
             })}
         })}
       }
@@ -38,6 +42,9 @@ export default function Categories({categories}){
   const title = router.asPath
   var cats = title.split('/')
   cats.shift()
+
+  if ( !categories )
+    return <Error statusCode={503} ></Error>
 
   return ( 
     <Layout categories={categories}>

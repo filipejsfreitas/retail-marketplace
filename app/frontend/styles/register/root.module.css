@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
+    align-items: center;
 }
 
 .logo {
@@ -15,6 +16,21 @@
     display: flex;
     flex-direction: row;
     margin: auto 80px auto 80px;
+}
+
+.grayscale {
+    -webkit-filter: grayscale(1);
+}
+
+.registerOpt > * {
+    transform: scale(0.8);
+    transition: 0.5s;
+}
+
+.registerOpt > .client:hover,.seller:hover {
+    transform: scale(0.9);
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 .client {

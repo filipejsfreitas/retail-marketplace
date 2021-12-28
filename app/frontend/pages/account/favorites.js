@@ -4,13 +4,13 @@ import useFetchData from "hooks/useFetchData"
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
-import rootstyles from '../styles/Root/root.module.css'
+import rootstyles from 'styles/Root/root.module.css'
 import styles from "styles/favorites.module.css"
 
 export default function Favorites({ categories }) {
     const { data: products } =
         useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/list`, { default: [] })
-    console.log(products)
+    //console.log(products)
     return <Layout categories={categories} >
         <h2 className={rootstyles.titles}>Favorites</h2>
         <div className={styles.frame}>

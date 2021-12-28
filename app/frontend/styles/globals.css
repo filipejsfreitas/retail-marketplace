@@ -51,9 +51,11 @@ a {
 }
 
 .page_content {
+  position: relative;
   padding-top: 20px;
   margin: auto;
   max-width: 80%;
+  z-index: 0;
 } 
 
 :root {

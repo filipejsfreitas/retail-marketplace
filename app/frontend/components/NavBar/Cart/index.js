@@ -1,20 +1,27 @@
 import { Offcanvas, Container, Button } from "react-bootstrap"
 import { BsX } from 'react-icons/bs'
 import { useRouter } from 'next/router'
+import { useContext } from "react"
+import CartContext from 'components/NavBar/Cart/context';
 
-import Item from "components/NavBar/Checkout/item"
+import Item from "components/NavBar/Cart/item"
 
-import styles from 'styles/NavBar/Checkout/Checkout.module.css'
+import styles from 'styles/NavBar/Cart/Checkout.module.css'
 
 const calc_total = (items) => {
-    return 128;
+    return items.map( item => ({quantity:item.quantity, price:item.price}) ).reduce( (acc,item) => acc + item.quantity*item.price, 0)
 }
 
-const Checkout = (props) => {
+const Cart = (props) => {
+
+    const context = useContext(CartContext)
+
+    const cart = context.cart
 
     const router = useRouter()
 
-    const total = calc_total(props.items);
+
+    const total = calc_total(cart);
 
     return (
         <Offcanvas show={props.show} onHide={props.handleClose} placement="end" style={{width: "450px"}}>
@@ -36,13 +43,13 @@ const Checkout = (props) => {
                     </Button>
                 </Container>
             </Offcanvas.Header>
-            <Offcanvas.Body className="">
-                <Item price={34} title="The northface t-shirt" quantity={1}/>
-                <Item price={34} title="The northface t-shirt" quantity={1}/>
-                <Item price={34} title="The northface t-shirt" quantity={1}/>
+            <Offcanvas.Body>
+                {
+                    cart.map( item => <Item key={item._id} deleteHandler={ () => context.deleteItem(item._id) } price={item.price} title={item.name} image={item.image} quantity={item.quantity}/>)
+                }
             </Offcanvas.Body>
         </Offcanvas>
     )
 }
 
-export default Checkout
+export default Cart

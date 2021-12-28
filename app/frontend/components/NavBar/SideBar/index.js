@@ -42,7 +42,7 @@ const SideBar = (props) => {
             {renderCategories(props.categories)}
           </Offcanvas.Body>
         ) : (
-          <SubCategories category={subCategorie} handleClose={ () => setSubCategorie(false) }/>
+          <SubCategories category={subCategorie} handleClose={ () => setSubCategorie(false) } handleCloseSidebar={props.handleClose}/>
         )}
       </Offcanvas>
     );
