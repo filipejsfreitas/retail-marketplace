@@ -1,8 +1,10 @@
-import State from "./State";
+import { useState } from "react";
 
+import State from "./State";
 import styles from "styles/Checkout/Content/Content.module.css"
 import Basket from "./Basket";
 import Summary from "./Summary";
+import Addreses from "./Addresses";
 
 
 // This function filters products with 0 stock and returns the quantity of products in the cart
@@ -29,7 +31,8 @@ function calcShipping(state) {
 
 export default function Content(props) {
 
-
+    const [step,setStep] = props.step
+    const [address,setAddress] = useState(undefined);
 
     return (
         <div className="page_content">
@@ -38,10 +41,11 @@ export default function Content(props) {
                 <State state={props.step}/>
                 <div className={styles.edge}></div>
             </div>
-            <div className={styles.bot}>
-                <Basket quantity={calcQuantity(props.basket[0])} basket={props.basket}/>
-                <div className={styles.margin}></div>
-                <Summary total={calcTotalForProducts(props.basket[0])} quantity={calcQuantity(props.basket[0])} shipping={calcShipping(props.basket[0])}/>
+            <div className={step === 3 ? styles.bot_payment : styles.bot}>
+                {step === 1 && <Basket quantity={calcQuantity(props.basket[0])} basket={props.basket}/>}
+                {step === 2 && <Addreses state={[address,setAddress]}/>}
+                { (step === 1 || step === 2 )&& <div className={styles.margin}></div>}
+                <Summary state={props.step} total={calcTotalForProducts(props.basket[0])} quantity={calcQuantity(props.basket[0])} shippingCost={calcShipping(props.basket[0])} shippingTo={address}/>
             </div>
         </div>
     )

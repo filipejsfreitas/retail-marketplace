@@ -10,7 +10,7 @@ export default function State({state}) {
             return (
                 <Container className={styles.outside}>
                     <div className={styles.box}>
-                        <span onClick={() => setStep(1)} className={styles.wrapper}>
+                        <span onClick={() => (setStep(1))} className={styles.wrapper}>
                             <span className={styles.step}>1</span>
                             <span className={styles.basket}> Basket </span>
                         </span>

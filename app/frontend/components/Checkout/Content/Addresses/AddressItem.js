@@ -8,7 +8,7 @@ export default function AddressItem({state,name,address,postal,number,id}) {
     const [selected,setSelected] = state;
 
     return (
-        <Container className={styles.box}>
+        <Container onClick={() => setSelected(id)} className={styles.box}>
             <div className={styles.wrapper}>
                 <span className={styles.name}>{name}</span>
                 <span>{address}</span>

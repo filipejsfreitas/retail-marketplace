@@ -5,6 +5,11 @@
     padding: var(--checkout-address-padding);
     max-width: 90vw;
     width: 30%;
+    margin: 0px;
+}
+
+.box:hover {
+    cursor: pointer;
 }
 
 .wrapper {
