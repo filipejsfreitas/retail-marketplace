@@ -24,3 +24,29 @@ export async function fetchProduct(id) {
                             .catch( () => false )
     return product
 }
+
+
+export async function fetchCategoriePath(id) {
+    let categories = []
+    let hasParent = true
+    let current = id
+    let maxSteps = 4
+
+    while( hasParent && maxSteps > 0 ){
+        await fetch(`${process.env.NEXT_PUBLIC_HOST}/category/${current}`)
+            .then( (res) => {
+                return res.json()
+            })
+            .then( ({data}) => {
+                categories.push(data.name)
+                current = data.parent_id
+                if(!data.parent_id){
+                    hasParent = false
+                }
+            } )
+        maxSteps--
+    }
+
+    return categories
+
+}

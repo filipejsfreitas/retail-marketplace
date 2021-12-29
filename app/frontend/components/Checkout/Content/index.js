@@ -5,19 +5,25 @@ import Basket from "./Basket";
 import Summary from "./Summary";
 
 
-// This function filters products with 0 stock
+// This function filters products with 0 stock and returns the quantity of products in the cart
 function calcQuantity(state) {
+    if ( state.length == 0)
+        return 0;
     return state.filter(item => item.stock > 0).map( item => item.quantity ).reduce( (prev,next) => prev + next )
 }
 
-// This function filters products with 0 stock
+// This function filters products with 0 stock and returns total price of the products in the cart
 function calcTotalForProducts(state) {
-    return state.filter(item => item.stock > 0).map( item => ({quantity:item.quantity, price:item.price}) ).reduce( (acc,item) => acc + item.quantity*item.price, 0) / 100
+    if ( state.length == 0)
+        return 0;
+    return state.filter(item => item.stock > 0).map( item => ({quantity:item.quantity, price:item.price}) ).reduce( (acc,item) => acc + item.quantity*item.price, 0)
 }
 
-// This function filters products with 0 stock
+// This function filters products with 0 stock and returns shipping costs
 function calcShipping(state) {
-    return state.filter(item => item.stock > 0).map( item => item.shipping ).reduce( (prev,next) => prev + next ) / 100
+    if ( state.length == 0)
+        return 0;
+    return state.filter(item => item.stock > 0).map( item => item.shipping ).reduce( (prev,next) => prev + next )
 }
 
 
