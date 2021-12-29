@@ -4,6 +4,7 @@ import styles from 'styles/Account/address.module.css'
 import Error from "next/error"
 import { useState, useEffect, useRef } from "react"
 import { BsXLg, BsPlusLg, BsPenFill, BsCheckLg, BsXOctagonFill } from "react-icons/bs";
+import useAddress from "hooks/useAddress"
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
@@ -18,6 +19,7 @@ function AddressTitle(props) {
         <Col lg="auto"><BsXLg className={styles.hidden_btn} /></Col>
     </Row>
 }
+
 function FromAddress(props) {
     const address = props.address
     const [edit, setEdit] = useState(false)
@@ -29,12 +31,7 @@ function FromAddress(props) {
         <Col lg="2">{address.nif}</Col>
         <Col lg="auto">{<BsPenFill className={styles.btn} onClick={() => setEdit(true)} />}</Col>
         <Col lg="auto"><BsXLg className={styles.btn} onClick={async () => {
-            props.setLoading(val => val + 1)
-            var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/address/${address._id}`, {
-                method: 'DELETE',
-            })
-            props.setLoading(val => val - 1)
-            if (rep.ok) props.setAddresses(adds => adds.filter(add => add._id != address._id))
+            props.removeAddress(address._id)
         }} /></Col>
     </Row>
 }
@@ -42,8 +39,8 @@ function FromAddress(props) {
 function EditAddress(props) {
     const refs = { name: useRef(), address: useRef(), postal_code: useRef(), contact: useRef(), nif: useRef() }
     const [disabled, setDisabled] = useState(false)
-    const disable = () => { props.setLoading(val => val + 1); setDisabled(true) }
-    const enable = () => { props.setLoading(val => val - 1); setDisabled(false); Object.keys(refs).map(key => refs[key].current.value = "") }
+    const disable = () => { setDisabled(true) }
+    const enable = () => { setDisabled(false); Object.keys(refs).map(key => refs[key].current.value = "") }
 
     useEffect(() => {
         if (props.address) Object.keys(refs).map(key => refs[key].current.value = props.address[key])
@@ -58,17 +55,10 @@ function EditAddress(props) {
         <Col lg="auto"><BsCheckLg className={props.address ? styles.btn : styles.hidden_btn} onClick={async () => {
             if (!Object.values(refs).every(v => v.current.value)) return
             disable()
-            const req = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
-            var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/address/${props.address._id}`, {
-                method: 'PUT', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify(req)
-            })
+            const address = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
+            props.editAddress(props.address._id, address)
             enable()
             props.setEdit(false)
-            if (rep.ok) {
-                var json = await rep.json()
-                props.setAddresses(adds => [...adds.filter(add => add._id !== props.address._id), json.data])
-            }
         }} />
         </Col>
         <Col lg="auto">
@@ -78,16 +68,9 @@ function EditAddress(props) {
             {!props.address && <BsPlusLg className={styles.btn} onClick={async () => {
                 if (!Object.values(refs).every(v => v.current.value)) return
                 disable()
-                const req = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
-                var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/address/`, {
-                    method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                    body: JSON.stringify(req)
-                })
+                const address = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
+                await props.addAddress(address)
                 enable()
-                if (rep.ok) {
-                    var json = await rep.json()
-                    props.setAddresses(adds => [...adds, json.data])
-                }
             }} />}
         </Col>
     </Row>
@@ -97,29 +80,23 @@ export default function AccountAddress({ categories }) {
     if (!categories)
         return <Error statusCode={503} />
 
-    const [addresses, setAddresses] = useState([])
-    const [loading, setLoading] = useState(0)
-
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_HOST}/address/client`)
-            .then(res => res.json()).then(data => data.data)
-            .then(adds => setAddresses(adds))
-            .catch((error) => console.log(error))
-    }, [])
+    const { addresses, loading, pending, remove: removeAddress, add: addAddress, edit: editAddress } =
+        useAddress()
 
     return (
         <Account categories={categories} selected="address">
             <Row>
                 <Col lg="auto"><h4>My Addresses</h4></Col>
-                {loading ? <Col lg="auto"><Spinner animation="border" size="sm" /></Col> : undefined}
+                {(loading || pending) ? <Col lg="auto"><Spinner animation="border" size="sm" /></Col> : undefined}
             </Row>
             <Container className={styles.address_panel}>
                 <AddressTitle />
                 {addresses.sort((a1, a2) => a1._id > a2._id)
-                    .map(add => <FromAddress key={`address-${add._id}`}
-                        setLoading={setLoading} setAddresses={setAddresses} address={add} />)
+                    .map(addr => <FromAddress key={`address-${addr._id}`}
+                        removeAddress={removeAddress} editAddress={editAddress}
+                        address={addr} />)
                 }
-                <EditAddress setLoading={setLoading} setAddresses={setAddresses} />
+                <EditAddress addAddress={addAddress} />
             </Container>
         </Account>
     );
