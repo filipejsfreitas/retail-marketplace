@@ -7,15 +7,16 @@ import useCart from 'hooks/useCart';
 // This wraps up every page components, so the Layout will be displayed in every page
 function MyApp({ Component, pageProps }) {
 
-  const { showCart, handleCartVisibility, loading, data, addItem, deleteItem } = useCart();
+  const { showCart, handleCartVisibility, loading, data, addItem, deleteItem, updateItem } = useCart();
 
   const context = {
     loading: loading,
     visible: showCart,
     handleVisible: handleCartVisibility,
-    cart: data.data ? data.data : [] ,
+    cart: data ? data : [] ,
     addItem: addItem,
-    deleteItem: deleteItem
+    deleteItem: deleteItem,
+    updateItem: updateItem
 }
 
   return (

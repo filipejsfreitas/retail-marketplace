@@ -1,30 +1,30 @@
-import { useEffect, useState, createContext } from "react"
+import { useEffect, useState } from "react"
 
 
 const useCart = () => {
 
-    const url = `${process.env.NEXT_PUBLIC_HOST}/cart`
+    const urlCart = `${process.env.NEXT_PUBLIC_HOST}/cart`
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [showCart, setShowCart] = useState(false);
 
     useEffect(() => {
       const fetchApi = () => {
-        fetch(url)
+        fetch(urlCart)
           .then((response) => {
             return response.json();
           })
           .then((json) => {
-            setData(json);
+            setData(json.data);
             setLoading(false);
           });
       };
       if ( loading )
         fetchApi();
-    }, [url,loading]);
+    }, [urlCart,loading]);
 
     const addItem = (id,quantity) => {
-        fetch(url, {
+        fetch(urlCart, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,8 +34,7 @@ const useCart = () => {
     }
 
     const deleteItem = (id) => {
-      console.log("aqui")
-      fetch(`${url}/${id}`, {
+      fetch(`${urlCart}/${id}`, {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json'
@@ -43,11 +42,23 @@ const useCart = () => {
       }).then( () => setLoading(true) )
     }
 
+    const updateItem = (id,quantity) => {
+      fetch(`${urlCart}/${id}`, {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            quantity: quantity
+          })
+      }).then( () => setLoading(true) )
+    }
+
     const handleCartVisibility = () => {
       showCart ? setShowCart(false) : setShowCart(true)
     }
 
-    return { showCart, handleCartVisibility, loading, data, addItem , deleteItem };
+    return { showCart, handleCartVisibility, loading, data, addItem , deleteItem , updateItem };
 };
 
 export default useCart;

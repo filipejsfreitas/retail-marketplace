@@ -58,6 +58,10 @@ a {
   z-index: 0;
 } 
 
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
 :root {
   --bs-primary: #141850;
   --bs-primary-rgb: 20,24,80;

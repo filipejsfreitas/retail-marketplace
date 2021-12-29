@@ -23,7 +23,7 @@ export default function Seller({name,rating}) {
                 {`${name}`}
             </Link>
             <Link href={`/seller/${name}`}>
-                {computeStars(4.6)}
+                {computeStars(rating)}
             </Link>
         </div>
     )
