@@ -6,10 +6,12 @@ import { isEmpty } from '@utils/util';
 import { CreateCategoryDto } from "@/dtos/category.dto";
 import { Product } from "@/interfaces/product.interface";
 import { ProductModel } from "@/models/product.model";
+import { CartItemModel } from "@/models/cartItem.model";
 
 export class ProposalService{
     public proposals = ProposalModel;
     public products = ProductModel;
+    public cartItems = CartItemModel;
 
     public async createProposal(prop : CreateProposalDto, seller: string): Promise<Proposal>{
         if(await this.alreadyExists(prop.product_id, seller)){
@@ -38,13 +40,15 @@ export class ProposalService{
         }
         
         const proposal : Proposal = await this.proposals.findByIdAndUpdate({_id: id}, {...prop},{new: true});
-
-        await this.updateBestPrice(proposal.product_id);
-        /*
-        const product : Product = await this.products.findById({_id: proposal.product_id})
-        if(product.best_price < (prop.price + prop.shipping)){
-            const Prod : Product = await this.products.findByIdAndUpdate({_id: proposal.product_id},{best_price: (prop.price + prop.shipping)})
-        }*/
+        if(!(propo.price === prop.price && propo.shipping === prop.shipping)){
+            await this.updateBestPrice(proposal.product_id);
+            
+        } 
+        
+        if(!(propo.special_conditions === prop.special_conditions && propo.price === prop.price && propo.shipping === prop.shipping)) {
+            await this.cartItems.updateMany({proposal_id: id, locked: false}, {price: prop.price, shipping: prop.shipping, special_conditions: prop.special_conditions});
+        }
+        
         return proposal;
     }
 
@@ -56,6 +60,7 @@ export class ProposalService{
 
         const proposal :Proposal = await this.proposals.findByIdAndDelete({_id: id});
         await this.updateBestPrice(proposal.product_id);
+        await this.cartItems.deleteMany({proposal_id: id, locked: false})
         /*
         const product : Product = await this.products.findById({_id: proposal.product_id})
         if(product.best_price === (proposal.price + proposal.shipping)){

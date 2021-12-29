@@ -48,7 +48,7 @@ const cartItemSchema: Schema = new Schema({
     },
     special_conditions: {
         type: String,
-        required:true
+        required:false
     }
 })
 

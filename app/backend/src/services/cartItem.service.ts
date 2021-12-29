@@ -100,6 +100,8 @@ export class CartItemService {
     }
 
     public async lockClientItems(client_id:string){
+
+        //setTimeout(this.unlockItems(client_id), 2000)
         console.log("função");
         const date : Date = new Date();
 
@@ -170,10 +172,10 @@ export class CartItemService {
             
             if(sellersItem[element.seller_id]){
                 sellersItem[element.seller_id].push({quantity: element.quantity, price: element.price, shipping: element.shipping,
-                                                product_id: element.product_id, proposal_id: element.proposal_id, state:"indefinido"});
+                                                product_id: element.product_id, proposal_id: element.proposal_id});
             }else{
                 sellersItem[element.seller_id] = [{quantity: element.quantity, price: element.price, shipping: element.shipping,
-                    product_id: element.product_id, proposal_id: element.proposal_id, state:"indefinido"}];
+                    product_id: element.product_id, proposal_id: element.proposal_id}];
             }
         });
 
@@ -190,7 +192,7 @@ export class CartItemService {
                 sellerItems.push(sellersItem[key][index]);
             }
             sellersInvoice.push(this.sellerInvoices.create({date: date, invoice_id:clientInvoice._id,seller_id: key,
-                                                            total: sellerTotal, address: addressForInvoice, items: sellerItems }));
+                                                            total: sellerTotal, address: addressForInvoice, items: sellerItems, state:"indefinido" }));
         }
 
         await this.cartItems.deleteMany({client_id:client_id, locked: true});
@@ -210,7 +212,7 @@ export class CartItemService {
         var props = [];
 
         itemList.forEach(element => {
-            props.push(this.proposals.findById(element.proposal_id));
+            props.push(this.proposals.findByIdAndUpdate(element.proposal_id, {$inc: {stock : element.quantity}}, {new: true}));
         });
 
         Promise.all(props).then( (propsArray) =>{

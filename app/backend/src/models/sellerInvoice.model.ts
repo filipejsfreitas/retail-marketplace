@@ -22,8 +22,12 @@ const sellerInvoiceSchema: Schema = new Schema({
         type: {nif: String, address: String, postal_code: String, name: String, contact: String}, 
         required: true
     },
+    state: {
+        type: String,
+        required: true
+    },
     items: {
-        type: [{quantity: Number, price: Number, shipping: Number,product_id: String, proposal_id: String, state:String, special_conditions: String}],
+        type: [{quantity: Number, price: Number, shipping: Number,product_id: String, proposal_id: String, special_conditions: String}],
         required:true
     }
 })

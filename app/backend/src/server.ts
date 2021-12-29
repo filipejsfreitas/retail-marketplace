@@ -12,8 +12,12 @@ import { ProductController } from './controllers/product.controller';
 import { ProposalController } from './controllers/proposal.controller';
 import { AddressController } from './controllers/address.controller';
 import { CartController } from './controllers/cart.controller';
+import { SellerController } from './controllers/seller.controller';
+import { ClientController } from './controllers/client.controller';
 
 validateEnv();
 
-const app = new App([AuthController, IndexController, UsersController, CategoryController, ProductController, ProposalController, AddressController, CartController]);
+const app = new App([AuthController, IndexController, UsersController, CategoryController, 
+                ProductController, ProposalController, AddressController, CartController,
+                SellerController, ClientController]);
 app.listen();
