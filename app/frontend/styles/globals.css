@@ -67,5 +67,6 @@ input::-webkit-calendar-picker-indicator {
   --bs-primary-rgb: 20,24,80;
   --bs-secondary: #ED7966;
   --bs-secondary-rgb: 237,121,102;
+  --checkout-address-padding: 20px;
 }
 
