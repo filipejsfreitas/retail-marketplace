@@ -65,9 +65,9 @@ export default function Item({id,basket,img,title,price,quantity,category,stock,
                     <div className={styles.quantity}>
                         <button onClick={ () => cartContext.deleteItem(id) }><BsXLg size={24} className={styles.cross}/></button>
                         <div>
-                            <input className={styles.form_select} value={value} onChange={ (e) => {setValue(e.target.value);cartContext.updateItem(id,Number(e.target.value))}} type="text" name="product" list="productName"/>
-                            <datalist id="productName">
-                                {getQuantityOpts(max_quantity).map( x => (<option key={`key-${x}`} value={`${x}`}>{`${x}`}</option>) )}
+                            <input className={styles.form_select} value={value} onChange={ (e) => {setValue(e.target.value);cartContext.updateItem(id,Number(e.target.value))}} type="text" name="product" list={`options-${id}`}/>
+                            <datalist id={`options-${id}`}>
+                                {getQuantityOpts(max_quantity).map( x => (<option key={`key-${id}-${x}`} value={`${x}`}>{`${x}`}</option>) )}
                             </datalist>
                         </div>
                     </div>
