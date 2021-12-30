@@ -1,28 +1,25 @@
-import { Characteristic } from "@/interfaces/product.interface";
-import { IsArray, IsBoolean, IsString } from "class-validator";
-
-
+import { Characteristic } from '../interfaces/product.interface';
+import { IsArray, IsBoolean, IsString } from 'class-validator';
 
 export class CreateProductDto {
-    @IsString()
-    name: string;
+  @IsString()
+  name: string;
 
-    @IsString()
-    description: string;
+  @IsString()
+  description: string;
 
-    @IsString()
-    category_id: string;
-    
-    @IsArray()
-    images: Array<string>;
+  @IsString()
+  category_id: string;
 
-    @IsArray()
-    characteristic: Array<Characteristic>;
+  @IsArray()
+  images: Array<string>;
 
-    @IsArray()
-    tecnical: Array<string>;
+  @IsArray()
+  characteristic: Array<Characteristic>;
 
-    @IsBoolean()
-    forSale: boolean;
+  @IsArray()
+  tecnical: Array<string>;
 
+  @IsBoolean()
+  forSale: boolean;
 }

@@ -1,5 +1,5 @@
-import { model, Schema, Document } from 'mongoose';
-import { Proposal } from '@interfaces/proposal.interface';
+import { Document, model, Schema } from 'mongoose';
+import { Proposal } from '../interfaces/proposal.interface';
 
 const proposalSchema: Schema = new Schema({
     product_id: {
@@ -31,5 +31,5 @@ const proposalSchema: Schema = new Schema({
         required: false,
     }
   });
-  
+
   export const ProposalModel = model<Proposal & Document>('Proposal', proposalSchema);

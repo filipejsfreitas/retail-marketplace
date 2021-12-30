@@ -1,9 +1,10 @@
-import { Controller, Param, Body, Get, Post, Put, Delete, HttpCode, UseBefore } from 'routing-controllers';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
-import { CreateUserDto } from '@dtos/users.dto';
-import { User } from '@interfaces/users.interface';
-import { UserService } from '@services/users.service';
-import { validationMiddleware } from '@middlewares/validation.middleware';
+import { CreateUserDto } from '../dtos/users.dto';
+import { User } from '../interfaces/users.interface';
+import { UserService } from '../services/users.service';
+import { validationMiddleware } from '../middlewares/express/validation.middleware';
+import { UserModel } from '../models/users.model';
 
 @Controller()
 export class UsersController {
@@ -12,7 +13,7 @@ export class UsersController {
   @Get('/users')
   @OpenAPI({ summary: 'Return a list of users' })
   async getUsers() {
-    const findAllUsersData: User[] = await this.userService.findAllUser();
+    const findAllUsersData: UserModel[] = await this.userService.findAllUser();
     return { data: findAllUsersData, message: 'findAll' };
   }
 

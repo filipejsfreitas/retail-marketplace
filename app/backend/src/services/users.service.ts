@@ -1,16 +1,15 @@
 import bcrypt from 'bcrypt';
-import { CreateUserDto } from '@dtos/users.dto';
-import { HttpException } from '@exceptions/HttpException';
-import { User } from '@interfaces/users.interface';
-import { UserModel } from '@models/users.model';
-import { isEmpty } from '@utils/util';
+import { CreateUserDto } from '../dtos/users.dto';
+import { HttpException } from '../exceptions/HttpException';
+import { User } from '../interfaces/users.interface';
+import { UserModel } from '../models/users.model';
+import { isEmpty } from '../utils/util';
 
 export class UserService {
   public users = UserModel;
 
-  public async findAllUser(): Promise<User[]> {
-    const users: User[] = await this.users.find();
-    return users;
+  public async findAllUser(): Promise<UserModel[]> {
+    return UserModel.find();
   }
 
   public async findUserById(userId: string): Promise<User> {

@@ -1,12 +1,13 @@
-import { App } from '@/app';
-import request from "supertest";
-import { AuthController } from '@controllers/auth.controller';
-import { IndexController } from '@controllers/index.controller';
-import { UsersController } from '@controllers/users.controller';
-import mongoose from 'mongoose';
-import { CategoryController } from '@/controllers/category.controller';
+import { validateEnv } from '../utils/validateEnv';
+validateEnv();
 
-var app = new App([AuthController, IndexController, UsersController, CategoryController]).app;
+import { App } from '../app';
+import request from "supertest";
+import mongoose from 'mongoose';
+import { CONTROLLERS } from '../controllers';
+
+const app = new App(CONTROLLERS);
+app.init();
 //app.listen();
 
 describe("POST / - registo de uma categoria", () => {
@@ -55,7 +56,7 @@ describe("Delete / - apagar uma categoria e os seus descendentes", () => {
 
 
   });
-});  
+});
 
 */
 afterAll(() => mongoose.disconnect());
