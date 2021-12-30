@@ -30,6 +30,13 @@ export class CategoryController {
     return { data: categoryData, message: 'findCategory' };
   }
 
+  @Get('/above/:id')
+  @OpenAPI({summary: 'get all category ancestors'})
+  async getAbove(@Param('id') id: string){
+    const categoryData = await this.categoryService.findUppers(id);
+    return { data: categoryData, message: 'find ancestors' };
+  }
+
   @Get('/')
   @OpenAPI({ summary: 'returns categories of that level' })
   async getCategoryTree() {
@@ -54,6 +61,8 @@ export class CategoryController {
     console.log(r);
     return { data: r, message: 'findCategory' };
   }
+
+  
 
   @Post('/')
   @UseBefore(validationMiddleware(CreateCategoryDto, 'body'))
