@@ -3,7 +3,10 @@
     grid-auto-flow: dense;
     grid-template-columns: repeat(5,1fr);
     align-items: center;
+    margin-left: 60px;
+    margin-right: 60px;
 }
+
 
 .arrow{
     vertical-align: middle;

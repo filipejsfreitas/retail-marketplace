@@ -1,6 +1,9 @@
 
 .frame {
-    display: grid;
-    grid-auto-flow: dense;
-    grid-template-columns: repeat(4,1fr);
+    display:grid;
+    grid-auto-flow:dense;
+    grid-template-columns: repeat(5,1fr);
+    margin-left: 60px;
+    margin-right: 45px;
+    
 }
