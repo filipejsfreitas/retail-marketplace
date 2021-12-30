@@ -3,7 +3,7 @@ import { useState, useRef } from "react"
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router'
 
-import { Container, Button, Form, Alert } from "react-bootstrap"
+import { Container, Button, Form, Alert, Spinner } from "react-bootstrap"
 
 import { BsGoogle } from 'react-icons/bs'
 
@@ -17,6 +17,7 @@ export default function Login() {
   const router = useRouter()
   const [cookies, setCookie] = useCookies(['token']);
   const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   if (cookies.token)
     router.replace("/")
@@ -47,8 +48,12 @@ export default function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control ref={refs.password} type="password" required />
               </Form.Group>
-              <Button variant="primary" size="lg" className={styles.btn} onClick={async () => {
+              <div hidden={!loading} style={{ "display": "flex", "justify-content": "center" }}>
+                <Spinner animation="border" />
+              </div>
+              <Button hidden={loading} variant="primary" size="lg" className={styles.btn} onClick={async () => {
                 if (!Object.values(refs).every(v => v.current.value)) return
+                setLoading(true)
                 const req = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
                 var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/auth/login`, {
                   method: 'POST',
@@ -62,6 +67,7 @@ export default function Login() {
                   router.replace("/")
                 } else {
                   setShowAlert(true)
+                  setLoading(false)
                 }
               }}>
                 Login
