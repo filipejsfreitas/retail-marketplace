@@ -5,5 +5,5 @@
     grid-template-columns: repeat(5,1fr);
     margin-left: 60px;
     margin-right: 45px;
-    
+    align-items: center;
 }
