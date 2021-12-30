@@ -111,7 +111,7 @@ export default function Register() {
               </Button>
             </Form>
             <br />
-            <Alert hidden={!showAlert} variant="danger">
+            <Alert hidden={!showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
               The registration failed.
             </Alert>
           </Container>
