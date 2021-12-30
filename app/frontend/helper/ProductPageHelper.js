@@ -67,7 +67,7 @@ export async function setFavoriteOff(id) {
     await fetch(`${process.env.NEXT_PUBLIC_HOST}/client/favorites/${id}`, {
         method: 'DELETE',
     }).catch((error) => console.log(error))
-
+    {/**ssadada */}
     return 1
 }
 
