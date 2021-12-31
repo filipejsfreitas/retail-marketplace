@@ -145,3 +145,20 @@
     color: #fbfbfb;
     float: inline-end;
 }
+
+.sellerRateCheck{
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.sellerRateQuestion{
+    font-size: 18px;
+    font-weight: 600;
+}
+.rateinfo{
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 15px;
+    margin-top: 0px;
+    padding: 0px;
+}
