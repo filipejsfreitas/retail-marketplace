@@ -9,6 +9,7 @@ import MyModal from "./Comment"
 import Proposals from "./Proposals"
 import {useState} from "react";
 import { setFavoriteOff, setFavoriteOn } from "helper/ProductPageHelper"
+import { useLayoutEffect, useEffect } from "react"
 
 export function computeStars(stars) {
     var r = []
@@ -59,7 +60,7 @@ const Product = (props) => {
       outline: 0,
       boxShadow:"0px 0px 0px 0px black"
     }
-        
+    
     const prod = props.props
     const idP = prod._id
     const proposals = props.proposals
@@ -94,7 +95,7 @@ const Product = (props) => {
                             <Row className={styles.prodStats} >
                                 <Col>
                                     <div className={styles.favorite}>
-                                        <Button style={appStyles}
+                                        <Button id="buttonFav" style={appStyles}
                                                 onClick={async()  => {
                                                     const reply = await (fav ? setFavoriteOff(idP) : setFavoriteOn(idP))
                                                     if(reply == 1)

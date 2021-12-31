@@ -67,7 +67,15 @@ export async function setFavoriteOff(id) {
     await fetch(`${process.env.NEXT_PUBLIC_HOST}/client/favorites/${id}`, {
         method: 'DELETE',
     }).catch((error) => console.log(error))
-    {/**ssadada */}
+    
     return 1
 }
 
+export async function fetchProposalsClient(id) {
+
+    const proposals = await fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/seller/{${id}`)
+        .then( (res) => res.json() )
+        .then( (data) => data.data )
+        .catch( () => false )
+    return proposals
+}
