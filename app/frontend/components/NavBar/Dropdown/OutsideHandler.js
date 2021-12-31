@@ -15,7 +15,9 @@ function OutsideHandler(props) {
 
     useEffect(() => {
       function handleClickOutside(event) {
-        if (!buttonRef.current.contains(event.target) && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        if (!buttonRef.current){
+          setOpen(false);
+        } else if (!buttonRef.current.contains(event.target) && wrapperRef.current && !wrapperRef.current.contains(event.target)) {
           setOpen(false);
         }
       }
