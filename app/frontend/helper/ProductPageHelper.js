@@ -79,3 +79,13 @@ export async function fetchProposalsClient(id) {
         .catch( () => false )
     return proposals
 }
+
+
+export async function fetchCategoriesAbove(id) {
+
+    const categories = await fetch(`${process.env.NEXT_PUBLIC_HOST}/category/above/{${id}`)
+        .then( (res) => res.json() )
+        .then( (data) => data.data )
+        .catch((error) => console.log(error))
+    return categories
+}

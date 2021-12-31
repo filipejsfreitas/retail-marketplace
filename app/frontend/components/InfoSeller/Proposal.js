@@ -22,7 +22,7 @@ const Proposal = ({prod, prop}) =>{
                     <div className={styles.itemInfoWrapper}>
                         <div className={styles.itemInfo}>
                             <div className={styles.title}><Link href={`/product/${prod._id}`}>{prod.name}</Link></div>
-                            <div className={styles.categorie}>Categoria</div>
+                            {/*<div className={styles.categorie}>Categoria</div>*/}
                             <div className={styles.stars}>{computeStars(prod.score)}</div>
                             <span className={styles.status}><Status stock={prop.stock}/></span>
                         </div>
