@@ -1,4 +1,4 @@
-import { Container, Button, Form, Row, Col, Alert } from "react-bootstrap"
+import { Container, Button, Form, Row, Col, Alert, Spinner } from "react-bootstrap"
 import { useState, useRef } from "react"
 import { useRouter } from 'next/router'
 
@@ -11,6 +11,7 @@ export default function Register() {
   const router = useRouter()
 
   const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -18,6 +19,7 @@ export default function Register() {
     event.preventDefault();
     event.stopPropagation();
     if (form.checkValidity()) {
+      setLoading(true)
       const req = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
       var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/auth/register`, {
         method: 'POST',
@@ -27,6 +29,7 @@ export default function Register() {
       if (rep.ok){
         router.replace("/login/")
       } else {
+        setLoading(false)
         setShowAlert(true)
       }
     }
@@ -106,10 +109,13 @@ export default function Register() {
                   feedbackType="invalid"
                 />
               </Form.Group>
-              <Button type="submit" variant="primary" size="lg" className={styles.btn}>
+              <Button hidden={loading} type="submit" variant="primary" size="lg" className={styles.btn}>
                 Register
               </Button>
             </Form>
+            <div hidden={!loading} style={{ "display": "flex", "justify-content": "center" }}>
+              <Spinner animation="border" />
+            </div>
             <br />
             <Alert hidden={!showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
               The registration failed.
