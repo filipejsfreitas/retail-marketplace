@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useState, useRef } from "react"
-import { useCookies } from 'react-cookie';
+import useToken from "hooks/useToken"
 import { useRouter } from 'next/router'
 
 import { Container, Button, Form, Alert, Spinner } from "react-bootstrap"
@@ -15,11 +15,11 @@ import styles from "../styles/login.module.css"
 export default function Login() {
   const refs = { email: useRef(), password: useRef() }
   const router = useRouter()
-  const [cookies, setCookie] = useCookies(['token']);
   const [showAlert, setShowAlert] = useState(false);
   const [loading, setLoading] = useState(false)
 
-  if (cookies.token)
+  const { token, setToken } = useToken()
+  if (token)
     router.replace("/")
 
   return (
@@ -63,7 +63,7 @@ export default function Login() {
                 console.debug(rep)
                 if (rep.ok) {
                   const json = await rep.json()
-                  setCookie('token', json, { path: '/' });
+                  setToken(json)
                   router.replace("/")
                 } else {
                   setShowAlert(true)
