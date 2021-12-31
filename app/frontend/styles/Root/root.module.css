@@ -103,3 +103,10 @@
     align-items: center;
     background-color: #ffffff;
 }
+
+.rootFavoritos {
+    height: 400px;
+    width: 250px;
+    align-items: center;
+    background-color: #ffffff;
+}

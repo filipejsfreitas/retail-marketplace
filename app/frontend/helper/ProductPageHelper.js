@@ -50,3 +50,32 @@ export async function fetchCategoriePath(id) {
     return categories
 
 }
+
+export async function setFavoriteOn(id) {
+
+    await fetch(`${process.env.NEXT_PUBLIC_HOST}/client/favorites`, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product_id: id})
+    }).catch((error) => console.log(error)) 
+    
+    return 1
+}
+
+export async function setFavoriteOff(id) {
+
+    await fetch(`${process.env.NEXT_PUBLIC_HOST}/client/favorites/${id}`, {
+        method: 'DELETE',
+    }).catch((error) => console.log(error))
+    
+    return 1
+}
+
+export async function fetchProposalsClient(id) {
+
+    const proposals = await fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/seller/{${id}`)
+        .then( (res) => res.json() )
+        .then( (data) => data.data )
+        .catch( () => false )
+    return proposals
+}
