@@ -2,8 +2,9 @@ import React from "react"
 import Layout from "../../components/Layout"
 import Product from "../../components/Product/Product"
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
-import fetchProducts, { fetchProposals, fetchProduct } from "helper/ProductPageHelper";
+import fetchProducts, { fetchProposals, fetchProduct, fetchCategoriesAbove } from "helper/ProductPageHelper";
 import Error from "next/error";
+import useFetchData from "hooks/useFetchData";
 
 export const getStaticPaths = async () => {
   
@@ -107,13 +108,17 @@ export const getStaticPaths = async () => {
       }
   ]
 }*/
+
 export default function ProductPage({categories,product, proposals}){
 
   if( !categories || !product )
     return (<Error statusCode={503} />)
+  const { data: cats, loading } = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/category/above/${product.category_id}`)
   return ( 
       <Layout categories={categories} >
-          <Product props={product} proposals={proposals}></Product>
+        {loading ? <></> :
+          <Product props={product} proposals={proposals} cats={cats}></Product>
+        }
       </Layout>
   )
 }
@@ -124,13 +129,14 @@ export async function getStaticProps(context) {
   const product = await fetchProduct(id);
   const proposals = await fetchProposals(id);
   const categories = await fetchCategories();
+  
   const revTime = revalidateTime()
 
   return {
     props: {
       categories,
       proposals,
-      product
+      product,
     },
 
     revalidate: revTime, 

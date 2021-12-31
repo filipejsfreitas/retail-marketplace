@@ -9,7 +9,7 @@ import MyModal from "./Comment"
 import Proposals from "./Proposals"
 import {useState} from "react";
 import { setFavoriteOff, setFavoriteOn } from "helper/ProductPageHelper"
-import { useLayoutEffect, useEffect } from "react"
+import Link from "next/link";
 
 export function computeStars(stars) {
     var r = []
@@ -64,16 +64,32 @@ const Product = (props) => {
     const prod = props.props
     const idP = prod._id
     const proposals = props.proposals
+    const cats = props.cats
+    const catsOrd = []
+        cats.map(cat =>
+            catsOrd.push(cat.name)
+        )
+    catsOrd.reverse()
     const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
     return (            
            <>
             <Row md={12}>
-                {/*Ver os argumentos da categoria que vem no pedido para completar*/}
-                <div> Home<BsArrowRightCircle className={styles.arrow}/>
-                      Tecnologia<BsArrowRightCircle className={styles.arrow}/>  
-                      Smartphones<BsArrowRightCircle className={styles.arrow}/> 
-                      {prod.name}
+                <div className={styles.title}> 
+                  <Link href="/">Home</Link>
+                      {catsOrd.map((cat, i) => {
+                        const url = catsOrd.slice(0, i+1).reduce((acc, cat) => acc.concat("/").concat(cat), "")
+                        return (
+                          <span key={i}>
+                            <BsArrowRightCircle className={styles.arrow}/>
+                              <Link href={url}>
+                                {cat}
+                              </Link>
+                          </span>
+                        )
+                        }
+                      )}
                 </div>
+                
 
                 <Col md={6}>
                     <Row>
