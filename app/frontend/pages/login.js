@@ -48,7 +48,7 @@ export default function Login() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control ref={refs.password} type="password" required />
               </Form.Group>
-              <div hidden={!loading} style={{ "display": "flex", "justify-content": "center" }}>
+              <div hidden={!loading} style={{ "display": "flex", "justifyContent": "center" }}>
                 <Spinner animation="border" />
               </div>
               <Button hidden={loading} variant="primary" size="lg" className={styles.btn} onClick={async () => {
@@ -60,10 +60,9 @@ export default function Login() {
                   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                   body: JSON.stringify(req),
                 })
-                console.debug(rep)
                 if (rep.ok) {
                   const json = await rep.json()
-                  setToken(json)
+                  await setToken(json)
                   router.replace("/")
                 } else {
                   setShowAlert(true)
