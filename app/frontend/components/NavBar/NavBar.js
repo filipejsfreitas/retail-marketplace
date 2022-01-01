@@ -1,10 +1,12 @@
 import { useRef, useState } from "react"
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { Container, Navbar, FormControl, InputGroup } from "react-bootstrap"
-import { BsJustify, BsPersonCircle, BsBagFill, BsSearch  } from 'react-icons/bs'
+import { BsJustify, BsPersonCircle, BsBagFill, BsSearch } from 'react-icons/bs'
 
 import Dropdown from "components/NavBar/Dropdown"
 import LogoReversed from "components/Logos/LogoReversed"
+import useToken from "hooks/useToken"
 
 import styles from "styles/NavBar/NavBar.module.css"
 
@@ -13,6 +15,7 @@ const NavBar = (props) => {
 
     const [showDropdown, setshowDropdown] = useState(false)
     const dropButtonRef = useRef(null)
+    const { token } = useToken()
 
     return (
         <>
@@ -20,11 +23,11 @@ const NavBar = (props) => {
                 <Container fluid>
                     <Container className="d-flex align-items-center py-0">
                         <button className={styles.btn} onClick={props.handleShowSideBar}>
-                            <BsJustify size={48}/>
+                            <BsJustify size={48} />
                         </button>
                         <Container className={styles.brand}>
                             <Navbar.Brand href="/">
-                                <LogoReversed height={50} width={170}/>
+                                <LogoReversed height={50} width={170} />
                             </Navbar.Brand >
                         </Container>
                     </Container>
@@ -34,20 +37,28 @@ const NavBar = (props) => {
                                 props.handleSearch(event.target.value)
                             }} />
                         <button className={styles.searchBtn} >
-                            <BsSearch/>
+                            <BsSearch />
                         </button>
                     </InputGroup>
                     <Container className="d-flex flex-row-reverse">
-                        <button className={styles.btn} onClick={props.handleShowCheckout} >
-                            <BsBagFill size={48}/>
-                        </button>
-                        <button ref={dropButtonRef} className={styles.btn} onClick={() =>{ showDropdown ? setshowDropdown(false) : setshowDropdown(true) }}>
-                            <BsPersonCircle size={48} className="me-3"/>
-                        </button>
+                        {!token ? <Link href="/login">
+                            <a>
+                                <button className={styles.btn}>
+                                    <BsPersonCircle size={48} className="me-3" />
+                                </button>
+                            </a>
+                        </Link> : <>
+                            <button className={styles.btn} onClick={props.handleShowCheckout} >
+                                <BsBagFill size={48} />
+                            </button>
+                            <button ref={dropButtonRef} className={styles.btn} onClick={() => { showDropdown ? setshowDropdown(false) : setshowDropdown(true) }}>
+                                <BsPersonCircle size={48} className="me-3" />
+                            </button>
+                        </>}
                     </Container>
                 </Container>
             </Navbar>
-            <Dropdown user={{username:"Diogo"}} btnRef={dropButtonRef} state={[showDropdown, setshowDropdown]}/>
+            <Dropdown user={{ username: "Diogo" }} btnRef={dropButtonRef} state={[showDropdown, setshowDropdown]} />
         </>
     )
 }

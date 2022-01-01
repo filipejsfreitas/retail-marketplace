@@ -7,6 +7,7 @@ import Link from 'next/link'
 import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
 
 import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
+import useToken from "hooks/useToken"
 
 // Custom dropdown component with animation
 // Needs to be given a btnRef prop with the reference
@@ -25,6 +26,8 @@ const Dropdown = (props) => {
 
   const [showDropdown, setshowDropdown] = props.state;
 
+  const { token, removeToken } = useToken()
+
   return (
     <CSSTransition
       in={showDropdown}
@@ -42,7 +45,7 @@ const Dropdown = (props) => {
         state={[showDropdown, setshowDropdown]}
         buttonRef={buttonRef}
       >
-        { props.user
+        {props.user
           ?
           <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top_user}>
@@ -51,7 +54,14 @@ const Dropdown = (props) => {
                 <div>{props.user.username}</div>
               </div>
               <div>
-                <Button className={styles.dd_logoutBtn} variant="secondary" onClick={ () => router.push('/logout') }>Log Out</Button>
+                <Button className={styles.dd_logoutBtn} variant="secondary" onClick={async () => {
+                  fetch(`${process.env.NEXT_PUBLIC_HOST}/auth/logout`, {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + token.token}
+                  })
+                  setshowDropdown(false)
+                  removeToken()
+                }}>Log Out</Button>
               </div>
             </div>
             <div className={styles.dd_bot_user}>
@@ -70,14 +80,14 @@ const Dropdown = (props) => {
               Welcome
             </div>
             <div className={styles.dd_bot}>
-              <Button variant="secondary" onClick={ () => router.push('/login') } >Log In</Button>
-              <Button variant="secondary" onClick={ () => router.push('/register') } >Register</Button>
+              <Button variant="secondary" onClick={() => router.push('/login')} >Log In</Button>
+              <Button variant="secondary" onClick={() => router.push('/register')} >Register</Button>
             </div>
           </div>
         }
       </OutsideHandler>
     </CSSTransition>
   );
-};      
+};
 
 export default Dropdown
