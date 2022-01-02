@@ -1,7 +1,7 @@
 
 '''
 Sempre que um comentario é adcionado a base de dados este ficheiro deve ser executado.
-Recebe o id do produto (ou seller) e o comenatrio feito e vai classificar o comentario e adiciona-lo ao dataset de modo a que depois
+Recebe o id do produto (ou seller) e o comentario feito e vai classificar o comentario e adiciona-lo ao dataset de modo a que depois
 quando executado o modeulo seller_info se tenha o dataset atualizado
 '''
 

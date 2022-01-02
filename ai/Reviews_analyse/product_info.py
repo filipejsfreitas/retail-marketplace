@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 
 '''
-Este ficheiro deve permite ao seller saber para cada seu produto, o que é mais criticado/elogiado pelos users e as principais emoções idetificadas.
+Este ficheiro permite que para um dado produto, se obtenha o que é mais criticado/elogiado pelos users e as principais emoções identificadas.
 
 '''
 
@@ -59,7 +59,6 @@ def top_words_Product_reviews(language, product, n=10, words = 2):
 
 def identify_words(common_words):
 
-
     # from https://medium.com/life-at-hopper/conducting-sentiment-analysis-on-app-reviews-to-inform-product-decisions-64fcc71822ed with wordcloud
     list_words =  ['perfect', 'loved', 'expensive', 'dislike','good','decent', 'great', 'predominantly', 'reasonable', 'nice', 
     'cheap','flimsy', 'chinsey', 'cheaply', 'fragile', 'mealso','junk','crap', 'garbage', 'upset', 'fake', 'trash',
@@ -96,9 +95,17 @@ def main(idProduct,  language, data):
 
         sentiments = give_sentiment_product (product)
 
+
         print("O produto " + idProduct + " despertou as seguintes emoções aos utilizadores: " + sentiments[0] + ", " + sentiments[1] )
         print("As principais palavras utilizadas para descrever o produto " + idProduct + " são: " + ' , '.join(words) )
-    
+
+        context = {
+            "id_product": id_product,
+            "sentiments": sentiments [:2],
+            "most_used_words": words
+        }
+
+    return context 
 
 if __name__ == "__main__":
     #   id_product = "AVpgfP3DilAPnD_xtG3M"
@@ -109,4 +116,6 @@ if __name__ == "__main__":
     data = pd.read_csv("reviews.csv", index_col=False,sep=',')
 
    
-    main(id_product, language, data)
+    context = main(id_product, language, data)
+
+    print (context)
