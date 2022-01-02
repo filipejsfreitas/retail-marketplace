@@ -18,6 +18,15 @@ const sellerCommentSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
+  shipping_rating: {
+    type: Number,
+    required: true,
+  },
+  support_rating: {
+    type: Number,
+    required: true,
+  }
+
 });
 
 export const SellerCommentModel = model<SellerComment & Document>('SellerComment', sellerCommentSchema);

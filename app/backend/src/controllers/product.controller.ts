@@ -1,6 +1,6 @@
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFiles, UseBefore } from 'routing-controllers';
+import { Body, Controller, Delete, Get, Param, Post, Put, QueryParams, UploadedFiles, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
 import { CreateCommentDto } from '../dtos/comment.dto';
@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 import multer from 'multer';
 
 import { Product } from '../interfaces/product.interface';
+import { QueryParameters } from 'dtos/query.dto';
 
 const upload = multer({ dest: './uploads' });
 
@@ -24,10 +25,30 @@ export class ProductController {
 
   @Get('/list')
   @OpenAPI({ summary: 'get product list' })
-  async getProducts() {
-    const prodData = await this.productService.getproducts();
+  async getProducts(@QueryParams() parametros: QueryParameters) {
+    
+    
+    if (!parametros.limit){parametros.limit = 20};
+    if (!parametros.min_rating){parametros.min_rating = 0};
+    if (!parametros.page){parametros.page = 0}
+    if (!parametros.min_price){parametros.min_price = 0};
+    if (!parametros.max_price){parametros.max_price = 100000000000};
+
+    const prodData = await this.productService.listproducts(parametros);
+    //const prodData = await this.productService.getproducts();
     return { data: prodData, message: 'found Product' };
   }
+
+  @Get('/category/:category_name')
+  @OpenAPI({ summary: 'get products lof category' })
+  async getProductsCategory(@Param('category_name') category_name: string) {
+
+    const prodData = await this.productService.getProductByCategoryName(category_name);
+    //const prodData = await this.productService.getproducts();
+    return { data: prodData, message: 'found Product' };
+  }
+
+
 
   @Get('/:id')
   @OpenAPI({ summary: 'get product info' })
