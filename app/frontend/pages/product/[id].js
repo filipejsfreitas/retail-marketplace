@@ -30,7 +30,7 @@ export default function ProductPage({categories,product, proposals}){
   return ( 
       <Layout categories={categories} >
         {loading || loading2  ? 
-          <div  style={{ "display": "flex", "justify-content": "center" }}>
+          <div  style={{ "display": "flex", "justifyContent": "center" }}>
           <Spinner animation="border" />
           </div>  :
           <Product props={product} proposals={proposals} cats={cats} favs={favs}></Product>
