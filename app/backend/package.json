@@ -45,6 +45,7 @@
     "swagger-ui-express": "^4.1.6",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.5",
+    "typescript-ioc": "^3.2.2",
     "uuid": "^8.3.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5"
