@@ -20,11 +20,11 @@ export class CartItemService {
   public clientInvoices = ClientInvoiceModel;
   public sellerInvoices = SellerInvoiceModel;
 
-  public async addItem(item: CreateCartItemDto, client_id: string): Promise<CartItem> {
+  public async addItem(item: CreateCartItemDto, clientId: string): Promise<CartItem> {
     console.log('função');
     if (isEmpty(item)) throw new HttpException(400, 'Invalid Item');
 
-    const alreadyInCart: CartItem = await this.cartItems.findOne({ client_id: client_id, proposal_id: item.proposal_id });
+    const alreadyInCart: CartItem = await this.cartItems.findOne({ clientId: clientId, proposal_id: item.proposal_id });
     console.log('função2');
     if (alreadyInCart) {
       throw new HttpException(400, 'Item already in cart');
@@ -43,16 +43,16 @@ export class CartItemService {
       throw new HttpException(400, 'Unsuficient stock to satisfy request');
     }
 
-    const prod: Product = await this.products.findOne({ _id: prop.product_id, forSale: true });
+    const prod: Product = await this.products.findOne({ _id: prop.productId, forSale: true });
 
     if (!prod) {
       throw new HttpException(400, 'Invalid product, or product not for sale');
     }
 
     const cartItem: CartItem = await this.cartItems.create({
-      product_id: prod._id,
+      productId: prod._id,
       name: prod.name,
-      client_id: client_id,
+      clientId: clientId,
       proposal_id: prop._id,
       price: prop.price,
       shipping: prop.shipping,
@@ -60,17 +60,17 @@ export class CartItemService {
       quantity: item.quantity,
       locked: false,
       timestamp: new Date(),
-      seller_id: prop.seller_id,
+      sellerId: prop.sellerId,
       special_conditions: prop.special_conditions,
     });
 
     return cartItem;
   }
 
-  public async updateItem(item: UpdateCartItemDto, client_id: string, cartItem_id: string): Promise<CartItem> {
+  public async updateItem(item: UpdateCartItemDto, clientId: string, cartItem_id: string): Promise<CartItem> {
     if (isEmpty(item)) throw new HttpException(400, 'Invalid Item');
 
-    const oldItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, client_id: client_id });
+    const oldItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, clientId: clientId });
 
     const prop: Proposal = await this.proposals.findById(oldItem.proposal_id);
 
@@ -87,7 +87,7 @@ export class CartItemService {
     }
 
     const cartItem: CartItem = await this.cartItems.findOneAndUpdate(
-      { _id: cartItem_id, client_id: client_id },
+      { _id: cartItem_id, clientId: clientId },
       { quantity: item.quantity, locked: false, timestamp: new Date() },
       { new: true },
     );
@@ -95,32 +95,31 @@ export class CartItemService {
     return cartItem;
   }
 
-  public async deleteCartItem(client_id: string, cartItem_id: string): Promise<CartItem> {
-    const cartItem: CartItem = await this.cartItems.findOneAndDelete({ _id: cartItem_id, client_id: client_id });
+  public async deleteCartItem(clientId: string, cartItem_id: string): Promise<CartItem> {
+    const cartItem: CartItem = await this.cartItems.findOneAndDelete({ _id: cartItem_id, clientId: clientId });
 
     return cartItem;
   }
 
-  public async getCartItem(client_id: string, cartItem_id: string): Promise<CartItem> {
-    const cartItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, client_id: client_id });
+  public async getCartItem(clientId: string, cartItem_id: string): Promise<CartItem> {
+    const cartItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, clientId: clientId });
 
     return cartItem;
   }
 
-  public async getClientCartItems(client_id: string): Promise<CartItem[]> {
-    const cartItems: CartItem[] = await this.cartItems.find({ client_id: client_id });
+  public async getClientCartItems(clientId: string): Promise<CartItem[]> {
+    const cartItems: CartItem[] = await this.cartItems.find({ clientId: clientId });
 
     return cartItems;
   }
 
-  public async lockClientItems(client_id: string) {
-    //setTimeout( () =>  this.unlockItems(client_id).then(), 2000)
+  public async lockClientItems(clientId: string) {
+    //setTimeout( () =>  this.unlockItems(clientId).then(), 2000)
 
-    
     console.log('função');
     const date: Date = new Date();
 
-    const itemList: CartItem[] = await this.cartItems.find({ client_id: client_id, locked: false });
+    const itemList: CartItem[] = await this.cartItems.find({ clientId: clientId, locked: false });
 
     const props = [];
 
@@ -137,7 +136,7 @@ export class CartItemService {
         }
       }
 
-      this.cartItems.updateMany({ client_id: client_id }, { locked: true }).then(res => {
+      this.cartItems.updateMany({ clientId: clientId }, { locked: true }).then(res => {
         console.log(res);
 
         const propsmodified = [];
@@ -161,9 +160,9 @@ export class CartItemService {
     console.log('falhou');
   }
 
-  public async concludePurchase(client_id: string, address_id: string) {
-    const address: Address = await this.addresses.findOne({ _id: address_id, client_id: client_id });
-    const itemList: CartItem[] = await this.cartItems.find({ client_id: client_id, locked: true });
+  public async concludePurchase(clientId: string, address_id: string) {
+    const address: Address = await this.addresses.findOne({ _id: address_id, clientId: clientId });
+    const itemList: CartItem[] = await this.cartItems.find({ clientId: clientId, locked: true });
 
     const addressForInvoice = {
       nif: address.nif,
@@ -188,28 +187,28 @@ export class CartItemService {
         quantity: element.quantity,
         price: element.price,
         shipping: element.shipping,
-        product_id: element.product_id,
+        productId: element.productId,
         proposal_id: element.proposal_id,
-        seller_id: element.seller_id,
+        sellerId: element.sellerId,
         state: 'indefinido',
         special_conditions: element.special_conditions,
       });
 
-      if (sellersItem[element.seller_id]) {
-        sellersItem[element.seller_id].push({
+      if (sellersItem[element.sellerId]) {
+        sellersItem[element.sellerId].push({
           quantity: element.quantity,
           price: element.price,
           shipping: element.shipping,
-          product_id: element.product_id,
+          productId: element.productId,
           proposal_id: element.proposal_id,
         });
       } else {
-        sellersItem[element.seller_id] = [
+        sellersItem[element.sellerId] = [
           {
             quantity: element.quantity,
             price: element.price,
             shipping: element.shipping,
-            product_id: element.product_id,
+            productId: element.productId,
             proposal_id: element.proposal_id,
           },
         ];
@@ -217,7 +216,7 @@ export class CartItemService {
     });
 
     const clientInvoice = await this.clientInvoices.create({
-      client_id: client_id,
+      clientId: clientId,
       date: date,
       address: addressForInvoice,
       total: clientTotal,
@@ -237,7 +236,7 @@ export class CartItemService {
         this.sellerInvoices.create({
           date: date,
           invoice_id: clientInvoice._id,
-          seller_id: key,
+          sellerId: key,
           total: sellerTotal,
           address: addressForInvoice,
           items: sellerItems,
@@ -246,7 +245,7 @@ export class CartItemService {
       );
     }
 
-    await this.cartItems.deleteMany({ client_id: client_id, locked: true });
+    await this.cartItems.deleteMany({ clientId: clientId, locked: true });
 
     Promise.all(sellersInvoice).then(res => {
       return;
@@ -255,8 +254,8 @@ export class CartItemService {
     return;
   }
 
-  public async unlockItems(client_id: string) {
-    const itemList = await this.cartItems.find({ client_id: client_id, locked: true });
+  public async unlockItems(clientId: string) {
+    const itemList = await this.cartItems.find({ clientId: clientId, locked: true });
 
     const props = [];
 

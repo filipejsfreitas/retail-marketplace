@@ -2,7 +2,7 @@ import { Seller } from '../interfaces/seller.interface';
 import { Document, model, Schema } from 'mongoose';
 
 const sellerSchema: Schema = new Schema({
-  seller_id: {
+  userId: {
     type: String,
     required: false,
     unique: true,
@@ -45,4 +45,5 @@ const sellerSchema: Schema = new Schema({
   },
 });
 
-export const SellerModel = model<Seller & Document>('Seller', sellerSchema);
+export type SellerModel = Seller & Document;
+export const SellerModel = model<SellerModel>('Seller', sellerSchema);

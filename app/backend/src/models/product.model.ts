@@ -39,7 +39,7 @@ const productSchema: Schema = new Schema({
     required: true,
   },
   comments: {
-    type: [{ score: Number, comment: String, title: String, date: Date, client_id: String, name: String }],
+    type: [{ score: Number, comment: String, title: String, date: Date, clientId: String, name: String }],
     required: true,
   },
   best_offer: {
@@ -52,4 +52,5 @@ const productSchema: Schema = new Schema({
   },
 });
 
-export const ProductModel = model<Product & Document>('Product', productSchema);
+export type ProductModel = Product & Document;
+export const ProductModel = model<ProductModel>('Product', productSchema);

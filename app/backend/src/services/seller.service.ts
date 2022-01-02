@@ -1,4 +1,4 @@
-import { CreateSellerDto, UpdateSellerDto } from '../dtos/seller.dto';
+import { UpdateSellerDto } from '../dtos/seller.dto';
 import { SellerCommentDto } from '../dtos/sellerComment.dto';
 import { HttpException } from '../exceptions/HttpException';
 import { Seller } from '../interfaces/seller.interface';
@@ -9,57 +9,73 @@ import { SellerModel } from '../models/seller.model';
 import { SellerCommentModel } from '../models/sellerComment.model';
 import { SellerInvoiceModel } from '../models/sellerInvoice.model';
 import { isEmpty } from 'class-validator';
+import { Singleton } from 'typescript-ioc';
+import { CreateSellerDto } from '../dtos/users.dto';
 
+@Singleton
 export class SellerService {
   public sellers = SellerModel;
   public invoices = SellerInvoiceModel;
   public comments = SellerCommentModel;
   public clientInvoices = ClientInvoiceModel;
 
-  public async createSeller(seller_info: CreateSellerDto): Promise<Seller> {
+  public async createSeller(sellerInfo: CreateSellerDto, userId: string): Promise<SellerModel> {
+    if (isEmpty(sellerInfo)) throw new HttpException(400, 'Invalid information');
+
+    const { firstName, lastName, phoneNumber, companyName, tin, companyPhoneNumber, customerServiceEmail } = sellerInfo;
+
+    const seller = await this.sellers.create({
+      userId,
+      firstName,
+      lastName,
+      phoneNumber,
+      companyName,
+      tin,
+      companyPhoneNumber,
+      customerServiceEmail,
+      rating: 0,
+      numberRating: 0,
+    });
+
+    return seller;
+  }
+
+  public async updateSeller(seller_info: UpdateSellerDto, sellerId: string): Promise<Seller> {
     if (isEmpty(seller_info)) throw new HttpException(400, 'Invalid information');
 
-    const seller: Seller = await this.sellers.create({ ...seller_info, rating: 0, numberRating: 0 });
+    const seller: Seller = await this.sellers.findOneAndUpdate({ userId: sellerId }, { ...seller_info });
 
     return seller;
   }
 
-  public async updateSeller(seller_info: UpdateSellerDto, seller_id: string): Promise<Seller> {
-    if (isEmpty(seller_info)) throw new HttpException(400, 'Invalid information');
-
-    const seller: Seller = await this.sellers.findOneAndUpdate({ seller_id: seller_id }, { ...seller_info });
+  public async getSeller(sellerId: string) {
+    const seller: SellerModel = await this.sellers.findOne({ userId: sellerId });
 
     return seller;
   }
 
-  public async getSeller(seller_id: string) {
-    const seller: Seller = await this.sellers.findOne({ seller_id: seller_id });
-
-    return seller;
-  }
-
-  public async getInvoices(seller_id: string): Promise<SellerInvoice[]> {
-    const invoices: SellerInvoice[] = await this.invoices.find({ seller_id: seller_id.toString() });
+  public async getInvoices(sellerId: string): Promise<SellerInvoice[]> {
+    const invoices: SellerInvoice[] = await this.invoices.find({ sellerId: sellerId.toString() });
 
     return invoices;
   }
 
-  public async getInvoice(seller_id: string, invoice_id: string): Promise<SellerInvoice> {
-    const invoice: SellerInvoice = await this.invoices.findOne({ seller_id: seller_id, _id: invoice_id });
+  public async getInvoice(sellerId: string, invoice_id: string): Promise<SellerInvoice> {
+    const invoice: SellerInvoice = await this.invoices.findOne({ sellerId: sellerId, _id: invoice_id });
 
     if (!invoice) throw new HttpException(409, 'Invalid invoice Id or not authrized');
 
     return invoice;
   }
 
-  public async updateInvoice(seller_id: string, invoice_id: string, new_state: string): Promise<SellerInvoice> {
-    const invoice: SellerInvoice = await this.invoices.findOneAndUpdate({ seller_id: seller_id, _id: invoice_id }, { state: new_state });
+  public async updateInvoice(sellerId: string, invoice_id: string, new_state: string): Promise<SellerInvoice> {
+    const invoice: SellerInvoice = await this.invoices.findOneAndUpdate({ sellerId: sellerId, _id: invoice_id }, { state: new_state });
     if (!invoice) throw new HttpException(409, 'Invalid invoice Id or not authrized');
 
     const clientInvoice = await this.clientInvoices.findOne({ _id: invoice.invoice_id });
 
     clientInvoice.items.forEach(element => {
-      if (seller_id.toString() === seller_id) {
+      if (sellerId.toString() === sellerId) {
         element.state = new_state;
       }
     });
@@ -69,38 +85,44 @@ export class SellerService {
     return invoice;
   }
 
-  public async makeComment(comment: SellerCommentDto, client_id: string, seller_id: string): Promise<SellerComment> {
+  public async makeComment(comment: SellerCommentDto, clientId: string, sellerId: string): Promise<SellerComment> {
     if (isEmpty(comment)) throw new HttpException(400, 'Invalid information');
 
-    const findSeller: Seller = await this.sellers.findOne({ seller_id: seller_id });
+    const findSeller: Seller = await this.sellers.findOne({ userId: sellerId });
 
     if (!findSeller) throw new HttpException(409, 'Invalid seller Id');
 
     const newNumberScores = findSeller.numberRating + 1;
 
-    var rating = (comment.shipping_rating + comment.support_rating)/2
+    const rating = (comment.shipping_rating + comment.support_rating) / 2;
 
     const newScore = (findSeller.rating * findSeller.numberRating + rating) / newNumberScores;
 
     const updateSeller: Seller = await this.sellers.findOneAndUpdate(
-      { _id: seller_id },
+      { _id: sellerId },
       { rating: newScore, numberRating: newNumberScores },
       { new: true },
     );
 
-    const sellerComment: SellerComment = await this.comments.create({ ...comment, seller_id: seller_id, client_id: client_id, date: new Date() , rating: rating});
+    const sellerComment: SellerComment = await this.comments.create({
+      ...comment,
+      sellerId: sellerId,
+      clientId: clientId,
+      date: new Date(),
+      rating: rating,
+    });
 
     return sellerComment;
   }
 
-  public async deleteComment(comment_id: string, client_id: string): Promise<SellerComment> {
-    const findComment: SellerComment = await this.comments.findOne({ _id: comment_id, client_id: client_id });
+  public async deleteComment(comment_id: string, clientId: string): Promise<SellerComment> {
+    const findComment: SellerComment = await this.comments.findOne({ _id: comment_id, clientId: clientId });
 
     if (!findComment) {
       throw new HttpException(400, "Invalid comment Id or rou're not authorized");
     }
 
-    const seller: Seller = await this.sellers.findOne({ seller_id: findComment.seller_id });
+    const seller: Seller = await this.sellers.findOne({ userId: findComment.sellerId });
 
     const newNumberScores = seller.numberRating - 1;
 
@@ -111,7 +133,7 @@ export class SellerService {
     }
 
     const sellerUpdated: Seller = await this.sellers.findOneAndUpdate(
-      { seller_id: seller._id },
+      { userId: seller._id },
       { rating: newScore, numberRating: newNumberScores },
       { new: true },
     );
@@ -120,20 +142,20 @@ export class SellerService {
     return commentdeleted;
   }
 
-  public async updateComment(comment_id: string, client_id: string, new_comment: SellerCommentDto) {
-    const findComment: SellerComment = await this.comments.findOne({ _id: comment_id, client_id: client_id });
+  public async updateComment(comment_id: string, clientId: string, new_comment: SellerCommentDto) {
+    const findComment: SellerComment = await this.comments.findOne({ _id: comment_id, clientId: clientId });
 
     if (!findComment) {
       throw new HttpException(400, "Invalid comment Id or rou're not authorized");
     }
 
-    const seller: Seller = await this.sellers.findOne({ seller_id: findComment.seller_id });
+    const seller: Seller = await this.sellers.findOne({ userId: findComment.sellerId });
 
-    var rating = (new_comment.shipping_rating + new_comment.support_rating)/2
+    const rating = (new_comment.shipping_rating + new_comment.support_rating) / 2;
 
     const newScore = (seller.rating * seller.numberRating - findComment.rating + rating) / seller.numberRating;
 
-    const sellerUpdated: Seller = await this.sellers.findOneAndUpdate({ seller_id: seller._id }, {...new_comment ,rating: newScore }, { new: true });
+    const sellerUpdated: Seller = await this.sellers.findOneAndUpdate({ userId: seller._id }, { ...new_comment, rating: newScore }, { new: true });
 
     const comment_updated: SellerComment = await this.comments.findOneAndUpdate(
       { _id: comment_id },
@@ -144,8 +166,8 @@ export class SellerService {
     return comment_updated;
   }
 
-  public async getComments(seller_id): Promise<SellerComment[]> {
-    const comments: SellerComment[] = await this.comments.find({ seller_id: seller_id });
+  public async getComments(sellerId): Promise<SellerComment[]> {
+    const comments: SellerComment[] = await this.comments.find({ sellerId: sellerId });
 
     return comments;
   }

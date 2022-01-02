@@ -26,13 +26,21 @@ export class ProductController {
   @Get('/list')
   @OpenAPI({ summary: 'get product list' })
   async getProducts(@QueryParams() parametros: QueryParameters) {
-    
-    
-    if (!parametros.limit){parametros.limit = 20};
-    if (!parametros.min_rating){parametros.min_rating = 0};
-    if (!parametros.page){parametros.page = 0}
-    if (!parametros.min_price){parametros.min_price = 0};
-    if (!parametros.max_price){parametros.max_price = 100000000000};
+    if (!parametros.limit) {
+      parametros.limit = 20;
+    }
+    if (!parametros.min_rating) {
+      parametros.min_rating = 0;
+    }
+    if (!parametros.page) {
+      parametros.page = 0;
+    }
+    if (!parametros.min_price) {
+      parametros.min_price = 0;
+    }
+    if (!parametros.max_price) {
+      parametros.max_price = 100000000000;
+    }
 
     const prodData = await this.productService.listproducts(parametros);
     //const prodData = await this.productService.getproducts();
@@ -42,13 +50,10 @@ export class ProductController {
   @Get('/category/:category_name')
   @OpenAPI({ summary: 'get products lof category' })
   async getProductsCategory(@Param('category_name') category_name: string) {
-
     const prodData = await this.productService.getProductByCategoryName(category_name);
     //const prodData = await this.productService.getproducts();
     return { data: prodData, message: 'found Product' };
   }
-
-
 
   @Get('/:id')
   @OpenAPI({ summary: 'get product info' })
@@ -61,9 +66,9 @@ export class ProductController {
   @UseBefore(validationMiddleware(CreateCommentDto, 'body'))
   @OpenAPI({ summary: 'comment product' })
   async commentProduct(@Param('id') prodId: string, @Body() prodData: CreateCommentDto) {
-    const client_id = '123456';
+    const clientId = '123456';
     const date: Date = new Date();
-    const product = await this.productService.commentProduct(prodId, { ...prodData, client_id: client_id, name: 'nome', date: date });
+    const product = await this.productService.commentProduct(prodId, { ...prodData, clientId: clientId, name: 'nome', date: date });
     return { data: product, message: 'Product commented' };
   }
 
@@ -71,17 +76,17 @@ export class ProductController {
   @UseBefore(validationMiddleware(CreateCommentDto, 'body'))
   @OpenAPI({ summary: 'delete comment' })
   async updateComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string, @Body() prodData: CreateCommentDto) {
-    const client_id = '123456';
+    const clientId = '123456';
     const date: Date = new Date();
-    const product = await this.productService.updateComment(prodId, comment_Id, { ...prodData, client_id: client_id, name: 'nome', date: date });
+    const product = await this.productService.updateComment(prodId, comment_Id, { ...prodData, clientId: clientId, name: 'nome', date: date });
     return { data: product, message: 'Comment deleted' };
   }
 
   @Delete('/:id/comment/:comment_id')
   @OpenAPI({ summary: 'delete comment' })
   async deleteComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string) {
-    const client_id = '123456';
-    const product = await this.productService.deleteComment(prodId, comment_Id, client_id);
+    const clientId = '123456';
+    const product = await this.productService.deleteComment(prodId, comment_Id, clientId);
     return { data: product, message: 'Comment deleted' };
   }
 

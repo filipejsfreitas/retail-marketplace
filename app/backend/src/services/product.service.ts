@@ -17,108 +17,138 @@ export class ProductService {
     return prodList;
   }
 
-  public async findLowers(category_id:string){
-    var ids = [];
-    var tempIds = []
-    var children = await this.categories.find({ parent_id: category_id});
+  public async findLowers(category_id: string) {
+    const ids = [];
+    let tempIds = [];
+    let children = await this.categories.find({ parent_id: category_id });
 
-    while(children.length > 0){
-        children.forEach(element => {
-            tempIds.push(element._id)
-            ids.push(element._id)
-        });
+    while (children.length > 0) {
+      children.forEach(element => {
+        tempIds.push(element._id);
+        ids.push(element._id);
+      });
 
-        children = await this.categories.find({parent_id: {$in : tempIds}})
-        tempIds = [];
-        console.log(ids);
+      children = await this.categories.find({ parent_id: { $in: tempIds } });
+      tempIds = [];
+      console.log(ids);
     }
 
     return ids;
   }
 
+  public async getProductByCategoryName(category_name: string) {
+    const ids = [];
+    const category: Category = await this.categories.findOne({ name: category_name });
 
-  public async getProductByCategoryName(category_name: string){
-    var ids = [];
-    const category : Category = await this.categories.findOne({name: category_name});
-
-    if(!category){
-      throw new HttpException(400, "Category not found");
+    if (!category) {
+      throw new HttpException(400, 'Category not found');
     }
 
-    var categories_ids = await this.findLowers(category._id);
+    const categories_ids = await this.findLowers(category._id);
 
     categories_ids.push(category._id);
 
-    const cat_products = await this.products.find({category_id:{$in: categories_ids}});
+    const cat_products = await this.products.find({ category_id: { $in: categories_ids } });
 
     return cat_products;
   }
 
-  public async listproducts(parameters: QueryParameters){
-    if(parameters.category_id){
-
-        if(parameters.sort_by && parameters.order_by){  
-
-            if(parameters.order_by === "desc"){
-
-                if(parameters.sort_by === "price"){
-                  return await (this.products.find({ category_id: parameters.category_id,best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                              .sort({best_offer: -1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
-                }else if(parameters.sort_by === "rating"){
-                  return (await this.products.find({ category_id: parameters.category_id,best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                              .sort({score: -1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
-                }
-            }else{
-              if(parameters.sort_by === "price"){
-                return (await this.products.find({ category_id: parameters.category_id,best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                            .sort({best_offer: 1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
-              }else if(parameters.sort_by === "rating"){
-                return (await this.products.find({ category_id: parameters.category_id,best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                            .sort({score: 1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
-              }
-            }
-
-          
-
-        }else{
-          return (await this.products.find({ category_id: parameters.category_id,best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-          .skip(parameters.limit* parameters.page).limit(parameters.limit));  
-    
-        }
-
-      
-    }else{
-      if(parameters.sort_by && parameters.order_by){  
-
-        if(parameters.order_by === "desc"){
-
-            if(parameters.sort_by === "price"){
-              return (await this.products.find({ best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                          .sort({best_offer: -1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
-            }else if(parameters.sort_by === "rating"){
-              return (await this.products.find({ best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                          .sort({score: -1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
-            }
-        }else{
-          if(parameters.sort_by === "price"){
-            return (await this.products.find({ best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                        .sort({best_offer: 1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
-          }else if(parameters.sort_by === "rating"){
-            return (await this.products.find({best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-                        .sort({score: 1}).skip(parameters.limit* parameters.page).limit(parameters.limit));  
+  public async listproducts(parameters: QueryParameters) {
+    if (parameters.category_id) {
+      if (parameters.sort_by && parameters.order_by) {
+        if (parameters.order_by === 'desc') {
+          if (parameters.sort_by === 'price') {
+            return await this.products
+              .find({
+                category_id: parameters.category_id,
+                best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
+                score: { $gte: parameters.min_rating },
+              })
+              .sort({ best_offer: -1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
+          } else if (parameters.sort_by === 'rating') {
+            return await this.products
+              .find({
+                category_id: parameters.category_id,
+                best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
+                score: { $gte: parameters.min_rating },
+              })
+              .sort({ score: -1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
+          }
+        } else {
+          if (parameters.sort_by === 'price') {
+            return await this.products
+              .find({
+                category_id: parameters.category_id,
+                best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
+                score: { $gte: parameters.min_rating },
+              })
+              .sort({ best_offer: 1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
+          } else if (parameters.sort_by === 'rating') {
+            return await this.products
+              .find({
+                category_id: parameters.category_id,
+                best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
+                score: { $gte: parameters.min_rating },
+              })
+              .sort({ score: 1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
           }
         }
-
-      
-
-      }else{
-        return await this.products.find({ best_offer:{$gte:parameters.min_price, $lt:parameters.max_price}, score: {$gte:parameters.min_rating }})
-        .skip(parameters.limit* parameters.page).limit(parameters.limit);  
-
+      } else {
+        return await this.products
+          .find({
+            category_id: parameters.category_id,
+            best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
+            score: { $gte: parameters.min_rating },
+          })
+          .skip(parameters.limit * parameters.page)
+          .limit(parameters.limit);
       }
-      
+    } else {
+      if (parameters.sort_by && parameters.order_by) {
+        if (parameters.order_by === 'desc') {
+          if (parameters.sort_by === 'price') {
+            return await this.products
+              .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
+              .sort({ best_offer: -1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
+          } else if (parameters.sort_by === 'rating') {
+            return await this.products
+              .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
+              .sort({ score: -1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
+          }
+        } else {
+          if (parameters.sort_by === 'price') {
+            return await this.products
+              .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
+              .sort({ best_offer: 1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
+          } else if (parameters.sort_by === 'rating') {
+            return await this.products
+              .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
+              .sort({ score: 1 })
+              .skip(parameters.limit * parameters.page)
+              .limit(parameters.limit);
+          }
+        }
+      } else {
+        return await this.products
+          .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
+          .skip(parameters.limit * parameters.page)
+          .limit(parameters.limit);
+      }
     }
-
   }
 
   public async createProduct(productData: CreateProductDto): Promise<Product> {
@@ -192,7 +222,7 @@ export class ProductService {
     findProduct.comments.forEach(element => {
       if (element._id.toString() === commentId) {
         console.log('encontrou comentário');
-        if (!(element.client_id.toString() === comment.client_id)) {
+        if (!(element.clientId.toString() === comment.clientId)) {
           throw new HttpException(400, "You're not authorized");
         }
 
@@ -228,7 +258,7 @@ export class ProductService {
 
     console.log(oldComment);
 
-    if (oldComment.client_id.toString() === clientId) {
+    if (oldComment.clientId.toString() === clientId) {
     } else {
       throw new HttpException(400, "You're not authorized");
     }

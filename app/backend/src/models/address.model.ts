@@ -2,7 +2,7 @@ import { Document, model, Schema } from 'mongoose';
 import { Address } from '../interfaces/address.interface';
 
 const addressSchema: Schema = new Schema({
-  client_id: {
+  clientId: {
     type: String,
     required: true,
   },
@@ -28,4 +28,5 @@ const addressSchema: Schema = new Schema({
   },
 });
 
-export const AddressModel = model<Address & Document>('Address', addressSchema);
+export type AddressModel = Address & Document;
+export const AddressModel = model<AddressModel>('Address', addressSchema);

@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import { Authorized, Body, HttpCode, JsonController, Post, Req, Res, UseBefore } from 'routing-controllers';
-import { CreateUserDto, LoginUserDto } from '../dtos/users.dto';
+import { CreateClientWithUserDto, CreateSellerWithUserDto, LoginUserDto } from '../dtos/users.dto';
 import { User } from '../interfaces/users.interface';
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
 import { AuthService } from '../services/auth.service';
@@ -9,6 +9,10 @@ import passport from 'passport';
 import { RequestWithUser } from '../interfaces/auth.interface';
 import { HttpException } from '../exceptions/HttpException';
 import { UserModel } from '../models/users.model';
+import { ClientService } from '../services/client.service';
+import { SellerService } from '../services/seller.service';
+import { ClientModel } from '../models/client.model';
+import { SellerModel } from '../models/seller.model';
 
 @Singleton
 @JsonController('/auth')
@@ -16,11 +20,52 @@ export class AuthController {
   @Inject
   public authService: AuthService;
 
+  @Inject
+  public clientService: ClientService;
+
+  @Inject
+  public sellerService: SellerService;
+
   @Post('/register')
-  @UseBefore(validationMiddleware(CreateUserDto, 'body'))
+  @UseBefore(validationMiddleware(CreateClientWithUserDto, 'body'))
   @HttpCode(201)
-  async register(@Body() userData: CreateUserDto) {
+  async register(@Body() userData: CreateClientWithUserDto) {
     const signUpUserData: User = await this.authService.signup(userData);
+
+    await this.clientService.createClient(
+      {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+      },
+      signUpUserData._id,
+    );
+
+    return { data: signUpUserData, message: 'signup' };
+  }
+
+  @Post('/register/client')
+  @UseBefore(validationMiddleware(CreateClientWithUserDto, 'body'))
+  @HttpCode(201)
+  async registerClient(@Body() userData: CreateClientWithUserDto) {
+    const signUpUserData: User = await this.authService.signup(userData);
+
+    await this.clientService.createClient(
+      {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+      },
+      signUpUserData._id,
+    );
+
+    return { data: signUpUserData, message: 'signup' };
+  }
+
+  @Post('/register/seller')
+  @UseBefore(validationMiddleware(CreateSellerWithUserDto, 'body'))
+  @HttpCode(201)
+  async registerSeller(@Body() sellerData: CreateSellerWithUserDto) {
+    const signUpUserData: User = await this.authService.signup(sellerData);
+    await this.sellerService.createSeller(sellerData, signUpUserData._id);
 
     return { data: signUpUserData, message: 'signup' };
   }
@@ -32,9 +77,13 @@ export class AuthController {
       passport.authenticate('local', (err, user, info) => {
         if (err || !user) return reject(new HttpException(401, 'Incorrect username/password.'));
 
-        const tokenData = this.authService.createToken(user);
+        Promise.all([this.clientService.getClient(user._id), this.sellerService.getSeller(user._id)]).then(
+          ([client, seller]: [ClientModel?, SellerModel?]) => {
+            const tokenData = this.authService.createToken(user, client, seller);
 
-        resolve(tokenData);
+            resolve(tokenData);
+          },
+        );
       })(req, res, next);
     });
   }

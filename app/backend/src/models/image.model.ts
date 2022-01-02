@@ -8,4 +8,5 @@ const imageSchema: Schema = new Schema({
   },
 });
 
-export const ImageModel = model<Image & Document>('Image', imageSchema);
+export type ImageModel = Image & Document;
+export const ImageModel = model<ImageModel>('Image', imageSchema);
