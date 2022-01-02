@@ -27,7 +27,7 @@ const Dropdown = (props) => {
   const [showDropdown, setshowDropdown] = props.state;
 
   const { token, removeToken } = useToken()
-
+  
   return (
     <CSSTransition
       in={showDropdown}
@@ -45,13 +45,14 @@ const Dropdown = (props) => {
         state={[showDropdown, setshowDropdown]}
         buttonRef={buttonRef}
       >
-        {props.user
+        {token
           ?
           <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top_user}>
               <div className={styles.dd_top_user_welcome_div}>
                 Welcome
-                <div>{props.user.username}</div>
+                {/* change to token.user */}
+                <div>PLACEHOLDER</div> 
               </div>
               <div>
                 <Button className={styles.dd_logoutBtn} variant="secondary" onClick={async () => {
