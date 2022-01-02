@@ -1,0 +1,33 @@
+
+.box {
+    border: 1px solid var(--bs-secondary);
+    background-color: white;
+    padding: var(--checkout-address-padding);
+    max-width: 90vw;
+    width: 30%;
+    margin: 0px;
+}
+
+.box:hover {
+    cursor: pointer;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.check {
+    color: var(--bs-secondary);
+    position: absolute;
+    right: calc(-1 * var(--checkout-address-padding) - 4px);
+    bottom: calc(-1 * var(--checkout-address-padding) - 4px);
+}
+
+.check:hover {
+    color: #F5CAC2;
+}
+
+.name{
+    font-weight: 500;
+}

@@ -1,0 +1,24 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 620px;
+}
+
+
+.title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+}
+
+.row {
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
