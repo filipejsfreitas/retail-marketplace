@@ -5,6 +5,8 @@ import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper"
 import fetchProducts, { fetchProposals, fetchProduct, fetchCategoriesAbove } from "helper/ProductPageHelper";
 import Error from "next/error";
 import useFetchData from "hooks/useFetchData";
+import useToken from "hooks/useToken";
+import { Spinner } from "react-bootstrap";
 
 export const getStaticPaths = async () => {
   
@@ -16,6 +18,58 @@ export const getStaticPaths = async () => {
 
   return { paths, fallback: 'blocking' }
 }
+
+export default function ProductPage({categories,product, proposals}){
+  const { token: tkn } = useToken()
+
+  if( !categories || !product )
+    return (<Error statusCode={503} />)
+  const { data: cats, loading: loading} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/category/above/${product.category_id}`)
+  const { data: favs, loading: loading2} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`)
+
+  return ( 
+      <Layout categories={categories} >
+        {loading || loading2  ? 
+          <div  style={{ "display": "flex", "justify-content": "center" }}>
+          <Spinner animation="border" />
+          </div>  :
+          <Product props={product} proposals={proposals} cats={cats} favs={favs}></Product>
+        }
+      </Layout>
+  )
+}
+
+export async function getStaticProps(context) {
+ 
+  const id = context.params.id;
+  const product = await fetchProduct(id);
+  const proposals = await fetchProposals(id);
+  const categories = await fetchCategories();
+  
+
+  const revTime = revalidateTime()
+  return {
+    props: {
+      categories,
+      proposals,
+      product,
+    },
+
+    revalidate: revTime, 
+  }
+}
+
+
+
+// This function gets called at build time on server-side.
+// Next.js will attempt to re-generate the page:
+// - When a request comes in
+// - At most once every X seconds, X being the value in the 
+// revalidate const.
+// In development (npm run dev) this function is called on every 
+// request
+
+
 
 /*const product = {
   name : "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
@@ -108,47 +162,3 @@ export const getStaticPaths = async () => {
       }
   ]
 }*/
-
-export default function ProductPage({categories,product, proposals}){
-
-  if( !categories || !product )
-    return (<Error statusCode={503} />)
-  const { data: cats, loading } = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/category/above/${product.category_id}`)
-  return ( 
-      <Layout categories={categories} >
-        {loading ? <></> :
-          <Product props={product} proposals={proposals} cats={cats}></Product>
-        }
-      </Layout>
-  )
-}
-
-export async function getStaticProps(context) {
-
-  const id = context.params.id;
-  const product = await fetchProduct(id);
-  const proposals = await fetchProposals(id);
-  const categories = await fetchCategories();
-  
-  const revTime = revalidateTime()
-
-  return {
-    props: {
-      categories,
-      proposals,
-      product,
-    },
-
-    revalidate: revTime, 
-  }
-}
-
-
-
-// This function gets called at build time on server-side.
-// Next.js will attempt to re-generate the page:
-// - When a request comes in
-// - At most once every X seconds, X being the value in the 
-// revalidate const.
-// In development (npm run dev) this function is called on every 
-// request

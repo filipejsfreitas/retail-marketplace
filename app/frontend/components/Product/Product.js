@@ -1,5 +1,5 @@
 import { Container, ListGroup, Button, Table, Row, Col, ListGroupItem } from "react-bootstrap"
-import React from "react"
+import React, { useEffect } from "react"
 import styles from 'styles/Product/product.module.css'
 import RecomendedProducts from "./Carousel2"
 import CarouselComponent from "./Carousel"
@@ -10,6 +10,7 @@ import Proposals from "./Proposals"
 import {useState} from "react";
 import { setFavoriteOff, setFavoriteOn } from "helper/ProductPageHelper"
 import Link from "next/link";
+import { useRouter } from 'next/router'
 
 export function computeStars(stars) {
     var r = []
@@ -52,7 +53,18 @@ const Product = (props) => {
           score: 3
         }
       ]
-    const [fav, setfav] = useState(false)
+    
+    const favoriteProducts = props.favs.favoriteProducts
+    const [fav, setfav] = useState(null)
+
+    useEffect(async () => {
+        if (favoriteProducts.includes(idP)) {
+           setfav(true)
+        } else {
+           setfav(false)
+        }
+    }, [])
+
     const appStyles={
       background:"#ffffff",
       border: 0,
@@ -71,6 +83,7 @@ const Product = (props) => {
         )
     catsOrd.reverse()
     const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
+    
     return (            
            <>
             <Row md={12}>
@@ -115,9 +128,8 @@ const Product = (props) => {
                                                 onClick={async()  => {
                                                     const reply = await (fav ? setFavoriteOff(idP) : setFavoriteOn(idP))
                                                     if(reply == 1)
-                                                        setfav(f => !f) 
+                                                        setfav(f => !f)
                                                 }}
-                                                //onClick={async() => {setfav(f => !f) }}
                                                 >
                                             <div className={styles.buttonFav} >{!fav ? <BsHeart/> : <BsHeartFill/>} Favorite</div>
                                         </Button>
