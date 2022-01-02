@@ -1,19 +1,22 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseBefore } from 'routing-controllers';
+import { Authorized, Body, Controller, Delete, Get, Param, Post, Put, Req, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
 import { AddressService } from '../services/address.service';
 import { CreateAddressDto } from '../dtos/address.dto';
 import { Address } from '../interfaces/address.interface';
+import { RequestWithUser } from 'interfaces/auth.interface';
 
 @Controller('/address')
 export class AddressController {
   public addressService = new AddressService();
 
   @Post('/')
+  //@Authorized()
   @UseBefore(validationMiddleware(CreateAddressDto, 'body'))
   @OpenAPI({ summary: 'create address' })
-  async createAddress(@Body() addressInfo: CreateAddressDto) {
-    const client_id = '123456';
+  async createAddress(@Body() addressInfo: CreateAddressDto, @Req() req: RequestWithUser) {
+    //const client_id = req.token._id;
+    const client_id = "123456";
     const address = await this.addressService.createAddress(client_id, addressInfo);
     return { data: address, message: 'Address Created' };
   }

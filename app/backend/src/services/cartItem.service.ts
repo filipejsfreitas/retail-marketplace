@@ -114,7 +114,9 @@ export class CartItemService {
   }
 
   public async lockClientItems(client_id: string) {
-    //setTimeout(this.unlockItems(client_id), 2000)
+    //setTimeout( () =>  this.unlockItems(client_id).then(), 2000)
+
+    
     console.log('função');
     const date: Date = new Date();
 

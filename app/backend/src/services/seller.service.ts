@@ -78,7 +78,9 @@ export class SellerService {
 
     const newNumberScores = findSeller.numberRating + 1;
 
-    const newScore = (findSeller.rating * findSeller.numberRating + comment.rating) / newNumberScores;
+    var rating = (comment.shipping_rating + comment.support_rating)/2
+
+    const newScore = (findSeller.rating * findSeller.numberRating + rating) / newNumberScores;
 
     const updateSeller: Seller = await this.sellers.findOneAndUpdate(
       { _id: seller_id },
@@ -86,7 +88,7 @@ export class SellerService {
       { new: true },
     );
 
-    const sellerComment: SellerComment = await this.comments.create({ ...comment, seller_id: seller_id, client_id: client_id, date: new Date() });
+    const sellerComment: SellerComment = await this.comments.create({ ...comment, seller_id: seller_id, client_id: client_id, date: new Date() , rating: rating});
 
     return sellerComment;
   }
@@ -127,9 +129,11 @@ export class SellerService {
 
     const seller: Seller = await this.sellers.findOne({ seller_id: findComment.seller_id });
 
-    const newScore = (seller.rating * seller.numberRating - findComment.rating + new_comment.rating) / seller.numberRating;
+    var rating = (new_comment.shipping_rating + new_comment.support_rating)/2
 
-    const sellerUpdated: Seller = await this.sellers.findOneAndUpdate({ seller_id: seller._id }, { rating: newScore }, { new: true });
+    const newScore = (seller.rating * seller.numberRating - findComment.rating + rating) / seller.numberRating;
+
+    const sellerUpdated: Seller = await this.sellers.findOneAndUpdate({ seller_id: seller._id }, {...new_comment ,rating: newScore }, { new: true });
 
     const comment_updated: SellerComment = await this.comments.findOneAndUpdate(
       { _id: comment_id },

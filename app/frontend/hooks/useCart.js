@@ -58,7 +58,11 @@ const useCart = () => {
       showCart ? setShowCart(false) : setShowCart(true)
     }
 
-    return { showCart, handleCartVisibility, loading, data, addItem , deleteItem , updateItem };
+    const reload = () => {
+      setLoading(true)
+    }
+
+    return { showCart, handleCartVisibility, loading, data, addItem , deleteItem , updateItem, reload };
 };
 
 export default useCart;
