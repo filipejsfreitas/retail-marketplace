@@ -1,9 +1,11 @@
 import React from 'react'
 import {Modal,Form,Col,FloatingLabel, Button} from 'react-bootstrap';
 import { useRouter } from 'next/router'
+import useFetchAuth from 'hooks/useFetchAuth';
 
 const Comment = (props) =>{ 
     const router = useRouter()
+    const { fetchAuth } = useFetchAuth()
 
     function handleSubmit(event) {
       event.preventDefault();
