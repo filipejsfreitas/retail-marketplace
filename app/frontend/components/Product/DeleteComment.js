@@ -6,6 +6,7 @@ import useFetchAuth from 'hooks/useFetchAuth';
 const DeleteComment = (props) =>{ 
     const router = useRouter()
     const pathC = router.query.id
+    const { fetchAuth } = useFetchAuth()
 
     function handleSubmit(event) {
       event.preventDefault();
