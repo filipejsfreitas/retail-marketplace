@@ -15,7 +15,7 @@ export class CreateProposalDto {
   maxPerPurchase: number;
 
   @IsString()
-  productId: string;
+  product_id: string;
 
   @IsString()
   @IsOptional()

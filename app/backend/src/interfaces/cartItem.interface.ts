@@ -1,7 +1,7 @@
 export interface CartItem {
   _id: string;
-  productId: string;
-  clientId: string;
+  product_id: string;
+  client_id: string;
   proposal_id: string;
   price: number;
   timestamp: Date;
@@ -10,6 +10,6 @@ export interface CartItem {
   name: string;
   locked: boolean;
   shipping: number;
-  sellerId: string;
+  seller_id: string;
   special_conditions: string;
 }

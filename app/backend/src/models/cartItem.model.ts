@@ -2,7 +2,7 @@ import { CartItem } from '../interfaces/cartItem.interface';
 import { Document, model, Schema } from 'mongoose';
 
 const cartItemSchema: Schema = new Schema({
-  productId: {
+  product_id: {
     type: String,
     required: true,
   },
@@ -10,7 +10,7 @@ const cartItemSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  clientId: {
+  client_id: {
     type: String,
     required: true,
   },
@@ -42,7 +42,7 @@ const cartItemSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  sellerId: {
+  seller_id: {
     type: String,
     required: true,
   },

@@ -2,7 +2,7 @@ import { Document, model, Schema } from 'mongoose';
 import { Address } from '../interfaces/address.interface';
 
 const addressSchema: Schema = new Schema({
-  clientId: {
+  client_id: {
     type: String,
     required: true,
   },

@@ -72,13 +72,13 @@ export class ClientService {
   }
 
   public async getClientInvoices(clientId: string): Promise<ClientInvoice[]> {
-    const invoices: ClientInvoice[] = await this.clientInvoices.find({ clientId: clientId });
+    const invoices: ClientInvoice[] = await this.clientInvoices.find({ client_id: clientId });
 
     return invoices;
   }
 
   public async getInvoice(clientId: string, invoice_id: string): Promise<ClientInvoice> {
-    const invoice: ClientInvoice = await this.clientInvoices.findOne({ clientId: clientId, _id: invoice_id });
+    const invoice: ClientInvoice = await this.clientInvoices.findOne({ client_id: clientId, _id: invoice_id });
 
     return invoice;
   }

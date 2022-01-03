@@ -12,11 +12,11 @@ export class ProposalService {
   public cartItems = CartItemModel;
 
   public async createProposal(prop: CreateProposalDto, seller: string): Promise<Proposal> {
-    if (await this.alreadyExists(prop.productId, seller)) {
+    if (await this.alreadyExists(prop.product_id, seller)) {
       throw new HttpException(400, 'You already have a proposal on this product');
     }
-    const proposal: Proposal = await this.proposals.create({ ...prop, sellerId: seller });
-    await this.updateBestPrice(prop.productId);
+    const proposal: Proposal = await this.proposals.create({ ...prop, seller_id: seller });
+    await this.updateBestPrice(prop.product_id);
     /*
         const product : Product = await this.products.findById({_id: prop.productId})
         if(product.best_price < (prop.price + prop.shipping)){
@@ -33,13 +33,13 @@ export class ProposalService {
 
   public async updateProposal(id: string, prop: UpdateProposalDto, sellerId: string): Promise<Proposal> {
     const propo: Proposal = await this.proposals.findById(id);
-    if (!(propo.sellerId.toString() === sellerId)) {
+    if (!(propo.seller_id.toString() === sellerId)) {
       throw new HttpException(400, "You're not authorized");
     }
 
     const proposal: Proposal = await this.proposals.findByIdAndUpdate({ _id: id }, { ...prop }, { new: true });
     if (!(propo.price === prop.price && propo.shipping === prop.shipping)) {
-      await this.updateBestPrice(proposal.productId);
+      await this.updateBestPrice(proposal.product_id);
     }
 
     if (!(propo.special_conditions === prop.special_conditions && propo.price === prop.price && propo.shipping === prop.shipping)) {
@@ -54,12 +54,12 @@ export class ProposalService {
 
   public async deleteProposal(id: string, sellerId: string): Promise<Proposal> {
     const propo: Proposal = await this.proposals.findById(id);
-    if (!(propo.sellerId.toString() === sellerId)) {
+    if (!(propo.seller_id.toString() === sellerId)) {
       throw new HttpException(400, "You're not authorized");
     }
 
     const proposal: Proposal = await this.proposals.findByIdAndDelete({ _id: id });
-    await this.updateBestPrice(proposal.productId);
+    await this.updateBestPrice(proposal.product_id);
     await this.cartItems.deleteMany({ proposal_id: id, locked: false });
     /*
         const product : Product = await this.products.findById({_id: proposal.productId})
@@ -70,13 +70,13 @@ export class ProposalService {
   }
 
   public async getSellerProposals(id: string): Promise<Proposal[]> {
-    const proposals: Proposal[] = await this.proposals.find({ sellerId: id });
+    const proposals: Proposal[] = await this.proposals.find({ seller_id: id });
 
     return proposals;
   }
 
   public async getProductProposals(id: string): Promise<Proposal[]> {
-    const proposals: Proposal[] = await this.proposals.find({ productId: id });
+    const proposals: Proposal[] = await this.proposals.find({ product_id: id });
 
     return proposals;
   }
@@ -101,7 +101,7 @@ export class ProposalService {
   }
 
   public async alreadyExists(prodId: string, sellerId: string): Promise<Boolean> {
-    const l: Proposal[] = await this.proposals.find({ productId: prodId, sellerId: sellerId });
+    const l: Proposal[] = await this.proposals.find({ product_id: prodId, seller_id: sellerId });
     return l.length > 0;
   }
 }

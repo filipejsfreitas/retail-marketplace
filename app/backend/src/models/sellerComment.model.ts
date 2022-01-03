@@ -2,11 +2,11 @@ import { SellerComment } from '../interfaces/sellerComment.interface';
 import { Document, model, Schema } from 'mongoose';
 
 const sellerCommentSchema: Schema = new Schema({
-  clientId: {
+  client_id: {
     type: String,
     required: true,
   },
-  sellerId: {
+  seller_id: {
     type: String,
     required: true,
   },

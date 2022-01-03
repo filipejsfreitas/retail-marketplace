@@ -2,11 +2,11 @@ import { Document, model, Schema } from 'mongoose';
 import { Proposal } from '../interfaces/proposal.interface';
 
 const proposalSchema: Schema = new Schema({
-  productId: {
+  product_id: {
     type: String,
     required: true,
   },
-  sellerId: {
+  seller_id: {
     type: String,
     required: true,
   },
