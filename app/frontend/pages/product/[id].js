@@ -28,15 +28,14 @@ export default function ProductPage({categories,product, proposals}){
     return (<Error statusCode={503} />)
  
   const { data: cats, loading: loading} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/category/above/${product.category_id}`)
-  const { data: favs, loading: loading2} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`, { when: token })
-  console.log(favs)
+  const { data: favs, loading: loading2} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`, { when: !(!token) })
   return ( 
       <Layout categories={categories} >
-        {loading || loading2  ? 
+        {loading || (token && loading2) ? 
           <div  style={{ "display": "flex", "justifyContent": "center" }}>
           <Spinner animation="border" />
           </div>  :
-          <Product props={product} proposals={proposals} cats={cats} favs={favs}></Product>
+          <Product props={product} proposals={proposals} cats={cats} favs={null}></Product>
         }
       </Layout>
   )

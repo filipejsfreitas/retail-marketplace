@@ -57,18 +57,16 @@ const Product = (props) => {
     const favoriteProducts = props.favs
     const [fav, setfav] = useState(null)
     
-    if(favoriteProducts == null) {
-        setfav(false)
-    }
-    else{
-        useEffect(async () => {
-            if (favoriteProducts.favoriteProducts.includes(idP)) {
-               setfav(true)
-            } else {
-               setfav(false)
-            }
-        }, [])
-    }
+    useEffect(async () => {
+        if (favoriteProducts == null) {
+            setfav(false)
+        }
+        else if (favoriteProducts.favoriteProducts.includes(idP)) {
+            setfav(true)
+        } else {
+            setfav(false)
+        }
+    }, [])
 
     const appStyles={
       background:"#ffffff",
