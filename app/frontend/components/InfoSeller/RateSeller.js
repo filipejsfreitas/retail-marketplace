@@ -2,12 +2,13 @@ import React from 'react'
 import {Modal,Form,Col,FloatingLabel, Button} from 'react-bootstrap';
 import { useRouter } from 'next/router'
 import styles from 'styles/infoseller.module.css'
-
+import useFetchAuth from 'hooks/useFetchAuth';
 
 const RateSeller = (props) =>{ 
     const router = useRouter()
     const [scoreQ1, setScoreQ1] = React.useState(0);
     const [scoreQ2, setScoreQ2] = React.useState(0);
+    const { fetchAuth } = useFetchAuth()
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -137,16 +138,14 @@ const RateSeller = (props) =>{
         </Modal.Body>
         <Modal.Footer>
           <Button onClick = { async () => {
-                console.log(`${scoreQ1}`)
-                console.log(`${scoreQ2}`)
-                //if(scoreQ1 && scoreQ2){
-                //  fetch(`${process.env.NEXT_PUBLIC_HOST}/product/${props.id}/comment`, {
-                //      method: 'POST',
-                //      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                //      body: JSON.stringify({ title: title, comment: comment, score: parseInt(rateProduct) })
-                //  }).then(() => router.reload())
-                //    .catch((error) => console.log(error))
-                //}
+                if(scoreQ1 && scoreQ2){
+                  fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/seller/${props.sellerId}/comment`, {
+                      method: 'POST',
+                      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ support_rating: parseInt(scoreQ2), shipping_rating: parseInt(scoreQ1) })
+                  }).then(() => router.reload())
+                    .catch((error) => console.log(error))
+                }
             }} variant="primary" type="submit"> Submit </Button>
         </Modal.Footer>
         </Form>
