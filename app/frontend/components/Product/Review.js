@@ -4,11 +4,13 @@ import styles from "styles/Product/product.module.css"
 import { computeStars } from "components/Product/Product";
 import { BsFillPencilFill, BsFillXCircleFill } from "react-icons/bs";
 import EditComment from "./EditComment";
-import { useRouter } from 'next/router'
+import TokenContext from 'components/Context/TokenContext'
+import { useContext } from "react";
+
 import DeleteComment from "./DeleteComment";
 
 export default function Reviews(props1) {
-    
+    const { token } = useContext(TokenContext)
     const [commentDel, setCommentDel] = React.useState({active: false, id: ""});
     const [commentEdit, setCommentEdit] = React.useState({active: false, old: ""});
 
@@ -24,6 +26,7 @@ export default function Reviews(props1) {
                         <Button 
                             className={styles.reviewCol2}  
                             type="submit"
+                            disabled={token._id==key.client_id ? false : true}
                             onClick={()=>setCommentEdit({active: true, old:key})}
                             >
                             <BsFillPencilFill/>
@@ -36,6 +39,7 @@ export default function Reviews(props1) {
                         <Button 
                             className={styles.reviewCol2}  
                             type="submit"
+                            disabled={token._id==key.client_id ? false : true}
                             onClick={()=>setCommentDel({active: true, id:key._id})}>
                            
                             <BsFillXCircleFill/>
