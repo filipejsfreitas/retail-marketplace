@@ -1,10 +1,16 @@
 import React from 'react'
 import {Modal,Form,Col,FloatingLabel, Button} from 'react-bootstrap';
 import { useRouter } from 'next/router'
+import { useContext } from 'react';
+import useFetchAuth from 'hooks/useFetchAuth';
+import TokenContext from 'components/Context/TokenContext'
 
 const Comment = (props) =>{ 
     const router = useRouter()
-    
+    const { fetchAuth } = useFetchAuth()
+    const { token } = useContext(TokenContext)
+    console.log(token)
+    console.log(fetchAuth)
     function handleSubmit(event) {
       event.preventDefault();
     }
@@ -45,7 +51,7 @@ const Comment = (props) =>{
                 const comment = document.getElementById("comment").value
                 const rateProduct = document.getElementById("rateProduct").value
                 if(title && comment && rateProduct){
-                  fetch(`${process.env.NEXT_PUBLIC_HOST}/product/${props.id}/comment`, {
+                  fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/product/${props.id}/comment`, {
                       method: 'POST',
                       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                       body: JSON.stringify({ title: title, comment: comment, score: parseInt(rateProduct) })
