@@ -21,7 +21,7 @@ export class ProposalController {
   @UseBefore(validationMiddleware(CreateProposalDto, 'body'))
   @OpenAPI({ summary: 'criar de uma proposta' })
   async createProposal(@Body() propData: CreateProposalDto, @Req() req: RequestWithUser) {
-    const sellerId = '123456';
+    const sellerId = req.token._id;
     const prop = await this.proposals.createProposal(propData, sellerId);
     return { data: prop, message: 'proposal retrevied' };
   }
@@ -31,7 +31,7 @@ export class ProposalController {
   @UseBefore(validationMiddleware(UpdateProposalDto, 'body'))
   @OpenAPI({ summary: 'update de uma proposta' })
   async updateProposal(@Param('id') propId: string, @Body() propData: UpdateProposalDto,@Req() req: RequestWithUser) {
-    const sellerId = '123456';
+    const sellerId = req.token._id;
     const prop = await this.proposals.updateProposal(propId, propData, sellerId);
     return { data: prop, message: 'proposal updated' };
   }
@@ -40,7 +40,7 @@ export class ProposalController {
   @Authorized()
   @OpenAPI({ summary: 'delete de uma proposta' })
   async deleteProposal(@Param('id') propId: string,@Req() req: RequestWithUser) {
-    const sellerId = '123456';
+    const sellerId = req.token._id;
     const prop = await this.proposals.deleteProposal(propId, sellerId);
     return { data: prop, message: 'proposal deleted ' };
   }

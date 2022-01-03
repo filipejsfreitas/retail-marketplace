@@ -1,26 +1,29 @@
 import { CartItem } from '../interfaces/cartItem.interface';
 import { CartItemService } from '../services/cartItem.service';
-import { Body, Controller, Delete, Get, Param, Post, Put, UseBefore } from 'routing-controllers';
+import { Authorized, Body, Controller, Delete, Get, Param, Post, Put, Req, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
 import { ConcludePurchaseDto, CreateCartItemDto, UpdateCartItemDto } from '../dtos/cartItem.dto';
+import { RequestWithUser } from 'interfaces/auth.interface';
 
 @Controller('/cart')
 export class CartController {
   public cartItemService = new CartItemService();
 
   @Get('/')
+  @Authorized()
   @OpenAPI({ summary: 'returns the users cart items' })
-  async getCart() {
-    const userId = '123456';
+  async getCart(@Req() req: RequestWithUser) {
+    const userId = req.token._id;
     const item: CartItem[] = await this.cartItemService.getClientCartItems(userId);
     return { data: item, message: 'Cart items retrived' };
   }
 
   @Post('/lock')
+  @Authorized()
   @OpenAPI({ summary: 'fazer lock cart items' })
-  async lockCart() {
-    const userId = '123456';
+  async lockCart(@Req() req: RequestWithUser) {
+    const userId = req.token._id;
     await this.cartItemService.lockClientItems(userId);
 
     return { message: 'Items locked' };
@@ -36,45 +39,50 @@ export class CartController {
   }
 
   @Post('/buy')
+  @Authorized()
   @UseBefore(validationMiddleware(ConcludePurchaseDto, 'body'))
-  async purchase(@Body() data: ConcludePurchaseDto) {
-    const userId = '123456';
+  async purchase(@Body() data: ConcludePurchaseDto,@Req() req: RequestWithUser) {
+    const userId = req.token._id;
     const addressId = data.address_id;
     await this.cartItemService.concludePurchase(userId, addressId);
     return { message: 'Items purchsed' };
   }
 
   @Get('/:id')
+  @Authorized()
   @OpenAPI({ summary: 'returns information on the cart item' })
-  async getCartItem(@Param('id') cartItemId: string) {
-    const userId = '123456';
+  async getCartItem(@Param('id') cartItemId: string,@Req() req: RequestWithUser) {
+    const userId = req.token._id;
     const item: CartItem = await this.cartItemService.getCartItem(userId, cartItemId);
     return { data: item, message: 'Cart item retrived' };
   }
 
   @Post('/')
+  @Authorized()
   @UseBefore(validationMiddleware(CreateCartItemDto, 'body'))
   @OpenAPI({ summary: 'create cart item' })
-  async createCartItem(@Body() itemData: CreateCartItemDto) {
+  async createCartItem(@Body() itemData: CreateCartItemDto,@Req() req: RequestWithUser) {
     console.log(itemData);
-    const userId = '123456';
+    const userId = req.token._id;
     const item: CartItem = await this.cartItemService.addItem(itemData, userId);
     return { data: item, message: 'Item added to cart' };
   }
 
   @Put('/:id')
+  @Authorized()
   @UseBefore(validationMiddleware(UpdateCartItemDto, 'body'))
   @OpenAPI({ summary: 'update cart item' })
-  async updateCartItem(@Param('id') cartItemId: string, @Body() itemData: UpdateCartItemDto) {
-    const userId = '123456';
+  async updateCartItem(@Param('id') cartItemId: string, @Body() itemData: UpdateCartItemDto,@Req() req: RequestWithUser) {
+    const userId = req.token._id;
     const item: CartItem = await this.cartItemService.updateItem(itemData, userId, cartItemId);
     return { data: item, message: 'Item added to cart' };
   }
 
   @Delete('/:id')
+  @Authorized()
   @OpenAPI({ summary: 'delete cart item' })
-  async deleteCartItem(@Param('id') cartItemId: string) {
-    const userId = '123456';
+  async deleteCartItem(@Param('id') cartItemId: string,@Req() req: RequestWithUser) {
+    const userId = req.token._id;
     const item: CartItem = await this.cartItemService.deleteCartItem(userId, cartItemId);
     return { data: item, message: 'Item deleted' };
   }

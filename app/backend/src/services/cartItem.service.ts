@@ -114,7 +114,7 @@ export class CartItemService {
   }
 
   public async lockClientItems(clientId: string) {
-    //setTimeout( () =>  this.unlockItems(clientId).then(), 2000)
+    setTimeout( () =>  this.unlockItems(clientId).then(), 900000)
 
     console.log('função');
     const date: Date = new Date();
@@ -273,7 +273,7 @@ export class CartItemService {
           this.cartItems.findByIdAndUpdate(itemList[index]._id, {
             locked: false,
             price: propsArray[index].price,
-            shipping: propsArray[index],
+            shipping: propsArray[index].shipping,
             special_conditions: propsArray[index].special_conditions,
           }),
         );
