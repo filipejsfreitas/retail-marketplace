@@ -2,11 +2,19 @@ import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useJwt } from "react-jwt";
 
+export const UserType = {
+    CLIENT: "client",
+    SELLER: "seller",
+    ADMIN: "admin",
+}
+
 /* The decoded part of the token might take more time to calculate */
 export default function useToken() {
     const [cookies, setCookie, removeCookie] = useCookies(['token']);
     const { decodedToken, isExpired, reEvaluateToken } = useJwt(cookies.token && cookies.token.token);
     const [tkn, setTkn] = useState(cookies.token ? {...decodedToken, ...cookies.token} : undefined)
+    const [isLogged, setIsLogged] = useState(cookies.token ? true : false)
+    const [userType, setUserType] = useState(undefined)
 
     useEffect(() => {
         reEvaluateToken(cookies.token && cookies.token.token)
@@ -14,6 +22,11 @@ export default function useToken() {
 
     useEffect(() => {
         setTkn(cookies.token ? {...decodedToken, ...cookies.token} : undefined)
+        setIsLogged(cookies.token ? true : false)
+        setUserType(!decodedToken ? undefined
+            : decodedToken.clientInfo !== null ? UserType.CLIENT
+            : decodedToken.sellerInfo !== null ? UserType.SELLER
+            : UserType.ADMIN)
     }, [decodedToken])
 
     useEffect(() => {
@@ -30,6 +43,8 @@ export default function useToken() {
 
     return {
         token: tkn,
+        isLogged: isLogged,
+        userType: userType,
         setToken: setToken,
         removeToken: removeToken,
     }
