@@ -10,7 +10,7 @@ export class AddressService {
   public async createAddress(clientId: string, address_info: CreateAddressDto): Promise<Address> {
     if (isEmpty(address_info)) throw new HttpException(400, "You're not product");
 
-    const address: Address = await this.addresses.create({ clientId: clientId, ...address_info });
+    const address: Address = await this.addresses.create({ client_id: clientId, ...address_info });
 
     return address;
   }
@@ -18,25 +18,25 @@ export class AddressService {
   public async updateAddress(clientId: string, address_info: CreateAddressDto, address_id: string): Promise<Address> {
     if (isEmpty(address_info)) throw new HttpException(400, "You're not product");
 
-    const address: Address = await this.addresses.findOneAndUpdate({ _id: address_id, clientId: clientId }, { ...address_info }, { new: true });
+    const address: Address = await this.addresses.findOneAndUpdate({ _id: address_id, client_id: clientId }, { ...address_info }, { new: true });
 
     return address;
   }
 
   public async deleteAddress(clientId: string, address_id: string): Promise<Address> {
-    const address: Address = await this.addresses.findOneAndDelete({ _id: address_id, clientId: clientId });
+    const address: Address = await this.addresses.findOneAndDelete({ _id: address_id, client_id: clientId });
 
     return address;
   }
 
   public async getAddress(clientId: string, address_id: string): Promise<Address> {
-    const address: Address = await this.addresses.findOne({ _id: address_id, clientId: clientId });
+    const address: Address = await this.addresses.findOne({ _id: address_id, client_id: clientId });
 
     return address;
   }
 
   public async getClientAddresses(clientid: string): Promise<Address[]> {
-    const address: Address[] = await this.addresses.find({ clientId: clientid });
+    const address: Address[] = await this.addresses.find({ client_id: clientid });
 
     return address;
   }

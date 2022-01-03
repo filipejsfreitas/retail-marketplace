@@ -1,7 +1,7 @@
 export interface SellerComment {
   _id: string;
-  clientId: string;
-  sellerId: string;
+  client_id: string;
+  seller_id: string;
   date: Date;
   rating: number;
   shipping_rating: number;

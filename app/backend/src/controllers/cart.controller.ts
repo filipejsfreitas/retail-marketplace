@@ -26,6 +26,15 @@ export class CartController {
     return { message: 'Items locked' };
   }
 
+  @Post('/unlock')
+  @OpenAPI({ summary: 'fazer lock cart items' })
+  async unlockCart() {
+    const userId = '123456';
+    await this.cartItemService.unlockItems(userId);
+
+    return { message: 'Items locked' };
+  }
+
   @Post('/buy')
   @UseBefore(validationMiddleware(ConcludePurchaseDto, 'body'))
   async purchase(@Body() data: ConcludePurchaseDto) {

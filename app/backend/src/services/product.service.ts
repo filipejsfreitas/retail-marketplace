@@ -222,7 +222,7 @@ export class ProductService {
     findProduct.comments.forEach(element => {
       if (element._id.toString() === commentId) {
         console.log('encontrou comentário');
-        if (!(element.clientId.toString() === comment.clientId)) {
+        if (!(element.client_id.toString() === comment.client_id)) {
           throw new HttpException(400, "You're not authorized");
         }
 
@@ -258,7 +258,7 @@ export class ProductService {
 
     console.log(oldComment);
 
-    if (oldComment.clientId.toString() === clientId) {
+    if (oldComment.client_id.toString() === clientId) {
     } else {
       throw new HttpException(400, "You're not authorized");
     }

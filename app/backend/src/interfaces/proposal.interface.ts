@@ -1,7 +1,7 @@
 export interface Proposal {
   _id: string;
-  sellerId: string;
-  productId: string;
+  seller_id: string;
+  product_id: string;
   price: number;
   shipping: number;
   stock: number;

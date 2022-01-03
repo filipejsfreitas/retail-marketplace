@@ -1,27 +1,30 @@
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
 import { SellerService } from '../services/seller.service';
-import { Body, Controller, Delete, Get, Param, Post, Put, UseBefore } from 'routing-controllers';
+import { Authorized, Body, Controller, Delete, Get, Param, Post, Put, Req, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { SellerCommentDto } from '../dtos/sellerComment.dto';
 import { UpdateSellerDto } from '../dtos/seller.dto';
+import { RequestWithUser } from 'interfaces/auth.interface';
 
 @Controller('/seller')
 export class SellerController {
   public sellerService = new SellerService();
 
   @Get('/invoice')
+  @Authorized()
   @OpenAPI({ summary: 'get seller invoices' })
-  async getSellerInvoices() {
-    const sellerId = '123456';
+  async getSellerInvoices(@Req() req: RequestWithUser) {
+    const sellerId = req.token._id;
     const info = await this.sellerService.getInvoices(sellerId);
 
     return { data: info, message: 'Seller invoices retrived' };
   }
 
   @Get('/invoice/:id')
+  @Authorized()
   @OpenAPI({ summary: 'get seller invoices' })
-  async getSellerInvoice(@Param('id') invoice_id: string) {
-    const sellerId = '123456';
+  async getSellerInvoice(@Param('id') invoice_id: string,@Req() req: RequestWithUser) {
+    const sellerId = req.token._id;
     const info = await this.sellerService.getInvoice(sellerId, invoice_id);
 
     return { data: info, message: 'Seller invoice retrived' };
@@ -44,19 +47,21 @@ export class SellerController {
   }
 
   @Delete('/comments/:commentId')
+  @Authorized()
   @OpenAPI({ summary: 'delete a comment' })
-  async deleteComment(@Param('commentId') comment_id: string) {
-    const clientId = '123456';
+  async deleteComment(@Param('commentId') comment_id: string,@Req() req: RequestWithUser) {
+    const clientId = req.token._id;
 
     const info = await this.sellerService.deleteComment(comment_id, clientId);
     return { data: info, message: 'Comment deleted' };
   }
 
   @Put('/comment/:commentId')
+  @Authorized()
   @OpenAPI({ summary: 'update comment' })
   @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
-  async updateComment(@Param('commentId') comment_id: string, @Body() commentData: SellerCommentDto) {
-    const clientId = '123456';
+  async updateComment(@Param('commentId') comment_id: string, @Body() commentData: SellerCommentDto,@Req() req: RequestWithUser) {
+    const clientId = req.token._id;
 
     const info = await this.sellerService.updateComment(comment_id, clientId, commentData);
 
@@ -64,9 +69,10 @@ export class SellerController {
   }
 
   @Put('/invoice/:invoiceId')
+  @Authorized()
   @OpenAPI({ summary: 'update invoice' })
-  async updateInvoice(@Param('invoiceId') invoice_id: string) {
-    const sellerId = '123456';
+  async updateInvoice(@Param('invoiceId') invoice_id: string,@Req() req: RequestWithUser) {
+    const sellerId = req.token._id;
 
     const info = await this.sellerService.updateInvoice(sellerId, invoice_id, 'modified');
 
@@ -74,10 +80,11 @@ export class SellerController {
   }
 
   @Put('/')
+  @Authorized()
   @OpenAPI({ summary: 'update seller' })
   @UseBefore(validationMiddleware(UpdateSellerDto, 'body'))
-  async updateSeller(@Body() sellerData: UpdateSellerDto) {
-    const sellerId = '123456';
+  async updateSeller(@Body() sellerData: UpdateSellerDto,@Req() req: RequestWithUser) {
+    const sellerId = req.token._id;
 
     const info = await this.sellerService.updateSeller(sellerData, sellerId);
 
@@ -96,10 +103,11 @@ export class SellerController {
   // }
 
   @Post('/:sellerId/comment')
+  @Authorized()
   @OpenAPI({ summary: 'post comment' })
   @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
-  async postComment(@Param('sellertId') sellerId: string, @Body() commentData: SellerCommentDto) {
-    const clientId = '123456';
+  async postComment(@Param('sellertId') sellerId: string, @Body() commentData: SellerCommentDto,@Req() req: RequestWithUser) {
+    const clientId = req.token._id;
 
     const info = await this.sellerService.makeComment(commentData, clientId, sellerId);
 

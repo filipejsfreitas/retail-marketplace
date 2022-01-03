@@ -39,7 +39,7 @@ const productSchema: Schema = new Schema({
     required: true,
   },
   comments: {
-    type: [{ score: Number, comment: String, title: String, date: Date, clientId: String, name: String }],
+    type: [{ score: Number, comment: String, title: String, date: Date, client_id: String, name: String }],
     required: true,
   },
   best_offer: {

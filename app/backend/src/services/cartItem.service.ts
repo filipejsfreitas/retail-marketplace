@@ -24,7 +24,7 @@ export class CartItemService {
     console.log('função');
     if (isEmpty(item)) throw new HttpException(400, 'Invalid Item');
 
-    const alreadyInCart: CartItem = await this.cartItems.findOne({ clientId: clientId, proposal_id: item.proposal_id });
+    const alreadyInCart: CartItem = await this.cartItems.findOne({ client_id: clientId, proposal_id: item.proposal_id });
     console.log('função2');
     if (alreadyInCart) {
       throw new HttpException(400, 'Item already in cart');
@@ -43,16 +43,16 @@ export class CartItemService {
       throw new HttpException(400, 'Unsuficient stock to satisfy request');
     }
 
-    const prod: Product = await this.products.findOne({ _id: prop.productId, forSale: true });
+    const prod: Product = await this.products.findOne({ _id: prop.product_id, forSale: true });
 
     if (!prod) {
       throw new HttpException(400, 'Invalid product, or product not for sale');
     }
 
     const cartItem: CartItem = await this.cartItems.create({
-      productId: prod._id,
+      product_id: prod._id,
       name: prod.name,
-      clientId: clientId,
+      client_id: clientId,
       proposal_id: prop._id,
       price: prop.price,
       shipping: prop.shipping,
@@ -60,7 +60,7 @@ export class CartItemService {
       quantity: item.quantity,
       locked: false,
       timestamp: new Date(),
-      sellerId: prop.sellerId,
+      seller_id: prop.seller_id,
       special_conditions: prop.special_conditions,
     });
 
@@ -70,7 +70,7 @@ export class CartItemService {
   public async updateItem(item: UpdateCartItemDto, clientId: string, cartItem_id: string): Promise<CartItem> {
     if (isEmpty(item)) throw new HttpException(400, 'Invalid Item');
 
-    const oldItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, clientId: clientId });
+    const oldItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, client_id: clientId });
 
     const prop: Proposal = await this.proposals.findById(oldItem.proposal_id);
 
@@ -87,7 +87,7 @@ export class CartItemService {
     }
 
     const cartItem: CartItem = await this.cartItems.findOneAndUpdate(
-      { _id: cartItem_id, clientId: clientId },
+      { _id: cartItem_id, client_id: clientId },
       { quantity: item.quantity, locked: false, timestamp: new Date() },
       { new: true },
     );
@@ -96,19 +96,19 @@ export class CartItemService {
   }
 
   public async deleteCartItem(clientId: string, cartItem_id: string): Promise<CartItem> {
-    const cartItem: CartItem = await this.cartItems.findOneAndDelete({ _id: cartItem_id, clientId: clientId });
+    const cartItem: CartItem = await this.cartItems.findOneAndDelete({ _id: cartItem_id, client_id: clientId });
 
     return cartItem;
   }
 
   public async getCartItem(clientId: string, cartItem_id: string): Promise<CartItem> {
-    const cartItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, clientId: clientId });
+    const cartItem: CartItem = await this.cartItems.findOne({ _id: cartItem_id, client_id: clientId });
 
     return cartItem;
   }
 
   public async getClientCartItems(clientId: string): Promise<CartItem[]> {
-    const cartItems: CartItem[] = await this.cartItems.find({ clientId: clientId });
+    const cartItems: CartItem[] = await this.cartItems.find({ client_id: clientId });
 
     return cartItems;
   }
@@ -119,7 +119,7 @@ export class CartItemService {
     console.log('função');
     const date: Date = new Date();
 
-    const itemList: CartItem[] = await this.cartItems.find({ clientId: clientId, locked: false });
+    const itemList: CartItem[] = await this.cartItems.find({ client_id: clientId, locked: false });
 
     const props = [];
 
@@ -136,7 +136,7 @@ export class CartItemService {
         }
       }
 
-      this.cartItems.updateMany({ clientId: clientId }, { locked: true }).then(res => {
+      this.cartItems.updateMany({ client_id: clientId }, { locked: true }).then(res => {
         console.log(res);
 
         const propsmodified = [];
@@ -161,8 +161,8 @@ export class CartItemService {
   }
 
   public async concludePurchase(clientId: string, address_id: string) {
-    const address: Address = await this.addresses.findOne({ _id: address_id, clientId: clientId });
-    const itemList: CartItem[] = await this.cartItems.find({ clientId: clientId, locked: true });
+    const address: Address = await this.addresses.findOne({ _id: address_id, client_id: clientId });
+    const itemList: CartItem[] = await this.cartItems.find({ client_id: clientId, locked: true });
 
     const addressForInvoice = {
       nif: address.nif,
@@ -187,28 +187,28 @@ export class CartItemService {
         quantity: element.quantity,
         price: element.price,
         shipping: element.shipping,
-        productId: element.productId,
+        product_id: element.product_id,
         proposal_id: element.proposal_id,
-        sellerId: element.sellerId,
+        seller_id: element.seller_id,
         state: 'indefinido',
         special_conditions: element.special_conditions,
       });
 
-      if (sellersItem[element.sellerId]) {
-        sellersItem[element.sellerId].push({
+      if (sellersItem[element.seller_id]) {
+        sellersItem[element.seller_id].push({
           quantity: element.quantity,
           price: element.price,
           shipping: element.shipping,
-          productId: element.productId,
+          product_id: element.product_id,
           proposal_id: element.proposal_id,
         });
       } else {
-        sellersItem[element.sellerId] = [
+        sellersItem[element.seller_id] = [
           {
             quantity: element.quantity,
             price: element.price,
             shipping: element.shipping,
-            productId: element.productId,
+            product_id: element.product_id,
             proposal_id: element.proposal_id,
           },
         ];
@@ -216,7 +216,7 @@ export class CartItemService {
     });
 
     const clientInvoice = await this.clientInvoices.create({
-      clientId: clientId,
+      client_id: clientId,
       date: date,
       address: addressForInvoice,
       total: clientTotal,
@@ -236,7 +236,7 @@ export class CartItemService {
         this.sellerInvoices.create({
           date: date,
           invoice_id: clientInvoice._id,
-          sellerId: key,
+          seller_id: key,
           total: sellerTotal,
           address: addressForInvoice,
           items: sellerItems,
@@ -245,7 +245,7 @@ export class CartItemService {
       );
     }
 
-    await this.cartItems.deleteMany({ clientId: clientId, locked: true });
+    await this.cartItems.deleteMany({ client_id: clientId, locked: true });
 
     Promise.all(sellersInvoice).then(res => {
       return;
@@ -255,7 +255,8 @@ export class CartItemService {
   }
 
   public async unlockItems(clientId: string) {
-    const itemList = await this.cartItems.find({ clientId: clientId, locked: true });
+    const itemList = await this.cartItems.find({ client_id: clientId, locked: true });
+    console.log(itemList);
 
     const props = [];
 
@@ -265,7 +266,8 @@ export class CartItemService {
 
     Promise.all(props).then(propsArray => {
       const cartsModified = [];
-
+      console.log("primeiro promise all")
+      console.log(propsArray);
       for (let index = 0; index < itemList.length; index++) {
         cartsModified.push(
           this.cartItems.findByIdAndUpdate(itemList[index]._id, {
@@ -278,6 +280,8 @@ export class CartItemService {
       }
 
       Promise.all(cartsModified).then(cartArray => {
+        console.log("segundo promise all")
+        console.log(cartArray)
         return;
       });
     });

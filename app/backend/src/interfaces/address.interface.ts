@@ -1,6 +1,6 @@
 export interface Address {
   _id: string;
-  clientId: string;
+  client_id: string;
   nif: string;
   address: string;
   postal_code: string;

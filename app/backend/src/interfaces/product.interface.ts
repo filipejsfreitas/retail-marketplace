@@ -8,7 +8,7 @@ export interface CommentChecker {
   score: number;
   comment: string;
   date: Date;
-  clientId: string;
+  client_id: string;
   name: string;
 }
 
@@ -18,7 +18,7 @@ export interface CommentProduct {
   score: number;
   comment: string;
   date: Date;
-  clientId: string;
+  client_id: string;
   name: string;
 }
 

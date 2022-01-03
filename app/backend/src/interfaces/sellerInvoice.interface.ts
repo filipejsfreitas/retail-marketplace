@@ -1,5 +1,6 @@
 export interface SellerInvoice {
   _id: string;
+  seller_id:string;
   invoice_id: string;
   date: Date;
   total: number;
