@@ -1,12 +1,10 @@
 import React from 'react'
 import {Modal,Form,FloatingLabel, Button} from 'react-bootstrap';
 import { useRouter } from 'next/router'
-import useFetchAuth from 'hooks/useFetchAuth';
 
 const DeleteComment = (props) =>{ 
     const router = useRouter()
     const pathC = router.query.id
-    const { fetchAuth } = useFetchAuth()
 
     function handleSubmit(event) {
       event.preventDefault();

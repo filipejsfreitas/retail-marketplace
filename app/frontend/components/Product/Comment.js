@@ -1,16 +1,10 @@
 import React from 'react'
 import {Modal,Form,Col,FloatingLabel, Button} from 'react-bootstrap';
 import { useRouter } from 'next/router'
-import { useContext } from 'react';
-import useFetchAuth from 'hooks/useFetchAuth';
-import TokenContext from 'components/Context/TokenContext'
 
 const Comment = (props) =>{ 
     const router = useRouter()
-    const { fetchAuth } = useFetchAuth()
-    const { token } = useContext(TokenContext)
-    console.log(token)
-    console.log(fetchAuth)
+
     function handleSubmit(event) {
       event.preventDefault();
     }
