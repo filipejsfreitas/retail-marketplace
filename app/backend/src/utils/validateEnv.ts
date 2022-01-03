@@ -17,7 +17,7 @@ export const validateEnv = () => {
     JWT_ISSUER: str({ devDefault: 'retail-marketplace' }),
     JWT_AUDIENCE: str({ devDefault: 'retail-marketplace' }),
 
-    CORS_ORIGIN: bool({ devDefault: false, default: true }),
+    CORS_ORIGIN: str({ devDefault: '*', default: '*' }),
     CORS_CREDENTIALS: bool({ devDefault: false, default: true }),
 
     LOG_FORMAT: str({ devDefault: 'dev', default: 'prod' }),
