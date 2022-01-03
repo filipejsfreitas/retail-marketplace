@@ -53,7 +53,7 @@ export default function Categories({categories}){
   const catToFetch = cats[cats.length -1] 
 
   const { data: products, loading } =
-        useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/category/${catToFetch}`)
+        useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/category/${catToFetch}`, {when : catToFetch})
   
   return ( 
     

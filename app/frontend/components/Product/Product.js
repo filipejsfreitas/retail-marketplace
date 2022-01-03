@@ -10,7 +10,7 @@ import Proposals from "./Proposals"
 import {useState} from "react";
 import { setFavoriteOff, setFavoriteOn } from "helper/ProductPageHelper"
 import Link from "next/link";
-import { useRouter } from 'next/router'
+import useFetchAuth from "hooks/useFetchAuth"
 
 export function computeStars(stars) {
     var r = []
@@ -54,16 +54,21 @@ const Product = (props) => {
         }
       ]
     
-    const favoriteProducts = props.favs.favoriteProducts
+    const favoriteProducts = props.favs
     const [fav, setfav] = useState(null)
-
-    useEffect(async () => {
-        if (favoriteProducts.includes(idP)) {
-           setfav(true)
-        } else {
-           setfav(false)
-        }
-    }, [])
+    
+    if(favoriteProducts == null) {
+        setfav(false)
+    }
+    else{
+        useEffect(async () => {
+            if (favoriteProducts.favoriteProducts.includes(idP)) {
+               setfav(true)
+            } else {
+               setfav(false)
+            }
+        }, [])
+    }
 
     const appStyles={
       background:"#ffffff",
@@ -83,7 +88,7 @@ const Product = (props) => {
         )
     catsOrd.reverse()
     const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
-    
+    const { fetchAuth } = useFetchAuth()
     return (            
            <>
             <Row md={12}>
@@ -125,8 +130,9 @@ const Product = (props) => {
                                 <Col>
                                     <div className={styles.favorite}>
                                         <Button id="buttonFav" style={appStyles}
+                                                disabled={favoriteProducts == null ? true : false}
                                                 onClick={async()  => {
-                                                    const reply = await (fav ? setFavoriteOff(idP) : setFavoriteOn(idP))
+                                                    const reply = await (fav ? setFavoriteOff(idP,fetchAuth) : setFavoriteOn(idP,fetchAuth))
                                                     if(reply == 1)
                                                         setfav(f => !f)
                                                 }}

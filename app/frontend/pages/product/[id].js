@@ -7,6 +7,9 @@ import Error from "next/error";
 import useFetchData from "hooks/useFetchData";
 import useToken from "hooks/useToken";
 import { Spinner } from "react-bootstrap";
+import TokenContext from 'components/Context/TokenContext'
+import useFetchAuth from 'hooks/useFetchAuth'
+import { useContext, useState } from "react";
 
 export const getStaticPaths = async () => {
   
@@ -20,13 +23,13 @@ export const getStaticPaths = async () => {
 }
 
 export default function ProductPage({categories,product, proposals}){
-  const { token: tkn } = useToken()
-
+  const { token } = useContext(TokenContext)
   if( !categories || !product )
     return (<Error statusCode={503} />)
+ 
   const { data: cats, loading: loading} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/category/above/${product.category_id}`)
-  const { data: favs, loading: loading2} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`)
-
+  const { data: favs, loading: loading2} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`, { when: token })
+  console.log(favs)
   return ( 
       <Layout categories={categories} >
         {loading || loading2  ? 

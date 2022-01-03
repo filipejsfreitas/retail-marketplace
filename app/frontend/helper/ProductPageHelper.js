@@ -48,8 +48,8 @@ export async function fetchCategoriePath(id) {
   return categories;
 }
 
-export async function setFavoriteOn(id) {
-  await fetch(`${process.env.NEXT_PUBLIC_HOST}/client/favorites`, {
+export async function setFavoriteOn(id, fetchAuth) {
+  await fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/client/favorites`, {
     method: "POST",
     headers: { Accept: "application/json", "Content-Type": "application/json" },
     body: JSON.stringify({ productId: id }),
@@ -58,8 +58,8 @@ export async function setFavoriteOn(id) {
   return 1;
 }
 
-export async function setFavoriteOff(id) {
-  await fetch(`${process.env.NEXT_PUBLIC_HOST}/client/favorites/${id}`, {
+export async function setFavoriteOff(id, fetchAuth) {
+  await fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/client/favorites/${id}`, {
     method: "DELETE",
   }).catch((error) => console.log(error));
 
