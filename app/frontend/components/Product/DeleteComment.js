@@ -28,7 +28,7 @@ const DeleteComment = (props) =>{
         </Modal.Body>
         <Modal.Footer>
           <Button onClick = { async () => {
-                   fetch(`${process.env.NEXT_PUBLIC_HOST}/product/${pathC}/comment/${props.idC}`, {
+                   fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/product/${pathC}/comment/${props.idC}`, {
                       method: 'DELETE'
                   }).then(() => router.reload())
                     .catch((error) => console.log(error))
