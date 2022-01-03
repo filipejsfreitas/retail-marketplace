@@ -2,23 +2,28 @@ import { useEffect, useState } from "react";
 import Layout, { SELLER_SIDEBAR } from "components/Management/Layout";
 import ToggleDropdown from "components/Management/ToggleDropdown";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
+import useFetchAuth from "hooks/useFetchAuth";
 
 import styles from "/styles/Seller/proposal/add.module.css";
 
 function AddProductModal(props) {
   const [product, setProduct] = props.productIdState;
-  const [categoryName, setCategoryName] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
+  const [categoryName, setCategoryName] = useState("")
+  const [showAlert, setShowAlert] = useState(false)
+  const { fetchAuth } = useFetchAuth()
+
   useEffect(() => {
     if (!product) return;
     setShowAlert(false);
-    fetch(`${process.env.NEXT_PUBLIC_HOST}/category/${product.category_id}`)
+    fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/category/${product.category_id}`)
       .then((res) => res.json())
       .then((data) => data.data)
       .then((cat) => setCategoryName(cat.name))
       .catch((error) => console.log(error));
   }, [product]);
+
   if (!product) return <></>;
+
   return (
     <Modal
       show={product}
@@ -70,7 +75,7 @@ function AddProductModal(props) {
       <Modal.Footer>
         <Button
           onClick={() => {
-            const request = { productId: product._id };
+            const request = { product_id: product._id };
             const valueFromId = (id) => document.getElementById(id).value;
             request.price = parseFloat(
               parseFloat(valueFromId("form-prop-price")).toFixed(2)
@@ -88,7 +93,7 @@ function AddProductModal(props) {
             }
             request.special_conditions = valueFromId("form-prop-conditions");
 
-            fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/`, {
+            fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/proposal/`, {
               method: "POST",
               headers: {
                 Accept: "application/json",
@@ -97,7 +102,6 @@ function AddProductModal(props) {
               body: JSON.stringify(request),
             })
               .then((reply) => {
-                console.log(reply);
                 if (reply.ok) setProduct(undefined);
                 else
                   setShowAlert(
@@ -105,7 +109,7 @@ function AddProductModal(props) {
                   );
               })
               .catch((error) => {
-                console.log(error);
+                console.debug(error);
                 setShowAlert("Unable to connect to server.");
               });
           }}
@@ -131,8 +135,11 @@ export default function ProposalAdd() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState(undefined);
+
+  const { fetchAuth } = useFetchAuth()
+
   useEffect(async () => {
-    fetch(`${process.env.NEXT_PUBLIC_HOST}/product/list/`)
+    fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/product/list/`)
       .then((res) => res.json())
       .then((data) => data.data)
       .then((products) => {
@@ -141,6 +148,7 @@ export default function ProposalAdd() {
       })
       .catch((error) => console.log(error));
   }, []);
+
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={isLoading}>
       <h3>Add Proposal</h3>
