@@ -21,7 +21,7 @@ export default function Register() {
     if (form.checkValidity()) {
       setLoading(true)
       const req = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
-      var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/auth/register`, {
+      var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/auth/register/client`, {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify(req),
