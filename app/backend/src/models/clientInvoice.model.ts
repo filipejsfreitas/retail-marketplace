@@ -2,7 +2,7 @@ import { Document, model, Schema } from 'mongoose';
 import { ClientInvoice } from '../interfaces/clientInvoice.interface';
 
 const clientInvoiceSchema: Schema = new Schema({
-  client_id: {
+  clientId: {
     type: String,
     required: true,
   },
@@ -24,9 +24,9 @@ const clientInvoiceSchema: Schema = new Schema({
         quantity: Number,
         price: Number,
         shipping: Number,
-        product_id: String,
+        productId: String,
         proposal_id: String,
-        seller_id: String,
+        sellerId: String,
         state: String,
         special_conditions: String,
       },
@@ -35,4 +35,5 @@ const clientInvoiceSchema: Schema = new Schema({
   },
 });
 
-export const ClientInvoiceModel = model<ClientInvoice & Document>('ClientInvoice', clientInvoiceSchema);
+export type ClientInvoiceModel = ClientInvoice & Document;
+export const ClientInvoiceModel = model<ClientInvoiceModel>('ClientInvoice', clientInvoiceSchema);

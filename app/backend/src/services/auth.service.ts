@@ -1,17 +1,19 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Singleton } from 'typescript-ioc';
-import { CreateUserDto } from '../dtos/users.dto';
+import { CreateClientWithUserDto, CreateSellerWithUserDto } from '../dtos/users.dto';
 import { HttpException } from '../exceptions/HttpException';
 import { JwtTokenPayload, TokenData } from '../interfaces/auth.interface';
 import { User } from '../interfaces/users.interface';
 import { UserModel } from '../models/users.model';
 import { isEmpty } from '../utils/util';
 import { nanoid } from 'nanoid';
+import { ClientModel } from '../models/client.model';
+import { SellerModel } from '../models/seller.model';
 
 @Singleton
 export class AuthService {
-  public async signup(userData: CreateUserDto): Promise<User> {
+  public async signup(userData: CreateClientWithUserDto | CreateSellerWithUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     const user: User = await UserModel.findOne({ email: userData.email });
@@ -28,10 +30,24 @@ export class AuthService {
     await user.save();
   }
 
-  public createToken(user: User): TokenData {
+  public createToken(user: UserModel, client?: ClientModel, seller?: SellerModel): TokenData {
     const dataStoredInToken: JwtTokenPayload = {
       _id: user._id,
       email: user.email,
+
+      clientInfo: client
+        ? {
+            firstName: client.firstName,
+            lastName: client.lastName,
+          }
+        : null,
+
+      sellerInfo: seller
+        ? {
+            firstName: seller.firstName,
+            lastName: seller.lastName,
+          }
+        : null,
 
       jti: nanoid(16),
       aud: process.env.JWT_AUDIENCE,

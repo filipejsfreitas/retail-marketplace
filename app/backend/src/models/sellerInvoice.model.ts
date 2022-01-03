@@ -2,7 +2,7 @@ import { Document, model, Schema } from 'mongoose';
 import { SellerInvoice } from '../interfaces/sellerInvoice.interface';
 
 const sellerInvoiceSchema: Schema = new Schema({
-  seller_id: {
+  sellerId: {
     type: String,
     required: true,
   },
@@ -27,9 +27,10 @@ const sellerInvoiceSchema: Schema = new Schema({
     required: true,
   },
   items: {
-    type: [{ quantity: Number, price: Number, shipping: Number, product_id: String, proposal_id: String, special_conditions: String }],
+    type: [{ quantity: Number, price: Number, shipping: Number, productId: String, proposal_id: String, special_conditions: String }],
     required: true,
   },
 });
 
-export const SellerInvoiceModel = model<SellerInvoice & Document>('SellerInvoice', sellerInvoiceSchema);
+export type SellerInvoiceModel = SellerInvoice & Document;
+export const SellerInvoiceModel = model<SellerInvoiceModel>('SellerInvoice', sellerInvoiceSchema);

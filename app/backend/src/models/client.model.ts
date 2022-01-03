@@ -2,7 +2,7 @@ import { Document, model, Schema } from 'mongoose';
 import { Client } from '../interfaces/client.interface';
 
 const clientSchema: Schema = new Schema({
-  client_id: {
+  userId: {
     type: String,
     required: true,
     unique: true,
@@ -29,4 +29,5 @@ const clientSchema: Schema = new Schema({
   },
 });
 
-export const ClientModel = model<Client & Document>('Client', clientSchema);
+export type ClientModel = Client & Document;
+export const ClientModel = model<ClientModel>('Client', clientSchema);

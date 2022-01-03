@@ -2,11 +2,11 @@ import { SellerComment } from '../interfaces/sellerComment.interface';
 import { Document, model, Schema } from 'mongoose';
 
 const sellerCommentSchema: Schema = new Schema({
-  client_id: {
+  clientId: {
     type: String,
     required: true,
   },
-  seller_id: {
+  sellerId: {
     type: String,
     required: true,
   },
@@ -25,8 +25,8 @@ const sellerCommentSchema: Schema = new Schema({
   support_rating: {
     type: Number,
     required: true,
-  }
-
+  },
 });
 
-export const SellerCommentModel = model<SellerComment & Document>('SellerComment', sellerCommentSchema);
+export type SellerCommentModel = SellerComment & Document;
+export const SellerCommentModel = model<SellerCommentModel>('SellerComment', sellerCommentSchema);

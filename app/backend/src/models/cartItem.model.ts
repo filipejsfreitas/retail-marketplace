@@ -2,7 +2,7 @@ import { CartItem } from '../interfaces/cartItem.interface';
 import { Document, model, Schema } from 'mongoose';
 
 const cartItemSchema: Schema = new Schema({
-  product_id: {
+  productId: {
     type: String,
     required: true,
   },
@@ -10,7 +10,7 @@ const cartItemSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  client_id: {
+  clientId: {
     type: String,
     required: true,
   },
@@ -42,7 +42,7 @@ const cartItemSchema: Schema = new Schema({
     type: Number,
     required: true,
   },
-  seller_id: {
+  sellerId: {
     type: String,
     required: true,
   },
@@ -52,4 +52,5 @@ const cartItemSchema: Schema = new Schema({
   },
 });
 
-export const CartItemModel = model<CartItem & Document>('Cartitem', cartItemSchema);
+export type CartItemModel = CartItem & Document;
+export const CartItemModel = model<CartItemModel>('Cartitem', cartItemSchema);

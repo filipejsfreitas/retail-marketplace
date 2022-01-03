@@ -12,15 +12,15 @@ export class ProposalService {
   public cartItems = CartItemModel;
 
   public async createProposal(prop: CreateProposalDto, seller: string): Promise<Proposal> {
-    if (await this.alreadyExists(prop.product_id, seller)) {
+    if (await this.alreadyExists(prop.productId, seller)) {
       throw new HttpException(400, 'You already have a proposal on this product');
     }
-    const proposal: Proposal = await this.proposals.create({ ...prop, seller_id: seller });
-    await this.updateBestPrice(prop.product_id);
+    const proposal: Proposal = await this.proposals.create({ ...prop, sellerId: seller });
+    await this.updateBestPrice(prop.productId);
     /*
-        const product : Product = await this.products.findById({_id: prop.product_id})
+        const product : Product = await this.products.findById({_id: prop.productId})
         if(product.best_price < (prop.price + prop.shipping)){
-            const Prod : Product = await this.products.findByIdAndUpdate({_id: prop.product_id},{best_price: (prop.price + prop.shipping)})
+            const Prod : Product = await this.products.findByIdAndUpdate({_id: prop.productId},{best_price: (prop.price + prop.shipping)})
         }*/
     return proposal;
   }
@@ -31,15 +31,15 @@ export class ProposalService {
     return proposal;
   }
 
-  public async updateProposal(id: string, prop: UpdateProposalDto, seller_id: string): Promise<Proposal> {
+  public async updateProposal(id: string, prop: UpdateProposalDto, sellerId: string): Promise<Proposal> {
     const propo: Proposal = await this.proposals.findById(id);
-    if (!(propo.seller_id.toString() === seller_id)) {
+    if (!(propo.sellerId.toString() === sellerId)) {
       throw new HttpException(400, "You're not authorized");
     }
 
     const proposal: Proposal = await this.proposals.findByIdAndUpdate({ _id: id }, { ...prop }, { new: true });
     if (!(propo.price === prop.price && propo.shipping === prop.shipping)) {
-      await this.updateBestPrice(proposal.product_id);
+      await this.updateBestPrice(proposal.productId);
     }
 
     if (!(propo.special_conditions === prop.special_conditions && propo.price === prop.price && propo.shipping === prop.shipping)) {
@@ -52,31 +52,31 @@ export class ProposalService {
     return proposal;
   }
 
-  public async deleteProposal(id: string, seller_id: string): Promise<Proposal> {
+  public async deleteProposal(id: string, sellerId: string): Promise<Proposal> {
     const propo: Proposal = await this.proposals.findById(id);
-    if (!(propo.seller_id.toString() === seller_id)) {
+    if (!(propo.sellerId.toString() === sellerId)) {
       throw new HttpException(400, "You're not authorized");
     }
 
     const proposal: Proposal = await this.proposals.findByIdAndDelete({ _id: id });
-    await this.updateBestPrice(proposal.product_id);
+    await this.updateBestPrice(proposal.productId);
     await this.cartItems.deleteMany({ proposal_id: id, locked: false });
     /*
-        const product : Product = await this.products.findById({_id: proposal.product_id})
+        const product : Product = await this.products.findById({_id: proposal.productId})
         if(product.best_price === (proposal.price + proposal.shipping)){
-            const Prod : Product = await this.products.findByIdAndUpdate({_id: proposal.product_id},{best_price: (prop.price + prop.shipping)})
+            const Prod : Product = await this.products.findByIdAndUpdate({_id: proposal.productId},{best_price: (prop.price + prop.shipping)})
         }*/
     return proposal;
   }
 
   public async getSellerProposals(id: string): Promise<Proposal[]> {
-    const proposals: Proposal[] = await this.proposals.find({ seller_id: id });
+    const proposals: Proposal[] = await this.proposals.find({ sellerId: id });
 
     return proposals;
   }
 
   public async getProductProposals(id: string): Promise<Proposal[]> {
-    const proposals: Proposal[] = await this.proposals.find({ product_id: id });
+    const proposals: Proposal[] = await this.proposals.find({ productId: id });
 
     return proposals;
   }
@@ -101,7 +101,7 @@ export class ProposalService {
   }
 
   public async alreadyExists(prodId: string, sellerId: string): Promise<Boolean> {
-    const l: Proposal[] = await this.proposals.find({ product_id: prodId, seller_id: sellerId });
+    const l: Proposal[] = await this.proposals.find({ productId: prodId, sellerId: sellerId });
     return l.length > 0;
   }
 }
