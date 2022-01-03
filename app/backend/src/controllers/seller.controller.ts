@@ -106,7 +106,7 @@ export class SellerController {
   @Authorized()
   @OpenAPI({ summary: 'post comment' })
   @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
-  async postComment(@Param('sellertId') sellerId: string, @Body() commentData: SellerCommentDto,@Req() req: RequestWithUser) {
+  async postComment(@Param('sellerId') sellerId: string, @Body() commentData: SellerCommentDto,@Req() req: RequestWithUser) {
     const clientId = req.token._id;
 
     const info = await this.sellerService.makeComment(commentData, clientId, sellerId);
