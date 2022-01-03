@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import useFetchAuth from "./useFetchAuth";
 
 export default function useFetchData(url, params = {}) {
     const def = params.default ?? undefined
@@ -7,9 +8,10 @@ export default function useFetchData(url, params = {}) {
     const router = useRouter()
     const [data, setData] = useState(def)
     const [loading, setLoading] = useState(true)
+    const { fetchAuth } = useFetchAuth()
     useEffect(async () => {
         if (!router.isReady || !when) return
-        fetch(url instanceof Function ? url() : url)
+        fetchAuth(url instanceof Function ? url() : url)
             .then(res => res.json())
             .then(json => json.data)
             .then(data => {

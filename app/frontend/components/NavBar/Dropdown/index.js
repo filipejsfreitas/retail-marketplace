@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
@@ -7,7 +7,8 @@ import Link from 'next/link'
 import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
 
 import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
-import useToken from "hooks/useToken"
+import TokenContext from 'components/Context/TokenContext'
+import useFetchAuth from 'hooks/useFetchAuth'
 
 // Custom dropdown component with animation
 // Needs to be given a btnRef prop with the reference
@@ -26,7 +27,8 @@ const Dropdown = (props) => {
 
   const [showDropdown, setshowDropdown] = props.state;
 
-  const { token, removeToken } = useToken()
+  const { token, removeToken } = useContext(TokenContext)
+  const { fetchAuth } = useFetchAuth()
   
   return (
     <CSSTransition
@@ -56,9 +58,8 @@ const Dropdown = (props) => {
               </div>
               <div>
                 <Button className={styles.dd_logoutBtn} variant="secondary" onClick={async () => {
-                  fetch(`${process.env.NEXT_PUBLIC_HOST}/auth/logout`, {
+                  fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/auth/logout`,{
                     method: 'POST',
-                    headers: { 'Authorization': 'Bearer ' + token.token}
                   })
                   setshowDropdown(false)
                   removeToken()
