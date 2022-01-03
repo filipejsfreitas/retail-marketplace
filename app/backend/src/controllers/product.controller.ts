@@ -1,5 +1,5 @@
 import { ProductService } from '../services/product.service';
-import { Authorized, Body, Controller, Delete, Get, Param, Post, Put, QueryParams, UploadedFiles, UseBefore } from 'routing-controllers';
+import { Authorized, Body, Controller, Delete, Get, Param, Post, Put, QueryParams, Req, UploadedFiles, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
 import { CreateCommentDto } from '../dtos/comment.dto';
@@ -12,6 +12,7 @@ import multer from 'multer';
 
 import { Product } from '../interfaces/product.interface';
 import { QueryParameters } from 'dtos/query.dto';
+import { RequestWithUser } from 'interfaces/auth.interface';
 
 const upload = multer({ dest: './uploads' });
 
@@ -64,10 +65,11 @@ export class ProductController {
   @Authorized()
   @UseBefore(validationMiddleware(CreateCommentDto, 'body'))
   @OpenAPI({ summary: 'comment product' })
-  async commentProduct(@Param('id') prodId: string, @Body() prodData: CreateCommentDto) {
-    const clientId = '123456';
+  async commentProduct(@Param('id') prodId: string, @Body() prodData: CreateCommentDto,@Req() req: RequestWithUser) {
+    const clientId = req.token._id;
     const date: Date = new Date();
-    const product = await this.productService.commentProduct(prodId, { ...prodData, client_id: clientId, name: 'nome', date: date });
+    const product = await this.productService.commentProduct(prodId, { ...prodData, client_id: clientId, 
+      name: req.token.clientInfo.firstName.concat(" ", req.token.clientInfo.lastName), date: date });
     return { data: product, message: 'Product commented' };
   }
 
@@ -75,18 +77,19 @@ export class ProductController {
   @Authorized()
   @UseBefore(validationMiddleware(CreateCommentDto, 'body'))
   @OpenAPI({ summary: 'delete comment' })
-  async updateComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string, @Body() prodData: CreateCommentDto) {
-    const clientId = '123456';
+  async updateComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string, @Body() prodData: CreateCommentDto,@Req() req: RequestWithUser) {
+    const clientId = req.token._id;
     const date: Date = new Date();
-    const product = await this.productService.updateComment(prodId, comment_Id, { ...prodData, client_id: clientId, name: 'nome', date: date });
+    const product = await this.productService.updateComment(prodId, comment_Id, { ...prodData, client_id: clientId, 
+      name: req.token.clientInfo.firstName.concat(" ", req.token.clientInfo.lastName), date: date });
     return { data: product, message: 'Comment deleted' };
   }
 
   @Delete('/:id/comment/:comment_id')
   @Authorized()
   @OpenAPI({ summary: 'delete comment' })
-  async deleteComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string) {
-    const clientId = '123456';
+  async deleteComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string,@Req() req: RequestWithUser) {
+    const clientId = req.token._id;
     const product = await this.productService.deleteComment(prodId, comment_Id, clientId);
     return { data: product, message: 'Comment deleted' };
   }
