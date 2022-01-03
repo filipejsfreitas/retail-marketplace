@@ -57,6 +57,8 @@ const Product = (props) => {
     const favoriteProducts = props.favs
     const [fav, setfav] = useState(null)
     
+    const isLog = favoriteProducts == null ? false : true
+
     useEffect(async () => {
         if (favoriteProducts == null) {
             setfav(false)
@@ -128,7 +130,7 @@ const Product = (props) => {
                                 <Col>
                                     <div className={styles.favorite}>
                                         <Button id="buttonFav" style={appStyles}
-                                                disabled={favoriteProducts == null ? true : false}
+                                                disabled={isLog ? false : true}
                                                 onClick={async()  => {
                                                     const reply = await (fav ? setFavoriteOff(idP,fetchAuth) : setFavoriteOn(idP,fetchAuth))
                                                     if(reply == 1)
@@ -184,6 +186,7 @@ const Product = (props) => {
                     <Button type="submit" 
                         variant="secundary"
                         className={styles.buttonComment}
+                        disabled={isLog ? false : true}
                         onClick={() => setModalShow(true)}>
                     New Review
                     </Button>

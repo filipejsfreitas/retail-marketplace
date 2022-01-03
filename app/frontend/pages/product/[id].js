@@ -35,7 +35,7 @@ export default function ProductPage({categories,product, proposals}){
           <div  style={{ "display": "flex", "justifyContent": "center" }}>
           <Spinner animation="border" />
           </div>  :
-          <Product props={product} proposals={proposals} cats={cats} favs={null}></Product>
+          <Product props={product} proposals={proposals} cats={cats} favs={favs}></Product>
         }
       </Layout>
   )
