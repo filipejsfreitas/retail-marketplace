@@ -113,7 +113,7 @@ export default function Register() {
                 Register
               </Button>
             </Form>
-            <div hidden={!loading} style={{ "display": "flex", "justify-content": "center" }}>
+            <div hidden={!loading} style={{ "display": "flex", "justifyContent": "center" }}>
               <Spinner animation="border" />
             </div>
             <br />

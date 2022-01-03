@@ -84,14 +84,14 @@ export default function Register() {
                   <Form.Label>Email</Form.Label>
                   <Form.Control ref={refs.email} type="email" placeholder="name@example.com" required />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPhone">
+                {undefined && <Form.Group className="mb-3" controlId="formBasicPhone">
                   <Form.Label>Phone Number</Form.Label>
                   <PhoneInput
                     placeholder="Enter phone number"
                     value={value}
                     onChange={setValue}
                     required />
-                </Form.Group>
+                </Form.Group>}
                 <Form.Group className="mb-3" controlId="formBasicPass">
                   <Form.Label>Password</Form.Label>
                   <Form.Control ref={refs.password} type="password" placeholder="Password" required aria-describedby="passwordHelpBlock" />
@@ -138,7 +138,7 @@ export default function Register() {
                 Register
               </Button>
             </Form>
-            <div hidden={!loading} style={{ "display": "flex", "justify-content": "center" }}>
+            <div hidden={!loading} style={{ "display": "flex", "justifyContent": "center" }}>
               <Spinner animation="border" />
             </div>
             <br />
