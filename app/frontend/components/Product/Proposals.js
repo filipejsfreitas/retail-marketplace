@@ -69,7 +69,7 @@ export default function Proposals(proposals) {
                   cart.handleVisible();
                 }}
               >
-                ADD TO CARD
+                ADD TO CART
               </Button>
               {/*{key._id} é o id da proposta*/}
             </Col>
