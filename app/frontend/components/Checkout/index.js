@@ -6,6 +6,7 @@ import Content from "./Content";
 
 import styles from "styles/Checkout/Checkout.module.css";
 import CartContext from "components/NavBar/Cart/context";
+import useFetchAuth from "hooks/useFetchAuth";
 
 const missingTestFields = {
   seller: {
@@ -15,6 +16,7 @@ const missingTestFields = {
 };
 
 export default function Checkout() {
+  const { fetchAuth: fetch } = useFetchAuth()
   const cartContext = useContext(CartContext);
 
   const urlProposal = `${process.env.NEXT_PUBLIC_HOST}/proposal`;
@@ -38,7 +40,7 @@ export default function Checkout() {
               max_quantity: json.data.maxPerPurchase,
             };
           });
-        const categoriesPath = fetch(`${urlProduct}/${item.productId}`)
+        const categoriesPath = fetch(`${urlProduct}/${item.product_id}`)
           .then((res) => {
             return res.json();
           })

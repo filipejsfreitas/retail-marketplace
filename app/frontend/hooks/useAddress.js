@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useFetchData from "hooks/useFetchData";
+import useFetchAuth from "./useFetchAuth";
 
 export default function useAddress() {
+    const { fetchAuth: fetch } = useFetchAuth()
     const { data: addresses, setData: setAddresses, loading, setLoading }
         = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/address/client`, { default: [] })
 
