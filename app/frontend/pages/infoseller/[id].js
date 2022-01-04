@@ -29,7 +29,7 @@ const GetProposals = ({ proposals }) => {
   const info = [];
   proposals.map((prop) => {
     const { data: product, loading } = useFetchData(
-      `${process.env.NEXT_PUBLIC_HOST}/product/${prop.productId}`
+      `${process.env.NEXT_PUBLIC_HOST}/product/${prop.product_id}`
     );
     loading ? <></> : info.push(<Proposal prod={product} prop={prop} />);
   });
