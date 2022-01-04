@@ -1,7 +1,9 @@
 import useFetchData from "hooks/useFetchData"
 import { useState } from "react"
+import useFetchAuth from "./useFetchAuth"
 
 export default function useClientInfo() {
+    const { fetchAuth: fetch } = useFetchAuth()
     const { data, setData, loading } =
         useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`, { default: {} })
     const [pending, setPending] = useState(0)
