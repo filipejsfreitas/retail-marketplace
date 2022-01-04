@@ -6,6 +6,21 @@ import { BsTruck } from "react-icons/bs";
 import Link from "next/link";
 import { useContext } from "react";
 import CartContext from "components/NavBar/Cart/context";
+import useFetchData from "hooks/useFetchData";
+
+const SellerInfo = ({ idSeller }) => {
+  const { data: seller, loading } = useFetchData(
+    `${process.env.NEXT_PUBLIC_HOST}/seller/${idSeller}`
+  );
+  return loading ? <></> : 
+  <>
+    <p></p>
+    <p className={styles.nameSeller}>
+    <Link href={`/infoseller/${idSeller}`}><a>{seller.firstName} {seller.lastName}</a></Link>
+    </p>
+    <p className={styles.stars}>{computeStars(seller.rating)}</p>
+  </>
+};
 
 export default function Proposals(proposals) {
   const cart = useContext(CartContext);
@@ -42,11 +57,7 @@ export default function Proposals(proposals) {
         <ListGroupItem key={value} className={styles.listItem}>
           <Row md={12}>
             <Col md={6} className={styles.col1}>
-              {/*Meter nome e rating do seller */}
-              <p className={styles.nameSeller}>
-                <Link href={`/infoseller/${key.seller_id}`}>{"SellerName"}</Link>
-              </p>
-              <p className={styles.stars}>{computeStars(key.rating)}</p>
+              <SellerInfo idSeller={key.seller_id}></SellerInfo>
               <p>
                 {" "}
                 <Status stock={key.stock}></Status>
