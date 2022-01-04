@@ -38,7 +38,8 @@ const NavBar = (props) => {
               placeholder="Search"
               defaultValue={router.query.query}
               onKeyUp={(event) => {
-                props.handleSearch(event.target.value);
+                if(event.code === "Enter")
+                  props.handleSearch(event.target.value)
               }}
             />
             <button className={styles.searchBtn}>

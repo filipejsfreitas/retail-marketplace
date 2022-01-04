@@ -34,9 +34,6 @@ export default function AccountInfo({ categories }) {
     const { data: orders, loading } =
         useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client/invoice`, { default: [] })
     
-    
-    console.debug(orders)
-
     return <Account categories={categories} selected="order">
         <Row>
             <Col lg="auto"><h4>My Orders</h4></Col>
