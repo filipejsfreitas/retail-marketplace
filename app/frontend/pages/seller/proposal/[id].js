@@ -7,6 +7,7 @@ import { BsBoxArrowUpRight } from "react-icons/bs";
 import Link from "next/link";
 
 import gstyles from "styles/Seller/globals.module.css";
+import useFetchAuth from "hooks/useFetchAuth";
 
 function EditableText({ refs, value, edit, as, rows }) {
   return edit ? (
@@ -54,6 +55,7 @@ function ProposalInfo({ proposal, setProposal }) {
   };
   const [edit, setEdit] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  const { fetchAuth } = useFetchAuth()
   return (
     <>
       <h3>Proposal Info:</h3> <br />
@@ -105,7 +107,7 @@ function ProposalInfo({ proposal, setProposal }) {
                 parseFloat(req.maxPerPurchase).toFixed(2)
               );
               req.stock = parseInt(req.stock);
-              const rep = await fetch(
+              const rep = await fetchAuth(
                 `${process.env.NEXT_PUBLIC_HOST}/proposal/${proposal._id}`,
                 {
                   method: "PUT",
@@ -150,7 +152,7 @@ export default function Proposal(props) {
     default: {},
   });
   const { data: product, loading: loadingProduct } = useFetchData(
-    () => `${process.env.NEXT_PUBLIC_HOST}/product/${proposal.productId}`,
+    () => `${process.env.NEXT_PUBLIC_HOST}/product/${proposal.product_id}`,
     { default: {}, when: !loadingProposal }
   );
   const { data: category, loading: loadingCategory } = useFetchData(
