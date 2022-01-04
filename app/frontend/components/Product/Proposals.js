@@ -35,7 +35,7 @@ export default function Proposals(proposals) {
   ];
 
   const proposalsOrd = proposals.proposals.sort((a, b) => a.price - b.price);
-
+  const isLog = proposals.isLog
   return (
     <ListGroup className={styles.list}>
       {Object.values(proposalsOrd).map((key, value) => (
@@ -63,7 +63,7 @@ export default function Proposals(proposals) {
                 type="submit"
                 variant="secundary"
                 className={styles.button}
-                disabled={key.stock <= 0 ? true : false}
+                disabled={(key.stock <= 0 || !isLog) ? true : false}
                 onClick={() => {
                   cart.addItem(key._id, 1);
                   cart.handleVisible();
