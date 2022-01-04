@@ -5,7 +5,7 @@ import Status from "components/common/Status";
 import Link from "next/link";
 
 const Proposal = ({prod, prop}) =>{ 
-   
+    console.log(prod)
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
 
     return(

@@ -51,13 +51,14 @@ const Info = ({seller}) =>{
                     <p className={styles.lines}><span className={styles.subTitle}>Number reviews: <span className={styles.infos}>{seller.numberRating} </span></span></p>
                     <p className={styles.lines}><span className={styles.subTitle}>Number products: <span className={styles.infos}>{100}</span></span></p>
                     <p className={styles.lines}><span className={styles.subTitle}>Rating: <span className={styles.infosStar}>{computeStars(seller.rating)}</span></span></p>
-                    <p className={styles.lines}><span className={styles.subTitle}>Register date: <span className={styles.infos}>{122}</span></span></p>
+                    <p className={styles.lines}><span className={styles.subTitle}>Register date: <span className={styles.infos}>{"4/5/2022"}</span></span></p>
                     <Button className={styles.buttonRate} variant="secundary" type="submit" onClick={() => setModalShow(true)}>
                         Rate Seller 
                     </Button>
                     <RateSeller
                       show={modalShow}
                       onHide={() => setModalShow(false)}
+                      sellerId={seller._id}
                     />
                 </Col>
             </Row>

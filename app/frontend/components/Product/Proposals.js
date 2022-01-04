@@ -44,7 +44,7 @@ export default function Proposals(proposals) {
             <Col md={6} className={styles.col1}>
               {/*Meter nome e rating do seller */}
               <p className={styles.nameSeller}>
-                <Link href={`/infoseller/${key.sellerId}`}>{key.sellerId}</Link>
+                <Link href={`/infoseller/${key.seller_id}`}>{"SellerName"}</Link>
               </p>
               <p className={styles.stars}>{computeStars(key.rating)}</p>
               <p>
