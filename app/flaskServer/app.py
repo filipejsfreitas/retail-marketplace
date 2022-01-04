@@ -1,4 +1,5 @@
 # Executar py -m app run
+from decimal import Context
 from flask import Flask, request
 
 from product_info import product_info
@@ -6,6 +7,7 @@ from update_dataset import update_dataset
 from price_optimization import price_optimization
 from product_recomendation import calculoRecomenda
 from recom_category import categories
+from pytrends.request import TrendReq
 import pandas as pd
 import numpy as np                        
 
@@ -26,13 +28,13 @@ def add_review_classify():
     #productId = request.json['productId']
     #review = request.json['review']
 
-    productId = "AVpf3txeLJeJML43FN82"
-    review = "The computer works very well. Definitely recommend."
+    data = {"productId" : "AVpf3txeLJeJML43FN82"
+    ,"review" : "The computer works very well."}
 
     #lê dados
     #data = pd.read_csv("datasets/reviews.csv", index_col=False,sep=',')
 
-    update_dataset(productId, review)
+    update_dataset(data ["productId"], data ["review"])
     
     return "True"
 
@@ -112,17 +114,18 @@ def products_recomendation(clientId, productId):
 '''
 Metodo invocado para obter lista de categorias recomendadas ao seller com base na geolocalização e trends
 '''
-@app.route('/new_categories/<geo>', methods=['GET', 'POST'])
+@app.route('/search_categories/<geo>', methods=['GET', 'POST'])
 
 ## Recebe a geolocalização
 def new_categories(geo): 
    
     #lê dados
-    payload = categories(geo)
-    
-    return payload
+    trends_list = categories(geo)
+    context = {
+            "categories": trends_list
+        }
 
-
+    return context
 
 
 if __name__ == '__main__':
