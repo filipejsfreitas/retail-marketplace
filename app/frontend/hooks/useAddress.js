@@ -10,9 +10,9 @@ export default function useAddress() {
 
     const [pending, setPending] = useState(0)
 
-    const wrapPending = fn => async args => {
+    const wrapPending = fn => async (arg0, arg1) => {
         setPending(v => v + 1)
-        const ret = await fn(args)
+        const ret = await fn(arg0, arg1)
         setPending(v => v - 1)
         return ret
     }
