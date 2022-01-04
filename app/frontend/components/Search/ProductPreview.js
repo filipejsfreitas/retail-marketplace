@@ -20,12 +20,12 @@ function computeStars(stars) {
 
 export default function ProductPreview({ product }) {
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
-    const { _id, name, price, images, score } = product ?? {
+    const { _id, name, best_offer, images, score } = product ?? {
         _id: "",
         name: "A very nice and big product name",
         images: [],
         score: 3.5,
-        price: 20
+        best_offer: 20
     }
 
     return (
@@ -42,7 +42,7 @@ export default function ProductPreview({ product }) {
               <div className={styles.product_name}>{name}</div>
               <Row>
                   <Col className={styles.product_stars}> {computeStars(score)} </Col>  
-                  <Col className={styles.product_price}>{price}€</Col>
+                  <Col className={styles.product_price}>{best_offer}€</Col>
               </Row>
             </div>
             </a>
