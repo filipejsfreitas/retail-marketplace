@@ -19,8 +19,6 @@ export default function useFetchAuth(opts={}) {
         if(rep.status === 401){
             onUnauthorized()
         }
-        console.debug(rep)
-        if(rep.status === 400) console.debug(await rep.json())
         return rep
     }
 
