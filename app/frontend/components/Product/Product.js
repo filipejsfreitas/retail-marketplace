@@ -148,7 +148,7 @@ const Product = (props) => {
                                 </Col>
                             </Row>
                             <Row>
-                                <Proposals proposals={proposals}/>
+                                <Proposals proposals={proposals} isLog={isLog}/>
                             </Row>
                         </Container>
 
