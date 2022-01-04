@@ -26,7 +26,7 @@ export default function Reviews(props1) {
                         <Button 
                             className={styles.reviewCol2}  
                             type="submit"
-                            disabled={token._id==key.client_id ? false : true}
+                            disabled={(token && token._id==key.client_id) ? false : true}
                             onClick={()=>setCommentEdit({active: true, old:key})}
                             >
                             <BsFillPencilFill/>
@@ -39,7 +39,7 @@ export default function Reviews(props1) {
                         <Button 
                             className={styles.reviewCol2}  
                             type="submit"
-                            disabled={token._id==key.client_id ? false : true}
+                            disabled={(token && token._id==key.client_id) ? false : true}
                             onClick={()=>setCommentDel({active: true, id:key._id})}>
                            
                             <BsFillXCircleFill/>
