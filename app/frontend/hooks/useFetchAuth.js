@@ -1,10 +1,12 @@
 import TokenContext from "components/Context/TokenContext"
 import { useContext } from "react"
 import { useRouter } from "next/router"
+import useToken from "./useToken"
 
-export default function useFetchAuth() {
-    const { token } = useContext(TokenContext)
+export default function useFetchAuth(opts={}) {
+    const { token } = useContext(TokenContext) ?? useToken()
     const router = useRouter()
+    const onUnauthorized = opts.onUnauthorized ?? (() => router.replace("401"))
 
     const fetchAuth = async (url, options = {}) => {
         const rep = await fetch(url, token ? {
@@ -15,7 +17,7 @@ export default function useFetchAuth() {
             }
         } : options)
         if(rep.status === 401){
-            router.replace("/401")
+            onUnauthorized()
         }
         return rep
     }

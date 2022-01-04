@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import useFetchAuth from "hooks/useFetchAuth"
 
 const useCart = () => {
 
@@ -7,6 +7,7 @@ const useCart = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [showCart, setShowCart] = useState(false);
+    const { fetchAuth: fetch } = useFetchAuth({ onUnauthorized: () => { } })
 
     useEffect(() => {
       const fetchApi = () => {

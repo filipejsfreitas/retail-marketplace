@@ -1,3 +1,4 @@
+import useFetchAuth from "hooks/useFetchAuth";
 import { useState, useEffect } from "react";
 import { Row } from "react-bootstrap";
 import styles from "styles/Checkout/Content/Addresses/Adresses.module.css"
@@ -10,6 +11,7 @@ const newAdd = {
 }
 
 export default function Addreses({state}) {
+  const { fetchAuth: fetch} = useFetchAuth()
   const [selected, setSelected] = state;
   const [addresses, setAddresses] = useState([]);
   const [loading, setLoading] = useState(true);

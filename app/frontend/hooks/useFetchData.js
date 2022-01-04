@@ -10,7 +10,6 @@ export default function useFetchData(url, params = {}) {
     const [loading, setLoading] = useState(true)
     const { fetchAuth } = useFetchAuth()
     useEffect(async () => {
-        console.debug(when)
         if (!router.isReady || !when || when == undefined) return
         fetchAuth(url instanceof Function ? url() : url)
             .then(res => res.json())
