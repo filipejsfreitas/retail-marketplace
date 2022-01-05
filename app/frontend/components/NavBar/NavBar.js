@@ -36,7 +36,7 @@ const NavBar = (props) => {
               autoFocus={true}
               className={styles.searchBox}
               placeholder="Search"
-              defaultValue={router.query.query}
+              defaultValue={router.query.search}
               onKeyUp={(event) => {
                 if(event.code === "Enter")
                   props.handleSearch(event.target.value)
