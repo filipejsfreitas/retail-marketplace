@@ -58,11 +58,11 @@ const Dropdown = (props) => {
               </div>
               <div>
                 <Button className={styles.dd_logoutBtn} variant="secondary" onClick={async () => {
+                  removeToken()
                   fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/auth/logout`,{
                     method: 'POST',
                   })
                   setshowDropdown(false)
-                  removeToken()
                 }}>Log Out</Button>
               </div>
             </div>
