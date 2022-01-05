@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { BsBasket, BsCashCoin, BsTruck } from "react-icons/bs";
+import useFetchAuth from "hooks/useFetchAuth"
 
 import styles from "styles/Checkout/Content/Summary/Summary.module.css";
 
@@ -13,6 +14,7 @@ export default function Summary({
   state,
   shippingTo,
 }) {
+  const { fetchAuth: fetch } = useFetchAuth()
   const router = useRouter();
   const [step, setStep] = state;
 

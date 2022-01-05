@@ -1,33 +1,48 @@
 import Account from "components/Account"
-import AccountPanel from "components/AccountPanel"
-import { AccountPanelDescription, AccountPanelOpenOrderButtons } from "components/AccountPanel"
 import Error from "next/error";
+import { Container, Row, Col, Spinner } from "react-bootstrap"
+import useFetchData from "hooks/useFetchData"
+
+import addrstyles from 'styles/Account/address.module.css'
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
+
+function Order({ order }) {
+    return <div>
+        <h5>Order nº {order._id}</h5>
+        <Container>
+            <Row>
+                <Col lg="auto"> <h6 style={{"lineHeight": "24px"}}>Address:</h6> </Col>
+                <Col lg="auto"> {order.address.name} </Col>
+            </Row>
+            <Row>
+                <Col lg="auto"> <h6 style={{"lineHeight": "24px"}}>Date:</h6> </Col>
+                <Col lg="auto"> {new Date(order.date).toLocaleString('en-GB')} </Col>
+            </Row>
+            <Row>
+                <Col lg="auto"> <h6 style={{"lineHeight": "24px"}}>Cost:</h6> </Col>
+                <Col lg="auto"> {order.total.toString() + "€"} </Col>
+            </Row>
+        </Container>
+    </div>
+}
 
 export default function AccountInfo({ categories }) {
     if( !categories )
         return (<Error statusCode={503} />)
-    return (
-        <Account categories={categories} selected="order">
-            <h4>Account Information</h4>
-            <AccountPanel title="Order #1234"
-                fields={
-                    [
-                        [
-                            <AccountPanelDescription label="Name:" text="Test"/>,
-                            <AccountPanelDescription label="State:" text="Shipping"/>
-                        ],
-                        [
-                            <AccountPanelDescription label="Date:" text="10/10/10"/>,
-                            <AccountPanelDescription label="Total:" text="123€"/>
-                        ],
-                    ]
-                } >
-                <AccountPanelOpenOrderButtons />
-            </AccountPanel>
-        </Account>
-    );
+
+    const { data: orders, loading } =
+        useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client/invoice`, { default: [] })
+    
+    return <Account categories={categories} selected="order">
+        <Row>
+            <Col lg="auto"><h4>My Orders</h4></Col>
+            {loading ? <Col lg="auto"><Spinner animation="border" size="sm" /></Col> : undefined}
+        </Row>
+        <Container className={addrstyles.address_panel}>
+            {orders.map(order => <Order key={order._id} order={order}/>)}
+        </Container>
+    </Account>
 }
 
 // This function gets called at build time on server-side.

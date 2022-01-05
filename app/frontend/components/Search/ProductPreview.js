@@ -42,7 +42,7 @@ export default function ProductPreview({ product }) {
               <div className={styles.product_name}>{name}</div>
               <Row>
                   <Col className={styles.product_stars}> {computeStars(score)} </Col>  
-                  <Col className={styles.product_price}>{best_offer}€</Col>
+                  <Col className={styles.product_price}>{best_offer == 0 ? "--" : `${best_offer}€`}</Col>
               </Row>
             </div>
             </a>
