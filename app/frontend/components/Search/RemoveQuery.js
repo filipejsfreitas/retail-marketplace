@@ -4,15 +4,14 @@ import { useRouter } from 'next/router'
 
 import styles from "styles/Search/search.module.css"
 
-export default function RemoveQuery(props) {
+export default function RemoveQuery({ queryKey, text, modifyQuery }) {
     const router = useRouter()
     return <h6 style={{ fontWeight: "normal" }}>
         <button className={styles.btn} onClick={() => {
-            delete router.query[props.query_id]
-            router.replace({ pathname: router.pathname, query: router.query })
+            modifyQuery({[queryKey]: undefined})
         }}>
             <BsX size={24} />
         </button>
-        {props.text}
+        {text}
     </h6>
 }

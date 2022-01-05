@@ -18,7 +18,9 @@ const Layout = (props) => {
     const handleCloseSideBar = () => setShowSideBar(false);
     const handleShowSideBar = () => setShowSideBar(true);
 
-    const handleSearch = (value) => router.push({ pathname: "/search", query: {"query": value}})
+    const handleSearch = (value) => router.push({
+        pathname: "/", query: { "query": true, "search": value }
+    })
 
     return (
         <>
