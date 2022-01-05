@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import TokenContext from 'components/Context/TokenContext'
 import Error from "next/error";
 import { UserType } from "hooks/useToken"
-
+import { BsBoxArrowLeft } from "react-icons/bs";
 
 export const SELLER_SIDEBAR = {
     rootpath: "/seller",
@@ -40,6 +40,11 @@ function SideBar(props) {
                 </a>
             </Link>
         )}
+        <div style={{ "position": "absolute", "bottom": "40px", "left": "40px", "scale": "3" }}>
+            <Link href="/">
+                <a className={styles.a}> <BsBoxArrowLeft /> </a>
+            </Link>
+        </div>
     </>
 }
 

@@ -35,3 +35,11 @@
     padding: 20px;
     flex-grow: 1;
 }
+
+.a:hover {
+    transition: 1s;
+}
+
+.a:hover {
+    color: #ED7966;
+}

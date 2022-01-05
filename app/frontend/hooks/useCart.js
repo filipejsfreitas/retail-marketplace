@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react"
 import useFetchAuth from "hooks/useFetchAuth"
+import { useRouter } from "next/router"
+import useToken from "hooks/useToken"
+import { UserType } from "hooks/useToken"
 
 const useCart = () => {
+    const { fetchAuth: fetch } = useFetchAuth({ onUnauthorized: () => { } })
+    const { isReady } = useRouter()
+    const { userType } = useToken()
 
     const urlCart = `${process.env.NEXT_PUBLIC_HOST}/cart`
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const [showCart, setShowCart] = useState(false);
-    const { fetchAuth: fetch } = useFetchAuth({ onUnauthorized: () => { } })
 
     useEffect(() => {
+      if(!isReady || userType !== UserType.CLIENT) return
       const fetchApi = () => {
         fetch(urlCart)
           .then((response) => {
@@ -22,7 +28,7 @@ const useCart = () => {
       };
       if ( loading )
         fetchApi();
-    }, [urlCart,loading]);
+    }, [urlCart,loading, userType, isReady]);
 
     const addItem = (id,quantity) => {
         fetch(urlCart, {

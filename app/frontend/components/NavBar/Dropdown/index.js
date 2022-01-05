@@ -2,6 +2,7 @@ import { useRef, useContext } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
+import { UserType } from 'hooks/useToken'
 import Link from 'next/link'
 
 import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
@@ -27,7 +28,7 @@ const Dropdown = (props) => {
 
   const [showDropdown, setshowDropdown] = props.state;
 
-  const { token, removeToken } = useContext(TokenContext)
+  const { token, removeToken, userType } = useContext(TokenContext)
   const { fetchAuth } = useFetchAuth()
   
   return (
@@ -47,14 +48,13 @@ const Dropdown = (props) => {
         state={[showDropdown, setshowDropdown]}
         buttonRef={buttonRef}
       >
-        {token
+        {userType
           ?
           <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top_user}>
               <div className={styles.dd_top_user_welcome_div}>
                 Welcome
-                {/* change to token.user */}
-                <div>PLACEHOLDER</div> 
+                <div>{(token.clientInfo || token.sellerInfo || { firstName: "" }).firstName}</div>
               </div>
               <div>
                 <Button className={styles.dd_logoutBtn} variant="secondary" onClick={async () => {
@@ -66,7 +66,7 @@ const Dropdown = (props) => {
                 }}>Log Out</Button>
               </div>
             </div>
-            <div className={styles.dd_bot_user}>
+            {userType === UserType.CLIENT && <div className={styles.dd_bot_user}>
               Your Account
               <div className={styles.dd_bot_user_interior}>
                 <Link href="/account/info">Account</Link>
@@ -74,9 +74,16 @@ const Dropdown = (props) => {
                 <Link href="/account/address">Addresses</Link>
                 <Link href="/account/favorites">Favorites</Link>
               </div>
-            </div>
+            </div>}
+            {userType === UserType.SELLER && <div className={styles.dd_bot_user}>
+              Manage Products
+              <div className={styles.dd_bot_user_interior}>
+                <Link href="/seller">Home</Link>
+                <Link href="/seller/proposal/list">Manage Proposals</Link>
+              </div>
+            </div>}
           </div>
-          :
+          : !token ?
           <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top}>
               Welcome
@@ -86,6 +93,8 @@ const Dropdown = (props) => {
               <Button variant="secondary" onClick={() => router.push('/register')} >Register</Button>
             </div>
           </div>
+          :
+          <div> </div>
         }
       </OutsideHandler>
     </CSSTransition>
