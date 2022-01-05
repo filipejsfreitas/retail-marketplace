@@ -22,6 +22,8 @@ type File = Express.Multer.File;
 export class ProductController {
   public productService = new ProductService();
 
+  
+
   @Get('/list')
   @OpenAPI({ summary: 'get product list' })
   async getProducts(@QueryParams() parametros: QueryParameters) {
@@ -52,6 +54,36 @@ export class ProductController {
     const prodData = await this.productService.getProductByCategoryName(category_name);
     //const prodData = await this.productService.getproducts();
     return { data: prodData, message: 'found Product' };
+  }
+
+  @Get('/evaluation/:prodId')
+  @Authorized()
+  @OpenAPI({summary: 'get product evaluation'})
+  async getEvaluation(@Param('prodId') prodId: string,@Req() req: RequestWithUser){
+    const seller_id = req.token._id;
+
+    const results = await this.productService.getEvaluation(prodId);
+    return {data: results, message:'product evaluation retrieved'}
+  }
+
+  @Get('/priceStats/:prodId')
+  @Authorized()
+  @OpenAPI({summary: 'get price stats on proposal'})
+  async getPriceStats(@Param('prodId') prodId: string, @Req() req: RequestWithUser){
+    const sellerId = req.token._id;
+
+    const results = await this.productService.getPriceStats(prodId, sellerId);
+    return {data: results, message:'price stats retrieved'}
+  }
+
+  @Get('/sugestions/:prodId')
+  @Authorized()
+  @OpenAPI({summary: 'make sugestions of products'})
+  async getSugestions(@Param('prodId') prodId: string,@Req() req: RequestWithUser){
+    const clientId = req.token._id;
+
+    const results = await this.productService.getSugestions(clientId, prodId);
+    return {data: results, message:'sugestion retrieved'}
   }
 
   @Get('/:id')

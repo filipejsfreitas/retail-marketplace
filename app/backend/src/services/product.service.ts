@@ -6,10 +6,13 @@ import { isEmpty } from '../utils/util';
 import { QueryParameters } from 'dtos/query.dto';
 import { CategoryModel } from 'models/category.model';
 import { Category } from 'interfaces/category.interface';
+import { ProposalModel } from 'models/proposal.model';
+import { Proposal } from 'interfaces/proposal.interface';
 
 export class ProductService {
   public products = ProductModel;
   public categories = CategoryModel;
+  public proposals = ProposalModel;
 
   public async getproducts(): Promise<Product[]> {
     const prodList: Product[] = await this.products.find();
@@ -203,6 +206,10 @@ export class ProductService {
       { new: true },
     );
 
+    const aiComment = {productId: prodId, review: comment.comment};
+
+    const answer = await fetch('', {method: 'POST', body: JSON.stringify(aiComment) });
+
     return updateProductData;
   }
 
@@ -244,6 +251,10 @@ export class ProductService {
         */
     const result = await findProduct.save();
 
+    const aiComment = {productId: prodId, review: comment.comment};
+
+    const answer = await fetch('', {method: 'POST', body: JSON.stringify(aiComment) });
+
     return result;
   }
 
@@ -277,5 +288,49 @@ export class ProductService {
       { new: true },
     );
     return parent;
+  }
+
+  public async getPriceStats(prodId: string, sellerId: string){
+    const props: Proposal [] = await this.proposals.find({product_id: prodId});
+    const product: Product = await this.products.findOne({_id: prodId});
+    var seller_proposal : Proposal;
+    var seller_Index = -1;
+
+    var newFormatProps = [];
+
+    for (let index = 0; index < props.length; index++) {
+      if(props[index].seller_id === sellerId){
+        seller_Index = index;
+      }  
+      
+      newFormatProps.push({id:props[index]._id, 
+                          sellerId:props[index].seller_id,
+                          productId: props[index].product_id,
+                          price: props[index].price,
+                          shipping_price: props[index].shipping,
+                          stock: props[index].stock  })
+    }
+    if(seller_Index === -1){
+      throw new HttpException(400, "You do not have a proposal on this product");
+    }
+
+    const info = {
+      sellerID: sellerId,
+      productId: prodId,
+      product_name: product.name,
+      proposals: newFormatProps
+    }
+    
+    const answer = await fetch('', {method: 'POST', body: JSON.stringify(info) });
+
+  }
+
+  public async getEvaluation(prodId: string){
+    const answer = await fetch('', {method: 'GET'});
+  }
+
+  public async getSugestions(clientId: string, prodId: String){
+    const answer = await fetch('', {method: 'GET'});
+
   }
 }
