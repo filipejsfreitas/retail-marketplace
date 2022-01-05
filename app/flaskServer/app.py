@@ -6,6 +6,7 @@ from product_info import product_info
 from update_dataset import update_dataset
 from price_optimization import price_optimization
 from product_recomendation import calculoRecomenda
+from Forecasting import forecast
 from recom_category import categories
 from pytrends.request import TrendReq
 import pandas as pd
@@ -102,8 +103,9 @@ def seller_optimization():
 '''
 Metodo invocado para obter lista de produtos recommendados 
 '''
-@app.route('/products_recomendation/<clientId>/<productId>', methods=['GET', 'POST'])
+@app.route('/products_recomendation/<clientId>/<productId>', methods=['GET'])
 def products_recomendation(clientId, productId): 
+
     print (clientId, productId) 
     #lê dados
     payload = calculoRecomenda(productId, clientId)
@@ -114,7 +116,7 @@ def products_recomendation(clientId, productId):
 '''
 Metodo invocado para obter lista de categorias recomendadas ao seller com base na geolocalização e trends
 '''
-@app.route('/search_categories/<geo>', methods=['GET', 'POST'])
+@app.route('/search_categories/<geo>', methods=['GET'])
 
 ## Recebe a geolocalização
 def new_categories(geo): 
@@ -126,6 +128,20 @@ def new_categories(geo):
         }
 
     return context
+
+
+'''
+Obter forecasting stock
+'''
+@app.route('/forecast_stock/<productName>', methods=['GET'])
+
+## Recebe a geolocalização
+def forecast_stock(productName): 
+    print (productName)
+   
+    fCast = forecast(productName)
+    #print (fCast)
+    return fCast
 
 
 if __name__ == '__main__':
