@@ -2,27 +2,61 @@ import Account from "components/Account"
 import Error from "next/error";
 import { Container, Row, Col, Spinner } from "react-bootstrap"
 import useFetchData from "hooks/useFetchData"
+import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
 
 import addrstyles from 'styles/Account/address.module.css'
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
+import { useState } from "react";
+import { useRouter } from "next/router";
+
+function OrderItem({ item }) {
+    const { data: product, loading }
+        = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/${item.product_id}`, { default: {} })
+    console.debug(item)
+    const Sep = () => <Col lg="auto">{"|"}</Col>
+
+    return <Row>
+        <Col lg="auto"> <h6 style={{ "lineHeight": "24px" }}>{"State:"}</h6> </Col>
+        <Col lg="auto"> {item.state} </Col>
+        {!loading && <> <Sep/> <Col lg="auto"> {product.name} </Col> </>}
+    </Row>
+}
+
+function OrderItems({ items }) {
+    const [show, setShow] = useState(undefined)
+    const { isReady } = useRouter()
+    return <Row>
+        <a className={addrstyles.back_btn} onClick={() => setShow(!show)}>
+            <Col lg="auto"> <h6 style={{ "lineHeight": "24px" }}>Products</h6> </Col>
+            <Col lg="auto"> {!show ? <BsCaretDownFill /> : <BsCaretUpFill />}</Col>
+        </a>
+        {(show === undefined || !isReady) ? <></> : <Container hidden={!show} style={{ "marginLeft": "10px" }}>
+            {items.map(item => <OrderItem item={item} />)}
+        </Container>}
+    </Row>
+}
+
+function OrderField({title, value}){
+    return <Row>
+        <Col lg="auto"> <h6 style={{ "lineHeight": "24px" }}>{title}</h6> </Col>
+        <Col lg="auto"> {value} </Col>
+    </Row>
+}
 
 function Order({ order }) {
+    const [hidden, setHidden] = useState(true)
+    //console.debug(order.items)
     return <div>
-        <h5>Order nº {order._id}</h5>
-        <Container>
-            <Row>
-                <Col lg="auto"> <h6 style={{"lineHeight": "24px"}}>Address:</h6> </Col>
-                <Col lg="auto"> {order.address.name} </Col>
-            </Row>
-            <Row>
-                <Col lg="auto"> <h6 style={{"lineHeight": "24px"}}>Date:</h6> </Col>
-                <Col lg="auto"> {new Date(order.date).toLocaleString('en-GB')} </Col>
-            </Row>
-            <Row>
-                <Col lg="auto"> <h6 style={{"lineHeight": "24px"}}>Cost:</h6> </Col>
-                <Col lg="auto"> {order.total.toString() + "€"} </Col>
-            </Row>
+        <a className={addrstyles.back_btn} onClick={() => setHidden(!hidden)}>
+            <Col lg="auto"> {hidden ? <BsCaretDownFill /> : <BsCaretUpFill />}</Col>
+            <Col lg="auto"><h5>Order nº {order._id}</h5></Col>
+        </a>
+        <Container hidden={hidden ?? true}>
+            <OrderField title={"Address:"} value={order.address.name}/>
+            <OrderField title={"Date:"} value={new Date(order.date).toLocaleString('en-GB')}/>
+            <OrderField title={"Cost:"} value={order.total.toString() + "€"}/>
+            <OrderItems items={order.items}/>
         </Container>
     </div>
 }

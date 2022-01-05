@@ -26,6 +26,20 @@
     visibility: hidden;
 }
 
+.back_btn {
+    display: inline-flex;
+}
+
+.back_btn > * {
+    margin-right: 10px;
+}
+
+.back_btn:hover {
+    cursor: pointer;
+    color: #ED7966;
+}
+
+
 .spinner {
     max-width: 20px;
     max-height: 20px;
