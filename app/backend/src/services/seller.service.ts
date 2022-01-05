@@ -67,7 +67,7 @@ export class SellerService {
     return invoice;
   }
 
-  public async updateInvoice(sellerId: string, invoice_id: string, new_state: string): Promise<SellerInvoice> {
+  public async updateInvoice(sellerId: string, invoice_id: string, new_state: 'processing' | 'sent' | 'finished'): Promise<SellerInvoice> {
     const invoice: SellerInvoice = await this.invoices.findOneAndUpdate({ seller_id: sellerId, _id: invoice_id }, { state: new_state });
     if (!invoice) throw new HttpException(409, 'Invalid invoice Id or not authrized');
 

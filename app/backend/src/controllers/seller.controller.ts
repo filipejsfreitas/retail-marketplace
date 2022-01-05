@@ -5,6 +5,7 @@ import { OpenAPI } from 'routing-controllers-openapi';
 import { SellerCommentDto } from '../dtos/sellerComment.dto';
 import { UpdateSellerDto } from '../dtos/seller.dto';
 import { RequestWithUser } from 'interfaces/auth.interface';
+import { InvoiceUpdateDto } from '../dtos/invoice-update.dto';
 
 @Controller('/seller')
 export class SellerController {
@@ -23,7 +24,7 @@ export class SellerController {
   @Get('/invoice/:id')
   @Authorized()
   @OpenAPI({ summary: 'get seller invoices' })
-  async getSellerInvoice(@Param('id') invoice_id: string,@Req() req: RequestWithUser) {
+  async getSellerInvoice(@Param('id') invoice_id: string, @Req() req: RequestWithUser) {
     const sellerId = req.token._id;
     const info = await this.sellerService.getInvoice(sellerId, invoice_id);
 
@@ -49,7 +50,7 @@ export class SellerController {
   @Delete('/comments/:commentId')
   @Authorized()
   @OpenAPI({ summary: 'delete a comment' })
-  async deleteComment(@Param('commentId') comment_id: string,@Req() req: RequestWithUser) {
+  async deleteComment(@Param('commentId') comment_id: string, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
 
     const info = await this.sellerService.deleteComment(comment_id, clientId);
@@ -60,7 +61,7 @@ export class SellerController {
   @Authorized()
   @OpenAPI({ summary: 'update comment' })
   @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
-  async updateComment(@Param('commentId') comment_id: string, @Body() commentData: SellerCommentDto,@Req() req: RequestWithUser) {
+  async updateComment(@Param('commentId') comment_id: string, @Body() commentData: SellerCommentDto, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
 
     const info = await this.sellerService.updateComment(comment_id, clientId, commentData);
@@ -69,12 +70,12 @@ export class SellerController {
   }
 
   @Put('/invoice/:invoiceId')
-  @Authorized()
+  @Authorized('Seller')
   @OpenAPI({ summary: 'update invoice' })
-  async updateInvoice(@Param('invoiceId') invoice_id: string,@Req() req: RequestWithUser) {
+  async updateInvoice(@Param('invoiceId') invoice_id: string, @Body() body: InvoiceUpdateDto, @Req() req: RequestWithUser) {
     const sellerId = req.token._id;
 
-    const info = await this.sellerService.updateInvoice(sellerId, invoice_id, 'modified');
+    const info = await this.sellerService.updateInvoice(sellerId, invoice_id, body.state);
 
     return { data: info, message: 'Invoice updated' };
   }
@@ -83,7 +84,7 @@ export class SellerController {
   @Authorized()
   @OpenAPI({ summary: 'update seller' })
   @UseBefore(validationMiddleware(UpdateSellerDto, 'body'))
-  async updateSeller(@Body() sellerData: UpdateSellerDto,@Req() req: RequestWithUser) {
+  async updateSeller(@Body() sellerData: UpdateSellerDto, @Req() req: RequestWithUser) {
     const sellerId = req.token._id;
 
     const info = await this.sellerService.updateSeller(sellerData, sellerId);
@@ -106,7 +107,7 @@ export class SellerController {
   @Authorized()
   @OpenAPI({ summary: 'post comment' })
   @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
-  async postComment(@Param('sellerId') sellerId: string, @Body() commentData: SellerCommentDto,@Req() req: RequestWithUser) {
+  async postComment(@Param('sellerId') sellerId: string, @Body() commentData: SellerCommentDto, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
 
     const info = await this.sellerService.makeComment(commentData, clientId, sellerId);

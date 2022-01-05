@@ -114,7 +114,7 @@ export class CartItemService {
   }
 
   public async lockClientItems(clientId: string) {
-    setTimeout( () =>  this.unlockItems(clientId).then(), 900000)
+    setTimeout(() => this.unlockItems(clientId).then(), 900000);
 
     console.log('função');
     const date: Date = new Date();
@@ -176,7 +176,7 @@ export class CartItemService {
 
     let clientTotal = 0;
 
-    const sellersItem = new Object();
+    const sellersItem = {};
 
     const date = Date();
 
@@ -240,7 +240,7 @@ export class CartItemService {
           total: sellerTotal,
           address: addressForInvoice,
           items: sellerItems,
-          state: 'indefinido',
+          state: 'processing',
         }),
       );
     }
@@ -266,7 +266,7 @@ export class CartItemService {
 
     Promise.all(props).then(propsArray => {
       const cartsModified = [];
-      console.log("primeiro promise all")
+      console.log('primeiro promise all');
       console.log(propsArray);
       for (let index = 0; index < itemList.length; index++) {
         cartsModified.push(
@@ -280,8 +280,8 @@ export class CartItemService {
       }
 
       Promise.all(cartsModified).then(cartArray => {
-        console.log("segundo promise all")
-        console.log(cartArray)
+        console.log('segundo promise all');
+        console.log(cartArray);
         return;
       });
     });

@@ -1,4 +1,4 @@
-import { bool, cleanEnv, host, port, str } from 'envalid';
+import { bool, cleanEnv, host, port, str, url } from 'envalid';
 import dotenv from 'dotenv';
 
 export const validateEnv = () => {
@@ -12,6 +12,8 @@ export const validateEnv = () => {
     MONGODB_USERNAME: str({ default: '' }),
     MONGODB_PASSWORD: str({ default: '' }),
     MONGODB_DATABASE: str({ devDefault: 'retailmarketplace' }),
+
+    FLASK_URL: url({ devDefault: 'http://localhost:5000' }),
 
     SECRET_KEY: str({ devDefault: 'SecretKey' }),
     JWT_ISSUER: str({ devDefault: 'retail-marketplace' }),

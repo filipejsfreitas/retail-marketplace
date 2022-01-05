@@ -8,6 +8,7 @@ import { CategoryModel } from 'models/category.model';
 import { Category } from 'interfaces/category.interface';
 import { ProposalModel } from 'models/proposal.model';
 import { Proposal } from 'interfaces/proposal.interface';
+import fetch from 'node-fetch';
 
 export class ProductService {
   public products = ProductModel;
@@ -56,12 +57,12 @@ export class ProductService {
     return cat_products;
   }
 
-  public async listproducts(parameters: QueryParameters) {
+  public listproducts(parameters: QueryParameters) {
     if (parameters.category_id) {
       if (parameters.sort_by && parameters.order_by) {
         if (parameters.order_by === 'desc') {
           if (parameters.sort_by === 'price') {
-            return await this.products
+            return this.products
               .find({
                 category_id: parameters.category_id,
                 best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
@@ -71,7 +72,7 @@ export class ProductService {
               .skip(parameters.limit * parameters.page)
               .limit(parameters.limit);
           } else if (parameters.sort_by === 'rating') {
-            return await this.products
+            return this.products
               .find({
                 category_id: parameters.category_id,
                 best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
@@ -83,7 +84,7 @@ export class ProductService {
           }
         } else {
           if (parameters.sort_by === 'price') {
-            return await this.products
+            return this.products
               .find({
                 category_id: parameters.category_id,
                 best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
@@ -93,7 +94,7 @@ export class ProductService {
               .skip(parameters.limit * parameters.page)
               .limit(parameters.limit);
           } else if (parameters.sort_by === 'rating') {
-            return await this.products
+            return this.products
               .find({
                 category_id: parameters.category_id,
                 best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
@@ -105,7 +106,7 @@ export class ProductService {
           }
         }
       } else {
-        return await this.products
+        return this.products
           .find({
             category_id: parameters.category_id,
             best_offer: { $gte: parameters.min_price, $lt: parameters.max_price },
@@ -118,13 +119,13 @@ export class ProductService {
       if (parameters.sort_by && parameters.order_by) {
         if (parameters.order_by === 'desc') {
           if (parameters.sort_by === 'price') {
-            return await this.products
+            return this.products
               .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
               .sort({ best_offer: -1 })
               .skip(parameters.limit * parameters.page)
               .limit(parameters.limit);
           } else if (parameters.sort_by === 'rating') {
-            return await this.products
+            return this.products
               .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
               .sort({ score: -1 })
               .skip(parameters.limit * parameters.page)
@@ -132,13 +133,13 @@ export class ProductService {
           }
         } else {
           if (parameters.sort_by === 'price') {
-            return await this.products
+            return this.products
               .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
               .sort({ best_offer: 1 })
               .skip(parameters.limit * parameters.page)
               .limit(parameters.limit);
           } else if (parameters.sort_by === 'rating') {
-            return await this.products
+            return this.products
               .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
               .sort({ score: 1 })
               .skip(parameters.limit * parameters.page)
@@ -146,7 +147,7 @@ export class ProductService {
           }
         }
       } else {
-        return await this.products
+        return this.products
           .find({ best_offer: { $gte: parameters.min_price, $lt: parameters.max_price }, score: { $gte: parameters.min_rating } })
           .skip(parameters.limit * parameters.page)
           .limit(parameters.limit);
@@ -206,9 +207,9 @@ export class ProductService {
       { new: true },
     );
 
-    const aiComment = {productId: prodId, review: comment.comment};
+    const aiComment = { productId: prodId, review: comment.comment };
 
-    const answer = await fetch('', {method: 'POST', body: JSON.stringify(aiComment) });
+    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', body: JSON.stringify(aiComment) });
 
     return updateProductData;
   }
@@ -251,9 +252,9 @@ export class ProductService {
         */
     const result = await findProduct.save();
 
-    const aiComment = {productId: prodId, review: comment.comment};
+    const aiComment = { productId: prodId, review: comment.comment };
 
-    const answer = await fetch('', {method: 'POST', body: JSON.stringify(aiComment) });
+    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', body: JSON.stringify(aiComment) });
 
     return result;
   }
@@ -290,47 +291,65 @@ export class ProductService {
     return parent;
   }
 
-  public async getPriceStats(prodId: string, sellerId: string){
-    const props: Proposal [] = await this.proposals.find({product_id: prodId});
-    const product: Product = await this.products.findOne({_id: prodId});
-    var seller_proposal : Proposal;
-    var seller_Index = -1;
+  public async getPriceStats(prodId: string, sellerId: string) {
+    const props: Proposal[] = await this.proposals.find({ product_id: prodId });
+    const product: Product = await this.products.findOne({ _id: prodId });
+    let seller_proposal: Proposal;
+    let seller_Index = -1;
 
-    var newFormatProps = [];
+    const newFormatProps = [];
 
     for (let index = 0; index < props.length; index++) {
-      if(props[index].seller_id === sellerId){
+      if (props[index].seller_id === sellerId) {
         seller_Index = index;
-      }  
-      
-      newFormatProps.push({id:props[index]._id, 
-                          sellerId:props[index].seller_id,
-                          productId: props[index].product_id,
-                          price: props[index].price,
-                          shipping_price: props[index].shipping,
-                          stock: props[index].stock  })
+      }
+
+      newFormatProps.push({
+        id: props[index]._id,
+        sellerId: props[index].seller_id,
+        productId: props[index].product_id,
+        price: props[index].price,
+        shipping_price: props[index].shipping,
+        stock: props[index].stock,
+      });
     }
-    if(seller_Index === -1){
-      throw new HttpException(400, "You do not have a proposal on this product");
+    if (seller_Index === -1) {
+      throw new HttpException(400, 'You do not have a proposal on this product');
     }
 
     const info = {
       sellerID: sellerId,
       productId: prodId,
       product_name: product.name,
-      proposals: newFormatProps
+      proposals: newFormatProps,
+    };
+
+    const response = await fetch(process.env.FLASK_URL + '/seller_optimization', { method: 'POST', body: JSON.stringify(info) });
+
+    if (!response.ok) {
+      throw new HttpException(500, await response.json());
     }
-    
-    const answer = await fetch('', {method: 'POST', body: JSON.stringify(info) });
 
+    return await response.json();
   }
 
-  public async getEvaluation(prodId: string){
-    const answer = await fetch('', {method: 'GET'});
+  public async getEvaluation(prodId: string) {
+    const response = await fetch(process.env.FLASK_URL + `/product_evaluation/${prodId}`, { method: 'GET' });
+
+    if (!response.ok) {
+      throw new HttpException(500, await response.json());
+    }
+
+    return await response.json();
   }
 
-  public async getSugestions(clientId: string, prodId: String){
-    const answer = await fetch('', {method: 'GET'});
+  public async getSuggestions(clientId: string, prodId: String) {
+    const response = await fetch(process.env.FLASK_URL + `/products_recomendation/${clientId}/${prodId}`, { method: 'GET' });
 
+    if (!response.ok) {
+      throw new HttpException(500, await response.json());
+    }
+
+    return await response.json();
   }
 }

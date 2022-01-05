@@ -22,8 +22,6 @@ type File = Express.Multer.File;
 export class ProductController {
   public productService = new ProductService();
 
-  
-
   @Get('/list')
   @OpenAPI({ summary: 'get product list' })
   async getProducts(@QueryParams() parametros: QueryParameters) {
@@ -58,32 +56,32 @@ export class ProductController {
 
   @Get('/evaluation/:prodId')
   @Authorized()
-  @OpenAPI({summary: 'get product evaluation'})
-  async getEvaluation(@Param('prodId') prodId: string,@Req() req: RequestWithUser){
+  @OpenAPI({ summary: 'get product evaluation' })
+  async getEvaluation(@Param('prodId') prodId: string, @Req() req: RequestWithUser) {
     const seller_id = req.token._id;
 
     const results = await this.productService.getEvaluation(prodId);
-    return {data: results, message:'product evaluation retrieved'}
+    return { data: results, message: 'product evaluation retrieved' };
   }
 
   @Get('/priceStats/:prodId')
   @Authorized()
-  @OpenAPI({summary: 'get price stats on proposal'})
-  async getPriceStats(@Param('prodId') prodId: string, @Req() req: RequestWithUser){
+  @OpenAPI({ summary: 'get price stats on proposal' })
+  async getPriceStats(@Param('prodId') prodId: string, @Req() req: RequestWithUser) {
     const sellerId = req.token._id;
 
     const results = await this.productService.getPriceStats(prodId, sellerId);
-    return {data: results, message:'price stats retrieved'}
+    return { data: results, message: 'price stats retrieved' };
   }
 
   @Get('/sugestions/:prodId')
   @Authorized()
-  @OpenAPI({summary: 'make sugestions of products'})
-  async getSugestions(@Param('prodId') prodId: string,@Req() req: RequestWithUser){
+  @OpenAPI({ summary: 'make sugestions of products' })
+  async getSugestions(@Param('prodId') prodId: string, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
 
-    const results = await this.productService.getSugestions(clientId, prodId);
-    return {data: results, message:'sugestion retrieved'}
+    const results = await this.productService.getSuggestions(clientId, prodId);
+    return { data: results, message: 'sugestion retrieved' };
   }
 
   @Get('/:id')
@@ -97,11 +95,15 @@ export class ProductController {
   @Authorized()
   @UseBefore(validationMiddleware(CreateCommentDto, 'body'))
   @OpenAPI({ summary: 'comment product' })
-  async commentProduct(@Param('id') prodId: string, @Body() prodData: CreateCommentDto,@Req() req: RequestWithUser) {
+  async commentProduct(@Param('id') prodId: string, @Body() prodData: CreateCommentDto, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
     const date: Date = new Date();
-    const product = await this.productService.commentProduct(prodId, { ...prodData, client_id: clientId, 
-      name: req.token.clientInfo.firstName.concat(" ", req.token.clientInfo.lastName), date: date });
+    const product = await this.productService.commentProduct(prodId, {
+      ...prodData,
+      client_id: clientId,
+      name: req.token.clientInfo.firstName.concat(' ', req.token.clientInfo.lastName),
+      date: date,
+    });
     return { data: product, message: 'Product commented' };
   }
 
@@ -109,18 +111,27 @@ export class ProductController {
   @Authorized()
   @UseBefore(validationMiddleware(CreateCommentDto, 'body'))
   @OpenAPI({ summary: 'delete comment' })
-  async updateComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string, @Body() prodData: CreateCommentDto,@Req() req: RequestWithUser) {
+  async updateComment(
+    @Param('id') prodId: string,
+    @Param('comment_id') comment_Id: string,
+    @Body() prodData: CreateCommentDto,
+    @Req() req: RequestWithUser,
+  ) {
     const clientId = req.token._id;
     const date: Date = new Date();
-    const product = await this.productService.updateComment(prodId, comment_Id, { ...prodData, client_id: clientId, 
-      name: req.token.clientInfo.firstName.concat(" ", req.token.clientInfo.lastName), date: date });
+    const product = await this.productService.updateComment(prodId, comment_Id, {
+      ...prodData,
+      client_id: clientId,
+      name: req.token.clientInfo.firstName.concat(' ', req.token.clientInfo.lastName),
+      date: date,
+    });
     return { data: product, message: 'Comment deleted' };
   }
 
   @Delete('/:id/comment/:comment_id')
   @Authorized()
   @OpenAPI({ summary: 'delete comment' })
-  async deleteComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string,@Req() req: RequestWithUser) {
+  async deleteComment(@Param('id') prodId: string, @Param('comment_id') comment_Id: string, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
     const product = await this.productService.deleteComment(prodId, comment_Id, clientId);
     return { data: product, message: 'Comment deleted' };

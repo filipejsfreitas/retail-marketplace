@@ -8,6 +8,7 @@ import { AddressController } from './address.controller';
 import { CartController } from './cart.controller';
 import { ClientController } from './client.controller';
 import { SellerController } from './seller.controller';
+import { SellerPanelController } from './seller-panel.controller';
 
 export const CONTROLLERS = [
   AuthController,
@@ -20,4 +21,5 @@ export const CONTROLLERS = [
   CartController,
   SellerController,
   ClientController,
+  SellerPanelController,
 ];

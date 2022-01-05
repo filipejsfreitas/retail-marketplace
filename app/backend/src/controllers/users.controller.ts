@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
-import { CreateClientDto } from '../dtos/users.dto';
+import { CreateClientWithUserDto } from '../dtos/users.dto';
 import { User } from '../interfaces/users.interface';
 import { UserService } from '../services/users.service';
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
@@ -26,17 +26,17 @@ export class UsersController {
 
   @Post('/users')
   @HttpCode(201)
-  @UseBefore(validationMiddleware(CreateClientDto, 'body'))
+  @UseBefore(validationMiddleware(CreateClientWithUserDto, 'body'))
   @OpenAPI({ summary: 'Create a new user' })
-  async createUser(@Body() userData: CreateClientDto) {
+  async createUser(@Body() userData: CreateClientWithUserDto) {
     const createUserData: User = await this.userService.createUser(userData);
     return { data: createUserData, message: 'created' };
   }
 
   @Put('/users/:id')
-  @UseBefore(validationMiddleware(CreateClientDto, 'body', true))
+  @UseBefore(validationMiddleware(CreateClientWithUserDto, 'body', true))
   @OpenAPI({ summary: 'Update a user' })
-  async updateUser(@Param('id') userId: string, @Body() userData: CreateClientDto) {
+  async updateUser(@Param('id') userId: string, @Body() userData: CreateClientWithUserDto) {
     const updateUserData: User = await this.userService.updateUser(userId, userData);
     return { data: updateUserData, message: 'updated' };
   }

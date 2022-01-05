@@ -30,7 +30,7 @@ export class ProposalController {
   @Authorized()
   @UseBefore(validationMiddleware(UpdateProposalDto, 'body'))
   @OpenAPI({ summary: 'update de uma proposta' })
-  async updateProposal(@Param('id') propId: string, @Body() propData: UpdateProposalDto,@Req() req: RequestWithUser) {
+  async updateProposal(@Param('id') propId: string, @Body() propData: UpdateProposalDto, @Req() req: RequestWithUser) {
     const sellerId = req.token._id;
     const prop = await this.proposals.updateProposal(propId, propData, sellerId);
     return { data: prop, message: 'proposal updated' };
@@ -39,7 +39,7 @@ export class ProposalController {
   @Delete('/:id')
   @Authorized()
   @OpenAPI({ summary: 'delete de uma proposta' })
-  async deleteProposal(@Param('id') propId: string,@Req() req: RequestWithUser) {
+  async deleteProposal(@Param('id') propId: string, @Req() req: RequestWithUser) {
     const sellerId = req.token._id;
     const prop = await this.proposals.deleteProposal(propId, sellerId);
     return { data: prop, message: 'proposal deleted ' };
@@ -57,5 +57,12 @@ export class ProposalController {
   async getProposalsSellers(@Param('id') sellerId: string) {
     const props = await this.proposals.getSellerProposals(sellerId);
     return { data: props, message: 'sellers proposals' };
+  }
+
+  @Get('/:id/stock_suggestions')
+  @Authorized('Seller')
+  @OpenAPI({ summary: 'get stock suggestions for this proposal' })
+  async getProposalStockSuggestions(@Param('id') proposalId: string) {
+    return { data: null, message: 'stock suggestions' };
   }
 }
