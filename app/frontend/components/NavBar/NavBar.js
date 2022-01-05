@@ -1,12 +1,12 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { Container, Navbar, FormControl, InputGroup } from "react-bootstrap";
 import { BsJustify, BsPersonCircle, BsBagFill, BsSearch } from "react-icons/bs";
 
 import Dropdown from "components/NavBar/Dropdown";
 import LogoReversed from "components/Logos/LogoReversed";
-import useToken from "hooks/useToken";
+import { UserType } from "hooks/useToken";
+import TokenContext from "components/Context/TokenContext"
 
 import styles from "styles/NavBar/NavBar.module.css";
 
@@ -15,7 +15,7 @@ const NavBar = (props) => {
 
   const [showDropdown, setshowDropdown] = useState(false);
   const dropButtonRef = useRef(null);
-  const { token } = useToken();
+  const { userType } = useContext(TokenContext)
 
   return (
     <>
@@ -47,37 +47,16 @@ const NavBar = (props) => {
             </button>
           </InputGroup>
           <Container className="d-flex flex-row-reverse">
-            {!token ? (
-              <button
-                ref={dropButtonRef}
-                className={styles.btn}
-                onClick={() => {
-                  showDropdown ? setshowDropdown(false) : setshowDropdown(true);
-                }}
+            <>
+              {userType === UserType.CLIENT && <button className={styles.btn} onClick={props.handleShowCheckout}>
+                <BsBagFill size={48} />
+              </button>}
+              <button ref={dropButtonRef} className={styles.btn}
+                onClick={() => setshowDropdown(!showDropdown)}
               >
                 <BsPersonCircle size={48} className="me-3" />
               </button>
-            ) : (
-              <>
-                <button
-                  className={styles.btn}
-                  onClick={props.handleShowCheckout}
-                >
-                  <BsBagFill size={48} />
-                </button>
-                <button
-                  ref={dropButtonRef}
-                  className={styles.btn}
-                  onClick={() => {
-                    showDropdown
-                      ? setshowDropdown(false)
-                      : setshowDropdown(true);
-                  }}
-                >
-                  <BsPersonCircle size={48} className="me-3" />
-                </button>
-              </>
-            )}
+            </>
           </Container>
         </Container>
       </Navbar>
