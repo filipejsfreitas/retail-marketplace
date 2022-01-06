@@ -1,6 +1,8 @@
 
 .content {
     display: flex;
+    flex: 1 0;
+    flex-wrap: wrap;
     gap: 50px;
 }
 
@@ -22,15 +24,35 @@
 
 .panel_cat {
     width: 300px;
-    height: 100px;
+    height: 300px;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
 .panel_cat > * {
     width: 300px;
-    height: 100px;
+    height: 300px;
 }
 
 .carr_cat_elem {
     text-align: center;
+}
+
+.panel_lowstock {
+    width: 600px;
+    height: 300px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.panel_lowstock > * {
+    width: 600px;
+    height: 300px;
+}
+
+.carr_lowstock_elem {
+    width: 300px;
+    text-align: center;
+}
+
+.carr_lowstock_elem > *{
+    margin: 30px;
 }

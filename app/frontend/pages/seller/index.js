@@ -8,8 +8,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { ResponsivePie } from '@nivo/pie'
 import { ResponsiveBar } from "@nivo/bar";
+import Link from "next/link"
 
 import styles from "styles/Seller/index.module.css"
+import useFetchData from "hooks/useFetchData"
 
 function DefaultCarousel({ children, ...props }) {
   const responsive = {
@@ -17,12 +19,13 @@ function DefaultCarousel({ children, ...props }) {
   }
   return <Carousel
     draggable={false}
+    showDots={true}
     infinite={true}
     responsive={responsive}
     ssr={true} // means to render carousel on server-side.
     centerMode={true}
     infinite={true}
-    autoPlay={true}
+    autoPlay={false}
     autoPlaySpeed={4000}
     keyBoardControl={true}
     customTransition="all .5"
@@ -40,13 +43,45 @@ function RecommendedCategories({ recommendedCategories }) {
   return <div className={styles.panel}>
     <h5>Recommended Categories</h5>
     <div className={styles.panel_cat}>
-      <DefaultCarousel>
+      <DefaultCarousel autoPlay={true}>
         {
           recommendedCategories.categories.map(cat => (
             <div key={cat} className={styles.carr_cat_elem}>
               {cat}
             </div>
           ))}
+      </DefaultCarousel>
+    </div>
+  </div>
+}
+
+function LowStockProposal({ proposal }) {
+  const { _id, stock, product_id } = proposal
+  const { data: product, loading } =
+    useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/${product_id}`)
+  return <div key={_id} className={styles.carr_lowstock_elem}>
+    <Col>
+      <h6>Product</h6>
+      <Link href={`/seller/proposal/${_id}`}>
+        <a>
+          {product ? product.name : "Loading..."}
+        </a>
+      </Link>
+    </Col>
+    <Col>
+      <h6>Stock</h6>
+      {stock}
+    </Col>
+  </div>
+}
+
+function LowStockProposals({ lowStockProposals }) {
+  return <div className={styles.panel}>
+    <h5>Low Stock Proposals</h5>
+    <div className={styles.panel_lowstock}>
+      <DefaultCarousel>
+        {lowStockProposals.map(proposal =>
+          <LowStockProposal key={proposal._id} proposal={proposal} />)}
       </DefaultCarousel>
     </div>
   </div>
@@ -106,7 +141,7 @@ function OrdersPie({ ordersOverview }) {
 }
 
 
-function MyResponsiveBar({ revenueOverview }) {
+function RevenueOverviewBar({ revenueOverview }) {
   const data = revenueOverview.map(({ _id, count }) => ({
     date: new Date(_id.year, _id.month, _id.day).toLocaleDateString('en-GB'),
     revenue: count,
@@ -141,13 +176,15 @@ export default function Home() {
       .then(rep => rep.json())
       .then(p => setPanel(p))
   }, [isReady])
+  console.debug(panel)
 
-  //console.debug(panel)
   return <Layout sidebar={SELLER_SIDEBAR} isLoading={panel === undefined}>
+    <h3>Home</h3>
     {panel && <div className={styles.content}>
       <RecommendedCategories recommendedCategories={panel.recommendedCategories} />
       <OrdersPie ordersOverview={panel.ordersOverview} />
-      <MyResponsiveBar revenueOverview={panel.revenueOverview} />
+      <RevenueOverviewBar revenueOverview={panel.revenueOverview} />
+      <LowStockProposals lowStockProposals={panel.alerts.lowStockProposals}/>
     </div>}
   </Layout>
 }
