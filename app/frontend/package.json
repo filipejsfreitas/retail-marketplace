@@ -22,7 +22,8 @@
     "react-phone-number-input": "^3.1.44",
     "react-transition-group": "^4.4.2",
     "@nivo/core": "0.69.0",
-    "@nivo/pie": "0.69.0"
+    "@nivo/pie": "0.69.0",
+    "@nivo/bar": "0.69.0"
   },
   "devDependencies": {
     "eslint": "7.32.0",

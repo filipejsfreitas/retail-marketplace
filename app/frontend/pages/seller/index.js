@@ -7,6 +7,7 @@ import { Container, Row, Col } from "react-bootstrap"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { ResponsivePie } from '@nivo/pie'
+import { ResponsiveBar } from "@nivo/bar";
 
 import styles from "styles/Seller/index.module.css"
 
@@ -36,7 +37,7 @@ function DefaultCarousel({ children, ...props }) {
 }
 
 function RecommendedCategories({ recommendedCategories }) {
-  return <div>
+  return <div className={styles.panel}>
     <h5>Recommended Categories</h5>
     <div className={styles.panel_cat}>
       <DefaultCarousel>
@@ -56,7 +57,9 @@ function OrdersPie({ ordersOverview }) {
     { "id": "processing", "label": "Processing", "value": ordersOverview.processing },
     { "id": "sent", "label": "Processing", "value": ordersOverview.sent + 1 },
   ]
-  return <div style={{ height: 300 }}>
+  return <div className={styles.panel}>
+    <h5>Orders State</h5>
+    <div className={styles.panel_orders}>
     <ResponsivePie
       data={data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -99,6 +102,32 @@ function OrdersPie({ ordersOverview }) {
       ]}
     />
   </div >
+  </div>
+}
+
+
+function MyResponsiveBar({ revenueOverview }) {
+  const data = revenueOverview.map(({ _id, count }) => ({
+    date: new Date(_id.year, _id.month, _id.day).toLocaleDateString('en-GB'),
+    revenue: count,
+  }))
+
+  return <div className={styles.panel}>
+    <h5>Revenue Overview</h5>
+    <div className={styles.panel_revenue}>
+      <ResponsiveBar
+        data={data}
+        keys={["revenue"]}
+        indexBy="date" 
+        margin={{ top: 25, right: 25, bottom: 50, left: 60 }}
+        padding={0.3}
+        valueScale={{ type: 'linear' }}
+        indexScale={{ type: 'band', round: true }}
+        colors={{ scheme: 'nivo' }}
+        label={d => `${d.value}€`}
+      />
+    </div>
+  </div>
 }
 
 export default function Home() {
@@ -113,10 +142,12 @@ export default function Home() {
       .then(p => setPanel(p))
   }, [isReady])
 
+  //console.debug(panel)
   return <Layout sidebar={SELLER_SIDEBAR} isLoading={panel === undefined}>
-    {panel && <>
-      {/*<RecommendedCategories recommendedCategories={panel.recommendedCategories} />*/}
-      <OrdersPie data={data} ordersOverview={panel.ordersOverview} />
-    </>}
+    {panel && <div className={styles.content}>
+      <RecommendedCategories recommendedCategories={panel.recommendedCategories} />
+      <OrdersPie ordersOverview={panel.ordersOverview} />
+      <MyResponsiveBar revenueOverview={panel.revenueOverview} />
+    </div>}
   </Layout>
 }

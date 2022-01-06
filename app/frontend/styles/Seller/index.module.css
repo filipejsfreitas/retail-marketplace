@@ -1,7 +1,22 @@
 
+.content {
+    display: flex;
+    gap: 50px;
+}
+
 .panel {
-    margin: 20px;
-    padding: 20px;
+    display: inline-block;
+}
+
+.panel_revenue {
+    height: 300px;
+    width: 450px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.panel_orders {
+    height: 300px;
+    width: 450px;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
@@ -18,23 +33,4 @@
 
 .carr_cat_elem {
     text-align: center;
-}
-
-.root {
-    height: 100%;
-    width: 100%;
-    background-color: #ffffff;
-    position: relative;
-    margin-left: 50px;
-    
-}
-
-.root3 {
-    max-height: 900px;
-    max-width: 350px;
-    align-items: center;
-    background-color: #ffffff;
-    position: relative;
-    margin-left: 20px;
-
 }
