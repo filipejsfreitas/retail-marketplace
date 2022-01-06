@@ -8,6 +8,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { ResponsivePie } from '@nivo/pie'
 import { ResponsiveBar } from "@nivo/bar";
+import { ResponsiveCalendar } from '@nivo/calendar'
 import Link from "next/link"
 
 import styles from "styles/Seller/index.module.css"
@@ -90,7 +91,7 @@ function LowStockProposals({ lowStockProposals }) {
 function OrdersPie({ ordersOverview }) {
   const data = [
     { "id": "processing", "label": "Processing", "value": ordersOverview.processing },
-    { "id": "sent", "label": "Processing", "value": ordersOverview.sent + 1 },
+    { "id": "sent", "label": "Processing", "value": ordersOverview.sent },
   ]
   return <div className={styles.panel}>
     <h5>Orders State</h5>
@@ -142,7 +143,7 @@ function OrdersPie({ ordersOverview }) {
 
 
 function RevenueOverviewBar({ revenueOverview }) {
-  const data = revenueOverview.map(({ _id, count }) => ({
+  const data = revenueOverview.slice(-15).map(({ _id, count }) => ({
     date: new Date(_id.year, _id.month, _id.day).toLocaleDateString('en-GB'),
     revenue: count,
   }))
@@ -160,6 +161,34 @@ function RevenueOverviewBar({ revenueOverview }) {
         indexScale={{ type: 'band', round: true }}
         colors={{ scheme: 'nivo' }}
         label={d => `${d.value}€`}
+      />
+    </div>
+  </div>
+}
+
+
+function RevenueOverviewCal({ revenueOverview }) {
+  const data = revenueOverview.map(({ _id, count }) => ({
+    value: count,
+    day: new Date(_id.year, _id.month, _id.day).toJSON().slice(0,10),
+  }))
+
+  const curr = new Date()
+
+  return <div className={styles.panel}>
+    <h5>Revenue Overview Calendar</h5>
+    <div className={styles.panel_revenue_cal}>
+      <ResponsiveCalendar
+        data={data}
+        from={`${curr.getFullYear()}`}
+        to={`${curr.getFullYear()}`}
+        emptyColor="#eeeeee"
+        colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
+        margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+        yearSpacing={40}
+        monthBorderColor="#ffffff"
+        dayBorderWidth={2}
+        dayBorderColor="#ffffff"
       />
     </div>
   </div>
@@ -185,6 +214,7 @@ export default function Home() {
       <OrdersPie ordersOverview={panel.ordersOverview} />
       <RevenueOverviewBar revenueOverview={panel.revenueOverview} />
       <LowStockProposals lowStockProposals={panel.alerts.lowStockProposals}/>
+      <RevenueOverviewCal revenueOverview={panel.revenueOverview} />
     </div>}
   </Layout>
 }
