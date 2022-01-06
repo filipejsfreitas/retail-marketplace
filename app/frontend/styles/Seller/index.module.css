@@ -1,0 +1,64 @@
+
+.content {
+    display: flex;
+    flex: 1 0;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.panel {
+    display: inline-block;
+}
+
+.panel_revenue {
+    height: 300px;
+    width: 450px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.panel_orders {
+    height: 300px;
+    width: 450px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.panel_cat {
+    width: 300px;
+    height: 300px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.panel_cat > * {
+    width: 300px;
+    height: 300px;
+}
+
+.carr_cat_elem {
+    text-align: center;
+}
+
+.panel_lowstock {
+    width: 600px;
+    height: 300px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.panel_lowstock > * {
+    width: 600px;
+    height: 300px;
+}
+
+.carr_lowstock_elem {
+    width: 300px;
+    text-align: center;
+}
+
+.carr_lowstock_elem > *{
+    margin: 30px;
+}
+
+.panel_revenue_cal {
+    height: 300px;
+    width: 650px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}

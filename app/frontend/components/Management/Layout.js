@@ -15,6 +15,7 @@ export const SELLER_SIDEBAR = {
         { text: "Home", url: "/" },
         { text: "Add Proposal", url: "/proposal/add/" },
         { text: "Manage Proposals", url: "/proposal/list/" },
+        { text: "Manage Orders", url: "/order/list/" },
     ],
 }
 
