@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Layout, { SELLER_SIDEBAR } from "components/Management/Layout";
 import useFetchData from "hooks/useFetchData";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import Link from "next/link";
@@ -142,6 +142,8 @@ function ProposalInfo({ proposal, setProposal }) {
 }
 
 export default function Proposal(props) {
+  const { fetchAuth: fetch } = useFetchAuth()
+
   const router = useRouter();
   const { id } = router.query;
   const {
@@ -160,6 +162,13 @@ export default function Proposal(props) {
     { default: {}, when: !loadingProduct }
   );
 
+  useEffect(async () => {
+    const json = await
+      fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
+        .then(rep => rep.json())
+    console.debug(json)
+  }, [])
+
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>
       <Container>
@@ -173,7 +182,9 @@ export default function Proposal(props) {
         </Row>
         <br />
         <h3>Statistics:</h3>
-        TODO: statistics from AI
+        <div>
+          TODO: statistics from AI
+        </div>
       </Container>
     </Layout>
   );
