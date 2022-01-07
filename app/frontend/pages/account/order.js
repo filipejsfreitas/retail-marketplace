@@ -74,7 +74,8 @@ export default function AccountInfo({ categories }) {
             {loading ? <Col lg="auto"><Spinner animation="border" size="sm" /></Col> : undefined}
         </Row>
         <Container className={addrstyles.address_panel}>
-            {orders.map(order => <Order key={order._id} order={order}/>)}
+            {orders.sort((o1, o2) => o1.date < o2.date)
+                .map(order => <Order key={order._id} order={order} />)}
         </Container>
     </Account>
 }
