@@ -133,16 +133,15 @@ def new_categories(geo):
 '''
 Obter forecasting stock
 '''
-@app.route('/forecast_stock/<productName>', methods=['GET'])
+@app.route('/forecast_stock/<id>/<productName>', methods=['GET'])
 
 ## Recebe a geolocalização
-def forecast_stock(productName): 
-    print (productName)
-   
-    fCast = forecast(productName)
+def forecast_stock(id, productName): 
+   # print (productName)
+
+    fCast = forecast(id,productName)
     #print (fCast)
     return fCast
-
 
 if __name__ == '__main__':
     # This is used when running locally.

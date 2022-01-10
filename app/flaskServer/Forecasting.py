@@ -8,7 +8,7 @@ import math
 
 
 
-def forecast (productName):
+def forecast (id,productName):
 
     # Escolher Produtos para ver número de clicks nessa semana
     pytrends = TrendReq(hl='en-US')
@@ -41,7 +41,7 @@ def forecast (productName):
     prevision = [round(p) for p in previsao.to_list()]
     #print(previsao)
 
-    data = {"prevision" : prevision}
+    data = {"ProductID": id, "Stock_prevision" : prevision}
 
     mediaPrevisao = statistics.mean(previsao) 
     #print(mediaPrevisao)

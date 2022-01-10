@@ -104,4 +104,17 @@ export class ProposalService {
     const l: Proposal[] = await this.proposals.find({ product_id: prodId, seller_id: sellerId });
     return l.length > 0;
   }
+
+  public async getStockPrevision(proposalId: string, sellerId){
+    const proposal = await this.proposals.findOne({_id:proposalId,seller_id: sellerId});
+    const product = await this.products.findById(proposal.product_id)
+
+    const response = await fetch(process.env.FLASK_URL + `/forecast_stock/`+ product._id + `/`+ product.name, { method: 'GET' });
+
+    if (!response.ok) {
+      throw new HttpException(500, await response.json());
+    }
+
+    return await response.json();
+  }
 }

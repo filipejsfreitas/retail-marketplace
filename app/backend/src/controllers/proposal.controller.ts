@@ -9,6 +9,15 @@ import { RequestWithUser } from 'interfaces/auth.interface';
 export class ProposalController {
   public proposals = new ProposalService();
 
+
+  @Get('/:id/stock_suggestions')
+  @Authorized('Seller')
+  @OpenAPI({ summary: 'get stock suggestions for this proposal' })
+  async getProposalStockSuggestions(@Param('id') proposalId: string,@Req() req: RequestWithUser) {
+    const res = this.proposals.getStockPrevision(proposalId,req.token._id);
+    return { data: res, message: 'stock suggestions' };
+  }
+
   @Get('/:id')
   @OpenAPI({ summary: 'obter informação de uma proposta' })
   async getProposal(@Param('id') propId: string) {
@@ -59,10 +68,4 @@ export class ProposalController {
     return { data: props, message: 'sellers proposals' };
   }
 
-  @Get('/:id/stock_suggestions')
-  @Authorized('Seller')
-  @OpenAPI({ summary: 'get stock suggestions for this proposal' })
-  async getProposalStockSuggestions(@Param('id') proposalId: string) {
-    return { data: null, message: 'stock suggestions' };
-  }
 }
