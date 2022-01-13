@@ -1,11 +1,13 @@
 import CartContext from "components/NavBar/Cart/context";
-import { useRouter } from "next/router";
 import { useState, useContext } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { BsBasket, BsCashCoin, BsTruck } from "react-icons/bs";
 import useFetchAuth from "hooks/useFetchAuth"
 
+import SucessModal from "./SucessModal";
+
 import styles from "styles/Checkout/Content/Summary/Summary.module.css";
+import NoAddressModal from "./NoAddressModal";
 
 export default function Summary({
   total,
@@ -15,26 +17,31 @@ export default function Summary({
   shippingTo,
 }) {
   const { fetchAuth: fetch } = useFetchAuth()
-  const router = useRouter();
   const [step, setStep] = state;
 
   const context = useContext(CartContext);
 
   // Modal
-  const [show, setShow] = useState(false);
-  const handleClose = () => {
-    setShow(false), router.push("account/order");
-  };
-  const handleShow = () => setShow(true);
+  // 1 - success
+  // 0 - Hidden
+  // -1 - Error
+  const [show, setShow] = useState(0);
+
+  const handleShow = () => setShow(1);
 
   const validateBasket = () => {
     setStep(2);
   };
 
   const toPayment = () => {
-    fetch(`${process.env.NEXT_PUBLIC_HOST}/cart/lock`, { method: "POST" }).then(
-      () => setStep(3)
-    );
+    if (shippingTo) {
+      fetch(`${process.env.NEXT_PUBLIC_HOST}/cart/lock`, {
+        method: "POST",
+      }).then(() => setStep(3));
+    }
+    else {
+      setShow(-1)
+    }
   };
 
   const pay = () => {
@@ -111,24 +118,8 @@ export default function Summary({
           )}
         </div>
       </div>
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={show}
-        onHide={handleClose}
-        keyboard={false}
-      >
-        <Modal.Header>
-          <Modal.Title>Success!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you bought a product</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            GREAT!
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <SucessModal state={[show, setShow]}/>
+      <NoAddressModal state={[show, setShow]}/>
     </>
   );
 }
