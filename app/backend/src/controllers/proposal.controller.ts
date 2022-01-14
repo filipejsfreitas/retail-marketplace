@@ -14,7 +14,7 @@ export class ProposalController {
   @Authorized('Seller')
   @OpenAPI({ summary: 'get stock suggestions for this proposal' })
   async getProposalStockSuggestions(@Param('id') proposalId: string,@Req() req: RequestWithUser) {
-    const res = this.proposals.getStockPrevision(proposalId,req.token._id);
+    const res = await this.proposals.getStockPrevision(proposalId,req.token._id);
     return { data: res, message: 'stock suggestions' };
   }
 
