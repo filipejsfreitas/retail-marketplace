@@ -4,11 +4,10 @@ import { computeStars } from "components/Product/Product";
 import RateSeller from "./RateSeller";
 import { useState } from "react";
 
-const Info = ({seller}) =>{ 
+const Info = ({seller, token}) =>{ 
     
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     const [modalShow, setModalShow] = useState(false);
-
     //const seller = { 
     //    id: "ola",
     //    nome : "Global Mi Store",
@@ -52,7 +51,13 @@ const Info = ({seller}) =>{
                     <p className={styles.lines}><span className={styles.subTitle}>Number products: <span className={styles.infos}>{100}</span></span></p>
                     <p className={styles.lines}><span className={styles.subTitle}>Rating: <span className={styles.infosStar}>{computeStars(seller.rating)}</span></span></p>
                     <p className={styles.lines}><span className={styles.subTitle}>Register date: <span className={styles.infos}>{"4/5/2022"}</span></span></p>
-                    <Button className={styles.buttonRate} variant="secundary" type="submit" onClick={() => setModalShow(true)}>
+                    <Button 
+                        className={styles.buttonRate} 
+                        variant="secundary" 
+                        type="submit" 
+                        onClick={() => setModalShow(true)}
+                        disabled={!token}
+                        >
                         Rate Seller 
                     </Button>
                     <RateSeller
