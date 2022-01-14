@@ -9,6 +9,13 @@ import { RequestWithUser } from 'interfaces/auth.interface';
 export class ProposalController {
   public proposals = new ProposalService();
 
+  @Get('/stock_suggestions')
+  @Authorized('Seller')
+  @OpenAPI({ summary: 'get stock suggestions for all proposals' })
+  async getAllStockSuggestions(@Req() req: RequestWithUser) {
+    const res = await this.proposals.getAllStocksPrevisions(req.token._id);
+    return { data: res, message: 'stock suggestions' };
+  }
 
   @Get('/:id/stock_suggestions')
   @Authorized('Seller')

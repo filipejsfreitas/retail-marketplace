@@ -209,7 +209,7 @@ export class ProductService {
 
     const aiComment = { productId: prodId, review: comment.comment };
 
-    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', body: JSON.stringify(aiComment) });
+    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(aiComment) });
 
     return updateProductData;
   }
@@ -254,7 +254,7 @@ export class ProductService {
 
     const aiComment = { productId: prodId, review: comment.comment };
 
-    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', body: JSON.stringify(aiComment) });
+    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(aiComment) });
 
     return result;
   }
@@ -291,8 +291,86 @@ export class ProductService {
     return parent;
   }
 
+  public async getAllPriceStats(sellerId: string){
+    const seller_proposals= await this.proposals.find({seller_id:sellerId});
+
+    const product_proposal_search = [];
+    const product_search = []
+
+    seller_proposals.forEach(element =>{
+      product_proposal_search.push( this.proposals.find({product_id: element.product_id}) )
+      product_search.push(this.products.findOne({ _id: element.product_id}));
+    })
+
+    const requests = []
+    Promise.all(product_search).then(productsArray => {
+
+      Promise.all(product_proposal_search).then(proposalsArray => {
+      
+        for (let i = 0; i < seller_proposals.length; i++) {
+          const proposal = seller_proposals[i];
+          const newFormatProps = [];
+          let seller_Index = -1;
+  
+          const productProposals = proposalsArray[i];
+  
+          for (let index = 0; index < productProposals.length; index++) {
+            if (productProposals[index].seller_id === sellerId) {
+              seller_Index = index;
+            }
+    
+            newFormatProps.push({
+              id: productProposals[index]._id,
+              sellerId: productProposals[index].seller_id,
+              productId: productProposals[index].product_id,
+              price: productProposals[index].price,
+              shipping_price: productProposals[index].shipping,
+              stock: productProposals[index].stock,
+            });
+          }
+          if (seller_Index === -1) {
+            throw new HttpException(400, 'You do not have a proposal on this product');
+          }
+    
+          const info = {
+            sellerID: sellerId,
+            productId: proposal.product_id,
+            product_name: productsArray[i].name,
+            proposals: newFormatProps,
+          };
+    
+          requests.push( fetch(process.env.FLASK_URL + '/seller_optimization', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) }))
+          
+
+    
+  
+        }
+
+        Promise.all(requests).then(price_optimmized => {
+
+          return JSON.stringify(price_optimmized);
+          //return await price_optimmized.json();
+        })
+        .catch(function (err) {
+          throw new HttpException(500,err.message); // some coding error in handling happened
+        });
+        
+      })
+      .catch(function (err) {
+        throw new HttpException(500,err.message); // some coding error in handling happened
+      });
+
+    })
+    .catch(function (err) {
+      throw new HttpException(500,err.message); // some coding error in handling happened
+    });
+    
+  }
+
+
+
   public async getPriceStats(prodId: string, sellerId: string) {
-    const props: Proposal[] = await this.proposals.find({ product_id: prodId });
+    const props: Proposal[] = await this.proposals.find({ product_id: prodId});
     const product: Product = await this.products.findOne({ _id: prodId });
     let seller_proposal: Proposal;
     let seller_Index = -1;
@@ -324,7 +402,7 @@ export class ProductService {
       proposals: newFormatProps,
     };
 
-    const response = await fetch(process.env.FLASK_URL + '/seller_optimization', { method: 'POST', body: JSON.stringify(info) });
+    const response = await fetch(process.env.FLASK_URL + '/seller_optimization', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) });
 
     if (!response.ok) {
       throw new HttpException(500, await response.json());

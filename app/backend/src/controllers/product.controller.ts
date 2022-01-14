@@ -64,6 +64,16 @@ export class ProductController {
     return { data: results, message: 'product evaluation retrieved' };
   }
 
+  @Get('/priceStats')
+  @Authorized()
+  @OpenAPI({ summary: 'get price stats on all proposals' })
+  async getAllPriceStats( @Req() req: RequestWithUser) {
+    const sellerId = req.token._id;
+
+    const results = await this.productService.getAllPriceStats( sellerId);
+    return { data: results, message: 'price stats retrieved' };
+  }
+
   @Get('/priceStats/:prodId')
   @Authorized()
   @OpenAPI({ summary: 'get price stats on proposal' })

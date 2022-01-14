@@ -106,6 +106,37 @@ export class ProposalService {
     return l.length > 0;
   }
 
+  public async getAllStocksPrevisions(sellerId:string){
+    const proposals = await this.proposals.find({seller_id: sellerId});
+
+    const products_search= [];
+    proposals.forEach(element => {
+      products_search.push(this.products.findById(element.product_id))
+    });
+
+    const requests = [];
+
+    Promise.all(products_search).then(products => {
+      for (let index = 0; index < products.length; index++) {
+        
+        requests.push(fetch(process.env.FLASK_URL + `/forecast_stock/`+ products[index]._id + `/`+ products[index].name, { method: 'GET' }))
+        
+        Promise.all(requests).then(responses => {
+          return JSON.stringify(responses);
+          
+        })
+        .catch(function (err) {
+          throw new HttpException(500,err.message); // some coding error in handling happened
+        });
+
+
+      }
+    })
+    .catch(function (err) {
+      throw new HttpException(500,err.message); // some coding error in handling happened
+    });
+  }
+
   public async getStockPrevision(proposalId: string, sellerId){
     const proposal = await this.proposals.findOne({_id:proposalId,seller_id: sellerId});
     const product = await this.products.findById(proposal.product_id)
