@@ -4,3 +4,4 @@ sklearn
 spacy
 nrclex
 pytrends
+statsmodels
