@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ImageGallery from 'react-image-gallery'
 
 const ProductImage = (props) => {
-    const imagesrc = "http://localhost:3001/"
+    const imagesrc = process.env.NEXT_PUBLIC_HOST + "/"
     const defImg = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     var images = [];
     const[Images, setImages] = useState([])
