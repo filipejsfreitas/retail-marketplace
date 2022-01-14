@@ -62,7 +62,7 @@ export default function Addreses({state}) {
         });
     };
     if (loading) fetchApi();
-  }, [url, loading, setSelected]);
+  }, [url, loading, setSelected, fetch]);
 
   return (
     <div className={styles.box}>
