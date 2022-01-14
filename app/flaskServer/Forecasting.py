@@ -10,6 +10,10 @@ import math
 
 def forecast (id,productName):
 
+    name = productName.split()
+    name = [n for n in name if n.isalpha() ]
+    productName = ''.join([ i + " " for i in name[:2] if i.isalpha()])
+
     # Escolher Produtos para ver número de clicks nessa semana
     pytrends = TrendReq(hl='en-US')
 

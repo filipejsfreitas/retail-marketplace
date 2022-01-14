@@ -1,3 +1,4 @@
+from posixpath import split
 from pytrends.request import TrendReq
 import statistics
 
@@ -40,8 +41,7 @@ def PriceOptimizer ( range,price_proposal):
 def  analyse_trends(trends,price_proposal):
 
     for product in trends:
-       
-
+        
         if product != 'isPartial':
 
             range = trends[product][0] - trends[product][1]
@@ -91,10 +91,15 @@ def price_optimization(data):
         
        
        # print(id_seller, prices_product,price_proposal , nameProduct)
+    
+    ## limpeza ao nome
+    name = data["product_name"].split()
+    name = [n for n in name if n.isalpha() ]
+    n = ''.join([ i + " " for i in name[:2] if i.isalpha()])
+    trend = get_interest_over_time(n)
 
-    trend = get_interest_over_time(data["product_name"])
 
-    print("ola")
+    
     print(trend)
     
     ## preço obtido ao consultar a tendencia de procuras no google trends
@@ -111,12 +116,14 @@ def price_optimization(data):
    # print("We suggest: " , 0.4 * price_trends + 0.6* price_apiData, nameProduct)
 
     #Guarda a sugestão de preço associada ao id da proposta
+    
     context = {
         "sellerId": id_seller,
         "productId": id_product,
         "proposalId":proposal_id,
         "priceSugestion": 0.4 * price_trends + 0.6* price_apiData
     }
+
     print (context)
     return context
         
