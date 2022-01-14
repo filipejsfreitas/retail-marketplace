@@ -5,6 +5,7 @@ import { HttpException } from '../exceptions/HttpException';
 import { Product } from '../interfaces/product.interface';
 import { ProductModel } from '../models/product.model';
 import { CartItemModel } from '../models/cartItem.model';
+import fetch from 'node-fetch';
 
 export class ProposalService {
   public proposals = ProposalModel;
