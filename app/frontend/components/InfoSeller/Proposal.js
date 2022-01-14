@@ -3,10 +3,12 @@ import styles from 'styles/infoseller.module.css'
 import { computeStars } from "components/Product/Product";
 import Status from "components/common/Status";
 import Link from "next/link";
+import CartContext from "components/NavBar/Cart/context";
+import { useContext } from "react";
 
-const Proposal = ({prod, prop}) =>{ 
-    console.log(prod)
+const Proposal = ({prod, prop, token}) =>{ 
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
+    const cart = useContext(CartContext);
 
     return(
     <>
@@ -22,7 +24,6 @@ const Proposal = ({prod, prop}) =>{
                     <div className={styles.itemInfoWrapper}>
                         <div className={styles.itemInfo}>
                             <div className={styles.title}><Link href={`/product/${prod._id}`}>{prod.name}</Link></div>
-                            {/*<div className={styles.categorie}>Categoria</div>*/}
                             <div className={styles.stars}>{computeStars(prod.score)}</div>
                             <span className={styles.status}><Status stock={prop.stock}/></span>
                         </div>
@@ -31,9 +32,16 @@ const Proposal = ({prod, prop}) =>{
                                 {prop.price}€
                             </div>
                             <div className={styles.price}>
-                                <Button type="submit" variant="secundary"  className={styles.button}
-                                 disabled={(prop.stock <= 0 ? true: false)}>
-                                    ADD TO CARD
+                                <Button 
+                                    type="submit" 
+                                    variant="secundary"  
+                                    className={styles.button}
+                                    disabled={!token || (prop.stock <= 0 ? true: false)}
+                                    onClick={() => {
+                                        cart.addItem(prop._id, 1);
+                                        cart.handleVisible();
+                                      }}>
+                                    ADD TO CART
                                 </Button>
                             </div>
                         </div>
