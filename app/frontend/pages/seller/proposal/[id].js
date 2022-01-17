@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import Layout, { SELLER_SIDEBAR } from "components/Management/Layout";
 import useFetchData from "hooks/useFetchData";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import Link from "next/link";
+import { ResponsiveBar } from "@nivo/bar";
 
 import gstyles from "styles/Seller/globals.module.css";
+import styles from "styles/Seller/index.module.css"
 import useFetchAuth from "hooks/useFetchAuth";
 
 function EditableText({ refs, value, edit, as, rows }) {
@@ -141,7 +143,36 @@ function ProposalInfo({ proposal, setProposal }) {
   );
 }
 
+function StockPredictionBar({ predictions }) {
+  const getPeriod = (i, prev) => {
+    const now = new Date()
+    now.setDate(now.getDate() + i)
+    return `${now.getDate()}/${now.getMonth() + 1}`
+  }
+  const data = predictions.map((count, i) => ({
+    period: getPeriod(i),
+    units: count,
+  }))
+
+  return <div className={styles.panel}>
+    <h5>Required Stock Prediction</h5>
+    <div className={styles.panel_stock_prediction}>
+      <ResponsiveBar
+        data={data}
+        keys={["units"]}
+        indexBy="period" 
+        margin={{ top: 25, right: 25, bottom: 50, left: 60 }}
+        padding={0.3}
+        valueScale={{ type: 'linear' }}
+        indexScale={{ type: 'band', round: true }}
+        colors={{ scheme: 'nivo' }}
+        label={d => `${d.value}`}
+      />
+    </div>
+  </div>
+}
 export default function Proposal(props) {
+
   const router = useRouter();
   const { id } = router.query;
   const {
@@ -159,6 +190,15 @@ export default function Proposal(props) {
     () => `${process.env.NEXT_PUBLIC_HOST}/category/${product.category_id}`,
     { default: {}, when: !loadingProduct }
   );
+  const { data: stock_suggestions, loading: loadingStockSuggestions } =
+    useFetchData(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
+
+  useEffect(async () => {
+    const json = await
+      fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
+        .then(rep => rep.json())
+    console.debug(json)
+  }, [])
 
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>
@@ -172,8 +212,11 @@ export default function Proposal(props) {
           </Col>
         </Row>
         <br />
-        <h3>Statistics:</h3>
-        TODO: statistics from AI
+        <h3>{loadingStockSuggestions ? "Loading Statistics..." : "Statistics:"}</h3>
+        <div>
+          {stock_suggestions && stock_suggestions.Stock_prevision &&
+            <StockPredictionBar predictions={stock_suggestions.Stock_prevision} />}
+        </div>
       </Container>
     </Layout>
   );

@@ -16,6 +16,12 @@
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
+.panel_stock_prediction {
+    height: 300px;
+    width: 1200px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
 .panel_orders {
     height: 300px;
     width: 450px;
