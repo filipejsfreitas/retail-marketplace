@@ -146,9 +146,8 @@ function ProposalInfo({ proposal, setProposal }) {
 function StockPredictionBar({ predictions }) {
   const getPeriod = (i, prev) => {
     const now = new Date()
-    now.setDate(now.getDate() - now.getDay() + i*7)
-    return prev ? `${now.getDate()}/${now.getMonth()+1}`
-      : `${now.getDate()}/${now.getMonth()+1} - ${getPeriod(i+1, true)}`
+    now.setDate(now.getDate() + i)
+    return `${now.getDate()}/${now.getMonth() + 1}`
   }
   const data = predictions.map((count, i) => ({
     period: getPeriod(i),
