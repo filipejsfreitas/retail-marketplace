@@ -16,13 +16,13 @@ function computeStars(stars) {
 
 
 
-export default function Seller({name,rating}) {
+export default function Seller({id,name,rating}) {
     return (
         <div className={styles.seller}>
-            <Link href={`/seller/${name}`}>
+            <Link href={`/infoseller/${id}`}>
                 {`${name}`}
             </Link>
-            <Link href={`/seller/${name}`}>
+            <Link href={`/infoseller/${id}`}>
                 {computeStars(rating)}
             </Link>
         </div>

@@ -8,19 +8,12 @@ import styles from "styles/Checkout/Checkout.module.css";
 import CartContext from "components/NavBar/Cart/context";
 import useFetchAuth from "hooks/useFetchAuth";
 
-const missingTestFields = {
-  seller: {
-    name: "Worten",
-    rating: 2.3,
-  },
-};
-
 export default function Checkout() {
   const { fetchAuth: fetch } = useFetchAuth()
   const cartContext = useContext(CartContext);
 
   const urlProposal = `${process.env.NEXT_PUBLIC_HOST}/proposal`;
-  const urlCategories = `${process.env.NEXT_PUBLIC_HOST}/category`;
+  const urlSeller = `${process.env.NEXT_PUBLIC_HOST}/seller`;
   const urlProduct = `${process.env.NEXT_PUBLIC_HOST}/product`;
 
   const [basket, setBasket] = useState([]);
@@ -47,9 +40,18 @@ export default function Checkout() {
           .then(({ data }) => {
             return fetchCategoriePath(data.category_id);
           });
+        const sellerInfo = fetch(`${urlSeller}/${item.seller_id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then(({data}) => {
+          return {
+            seller: { id: data.userId, name: data.companyName, rating: data.rating },
+          };
+        })
 
-        return Promise.all([proposalInfo, categoriesPath]).then(
-          ([proposalInfo, categoriesPath]) => {
+        return Promise.all([proposalInfo, categoriesPath,sellerInfo]).then(
+          ([proposalInfo, categoriesPath, sellerInfo]) => {
             let categoriesPathString = "";
             for (let i = 0; i < categoriesPath.length; i++) {
               if (i == categoriesPath.length - 1)
@@ -65,20 +67,20 @@ export default function Checkout() {
               ...item,
               ...proposalInfo,
               category: categoriesPathString,
-              ...missingTestFields,
+              ...sellerInfo,
             };
           }
         );
       });
     };
 
-    if (!cartContext.loading) {
+    if (!cartContext.loading && loading) {
       Promise.all(fetchAditional(cartContext.cart)).then((items) => {
         setBasket(items);
         setLoading(false);
       });
     }
-  }, [cartContext, urlProposal, urlProduct]);
+  }, [loading, cartContext, urlProposal, urlProduct, urlSeller, fetch]);
 
   return (
     <div className={styles.bg}>

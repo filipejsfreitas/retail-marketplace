@@ -7,13 +7,6 @@ import { BsXLg } from "react-icons/bs";
 import { useState, useEffect, useContext } from "react";
 import CartContext from "components/NavBar/Cart/context";
 
-function adjustQuantity(id,quantity,[curentState,setCurrentState]){
-    const newState = curentState.slice().map(item =>
-        item.id === id ? { ...item, quantity: (quantity < 1 ? 1 : Number(quantity)) } : item
-    );
-    setCurrentState(newState)
-}
-
 function getQuantityOpts(max_quantity) {
     let opts = []
     for (let i = 1; i <= max_quantity; i++) {
@@ -28,7 +21,7 @@ export default function Item({id,basket,img,title,price,quantity,category,stock,
     const cartContext = useContext(CartContext)
     
     const [value,setValue] = useState(quantity)
-    const [state,setState] = basket
+    const [state,_] = basket
 
 
     useEffect(()=> {
@@ -55,7 +48,7 @@ export default function Item({id,basket,img,title,price,quantity,category,stock,
                     <div className={styles.title} >{`${title}`}</div>
                     <div className={styles.category}>{`${category}`}</div>
                     <div className={styles.soldBy}>Sold and shipped by:</div>
-                    <Seller name={seller.name} rating={seller.rating}/>
+                    <Seller id={seller.id} name={seller.name} rating={seller.rating}/>
                     <span className={styles.status}><Status stock={stock}/></span>
                 </div>
                 <div className={styles.priceWrapper}>
