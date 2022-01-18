@@ -67,3 +67,7 @@
     height: 350px;
     width: 450px;
 }
+
+.panel_recommended_categories > div:nth-of-type(2) {
+    padding: 0;
+}
