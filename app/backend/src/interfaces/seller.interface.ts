@@ -10,4 +10,5 @@ export interface Seller {
   customerServiceEmail: string;
   rating: number;
   numberRating: number;
+  image: string;
 }
