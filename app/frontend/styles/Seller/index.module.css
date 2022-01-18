@@ -60,3 +60,9 @@
 .panel_lowstock > div:nth-of-type(2) {
     padding: 0;
 }
+
+.simple_panel {
+    height: 150px;
+    width: 400px;
+    background: linear-gradient(96.3deg, #303179 0.84%, #575DA8 46.82%, #141850 100%), #FFFFFF;
+}
