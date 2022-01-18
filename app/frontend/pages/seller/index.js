@@ -10,8 +10,11 @@ import LowStockProposals from "components/Seller/Card/LowStockProposals"
 import OrdersPie from "components/Seller/Card/OrderPie"
 import DailyRevenue from "components/Seller/Card/DailyRevenue"
 import YearRevenue from "components/Seller/Card/YearRevenue"
+import { SimpleCard } from "components/Seller/Card"
 
 import styles from "styles/Seller/index.module.css"
+import { BsTruck, BsBank, BsBoxSeam } from "react-icons/bs"
+
 
 export default function Home() {
   const { fetchAuth: fetch } = useFetchAuth()
@@ -28,6 +31,9 @@ export default function Home() {
 
   return <Layout sidebar={SELLER_SIDEBAR} isLoading={panel === undefined}>
     {panel && <div className={styles.content}>
+      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={30} newvalue={40} description={"this week"} className={styles.simple_panel} icon={<BsTruck/>}/>
+      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={40} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBank/>}/>
+      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={33} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam/>}/>
       <DailyRevenue revenueOverview={panel.revenueOverview} />
       <YearRevenue revenueOverview={panel.revenueOverview} />
       <OrdersPie ordersOverview={panel.ordersOverview} />
