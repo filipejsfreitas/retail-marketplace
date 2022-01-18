@@ -27,7 +27,6 @@ export default function Home() {
   console.debug(panel)
 
   return <Layout sidebar={SELLER_SIDEBAR} isLoading={panel === undefined}>
-    <h3>Home</h3>
     {panel && <div className={styles.content}>
       <DailyRevenue revenueOverview={panel.revenueOverview} />
       <YearRevenue revenueOverview={panel.revenueOverview} />

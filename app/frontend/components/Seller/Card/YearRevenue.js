@@ -13,7 +13,7 @@ export default function YearRevenue({ revenueOverview }) {
   return <SellerCard className={styles.panel_revenue_cal} title={"Yearly Sales Overview"}>
     <ResponsiveCalendar
       data={data}
-      from={`${curr.getFullYear()}`}
+      from={`${curr.getFullYear()-1}`}
       to={`${curr.getFullYear()}`}
       emptyColor="#eeeeee"
       colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
