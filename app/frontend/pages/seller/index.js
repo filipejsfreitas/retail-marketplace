@@ -3,7 +3,7 @@ import { SELLER_SIDEBAR } from "components/Management/Layout"
 import useFetchAuth from "hooks/useFetchAuth"
 import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
-import { Container, Row, Col } from "react-bootstrap"
+import { Col, Table } from "react-bootstrap"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ResponsivePie from 'components/Seller/ResponsivePie'
@@ -42,19 +42,21 @@ function DefaultCarousel({ children, ...props }) {
 }
 
 function RecommendedCategories({ recommendedCategories }) {
-  return <div className={styles.panel}>
-    <h5>Recommended Categories</h5>
-    <div className={styles.panel_cat}>
-      <DefaultCarousel autoPlay={true}>
-        {
-          recommendedCategories.categories.map(cat => (
-            <div key={cat} className={styles.carr_cat_elem}>
-              {cat}
-            </div>
+  return <SellerCard className={styles.panel_recommended_categories}
+    title={"Recommended Categories"}>
+    <div className={styles.recommended_categories_table_wrapper}>
+      <Table striped hover responsive>
+        <thead>
+          <tr> <th>CATEGORY</th> </tr>
+        </thead>
+        <tbody>
+          {recommendedCategories.categories.map(cat => (
+            <tr key={cat}> <td> {cat} </td> </tr>
           ))}
-      </DefaultCarousel>
+        </tbody>
+      </Table>
     </div>
-  </div>
+  </SellerCard>
 }
 
 function LowStockProposal({ proposal }) {
@@ -106,9 +108,7 @@ function RevenueOverviewBar({ revenueOverview }) {
     revenue: count,
   }))
 
-  return <div className={styles.panel}>
-    <h5>Revenue Overview</h5>
-    <div className={styles.panel_revenue}>
+  return <SellerCard className={styles.panel_revenue} title={"Daily Sales"}>
       <ResponsiveBar
         data={data}
         keys={["revenue"]}
@@ -120,36 +120,31 @@ function RevenueOverviewBar({ revenueOverview }) {
         colors={{ scheme: 'nivo' }}
         label={d => `${d.value}€`}
       />
-    </div>
-  </div>
+  </SellerCard>
 }
 
 
 function RevenueOverviewCal({ revenueOverview }) {
   const data = revenueOverview.map(({ _id, count }) => ({
     value: count,
-    day: new Date(_id.year, _id.month, _id.day).toJSON().slice(0,10),
+    day: new Date(_id.year, _id.month, _id.day).toJSON().slice(0, 10),
   }))
-
   const curr = new Date()
 
-  return <div className={styles.panel}>
-    <h5>Revenue Overview Calendar</h5>
-    <div className={styles.panel_revenue_cal}>
-      <ResponsiveCalendar
-        data={data}
-        from={`${curr.getFullYear()}`}
-        to={`${curr.getFullYear()}`}
-        emptyColor="#eeeeee"
-        colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-        margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
-        yearSpacing={40}
-        monthBorderColor="#ffffff"
-        dayBorderWidth={2}
-        dayBorderColor="#ffffff"
-      />
-    </div>
-  </div>
+  return <SellerCard className={styles.panel_revenue_cal} title={"Yearly Sales Overview"}>
+    <ResponsiveCalendar
+      data={data}
+      from={`${curr.getFullYear()}`}
+      to={`${curr.getFullYear()}`}
+      emptyColor="#eeeeee"
+      colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
+      margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+      yearSpacing={40}
+      monthBorderColor="#ffffff"
+      dayBorderWidth={2}
+      dayBorderColor="#ffffff"
+    />
+  </SellerCard>
 }
 
 export default function Home() {
@@ -168,11 +163,11 @@ export default function Home() {
   return <Layout sidebar={SELLER_SIDEBAR} isLoading={panel === undefined}>
     <h3>Home</h3>
     {panel && <div className={styles.content}>
-      <RecommendedCategories recommendedCategories={panel.recommendedCategories} />
-      <OrdersPie ordersOverview={panel.ordersOverview} />
       <RevenueOverviewBar revenueOverview={panel.revenueOverview} />
-      <LowStockProposals lowStockProposals={panel.alerts.lowStockProposals}/>
       <RevenueOverviewCal revenueOverview={panel.revenueOverview} />
+      <OrdersPie ordersOverview={panel.ordersOverview} />
+      <RecommendedCategories recommendedCategories={panel.recommendedCategories} />
+      <LowStockProposals lowStockProposals={panel.alerts.lowStockProposals} />
     </div>}
   </Layout>
 }

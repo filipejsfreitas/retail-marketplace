@@ -11,7 +11,11 @@ export default function SellerCard({ children, title, ...props }) {
                 {title}
             </h4>
         </Card.Header>
-        <Card.Body style={{"width": "100%", "height": "100%"}}>
+        <Card.Body style={{
+            "width": "100%",
+            "height": "90%",
+            "overflow-y": "auto",
+        }}>
             {children}
         </Card.Body>
     </Card>
