@@ -28,11 +28,14 @@
     text-align: center;
 }
 
+<<<<<<< HEAD
 .panel_revenue {
     height: 350px;
     width: 700px;
 }
 
+=======
+>>>>>>> 85d675e (refactor to files)
 .panel_revenue {
     height: 350px;
     width: 700px;

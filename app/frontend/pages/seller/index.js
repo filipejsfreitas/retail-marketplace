@@ -10,11 +10,16 @@ import LowStockProposals from "components/Seller/Card/LowStockProposals"
 import OrdersPie from "components/Seller/Card/OrderPie"
 import DailyRevenue from "components/Seller/Card/DailyRevenue"
 import YearRevenue from "components/Seller/Card/YearRevenue"
+<<<<<<< HEAD
 import { SimpleCard } from "components/Seller/Card"
 
 import styles from "styles/Seller/index.module.css"
 import { BsTruck, BsBank, BsBoxSeam } from "react-icons/bs"
 
+=======
+
+import styles from "styles/Seller/index.module.css"
+>>>>>>> 85d675e (refactor to files)
 
 export default function Home() {
   const { fetchAuth: fetch } = useFetchAuth()
