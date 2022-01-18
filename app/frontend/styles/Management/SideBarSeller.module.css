@@ -1,0 +1,111 @@
+.page {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 64px);
+}
+
+
+.sidebar {
+    float: left;
+    flex-direction: column;
+    background-color: #303179;
+    color: #FFFFFF;
+    width: 260px;
+    margin-left: 0px;
+    margin-top: -64px;
+    align-self: auto;
+    position: relative;
+}
+
+.sidebar > .sidebar_content {
+   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+
+    position: static;
+    width: 239px;
+    height: 42px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background: rgba(81, 82, 182, 0.5);
+    border-radius: 50px;
+    transition: 0.3s;
+
+}
+
+.sidebar > .sidebar_content:hover {
+    opacity: 1;
+    background-color: rgb(20, 24, 80);
+}
+
+
+.sidebar > .sidebar_content:hover {
+    color:inherit;
+    cursor: pointer;
+
+}
+
+.logo{
+    margin-right: 43px;
+    margin-left: 43px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.company{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 239px;
+    height: 206px;
+    padding: 10px;
+    position: static;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.companyLogo{
+    width: 140px;
+    height: 140px;
+    background: #C4C4C4;
+    border-radius: 100px;
+    margin: 10px;
+    position: static;
+}
+
+.companyName{
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.icon{
+    position: static;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.text{
+    position: static;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 34px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+}
