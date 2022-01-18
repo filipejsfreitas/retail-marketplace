@@ -14,6 +14,7 @@ export default function SellerCard({ children, title, ...props }) {
         <Card.Body style={{
             "width": "100%",
             "height": "90%",
+            "overflow-x": "auto",
             "overflow-y": "auto",
         }}>
             {children}
