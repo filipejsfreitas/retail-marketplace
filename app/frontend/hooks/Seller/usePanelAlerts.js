@@ -1,0 +1,26 @@
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import useFetchAuth from "/hooks/useFetchAuth";
+
+export default function usePanelAlerts() {
+  const { isReady } = useRouter()
+  const { fetchAuth: fetch } = useFetchAuth()
+
+  const [loading, setLoading] = useState(true)
+  const [alerts, setAlerts] = useState(undefined)
+
+  useEffect(async () => {
+    if (!isReady) return
+    await fetch(`${process.env.NEXT_PUBLIC_HOST}/sellerPanel/alerts`)
+      .then(rep => rep.json())
+      .then(alerts => {
+        setLoading(false)
+        setAlerts(alerts)
+      })
+  }, [isReady])
+
+  return {
+    alerts: alerts,
+    loading: loading,
+  }
+}
