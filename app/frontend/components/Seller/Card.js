@@ -6,17 +6,17 @@ import styles from "styles/Seller/card.module.css"
 export function SimpleCard({ title, value, oldvalue, newvalue, description, icon, className }) {
     const diff = parseFloat((Math.max(newvalue, oldvalue) / Math.min(newvalue, oldvalue) - 1) *
         (newvalue > oldvalue ? 100 : -100)).toFixed(2)
-    const valuedesc = (diff < -0.1) ? "decrease"
-        : (diff > -0.1) ? "increase"
-        : "maintain"
-    const colorClass = (diff < 10) ? styles.simple_card_percentage_red
-        : (diff < 0) ? styles.simple_card_percentage_yellow
-        : (diff > 10) ? styles.simple_card_percentage_green
-        : styles.simple_card_percentage_green_light
-    const iconDiff = (diff < 10) ? <BsArrowDown />
-        : (diff < 0) ? <BsArrowDownShort />
-        : (diff > 10) ? <BsArrowUp />
-        : <BsArrowUpShort />
+    const valuedesc = (diff < -0.1 && "decrease")
+        || (diff > -0.1 && "increase")
+        || "maintain"
+    const colorClass = (diff < -10 && styles.simple_card_percentage_red)
+        || (diff < 0 && styles.simple_card_percentage_yellow)
+        || (diff > 10 && styles.simple_card_percentage_green)
+        || (styles.simple_card_percentage_green_light)
+    const iconDiff = (diff < -10 && <BsArrowDown />)
+        || (diff < 0 && <BsArrowDownShort />)
+        || (diff > 10 && <BsArrowUp />)
+        || (<BsArrowUpShort />)
 
     return <div className={`${styles.simple_card} ${className || ""}`}>
         <div>
@@ -57,12 +57,12 @@ export default function SellerCard({ children, title, loading, failed, ...props 
             "overflow-x": "auto",
             "overflow-y": "auto",
         }}>
-            { failed ? <div className={styles.card_failed}>
+            {failed ? <div className={styles.card_failed}>
                 <BsFillExclamationTriangleFill />
             </div>
             : loading ? <div className={styles.card_loading}>
-                <Spinner animation="border" />
-            </div>
+                    <Spinner animation="border" />
+                </div>
             : children}
         </Card.Body>
     </Card>
