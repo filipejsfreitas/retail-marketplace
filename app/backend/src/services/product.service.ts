@@ -303,9 +303,9 @@ export class ProductService {
     })
 
     const requests = []
-    Promise.all(product_search).then(productsArray => {
+    return Promise.all(product_search).then(productsArray => {
 
-      Promise.all(product_proposal_search).then(proposalsArray => {
+      return Promise.all(product_proposal_search).then(proposalsArray => {
       
         for (let i = 0; i < seller_proposals.length; i++) {
           const proposal = seller_proposals[i];
@@ -346,10 +346,10 @@ export class ProductService {
   
         }
 
-        Promise.all(requests).then(price_optimmized => {
-          
-          return JSON.stringify(price_optimmized);
-          //return await price_optimmized.json();
+        return Promise.all(requests).then(async (price_optimmized) => {
+          return Promise.all(price_optimmized.map(req => req.json())).then(reps => {
+            return reps
+          })
         })
         .catch(function (err) {
           throw new HttpException(500,err.message); // some coding error in handling happened
