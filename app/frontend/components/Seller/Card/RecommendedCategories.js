@@ -3,16 +3,16 @@ import SellerCard from "components/Seller/Card"
 
 import styles from "styles/Seller/index.module.css"
 
-export default function RecommendedCategories({ recommendedCategories }) {
+export default function RecommendedCategories({ recommendedCategories, ...props }) {
   return <SellerCard className={styles.panel_recommended_categories}
-    title={"Recommended Categories"}>
+    title={"Recommended Categories"} {...props}>
     <div className={styles.recommended_categories_table_wrapper}>
       <Table striped hover responsive>
         <thead>
           <tr> <th>CATEGORY</th> </tr>
         </thead>
         <tbody>
-          {recommendedCategories.categories.map(cat => (
+          {(recommendedCategories ?? []).map(cat => (
             <tr key={cat}> <td> {cat} </td> </tr>
           ))}
         </tbody>

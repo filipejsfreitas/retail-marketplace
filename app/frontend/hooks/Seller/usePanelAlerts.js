@@ -8,6 +8,7 @@ export default function usePanelAlerts() {
 
   const [loading, setLoading] = useState(true)
   const [alerts, setAlerts] = useState(undefined)
+  const [lowStockProposals, setLowStockProposals] = useState(undefined)
 
   useEffect(async () => {
     if (!isReady) return
@@ -19,8 +20,14 @@ export default function usePanelAlerts() {
       })
   }, [isReady])
 
+  useEffect(async () => {
+    setLowStockProposals((alerts ?? {}).lowStockProposals)
+  }, [alerts])
+
+
   return {
     alerts: alerts,
     loading: loading,
+    lowStockProposals: lowStockProposals,
   }
 }
