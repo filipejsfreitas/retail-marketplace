@@ -197,7 +197,6 @@ export default function Proposal(props) {
     const json = await
       fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
         .then(rep => rep.json())
-    console.debug(json)
   }, [])
 
   return (

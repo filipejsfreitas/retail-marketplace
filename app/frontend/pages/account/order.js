@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 function OrderItem({ item }) {
     const { data: product, loading }
         = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/${item.product_id}`, { default: {} })
-    console.debug(item)
     const Sep = () => <Col lg="auto">{"|"}</Col>
 
     return <Row>
@@ -46,7 +45,6 @@ function OrderField({title, value}){
 
 function Order({ order }) {
     const [hidden, setHidden] = useState(true)
-    //console.debug(order.items)
     return <div>
         <a className={addrstyles.back_btn} onClick={() => setHidden(!hidden)}>
             <Col lg="auto"> {hidden ? <BsCaretDownFill /> : <BsCaretUpFill />}</Col>

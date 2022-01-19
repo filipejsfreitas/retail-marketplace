@@ -71,7 +71,6 @@ function PageContent(props) {
 
 export default function Layout(props) {
     const { userType } = useContext(TokenContext)
-    console.log(userType)
     const authorized = (userType === UserType.SELLER && props.sidebar.rootpath == SELLER_SIDEBAR.rootpath)
         || (userType === UserType.ADMIN && props.sidebar.rootpath == ADMIN_SIDEBAR.rootpath)
 

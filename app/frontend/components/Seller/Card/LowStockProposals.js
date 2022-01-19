@@ -1,4 +1,4 @@
-import { Table } from "react-bootstrap"
+import { Table, Spinner } from "react-bootstrap"
 import SellerCard from "components/Seller/Card"
 import { BsPlusSquare, BsArrowRightSquare } from "react-icons/bs";
 import Link from "next/link";
@@ -13,10 +13,12 @@ function LowStockProposalsLine({ proposal }) {
     useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/${product_id}`)
 
   return <tr >
-    <td> {loading ? "" : product.name} </td>
+    <td> {loading ? <Spinner animation="border" size="sm" />
+      : product.name
+    } </td>
     <td> {`${price}€`} </td>
     <td> {stock} </td>
-    <td> ? </td>
+    <td> {<Spinner animation="border" size="sm" />} </td>
     <td>
       <div style={{ "display": "flex", "gap": "5px" }}>
         {/*<a > <BsPlusSquare /> </a>*/}
