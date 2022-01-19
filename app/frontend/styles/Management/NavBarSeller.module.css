@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     height: 64px;
-    width: 100vmax;
+    width: 100%;
 }
 
 .title{
@@ -15,17 +15,28 @@
     color: #FFFFFF;
 }
 
-.infoSeller{
-    float: right;
+.outCont{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0px 10px 0px 0px;
+    float: right;
+    max-width:400px;
+}
+
+.infoSeller{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 0px 0px;
     position: static;
-    width: 158px;
+    width: 100%;
     height: 64px;
-    margin-left: -5px;
+    margin-left: 0px;
+    flex: 1;
+    margin-left: -10px;
+    margin-right: 10px;
 }
 
 .circle{
@@ -40,10 +51,10 @@
     font-size: 24px;
     line-height: 28px;
     color: #FFFFFF;
+    flex: 1;
 }
 
 .gearCont{
-    float: right;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -52,12 +63,10 @@
     position: static;
     width: 65px;
     height: 64px;
-    margin-right: -5px;
 }
 
 .gear{
     color: #FFFFFF;
-    margin-right: 5px;
 }
 
 .btn {

@@ -1,37 +1,53 @@
-import { Navbar } from "react-bootstrap"
+import { Navbar , Button} from "react-bootstrap"
 import { BsPersonCircle, BsGearFill } from "react-icons/bs";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row , Spinner, Col} from "react-bootstrap";
 import { useState } from "react";
-import { useRef,useContext } from "react";
+import React, { useRef,useContext } from "react";
 import TokenContext from 'components/Context/TokenContext'
 import styles from "styles/Management/NavBarSeller.module.css"
 import { UserType } from "hooks/useToken";
 import Dropdown from "./DropDownSeller";
+import EditSeller from "./EditSeller";
+import useToken from "hooks/useToken";
+import useFetchData from "hooks/useFetchData";
 
 export default function NavBarSeller(props) {
     const { token , userType} = useContext(TokenContext)
     const [showDropdown, setshowDropdown] = useState(false);
+    const [modalShow, setModalShow] = React.useState(false);
     const dropButtonRef = useRef(null);
 
-    return (
+    const { data: seller, loading } =
+     useFetchData(() => `${process.env.NEXT_PUBLIC_HOST}/seller/${token._id}`,
+        {  when:token && token._id})
+
+    return(loading ? <Spinner animation="border" /> :
         <>
             <Navbar className={styles.navbar} bg="primary" >
                 <Container fluid>
                     <div className={styles.title}>Dashboard</div>
-                    <Row md={12}>
-                        <Container className={styles.gearCont}>
-                            <BsGearFill size={48} className={styles.gear}/>
-                        </Container>
-                        <Container className={styles.infoSeller}>
+                    <Row md={12} className={styles.outCont}>
+                        <Col className={styles.gearCont}>
+                            <button type="submit" className={styles.btn}
+                                onClick={() => setModalShow(true)}>
+                                <BsGearFill size={45} className={styles.gear}/>
+                            </button>
+                            <EditSeller
+                                show={modalShow}
+                                onHide={() => setModalShow(false)}
+                                seller={seller}
+                        />
+                        </Col>
+                        <Col className={styles.infoSeller}>
                         {userType == UserType.SELLER ?
                         <button ref={dropButtonRef} className={styles.btn}
                           onClick={() => setshowDropdown(!showDropdown)}
                         >
                             <BsPersonCircle size={48} className={styles.circle} />
-                            <div  className={styles.name}>{(token.sellerInfo || { firstName: "" }).firstName}</div>
+                            <div  className={styles.name}>{(token.sellerInfo).firstName} {(token.sellerInfo).lastName}</div>
                         </button>
                         : <></>}
-                        </Container>
+                        </Col>
                     </Row>
                 </Container>
             </Navbar>
