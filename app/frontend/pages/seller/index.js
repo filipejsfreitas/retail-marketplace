@@ -17,6 +17,7 @@ import usePanelOrdersOverview from "hooks/Seller/usePanelOrdersOverview"
 import usePanelRevenueOverview from "hooks/Seller/usePanelRevenueOverview"
 import usePanelAlerts from "hooks/Seller/usePanelAlerts"
 import usePanelRecommendedCategories from "hooks/Seller/usePanelRecommendedCategories"
+import useAllPriceStats from "hooks/Seller/useAllPriceStats"
 
 import styles from "styles/Seller/index.module.css"
 
