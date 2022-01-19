@@ -5,37 +5,45 @@ import Link from "next/link";
 import { useState, useContext } from "react";
 import gstyles from "/styles/Seller/globals.module.css";
 import TokenContext from "components/Context/TokenContext";
+import useSellerProposals from "hooks/Seller/useSellerProposals";
+import Form from 'react-bootstrap/Form'
 
-function ProposalProductName(props) {
-  const { data: product, loading: loading } = useFetchData(
-    `${process.env.NEXT_PUBLIC_HOST}/product/${props.proposal.product_id}`
-    , { when: props.proposal });
+function ProposalProductName({ proposal }) {
+  const { _id, product } = proposal
+
   return (
-    <Link href={`/seller/proposal/${props.proposal._id}`}>
+    <Link href={`/seller/proposal/${_id}`}>
       <a className={gstyles.link}>
-        <h5>{loading ? "(Loading product name...)" : product.name}</h5>
+        <h5>{product.name}</h5>
       </a>
     </Link>
   );
 }
 
+function SearchBar({ setQuery }) {
+  return <Form.Control placeholder="Search" onChange={e => {
+    if (setQuery)
+      setQuery(e.target.value)
+  }} />
+}
+
 export default function ProposalList() {
   const { token } = useContext(TokenContext)
 
-  const { data: proposals, loading: loading } = useFetchData(
-    () => `${process.env.NEXT_PUBLIC_HOST}/proposal/seller/${token._id}`,
-    { default: [], when: (token && token._id) }
-  );
+  const { proposals, search, loading } = useSellerProposals(token && token._id)
+  const [query, setQuery] = useState("")
 
   return <Layout sidebar={SELLER_SIDEBAR} isLoading={loading}>
-      <h3>Manage Proposals</h3>
-      <br />
-      <ToggleDropdown title={<h4>Proposal List</h4>}>
-        {(proposals ?? []).map((proposal) => (
-          <ProposalProductName key={proposal._id} proposal={proposal}>
-            {proposal._id}
-          </ProposalProductName>
-        ))}
-      </ToggleDropdown>
-    </Layout>
+    <h3>Manage Proposals</h3>
+    <br />
+    <SearchBar setQuery={setQuery}/>
+    <div style={{ "display": "flex", "flexDirection": "column" }}>
+      {search(query).map((proposal) => (
+        <ProposalProductName key={proposal._id} proposal={proposal}>
+          {proposal._id}
+        </ProposalProductName>
+      ))}
+    </div>
+
+  </Layout>
 }

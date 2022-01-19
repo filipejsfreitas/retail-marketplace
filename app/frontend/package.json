@@ -24,7 +24,8 @@
     "react-jwt": "1.1.4",
     "react-multi-carousel": "^2.6.5",
     "react-phone-number-input": "^3.1.44",
-    "react-transition-group": "^4.4.2"
+    "react-transition-group": "^4.4.2",
+    "fuse.js": "6.5.3"
   },
   "devDependencies": {
     "eslint": "7.32.0",
