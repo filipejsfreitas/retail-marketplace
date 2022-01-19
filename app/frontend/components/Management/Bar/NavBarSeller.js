@@ -6,10 +6,11 @@ import { useRef,useContext } from "react";
 import TokenContext from 'components/Context/TokenContext'
 import styles from "styles/Management/NavBarSeller.module.css"
 import Dropdown from "./DropDown";
+import { UserType } from "hooks/useToken";
+
 
 export default function NavBarSeller(props) {
-    const { token } = useContext(TokenContext)
-    console.log(token)
+    const { token , userType} = useContext(TokenContext)
     const [showDropdown, setshowDropdown] = useState(false);
     const dropButtonRef = useRef(null);
 
@@ -23,12 +24,14 @@ export default function NavBarSeller(props) {
                             <BsGearFill size={48} className={styles.gear}/>
                         </Container>
                         <Container className={styles.infoSeller}>
+                        {userType == UserType.SELLER ?
                         <button ref={dropButtonRef} className={styles.btn}
                           onClick={() => setshowDropdown(!showDropdown)}
                         >
                             <BsPersonCircle size={48} className={styles.circle} />
                             <div  className={styles.name}>{(token.sellerInfo || { firstName: "" }).firstName}</div>
                         </button>
+                        : <></>}
                         </Container>
                     </Row>
                 </Container>

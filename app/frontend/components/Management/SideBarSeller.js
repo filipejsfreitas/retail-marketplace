@@ -2,6 +2,8 @@ import styles from "/styles/Management/SideBarSeller.module.css"
 import LogoReversed from "components/Logos/LogoReversed";
 import Link from 'next/link'
 import React from 'react';
+import { Navbar } from "react-bootstrap";
+
 
 const Item = ({content, rootpath}) =>{
     return <>
@@ -15,10 +17,12 @@ const SideBarSeller = (props) =>{
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     const contents = props.sidebar.contents
     const rootpath = props.sidebar.rootpath
-    return(  
+    return(
     <> 
-        <div className={styles.logo}>
-            <LogoReversed height={50} width={170} />
+        <div className={styles.logo} >
+            <Navbar.Brand href="/">
+                <LogoReversed height={50} width={170} />
+            </Navbar.Brand>
         </div>
            
         <div className={styles.company}>

@@ -63,10 +63,8 @@ const Dropdown = (props) => {
               </div>
             </div>
             {userType === UserType.SELLER && <div className={styles.dd_bot_user}>
-              Manage Products
               <div className={styles.dd_bot_user_interior}>
-                <Link href="/seller">Home</Link>
-                <Link href="/seller/proposal/list">Manage Proposals</Link>
+                <Link href="/">Back to Shop</Link>
               </div>
             </div>}
           </div>

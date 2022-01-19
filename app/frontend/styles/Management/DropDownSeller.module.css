@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: column;
     width: 400px;
-    min-height: 250px;
+    min-height: 200px;
     z-index: 1;
     box-shadow: -5px 5px 5px grey;
   }
@@ -45,7 +45,7 @@
     font-size: 30px;
     align-items: center;
     justify-content: space-between;
-    padding: 25px;
+    padding: 22px;
   }
   
   .dd_top_user_welcome_div {
@@ -58,11 +58,13 @@
     font-size: 24px;
     line-height: 5px;
     padding-left: 15px;
+    padding-top: 5px;
   }
   
   .dd_logoutBtn {
     height: 46px;
     width: 160px;
+    padding-top: 10px;
   }
   
   .dd_bot_user {
@@ -77,7 +79,7 @@
     font-weight: 500;
     font-size: 36px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 25px;
+    padding: 20px;
   }
   
   .dd_bot_user_interior {
@@ -87,5 +89,6 @@
     font-weight: 500;
     font-size: 24px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 15px;
+    padding: 5px;
+    margin-left: 15px;
   }
