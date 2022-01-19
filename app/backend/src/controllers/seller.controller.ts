@@ -1,11 +1,20 @@
 import { validationMiddleware } from '../middlewares/express/validation.middleware';
 import { SellerService } from '../services/seller.service';
-import { Authorized, Body, Controller, Delete, Get, Param, Post, Put, Req, UseBefore } from 'routing-controllers';
+import { Authorized, Body, Controller, Delete, Get, Param, Post, Put, Req, UploadedFile, UploadedFiles, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
 import { SellerCommentDto } from '../dtos/sellerComment.dto';
 import { UpdateSellerDto } from '../dtos/seller.dto';
 import { RequestWithUser } from 'interfaces/auth.interface';
 import { InvoiceUpdateDto } from '../dtos/invoice-update.dto';
+import fs from 'fs';
+
+import { v4 as uuidv4 } from 'uuid';
+import { HttpException } from 'exceptions/HttpException';
+import multer from 'multer';
+
+const upload = multer({ dest: './uploads' });
+
+type File = Express.Multer.File;
 
 @Controller('/seller')
 export class SellerController {
@@ -103,6 +112,71 @@ export class SellerController {
   //   return { data: info, message: 'Seller created' };
   // }
 
+  @Post('/image')
+  @Authorized()
+  @OpenAPI({ summary: 'post seller image' })
+  @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
+  async postImage( @Req() req: RequestWithUser,@UploadedFile('image') imagem: File) {
+    const sellerId = req.token._id;
+
+    const foldername = uuidv4();
+
+    fs.mkdir('./public/sellerImage/' + foldername, { recursive: true }, err => {
+      if (err) {
+        throw new HttpException(500, err.message);
+      }
+        fs.writeFile('./public/sellerImage/' + foldername + '/' + imagem.originalname, imagem.buffer, err => {
+          if (err) {
+            console.log(err);
+            throw new HttpException(500, err.message);
+          }
+          let path = 'sellerImage/' + foldername + '/' + imagem.originalname;
+          this.sellerService.addImage(sellerId, path).then(result =>{
+            return { data: result, message: 'Image added' };
+          });
+        });
+    });
+    
+  }
+
+  @Put('/image')
+  @Authorized()
+  @OpenAPI({ summary: 'post seller image' })
+  @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
+  async updateImage( @Req() req: RequestWithUser,@UploadedFile('image') imagem: File) {
+    const sellerId = req.token._id;
+
+    const foldername = uuidv4();
+
+    const seller = await this.sellerService.getSeller(sellerId);
+    
+    fs.unlink('./public/' + seller.image, err => {
+      if (err) {
+        console.log(err);
+        throw new HttpException(500, err.message);
+      }
+    });
+
+    fs.mkdir('./public/sellerImage/' + foldername, { recursive: true }, err => {
+      if (err) {
+        throw new HttpException(500, err.message);
+      }
+        fs.writeFile('./public/sellerImage/' + foldername + '/' + imagem.originalname, imagem.buffer, err => {
+          if (err) {
+            console.log(err);
+            throw new HttpException(500, err.message);
+          }
+          let path = 'sellerImage/' + foldername + '/' + imagem.originalname;
+          this.sellerService.updateImage(sellerId, path).then(result =>{
+            return { data: result, message: 'Image updated' };
+          });
+        });
+    });
+    
+  }
+
+
+
   @Post('/:sellerId/comment')
   @Authorized()
   @OpenAPI({ summary: 'post comment' })
@@ -114,4 +188,7 @@ export class SellerController {
 
     return { data: info, message: 'Comment posted' };
   }
+
+  
+
 }

@@ -11,7 +11,7 @@ export class CartController {
   public cartItemService = new CartItemService();
 
   @Get('/')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'returns the users cart items' })
   async getCart(@Req() req: RequestWithUser) {
     const userId = req.token._id;
@@ -20,7 +20,7 @@ export class CartController {
   }
 
   @Post('/lock')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'fazer lock cart items' })
   async lockCart(@Req() req: RequestWithUser) {
     const userId = req.token._id;
@@ -39,7 +39,7 @@ export class CartController {
   }
 
   @Post('/buy')
-  @Authorized()
+  @Authorized('Client')
   @UseBefore(validationMiddleware(ConcludePurchaseDto, 'body'))
   async purchase(@Body() data: ConcludePurchaseDto,@Req() req: RequestWithUser) {
     const userId = req.token._id;
@@ -49,7 +49,7 @@ export class CartController {
   }
 
   @Get('/:id')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'returns information on the cart item' })
   async getCartItem(@Param('id') cartItemId: string,@Req() req: RequestWithUser) {
     const userId = req.token._id;
@@ -58,7 +58,7 @@ export class CartController {
   }
 
   @Post('/')
-  @Authorized()
+  @Authorized('Client')
   @UseBefore(validationMiddleware(CreateCartItemDto, 'body'))
   @OpenAPI({ summary: 'create cart item' })
   async createCartItem(@Body() itemData: CreateCartItemDto,@Req() req: RequestWithUser) {
@@ -69,7 +69,7 @@ export class CartController {
   }
 
   @Put('/:id')
-  @Authorized()
+  @Authorized('Client')
   @UseBefore(validationMiddleware(UpdateCartItemDto, 'body'))
   @OpenAPI({ summary: 'update cart item' })
   async updateCartItem(@Param('id') cartItemId: string, @Body() itemData: UpdateCartItemDto,@Req() req: RequestWithUser) {
@@ -79,7 +79,7 @@ export class CartController {
   }
 
   @Delete('/:id')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'delete cart item' })
   async deleteCartItem(@Param('id') cartItemId: string,@Req() req: RequestWithUser) {
     const userId = req.token._id;

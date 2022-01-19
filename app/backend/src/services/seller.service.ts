@@ -170,4 +170,26 @@ export class SellerService {
 
     return comments;
   }
+
+  public async addImage(sellerId: string, imagePath: string){
+    const seller = await this.sellers.findById(sellerId);
+    if(seller.image){
+      throw new HttpException(400, "Already as image");
+    }
+    
+    const newSeller = await this.sellers.findByIdAndUpdate(sellerId, {image: imagePath});
+
+    return newSeller;   
+  }
+
+  public async updateImage(sellerId: string, imagePath: string){
+    const seller = await this.sellers.findById(sellerId);
+    if(!(seller.image)){
+      throw new HttpException(400, "Does not have an image image");
+    }
+    
+    const newSeller = await this.sellers.findByIdAndUpdate(sellerId, {image: imagePath});
+
+    return newSeller;   
+  }
 }

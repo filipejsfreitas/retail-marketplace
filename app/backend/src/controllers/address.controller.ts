@@ -11,7 +11,7 @@ export class AddressController {
   public addressService = new AddressService();
 
   @Post('/')
-  @Authorized()
+  @Authorized('Client')
   @UseBefore(validationMiddleware(CreateAddressDto, 'body'))
   @OpenAPI({ summary: 'create address' })
   async createAddress(@Body() addressInfo: CreateAddressDto, @Req() req: RequestWithUser) {
@@ -21,7 +21,7 @@ export class AddressController {
   }
 
   @Put('/:id')
-  @Authorized()
+  @Authorized('Client')
   @UseBefore(validationMiddleware(CreateAddressDto, 'body'))
   @OpenAPI({ summary: 'update address' })
   async updateAddress(@Param('id') addressId: string, @Body() addressInfo: CreateAddressDto,@Req() req: RequestWithUser) {
@@ -31,7 +31,7 @@ export class AddressController {
   }
 
   @Delete('/:id')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'delete address' })
   async deleteAddress(@Param('id') addressId: string,@Req() req: RequestWithUser) {
     const clientId = req.token._id;
@@ -40,7 +40,7 @@ export class AddressController {
   }
 
   @Get('/client')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'retrive all clients address information' })
   async getClientAddresses(@Req() req: RequestWithUser) {
     const clientId = req.token._id;
@@ -49,7 +49,7 @@ export class AddressController {
   }
 
   @Get('/:id')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'retrive address information' })
   async getAddress(@Param('id') addressId: string,@Req() req: RequestWithUser) {
     const clientId = req.token._id;

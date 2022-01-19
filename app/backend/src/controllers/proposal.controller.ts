@@ -33,7 +33,7 @@ export class ProposalController {
   }
 
   @Post('/')
-  @Authorized()
+  @Authorized('Seller')
   @UseBefore(validationMiddleware(CreateProposalDto, 'body'))
   @OpenAPI({ summary: 'criar de uma proposta' })
   async createProposal(@Body() propData: CreateProposalDto, @Req() req: RequestWithUser) {
@@ -43,7 +43,7 @@ export class ProposalController {
   }
 
   @Put('/:id')
-  @Authorized()
+  @Authorized('Seller')
   @UseBefore(validationMiddleware(UpdateProposalDto, 'body'))
   @OpenAPI({ summary: 'update de uma proposta' })
   async updateProposal(@Param('id') propId: string, @Body() propData: UpdateProposalDto, @Req() req: RequestWithUser) {
@@ -53,7 +53,7 @@ export class ProposalController {
   }
 
   @Delete('/:id')
-  @Authorized()
+  @Authorized('Seller')
   @OpenAPI({ summary: 'delete de uma proposta' })
   async deleteProposal(@Param('id') propId: string, @Req() req: RequestWithUser) {
     const sellerId = req.token._id;

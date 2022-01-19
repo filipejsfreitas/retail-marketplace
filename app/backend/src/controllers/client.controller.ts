@@ -13,7 +13,7 @@ export class ClientController {
   public clientService = new ClientService();
 
   @Get('/')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'get client info' })
   async getClient(@Req() req: RequestWithUser) {
     const clientId = req.token._id;
@@ -22,7 +22,7 @@ export class ClientController {
   }
 
   @Put('/')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'update client info' })
   @UseBefore(validationMiddleware(UpdateClientDto, 'body'))
   async updateClient(@Body() clientInfo: UpdateClientDto, @Req() req: RequestWithUser) {
@@ -42,7 +42,7 @@ export class ClientController {
   // }
 
   @Get('/invoice')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'get client invoices ' })
   async getInvoices(@Req() req: RequestWithUser) {
     const clientId = req.token._id;
@@ -51,7 +51,7 @@ export class ClientController {
   }
 
   @Get('/invoice/:id')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'get client invoices ' })
   async getInvoice(@Param('id') invoice_id: string, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
@@ -60,7 +60,7 @@ export class ClientController {
   }
 
   @Post('/favorites')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'add product to favorites' })
   @UseBefore(validationMiddleware(FavoriteDto, 'body'))
   async addToFavorites(@Body() productInfo: FavoriteDto,@Req() req: RequestWithUser) {
@@ -70,7 +70,7 @@ export class ClientController {
   }
 
   @Delete('/favorites/:id')
-  @Authorized()
+  @Authorized('Client')
   @OpenAPI({ summary: 'delete product from favorites' })
   async deleteFromFavorites(@Param('id') productId: string,@Req() req: RequestWithUser) {
     const clientId = req.token._id;
