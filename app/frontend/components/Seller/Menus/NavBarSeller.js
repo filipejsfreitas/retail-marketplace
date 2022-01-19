@@ -5,9 +5,8 @@ import { useState } from "react";
 import { useRef,useContext } from "react";
 import TokenContext from 'components/Context/TokenContext'
 import styles from "styles/Management/NavBarSeller.module.css"
-import Dropdown from "./DropDown";
 import { UserType } from "hooks/useToken";
-
+import Dropdown from "./DropDownSeller";
 
 export default function NavBarSeller(props) {
     const { token , userType} = useContext(TokenContext)

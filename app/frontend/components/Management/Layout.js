@@ -9,20 +9,8 @@ import TokenContext from 'components/Context/TokenContext'
 import Error from "next/error";
 import { UserType } from "hooks/useToken"
 import { BsBoxArrowLeft } from "react-icons/bs";
-import SideBarSeller from './SideBarSeller'
-import NavBarSeller from './Bar/NavBarSeller';
-
-
-//export const SELLER_SIDEBAR = {
-//    rootpath: "/seller",
-//    contents: [
-//        { text: "Home", url: "/" },
-//        { text: "Add Proposal", url: "/proposal/add/" },
-//        { text: "Manage Proposals", url: "/proposal/list/" },
-//        { text: "Manage Orders", url: "/order/list/" },
-//    ],
-//}
-
+import NavBarSeller from 'components/Seller/Menus/NavBarSeller';
+import SideBarSeller from 'components/Seller/Menus/SideBarSeller';
 
 export function BsIcon(){
     return <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16" className={stylesNew.icon}>
@@ -72,6 +60,7 @@ function SideBar(props) {
 function PageContent(props) {
     return <>
         <div className={stylesNew.sidebar}>
+            {/* if user type== admin show SideBar */}
             <SideBarSeller sidebar={props.sidebar} />
         </div>
         <div className={styles.page_content}>
@@ -87,6 +76,7 @@ export default function Layout(props) {
         || (userType === UserType.ADMIN && props.sidebar.rootpath == ADMIN_SIDEBAR.rootpath)
 
     return (userType && !authorized) ? <Error statusCode={401} /> : <>
+        {/* if user type== admin show NavBar */}
         <NavBarSeller></NavBarSeller>
         <div className={stylesNew.page}>
          {!userType ? <></> : <PageContent {...props} />}
