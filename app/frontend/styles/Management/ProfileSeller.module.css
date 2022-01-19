@@ -1,0 +1,48 @@
+.page{
+    background-color: #ebe8e8;
+}
+
+.col1{
+    margin-top: 10px;
+}
+
+.titles{
+    float: inline-start;
+    font-size: 25px;
+    font-weight: 700;
+    margin-left: 10px;
+    font-family: Fira Sans;
+    line-height: 42px;
+}
+
+.infos{
+    float: inline-end;
+    font-size: 25px;
+    margin-right: 10px;
+    font-family: Fira Sans;
+    line-height: 42px;
+}
+
+.company{
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    position: static;
+    float: right;
+}
+
+.companyLogo{
+    width: 140px;
+    height: 140px;
+    background: #C4C4C4;
+    border-radius: 100px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.icon{
+    position:absolute ; 
+    margin-top: 115px;
+    margin-left: 110px;
+    cursor: pointer;
+}
