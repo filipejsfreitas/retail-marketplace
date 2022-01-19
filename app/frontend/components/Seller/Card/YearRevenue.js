@@ -3,17 +3,17 @@ import { ResponsiveCalendar } from "@nivo/calendar"
 
 import styles from "styles/Seller/index.module.css"
 
-export default function YearRevenue({ revenueOverview }) {
-  const data = revenueOverview.map(({ _id, count }) => ({
+export default function YearRevenue({ revenueOverview, ...props }) {
+  const data = revenueOverview ? revenueOverview.map(({ _id, count }) => ({
     value: count,
     day: new Date(_id.year, _id.month, _id.day).toJSON().slice(0, 10),
-  }))
+  })) : []
   const curr = new Date()
 
-  return <SellerCard className={styles.panel_revenue_cal} title={"Yearly Sales Overview"}>
+  return <SellerCard className={styles.panel_revenue_cal} title={"Yearly Sales Overview"} {...props}>
     <ResponsiveCalendar
       data={data}
-      from={`${curr.getFullYear()-1}`}
+      from={`${curr.getFullYear() - 1}`}
       to={`${curr.getFullYear()}`}
       emptyColor="#eeeeee"
       colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}

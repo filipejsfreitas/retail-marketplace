@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap"
+import { Card, Spinner } from "react-bootstrap"
 
 import { BsArrowUp, BsArrowDown, BsArrowUpShort, BsArrowDownShort } from "react-icons/bs"
 import styles from "styles/Seller/card.module.css"
@@ -28,7 +28,7 @@ export function SimpleCard({ title, value, oldvalue, newvalue, description, icon
             </div>
             <div style={{ "display": "flex", "flex-direction": "row", "align-items": "center" }}>
                 <div className={colorClass} style={{ "marginRight": "5px" }}>
-                    <BsArrowUp />
+                    {iconDiff}
                     {`${diff}%`}
                 </div>
                 {`${valuedesc} ${description}`}
@@ -40,7 +40,7 @@ export function SimpleCard({ title, value, oldvalue, newvalue, description, icon
     </div>
 }
 
-export default function SellerCard({ children, title, ...props }) {
+export default function SellerCard({ children, title, loading, ...props }) {
     return <Card {...props} style={{
         "filter": "drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25))",
         "border": "1px solid #EAEDF2",
@@ -57,7 +57,10 @@ export default function SellerCard({ children, title, ...props }) {
             "overflow-x": "auto",
             "overflow-y": "auto",
         }}>
-            {children}
+            {loading && <div className={styles.card_loading}>
+                <Spinner animation="border" />
+            </div> }
+            {!loading && children}
         </Card.Body>
     </Card>
 }

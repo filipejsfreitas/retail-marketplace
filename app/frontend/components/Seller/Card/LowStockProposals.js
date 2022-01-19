@@ -30,9 +30,9 @@ function LowStockProposalsLine({ proposal }) {
   </tr>
 }
 
-export default function LowStockProposals({ lowStockProposals }) {
+export default function LowStockProposals({ lowStockProposals, ...props }) {
   return <SellerCard className={styles.panel_lowstock}
-    title={"Low Stock Proposals"}>
+    title={"Low Stock Proposals"} {...props}>
     <Table striped hover responsive>
       <thead>
         <tr>
@@ -44,7 +44,7 @@ export default function LowStockProposals({ lowStockProposals }) {
         </tr>
       </thead>
       <tbody>
-        {lowStockProposals.map(proposal =>
+        {(lowStockProposals ?? []).map(proposal =>
           <LowStockProposalsLine key={proposal._id} proposal={proposal} />)}
       </tbody>
     </Table>

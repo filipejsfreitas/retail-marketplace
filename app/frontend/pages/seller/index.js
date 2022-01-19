@@ -14,6 +14,10 @@ import { SimpleCard } from "components/Seller/Card"
 
 import styles from "styles/Seller/index.module.css"
 import { BsTruck, BsBank, BsBoxSeam } from "react-icons/bs"
+import useFetchData from "hooks/useFetchData"
+import usePanelOrdersOverview from "hooks/Seller/usePanelOrdersOverview"
+import usePanelRevenueOverview from "hooks/Seller/usePanelRevenueOverview"
+import usePanelAlerts from "hooks/Seller/usePanelAlerts"
 
 
 export default function Home() {
@@ -27,18 +31,23 @@ export default function Home() {
       .then(rep => rep.json())
       .then(p => setPanel(p))
   }, [isReady])
-  console.debug(panel)
 
-  return <Layout sidebar={SELLER_SIDEBAR} isLoading={panel === undefined}>
-    {panel && <div className={styles.content}>
+  const { ordersOverview, loading: loadingOrdersOverview } = usePanelOrdersOverview()
+  const { revenueOverview, loading: loadingRevenueOverview } = usePanelRevenueOverview()
+  const { alerts, loading: loadingAlerts } = usePanelAlerts()
+
+  return <Layout sidebar={SELLER_SIDEBAR}>
+    <div className={styles.content}>
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={30} newvalue={40} description={"this week"} className={styles.simple_panel} icon={<BsTruck/>}/>
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={40} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBank/>}/>
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={33} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam/>}/>
-      <DailyRevenue revenueOverview={panel.revenueOverview} />
-      <YearRevenue revenueOverview={panel.revenueOverview} />
-      <OrdersPie ordersOverview={panel.ordersOverview} />
+      <OrdersPie ordersOverview={ordersOverview} loading={loadingOrdersOverview} />
+      <DailyRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview}/>
+      <YearRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview}/>
+      <LowStockProposals lowStockProposals={(alerts ?? {}).lowStockProposals} loading={loadingAlerts}/>
+      {/*
       <RecommendedCategories recommendedCategories={panel.recommendedCategories} />
-      <LowStockProposals lowStockProposals={panel.alerts.lowStockProposals} />
-    </div>}
+    */}
+    </div>
   </Layout>
 }
