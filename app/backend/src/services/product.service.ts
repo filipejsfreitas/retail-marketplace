@@ -347,7 +347,7 @@ export class ProductService {
         }
 
         Promise.all(requests).then(price_optimmized => {
-
+          
           return JSON.stringify(price_optimmized);
           //return await price_optimmized.json();
         })
