@@ -53,7 +53,7 @@ export class SellerPanelController {
     return alerts;
   }
 
-  @Get('/')
+  @Get('/recommendCategories')
   @Authorized('Seller')
   @OpenAPI({ summary: 'get seller panel information' })
   async getcategories(@Req() req: RequestWithUser) {
