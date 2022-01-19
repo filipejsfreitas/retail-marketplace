@@ -115,7 +115,6 @@ export class SellerController {
   @Post('/image')
   @Authorized()
   @OpenAPI({ summary: 'post seller image' })
-  @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
   async postImage( @Req() req: RequestWithUser,@UploadedFile('image') imagem: File) {
     const sellerId = req.token._id;
 
@@ -142,7 +141,6 @@ export class SellerController {
   @Put('/image')
   @Authorized()
   @OpenAPI({ summary: 'post seller image' })
-  @UseBefore(validationMiddleware(SellerCommentDto, 'body'))
   async updateImage( @Req() req: RequestWithUser,@UploadedFile('image') imagem: File) {
     const sellerId = req.token._id;
 
