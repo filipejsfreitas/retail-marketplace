@@ -1,6 +1,6 @@
 import { Card, Spinner } from "react-bootstrap"
 
-import { BsArrowUp, BsArrowDown, BsArrowUpShort, BsArrowDownShort } from "react-icons/bs"
+import { BsArrowUp, BsArrowDown, BsArrowUpShort, BsArrowDownShort, BsFillExclamationTriangleFill } from "react-icons/bs"
 import styles from "styles/Seller/card.module.css"
 
 export function SimpleCard({ title, value, oldvalue, newvalue, description, icon, className }) {
@@ -40,7 +40,7 @@ export function SimpleCard({ title, value, oldvalue, newvalue, description, icon
     </div>
 }
 
-export default function SellerCard({ children, title, loading, ...props }) {
+export default function SellerCard({ children, title, loading, failed, ...props }) {
     return <Card {...props} style={{
         "filter": "drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25))",
         "border": "1px solid #EAEDF2",
@@ -57,10 +57,13 @@ export default function SellerCard({ children, title, loading, ...props }) {
             "overflow-x": "auto",
             "overflow-y": "auto",
         }}>
-            {loading && <div className={styles.card_loading}>
+            { failed ? <div className={styles.card_failed}>
+                <BsFillExclamationTriangleFill />
+            </div>
+            : loading ? <div className={styles.card_loading}>
                 <Spinner animation="border" />
-            </div> }
-            {!loading && children}
+            </div>
+            : children}
         </Card.Body>
     </Card>
 }
