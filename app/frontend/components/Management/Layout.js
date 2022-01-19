@@ -81,7 +81,7 @@ export default function Layout(props) {
         {/* if user type== admin show NavBar */}
         <NavBarSeller></NavBarSeller>
         <div className={stylesNew.sidebar}>
-            <SideBarSeller sidebar={props.sidebar} />
+            <SideBarSeller sidebar={props.sidebar}/>
         </div>
         <div className={stylesNew.page}>
          {!userType ? <></> : <PageContent {...props} />}
