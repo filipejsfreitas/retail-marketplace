@@ -10,11 +10,6 @@
     display: inline-block;
 }
 
-.panel_revenue {
-    height: 300px;
-    width: 450px;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
-}
 
 .panel_stock_prediction {
     height: 300px;
@@ -22,17 +17,7 @@
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
-.panel_orders {
-    height: 300px;
-    width: 450px;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
-}
 
-.panel_cat {
-    width: 300px;
-    height: 300px;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
-}
 
 .panel_cat > * {
     width: 300px;
@@ -43,28 +28,41 @@
     text-align: center;
 }
 
-.panel_lowstock {
-    width: 600px;
-    height: 300px;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
-}
-
-.panel_lowstock > * {
-    width: 600px;
-    height: 300px;
-}
-
-.carr_lowstock_elem {
-    width: 300px;
-    text-align: center;
-}
-
-.carr_lowstock_elem > *{
-    margin: 30px;
+.panel_revenue {
+    height: 350px;
+    width: 700px;
 }
 
 .panel_revenue_cal {
-    height: 300px;
+    height: 350px;
+    width: 700px;
+}
+
+.panel_orders {
+    height: 350px;
+    width: 350px;
+}
+
+.panel_recommended_categories {
+    height: 350px;
+    width: 350px;
+}
+
+.panel_recommended_categories > div:nth-of-type(2) {
+    padding: 0;
+}
+
+.panel_lowstock {
+    height: 350px;
     width: 650px;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+.panel_lowstock > div:nth-of-type(2) {
+    padding: 0;
+}
+
+.simple_panel {
+    height: 150px;
+    width: 400px;
+    background: linear-gradient(96.3deg, #303179 0.84%, #575DA8 46.82%, #141850 100%), #FFFFFF;
 }

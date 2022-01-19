@@ -1,0 +1,48 @@
+
+.simple_card {
+    background: linear-gradient(96.3deg, #000000 0.84%, #868686 46.82%, #737171 100%), #FFFFFF;
+    border: 1px solid #EAEDF2;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    padding: 35px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+}
+
+.simple_card_icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.simple_card_icon > svg {
+    scale: 2;    
+    filter: brightness(0);
+}
+
+.simple_card_percentage_red {
+    fill: red;
+    color: red;
+}
+
+.simple_card_percentage_yellow {
+    fill: yellow;
+    color: yellow;
+}
+
+.simple_card_percentage_green_light {
+    fill: greenyellow;
+    color: greenyellow;
+}
+
+.simple_card_percentage_green {
+    fill: green;
+    color: green;
+}
