@@ -11,6 +11,7 @@ import OrdersPie from "components/Seller/Card/OrderPie"
 import DailyRevenue from "components/Seller/Card/DailyRevenue"
 import YearRevenue from "components/Seller/Card/YearRevenue"
 import { SimpleCard } from "components/Seller/Card"
+import HomeAlerts from "components/Seller/HomeAlerts"
 
 import { BsTruck, BsBank, BsBoxSeam } from "react-icons/bs"
 import usePanelOrdersOverview from "hooks/Seller/usePanelOrdersOverview"
@@ -33,6 +34,7 @@ export default function Home() {
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={30} newvalue={40} description={"this week"} className={styles.simple_panel} icon={<BsTruck />} />
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={40} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBank />} />
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
+      <HomeAlerts/>
       <DailyRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <YearRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <OrdersPie ordersOverview={ordersOverview} loading={loadingOrdersOverview} />
