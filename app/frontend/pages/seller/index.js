@@ -12,7 +12,6 @@ import DailyRevenue from "components/Seller/Card/DailyRevenue"
 import YearRevenue from "components/Seller/Card/YearRevenue"
 import { SimpleCard } from "components/Seller/Card"
 
-import styles from "styles/Seller/index.module.css"
 import { BsTruck, BsBank, BsBoxSeam } from "react-icons/bs"
 import useFetchData from "hooks/useFetchData"
 import usePanelOrdersOverview from "hooks/Seller/usePanelOrdersOverview"
