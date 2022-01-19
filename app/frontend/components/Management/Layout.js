@@ -59,11 +59,13 @@ function SideBar(props) {
 
 function PageContent(props) {
     return <>
-        <div className={stylesNew.sidebar}>
-            {/* if user type== admin show SideBar */}
+        {
+        /* <div className={stylesNew.sidebar}>
+            if user type== admin show SideBar 
             <SideBarSeller sidebar={props.sidebar} />
         </div>
-        <div className={styles.page_content}>
+        */}
+        <div >
             {props.isLoading ? <Spinner animation="border" /> : props.children}
         </div>
     </>
@@ -78,6 +80,9 @@ export default function Layout(props) {
     return (userType && !authorized) ? <Error statusCode={401} /> : <>
         {/* if user type== admin show NavBar */}
         <NavBarSeller></NavBarSeller>
+        <div className={stylesNew.sidebar}>
+            <SideBarSeller sidebar={props.sidebar} />
+        </div>
         <div className={stylesNew.page}>
          {!userType ? <></> : <PageContent {...props} />}
         </div>
