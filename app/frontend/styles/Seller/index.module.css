@@ -3,7 +3,7 @@
     display: flex;
     flex: 1 0;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 25px;
 }
 
 .panel {
@@ -30,12 +30,12 @@
 
 .panel_revenue {
     height: 350px;
-    width: 700px;
+    width: 785px;
 }
 
 .panel_revenue_cal {
     height: 350px;
-    width: 700px;
+    width: 790px;
 }
 
 .panel_orders {
@@ -54,7 +54,7 @@
 
 .panel_lowstock {
     height: 350px;
-    width: 650px;
+    width: 850px;
 }
 
 .panel_lowstock > div:nth-of-type(2) {
@@ -63,6 +63,6 @@
 
 .simple_panel {
     height: 150px;
-    width: 400px;
+    width: 381px;
     background: linear-gradient(96.3deg, #303179 0.84%, #575DA8 46.82%, #141850 100%), #FFFFFF;
 }

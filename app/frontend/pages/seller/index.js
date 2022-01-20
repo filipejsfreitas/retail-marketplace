@@ -34,6 +34,7 @@ export default function Home() {
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={30} newvalue={40} description={"this week"} className={styles.simple_panel} icon={<BsTruck />} />
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={40} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBank />} />
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
+      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
       <HomeAlerts/>
       <DailyRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <YearRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
