@@ -40,15 +40,15 @@ export default function useSellerProposals(seller_id) {
 	}, [seller_id, isReady])
 
 	useEffect(() => {
-		if(!proposals) return
-  	const fuse = new Fuse(proposals, {
-  	  keys: ['product.name', 'product.category.name']
-  	})
+		if (!proposals) return
+		const fuse = new Fuse(proposals, {
+			keys: ['product.name', 'product.category.name']
+		})
 		setSearch(() => (str) => {
-			if(str === "") return proposals
+			if (str === "") return proposals
 			return fuse.search(str).map(o => o.item)
 		})
-	}, proposals)
+	}, [proposals])
 
 	return {
 		proposals: proposals,

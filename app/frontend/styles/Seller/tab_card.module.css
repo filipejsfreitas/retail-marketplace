@@ -1,0 +1,40 @@
+
+.header {
+    border-top-left-radius: calc(-1px + 0.25rem);
+    border-top-right-radius: calc(-1px + 0.25rem);
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    display: flex;
+    gap: 5px
+}
+
+.card_tab {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-bottom: 0px;
+    padding: 10px;
+    padding-bottom: 5px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-bottom: 0px;
+    cursor: pointer;
+}
+
+.card_tab_selected {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.card_tab_unselected {
+    background-color: rgba(0, 0, 0, 0.05);
+    transition-duration: 0.5s;
+}
+
+.card_tab_unselected:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.card_extras {
+    margin: auto;
+}
