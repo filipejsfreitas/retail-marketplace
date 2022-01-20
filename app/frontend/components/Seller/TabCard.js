@@ -26,6 +26,7 @@ export default function TabCard({ tabs, children, ...props }) {
       "height": "90%",
       "overflow-x": "auto",
       "overflow-y": "auto",
+      "padding": "0",
     }}>
       {tabs[selected].content}
     </Card.Body>
