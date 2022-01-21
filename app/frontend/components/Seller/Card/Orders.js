@@ -54,7 +54,7 @@ function OrderLine({ order, setOrderState, setInspectOrder }) {
 
   const progressbar = (order.state === "processing" && { variant: "danger", now: 33, state: "Processing", class: styles.red, _next: "sent", next: "Sent" })
     || (order.state === "sent" && { variant: "warning", now: 66, state: "Sent", class: styles.yellow, _next: "complete", next: "Complete" })
-    || (order.state === "complete" && { variant: "success", now: 100, state: "Complete", _next: "unknown", })
+    || (order.state === "complete" && { variant: "success", now: 100, state: "Delivered", _next: "unknown", })
     || { variant: "info", now: 0, state: "Other", _next: "processing", next: "Processing" }
 
   const options = [<div onClick={() => {
