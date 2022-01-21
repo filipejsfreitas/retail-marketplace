@@ -18,7 +18,9 @@ export default function TabCard({ tabs, children, ...props }) {
         </div>)
       }
       <div className={styles.card_extras}>
-        {children}
+        <div>
+          {children}
+        </div>
       </div>
     </div>
     <Card.Body style={{

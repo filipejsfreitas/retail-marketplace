@@ -1,22 +1,32 @@
 import Layout, { SELLER_SIDEBAR } from "components/Management/Layout";
-import { BsPlusLg } from "react-icons/bs";
+import { BsPlusLg, BsThreeDots } from "react-icons/bs";
 import { useState, useContext } from "react";
 import TokenContext from "components/Context/TokenContext";
 import TabCard from 'components/Seller/TabCard'
 import useSellerProposals from "hooks/Seller/useSellerProposals";
+import ActionSelector from 'components/Seller/ActionSelector'
+import AddProductModal from "components/Seller/AddProductModal";
 import useAllProducts from "hooks/Seller/useAllProducts";
 import { Form, Spinner, Table } from 'react-bootstrap'
+import DottedOption from 'components/common/DottedOption'
+import Link from "next/link";
 
 import styles from 'styles/Seller/proposal/list.module.css'
 
 function ProposalLine({ proposal }) {
-  const { product, stock, price } = proposal
+  const { _id, product, stock, price } = proposal
+  const [show, setShow] = useState(false)
   return <tr>
     <td>{product.name}</td>
     <td>{product.category.name}</td>
     <td>{`${price}€`}</td>
     <td>{`${stock}`}</td>
-    <td>{`_`}</td>
+    <td>
+      <DottedOption style={{ "scale": "1.5" }} onClick={() => setShow(s => !s)} />
+      <ActionSelector show={show} setShow={setShow} options={[
+        <Link href={`/seller/proposal/${_id}`}>{"View Proposal"}</Link>
+      ]} />
+    </td>
   </tr>
 }
 
@@ -37,15 +47,25 @@ function ProposalsTable({ proposals }) {
   </Table>
 }
 
-function ProductLine({ product }) {
+function ProductLine({ product, setProposalProduct }) {
+  const [show, setShow] = useState(false)
   return <tr>
     <td>{product.name}</td>
     <td>{product.category.name}</td>
-    <td>{`_`}</td>
+    <td>
+      <DottedOption style={{ "scale": "1.5" }} onClick={() => setShow(s => !s)} />
+      <ActionSelector show={show} setShow={setShow} options={[
+        <div onClick={() => {
+          setShow(s => false)
+          setProposalProduct(product)
+        }}>{"Make Proposal"}</div>,
+        <Link href={`/product/${product._id}`}>{"View Product"}</Link>,
+      ]} />
+    </td>
   </tr>
 }
 
-function ProductsTable({ products }) {
+function ProductsTable({ products, setProposalProduct }) {
   return <div class={styles.table}>
     <Table striped hover responsive>
       <thead>
@@ -56,14 +76,14 @@ function ProductsTable({ products }) {
         </tr>
       </thead>
       <tbody>
-        {products.map(product => <ProductLine key={product._id} product={product} />)}
+        {products.map(product => <ProductLine key={product._id} product={product} setProposalProduct={setProposalProduct} />)}
       </tbody>
     </Table>
   </div>
 }
 
-function SearchBar({ setQuery }) {
-  return <Form.Control placeholder="Search" onChange={e => {
+function SearchBar({ setQuery, ...props }) {
+  return <Form.Control placeholder="Search" {...props} onChange={e => {
     if (setQuery)
       setQuery(e.target.value)
   }} />
@@ -72,9 +92,10 @@ function SearchBar({ setQuery }) {
 export default function ProposalList() {
   const { token } = useContext(TokenContext)
 
-  const { search, loading } = useSellerProposals(token && token._id)
+  const { search, addProposal, loading } = useSellerProposals(token && token._id)
   const { search: searchProducts } = useAllProducts()
   const [query, setQuery] = useState("")
+  const [proposalProduct, setProposalProduct] = useState(undefined)
 
   return <Layout sidebar={SELLER_SIDEBAR}>
     <TabCard className={styles.card} tabs={[
@@ -94,11 +115,12 @@ export default function ProposalList() {
           <ProductsTable products={
             searchProducts(query)
               .filter(product => search("").every(proposal => proposal.product._id != product._id))
-          } />
+          } setProposalProduct={setProposalProduct} />
         </>,
       },
     ]}>
       <SearchBar setQuery={setQuery} />
     </TabCard>
+    <AddProductModal product={proposalProduct} setProduct={setProposalProduct} addProposal={addProposal} />
   </Layout>
 }

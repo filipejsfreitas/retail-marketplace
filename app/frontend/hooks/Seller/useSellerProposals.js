@@ -50,8 +50,30 @@ export default function useSellerProposals(seller_id) {
 		})
 	}, [proposals])
 
+	const addProposal = async (product, proposal) => {
+		const req = {}
+		Object.entries(proposal).forEach(([k, v]) => req[k] = parseFloat(parseFloat(v).toFixed(2)))
+		req["stock"] = parseInt(req["stock"])
+		if (!Object.values(req).every(x => x))
+			return { error: "Some fields are missing or are invalid." }
+		req.special_conditions = ""
+		req.product_id = product._id
+		const rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/`, {
+			method: "POST",
+			headers: { Accept: "application/json", "Content-Type": "application/json", },
+			body: JSON.stringify(req),
+		})
+		if (!rep.ok)
+			return { error: "Unable to add proposal.", response: rep }
+		const newProposal = (await rep.json()).data
+		newProposal.product = product
+		setProposals(ps => [...ps, newProposal])
+		return { response: rep }
+	}
+
 	return {
 		proposals: proposals,
+		addProposal: addProposal,
 		search: search,
 		loading: loading,
 	}
