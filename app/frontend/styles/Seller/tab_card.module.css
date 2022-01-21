@@ -36,5 +36,7 @@
 }
 
 .card_extras {
+    display: flex;
+    align-content: flex-end;
     margin: auto;
 }
