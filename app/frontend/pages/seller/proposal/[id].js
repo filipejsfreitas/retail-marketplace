@@ -13,6 +13,7 @@ import gstyles from "styles/Seller/globals.module.css";
 import styles from "styles/Seller/index.module.css"
 import useFetchAuth from "hooks/useFetchAuth";
 import Comments from "components/Seller/Proposal/Comments";
+import OtherSeller from "components/Seller/Proposal/OtherSellers";
 
 function EditableText({ refs, value, edit, as, rows }) {
   return edit ? (
@@ -193,6 +194,12 @@ export default function Proposal(props) {
     () => `${process.env.NEXT_PUBLIC_HOST}/category/${product.category_id}`,
     { default: {}, when: !loadingProduct }
   );
+
+  const { data: proposals, loading: loadingProposals } = useFetchData(
+    () => `${process.env.NEXT_PUBLIC_HOST}/proposal/product/${proposal.product_id}`,
+    { default: {}, when: !loadingProduct }
+  );
+
   const { data: stock_suggestions, loading: loadingStockSuggestions } =
     useFetchData(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
 
@@ -206,7 +213,8 @@ export default function Proposal(props) {
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>
       <div className={styles.content}>
       <ProposalDetails product={product} category={category} proposal={proposal} />
-      <Comments product={product}/>
+      {!loadingProposals &&
+      <OtherSeller proposals={proposals} proposalP={proposal}/>}
       <Comments product={product}/>
       {stock_suggestions && stock_suggestions.Stock_prevision &&
         <StockPrediction predictions={stock_suggestions.Stock_prevision} />}
