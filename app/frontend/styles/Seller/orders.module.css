@@ -1,0 +1,13 @@
+.panel_orders {
+    width: 1600px;
+    height: 500px;
+}
+
+.panel_orders > div:nth-of-type(2) {
+    padding: 0;
+}
+
+.progress_bar_text {
+    font-size: 12px;
+    font-weight: bold;
+}
