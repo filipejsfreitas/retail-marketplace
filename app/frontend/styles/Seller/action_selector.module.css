@@ -30,6 +30,10 @@
     cursor: pointer;
 }
 
+.window_child > * > *:hover {
+    color: white;
+}
+
 .even {
     box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
 }

@@ -19,7 +19,7 @@ function useOutsideAlerter(ref) {
   }
 }
 
-export default function ActionSelector({ show, setShow }) {
+export default function ActionSelector({ show, setShow, options }) {
   const { isReady } = useRouter()
   const wrapperRef = useRef(null);
   const { isInside } = useOutsideAlerter(wrapperRef)
@@ -30,12 +30,9 @@ export default function ActionSelector({ show, setShow }) {
   return <>
     {show && <div className={styles.window} >
       <div ref={wrapperRef} className={styles.window_child}>
-        <div className={styles.even}>
-          option1
-        </div>
-        <div>
-          option2
-        </div>
+        {options.map((option, i) => <div key={i} className={`${i % 2 === 0 ? styles.even : ""}`}>
+          {option}
+        </div>)}
       </div>
     </div>}
   </>
