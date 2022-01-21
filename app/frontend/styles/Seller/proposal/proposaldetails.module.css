@@ -1,0 +1,128 @@
+
+.panel_details {
+    width: 1610px;
+    height: 493px;
+}
+
+.img{
+    width: 379px;
+    height: 379px;
+    left: 15px;
+    top: 10px;
+}
+
+.imgCol {
+    height: 390px;
+    width: 379px;
+    background-color: #ffffff;
+
+}
+
+.photo {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    align-items: center;
+    background-color: #ffffff;
+
+}
+
+.prodName{
+    width: 1157px;
+    height: 24px;
+    left: 18px;
+    top: 25px;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 24px;
+    color: #6C757D;
+}
+
+.infoCol2{
+    padding: 20px;
+}
+
+.rateLine{
+    margin-top: 10px;
+}
+
+.rate{
+    color: #1573D5;
+}
+
+.numberReviews{
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    color: #919191;
+    position: relative;
+    top: 4px;
+}
+
+.descriTitle{
+    position: relative;    
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    height: 32px;
+    line-height: 24px;
+    color: #313131;
+    top: 20px;
+}
+
+.description{
+    position: relative;
+    width: 1111px;
+    height: 110px;
+    top: 20px;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    color: #313131;
+    text-align: justify;
+    overflow: scroll;
+    text-overflow: ellipsis;
+}
+
+.stats{
+    position: relative;
+    height: 90px;
+    width: 1111px;
+    left: 19px;
+    top: 50px;
+}
+
+.statTitle{
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #313131;
+}
+
+.statInfo{
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 275;
+    font-size: 30px;
+    line-height: 24px;
+    color: #313131;
+    margin-top: 10px;
+}
+
+.shipping{
+    font-family: Fira Sans;
+    font-style: italic;
+    font-weight: 275;
+    font-size: 24px;
+    line-height: 24px;
+    color: #313131;
+    position: relative;
+}
