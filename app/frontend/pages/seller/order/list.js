@@ -3,41 +3,45 @@ import ToggleDropdown from "components/Management/ToggleDropdown";
 import Orders from "components/Seller/Card/Orders"
 import useFetchData from "hooks/useFetchData";
 import Link from "next/link";
-import gstyles from "/styles/Seller/globals.module.css";
+import styles from "/styles/Seller/orders.module.css";
 import useSellerInvoice from "hooks/useSellerInvoice";
 import { Row, Col, Modal, Button, Container, Table } from "react-bootstrap";
 import { useState } from "react";
+import { Card } from "react-bootstrap"
 
 
-//function InvoiceLine({ invoice, setInvoiceState }) {
-//  const { _id, date, address, items } = invoice
-//  const [showModal, setShowModal] = useState(false)
-//
-//  const ModalLine = ({ title, value }) => <Row>
-//    <Col lg="auto"> <h6>{title}</h6> </Col>
-//    <Col lg="auto"> {value} </Col>
-//  </Row>
-//
-//  const setInvoiceCloseModal = (value) => {
-//    setInvoiceState(_id, value)
-//    setShowModal(false)
-//  }
-//
-//  return <>
-//    <div className={gstyles.link} onClick={() => setShowModal(true)}>
-//      <Row>
-//        <Col lg="auto"> <h6 sytle={{ "lineHeight": "24px" }}>Order:</h6> </Col>
-//        <Col lg="auto"> {`${_id}`} </Col>
-//      </Row>
-//    </div>
-//  </>
-//}
+function OrderStats({ orders }) {
+  return <Card className={styles.panel_stats} style={{
+    "filter": "drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25))",
+    "border": "1px solid #EAEDF2",
+    "border-radius": "10px",
+  }}>
+    <div className={`${styles.panel_box} ${styles.panel_box_border}`}>
+      <h2>Orders</h2>
+      <h2>{orders.length}</h2>
+    </div>
+    <div className={`${styles.panel_box} ${styles.panel_box_border}`}>
+      <h2>Processing</h2>
+      <h2>{orders.filter(o => o.state === "processing").length}</h2>
+    </div>
+    <div className={`${styles.panel_box} ${styles.panel_box_border}`}>
+      <h2>Sent</h2>
+      <h2>{orders.filter(o => o.state === "sent").length}</h2>
+    </div>
+    <div className={styles.panel_box}>
+      <h2>Delivered</h2>
+      <h2>{orders.filter(o => o.state === "complete").length}</h2>
+    </div>
+  </Card>
+}
 
 export default function InvoiceList() {
-  const { search, loading, setInvoiceState } = useSellerInvoice()
+  const { invoices, search, loading, setInvoiceState } = useSellerInvoice()
   const [query, setQuery] = useState("")
 
   return <Layout sidebar={SELLER_SIDEBAR}>
+    <OrderStats orders={invoices ?? []} />
+    <br />
     <Orders orders={search(query)} setOrderState={setInvoiceState} setQuery={setQuery} loading={loading} />
   </Layout>
 }
