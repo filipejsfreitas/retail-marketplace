@@ -200,6 +200,11 @@ export default function Proposal(props) {
     { default: {}, when: !loadingProduct }
   );
 
+  const { data: invoices, loading: loadingInvoices } = useFetchData(
+    () => `${process.env.NEXT_PUBLIC_HOST}/seller/invoice`,
+    { default: {} }
+  );
+
   const { data: stock_suggestions, loading: loadingStockSuggestions } =
     useFetchData(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
 
@@ -212,8 +217,9 @@ export default function Proposal(props) {
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>
       <div className={styles.content}>
-      <ProposalDetails product={product} category={category} proposal={proposal} />
-      {!loadingProposals &&
+      {!loadingInvoices &&
+      <ProposalDetails product={product} category={category} proposal={proposal} invoices={invoices}/>}
+      {!loadingProposals && 
       <OtherSeller proposals={proposals} proposalP={proposal}/>}
       <Comments product={product}/>
       {stock_suggestions && stock_suggestions.Stock_prevision &&

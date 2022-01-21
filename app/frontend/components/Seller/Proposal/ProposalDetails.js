@@ -3,7 +3,22 @@ import SellerCard from "components/Seller/Card";
 import styles from 'styles/Seller/proposal/proposaldetails.module.css'
 import { computeStars } from "components/Product/Product";
 
-export default function ProposalDetails({ product, category, proposal, ...props }) {
+export default function ProposalDetails({ product, category, proposal,invoices, ...props }) {
+    console.log(invoices)
+    const numberOrders = 0;
+    const revenue = 0;
+    for (let i = 0; i < invoices.length; i++) {
+      if(invoices[i].state == "complete")
+        for (let j = 0; j < invoices[i].items.length; j++) {
+          if( invoices[i].items[j].product_id == product._id )
+            numberOrders++;
+            revenue += invoices[i].items[j].price * invoices[i].items[j].quantity;
+        }
+      
+    }
+    
+    console.log(numberOrders)
+    console.log(revenue)
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     return  <SellerCard className={styles.panel_details}
       title={"Proposal Details"} {...props}>
@@ -29,10 +44,7 @@ export default function ProposalDetails({ product, category, proposal, ...props 
                   Description:
                 </div>
                 <div className={styles.description}>
-                  O CleanFry Infinty 1500 é perfeito para preparar pequenas porções para acompanhar os pratos principais. Com uma capacidade de 1,5 litros de azeite poderá fritar as quantidades necessárias para uma refeição completa, por exemplo, saborosas batatas fritas, croquetes ou rodelas de cebola e saborear os melhores acompanhamentos preparados por si. Além disso, o seu design compacto com acabamentos em aço inoxidável tornam-no no melhor acessório para a sua cozinha.
-                  O CleanFry Infinty 1500 é perfeito para preparar pequenas porções para acompanhar os pratos principais. Com uma capacidade de 1,5 litros de azeite poderá fritar as quantidades necessárias para uma refeição completa, por exemplo, saborosas batatas fritas, croquetes ou rodelas de cebola e saborear os melhores acompanhamentos preparados por si. Além disso, o seu design compacto com acabamentos em aço inoxidável tornam-no no melhor acessório para a sua cozinha.
-                  O CleanFry Infinty 1500 é perfeito para preparar pequenas porções para acompanhar os pratos principais. Com uma capacidade de 1,5 litros de azeite poderá fritar as quantidades necessárias para uma refeição completa, por exemplo, saborosas batatas fritas, croquetes ou rodelas de cebola e saborear os melhores acompanhamentos preparados por si. Além disso, o seu design compacto com acabamentos em aço inoxidável tornam-no no melhor acessório para a sua cozinha.
-                  O CleanFry Infinty 1500 é perfeito para preparar pequenas porções para acompanhar os pratos principais. Com uma capacidade de 1,5 litros de azeite poderá fritar as quantidades necessárias para uma refeição completa, por exemplo, saborosas batatas fritas, croquetes ou rodelas de cebola e saborear os melhores acompanhamentos preparados por si. Além disso, o seu design compacto com acabamentos em aço inoxidável tornam-no no melhor acessório para a sua cozinha.
+                  {product.description}
                 </div>
                 <div className={styles.stats}>
                   <Row md={9} >
@@ -46,11 +58,11 @@ export default function ProposalDetails({ product, category, proposal, ...props 
                     </Col>
                     <Col>
                       <div className={styles.statTitle}>Number of orders:</div>
-                      <div className={styles.statInfo}></div>
+                      <div className={styles.statInfo}>{numberOrders}</div>
                     </Col>
                     <Col>
                       <div className={styles.statTitle}>Revenue:</div>
-                      <div className={styles.statInfo}></div>
+                      <div className={styles.statInfo}>{revenue}</div>
                     </Col>
                   </Row>
                 </div>
