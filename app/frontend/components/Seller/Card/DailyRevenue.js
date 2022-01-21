@@ -4,10 +4,15 @@ import SellerCard from "components/Seller/Card"
 import styles from "styles/Seller/index.module.css"
 
 export default function RevenueOverviewBar({ revenueOverview, ...props }) {
-  const data = revenueOverview ? revenueOverview.slice(-15).map(({ _id, count }) => ({
-    date: new Date(_id.year, _id.month, _id.day).toLocaleDateString('en-GB'),
-    revenue: count,
-  })) : []
+  const currDate = new Date()
+  const data = []
+  for (var i = 0; i < 7; i++) {
+    const date = new Date(new Date(currDate).setDate(currDate.getDate() - currDate.getDay() + i))
+    const { count } = (revenueOverview ?? [])
+      .find(({ _id }) => _id.year === date.getFullYear() && _id.month === date.getMonth() + 1 && _id.day === date.getDate()) ??
+      { count: 0 }
+    data[i] = { date: date.toLocaleDateString('en-GB', { weekday: 'long' }).slice(0, 3), revenue: count }
+  }
 
   return <SellerCard className={styles.panel_revenue} title={"Daily Sales"} {...props}>
     <ResponsiveBar
