@@ -13,7 +13,7 @@ clients = json.loads(data)
 id_client = []
 
 for i in range(len(clients)):
-    id_client.append (clients[i]['_id'])
+    id_client.append (clients[i]['userId'])
 
 
 
@@ -30,13 +30,13 @@ sellers = json.loads(data)
 id_seller = []
 
 for i in range(len(sellers)):
-    id_seller.append (sellers[i]['_id'])
+    id_seller.append (sellers[i]['userId'])
 
 
 
 
 #Abrir o product.json
-f = open("sellerComment.json","r")
+f = open("sellerComments.json","r")
 data = f.read()
 comment = json.loads(data)
 

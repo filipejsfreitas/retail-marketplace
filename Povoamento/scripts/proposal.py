@@ -30,13 +30,13 @@ sellers = json.loads(data)
 id_seller = []
 
 for i in range(len(sellers)):
-    id_seller.append (sellers[i]['_id'])
+    id_seller.append (sellers[i]['userId'])
 
 
 
 
 #Abrir o product.json
-f = open("proposal.json","r")
+f = open("proposals.json","r")
 data = f.read()
 proposals = json.loads(data)
 
@@ -48,7 +48,7 @@ for i in range(len(proposals)):
     proposals[i]["product_id"] = random.choice(id_product)
     proposals[i]["seller_id"] = random.choice(id_seller)
 
-with open("proposal.json", 'w') as f:
+with open("proposals.json", 'w') as f:
     json.dump(proposals, f, indent=1)
 
 
