@@ -4,11 +4,11 @@ import ResponsiveLine from 'components/Seller/ResponsiveLine'
 import styles from "styles/Seller/index.module.css"
 
 export default function YearRevenue({ revenueOverview, ...props }) {
-  const data = revenueOverview ? revenueOverview.map(({ _id, count }) => ({
+  const data = (revenueOverview ?? []).map(({ _id, count }) => ({
     y: count,
     x: new Date(_id.year, _id.month, _id.day).toLocaleDateString('en-GB').slice(0, 5),
-  })) : []
-  const curr = new Date()
+  })).sort((c1, c2) => c1.x > c2.x)
+  //const curr = new Date()
   const data2 = [{"data":data}];
   console.log(data)
   return <SellerCard className={styles.panel_revenue_cal} title={"Yearly Sales Overview"} {...props}>
