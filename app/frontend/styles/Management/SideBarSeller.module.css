@@ -15,9 +15,10 @@
     color: #FFFFFF;
     width: 260px;
     margin-left: 0px;
-    margin-top: -64px;
     align-self: auto;
     position: fixed;
+    left: 0px;
+    top: 0px;
 }
 
 .sidebar > .sidebar_content {

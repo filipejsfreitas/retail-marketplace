@@ -28,8 +28,7 @@ const SideBarSeller = (props) =>{
      useFetchData(() => `${process.env.NEXT_PUBLIC_HOST}/seller/${token._id}`,
         {  when:token && token._id})
 
-    return(loading ? <Spinner animation="border" /> :
-    <> 
+    return <> 
         <div className={styles.logo} >
             <Navbar.Brand href="/">
                 <LogoReversed height={50} width={170} />
@@ -37,17 +36,19 @@ const SideBarSeller = (props) =>{
         </div>
            
         <div className={styles.company}>
-            <img
-                className={styles.companyLogo}              
-                src={fallback}
-            />
-            <div className={styles.companyName}>{seller.companyName}</div>
+            {loading ?
+                <div>
+                    <Spinner animation="border" />
+                </div>
+                : <>
+                    <img className={styles.companyLogo} src={fallback} />
+                    <div className={styles.companyName}>{seller.companyName}</div>
+                </>}
         </div>
         {contents.map((content, i) =>
             <Item content={content} rootpath={rootpath} key={"sidebar-content-" + i} replace ></Item> 
         )}
     </>
-    )
 }
 
 export default SideBarSeller;
