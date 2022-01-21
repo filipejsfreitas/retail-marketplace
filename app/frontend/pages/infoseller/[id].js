@@ -19,11 +19,11 @@ export async function getStaticPaths() {
   return { paths, fallback: "blocking" };
 }
 
-const SellerInfo = ({ idSeller, token }) => {
+const SellerInfo = ({ idSeller, token, proposals }) => {
   const { data: seller, loading } = useFetchData(
     `${process.env.NEXT_PUBLIC_HOST}/seller/${idSeller}`
   );
-  return loading ? <></> : <Info seller={seller} token={token} />;
+  return loading ? <></> : <Info seller={seller} token={token} proposals={proposals}/>;
 };
 
 const GetProposals = ({ proposals, token }) => {
@@ -47,11 +47,11 @@ export default function SellerPage({ categories }) {
   );
   return (
     <Layout categories={categories}>
-      <SellerInfo idSeller={idSeller} token={token} />
       {loading ? (
         <></>
       ) : (
         <div>
+          <SellerInfo idSeller={idSeller} token={token} proposals={proposals.length} />
           <Proposals info={<GetProposals proposals={proposals} token={token}/>} />
         </div>
       )}
