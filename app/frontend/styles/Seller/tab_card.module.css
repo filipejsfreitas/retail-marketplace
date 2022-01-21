@@ -8,6 +8,7 @@
     padding-top: 10px;
     padding-right: 10px;
     display: flex;
+    flex: 1;
     gap: 5px
 }
 
@@ -36,7 +37,5 @@
 }
 
 .card_extras {
-    display: flex;
-    align-content: flex-end;
-    margin: auto;
+    margin-left: auto;
 }
