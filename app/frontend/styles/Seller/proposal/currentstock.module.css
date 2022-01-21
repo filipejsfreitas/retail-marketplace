@@ -1,0 +1,32 @@
+.panel_details {
+    position: relative;
+    width: 377px;
+    height: 356px;
+}
+
+
+.row {
+    height: 50%;
+    width: 50%;
+    background-color: #ffffff;
+}
+
+.icon {
+    height: 80%;
+    width: 80%;
+    background-color: #ffffff;
+    margin-top: 10px;
+    margin-left: 105px;
+    margin-bottom: 10px;
+}
+
+.stock{
+    position: static;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 102px;
+    line-height: 102px;
+    text-align: center;
+    color: #000000;
+}

@@ -6,10 +6,13 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import Link from "next/link";
 import { ResponsiveBar } from "@nivo/bar";
-
+import ProposalDetails from "components/Seller/Proposal/ProposalDetails";
+import StockPrediction from "components/Seller/Proposal/StockPrediction";
+import CurrentStock from "components/Seller/Proposal/CurrentStock";
 import gstyles from "styles/Seller/globals.module.css";
 import styles from "styles/Seller/index.module.css"
 import useFetchAuth from "hooks/useFetchAuth";
+import Comments from "components/Seller/Proposal/Comments";
 
 function EditableText({ refs, value, edit, as, rows }) {
   return edit ? (
@@ -201,22 +204,15 @@ export default function Proposal(props) {
 
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>
-      <Container>
-        <Row style={{ minHeight: "500px" }}>
-          <Col lg="6" style={{ overflowWrap: "break-word" }}>
-            <ProductInfo product={product} category={category} />
-          </Col>
-          <Col lg="6" style={{ overflowWrap: "break-word" }}>
-            <ProposalInfo proposal={proposal} setProposal={setProposal} />
-          </Col>
-        </Row>
-        <br />
-        <h3>{loadingStockSuggestions ? "Loading Statistics..." : "Statistics:"}</h3>
-        <div>
-          {stock_suggestions && stock_suggestions.Stock_prevision &&
-            <StockPredictionBar predictions={stock_suggestions.Stock_prevision} />}
-        </div>
-      </Container>
+      <div className={styles.content}>
+      <ProposalDetails product={product} category={category} proposal={proposal} />
+      <Comments product={product}/>
+      <Comments product={product}/>
+      {stock_suggestions && stock_suggestions.Stock_prevision &&
+        <StockPrediction predictions={stock_suggestions.Stock_prevision} />}
+      <CurrentStock proposal={proposal}/>
+      
+      </div>
     </Layout>
   );
 }

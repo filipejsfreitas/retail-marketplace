@@ -83,7 +83,7 @@ export default function Layout(props) {
             <SideBarSeller sidebar={props.sidebar}/>
         </div>
         <div className={stylesNew.page}>
-         {!userType ? <></> : <PageContent {...props} />}
+         {<PageContent {...props} />}
         </div>
     </>
 }
