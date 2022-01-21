@@ -5,10 +5,13 @@ import Status from "components/common/Status";
 import Link from "next/link";
 import CartContext from "components/NavBar/Cart/context";
 import { useContext } from "react";
+import TokenContext from 'components/Context/TokenContext'
+import { UserType } from "hooks/useToken";
 
 const Proposal = ({prod, prop, token}) =>{ 
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     const cart = useContext(CartContext);
+    const { userType} = useContext(TokenContext)
 
     return(
     <>
@@ -36,7 +39,7 @@ const Proposal = ({prod, prop, token}) =>{
                                     type="submit" 
                                     variant="secundary"  
                                     className={styles.button}
-                                    disabled={!token || (prop.stock <= 0 ? true: false)}
+                                    disabled={!token || (prop.stock <= 0 ? true: false) ||  userType != UserType.CLIENT}
                                     onClick={() => {
                                         cart.addItem(prop._id, 1);
                                         cart.handleVisible();
