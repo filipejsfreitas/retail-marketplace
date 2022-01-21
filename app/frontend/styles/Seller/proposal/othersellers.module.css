@@ -1,0 +1,19 @@
+.panel_details {
+    width: 790px;
+    height: 238px;
+}
+
+.panel_details > div:nth-of-type(2) {
+    padding: 0;
+}
+
+.negative{
+    color: #FF0000;
+}
+
+.positive{
+    color: #008000;
+}
+.arrow{
+    size: 20px;
+}

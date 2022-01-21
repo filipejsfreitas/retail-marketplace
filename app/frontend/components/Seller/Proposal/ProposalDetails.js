@@ -4,7 +4,6 @@ import styles from 'styles/Seller/proposal/proposaldetails.module.css'
 import { computeStars } from "components/Product/Product";
 
 export default function ProposalDetails({ product, category, proposal, ...props }) {
-    console.log(proposal)
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     return  <SellerCard className={styles.panel_details}
       title={"Proposal Details"} {...props}>
