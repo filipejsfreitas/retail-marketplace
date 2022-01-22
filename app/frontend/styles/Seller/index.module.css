@@ -67,3 +67,18 @@
     width: 381px;
     background: linear-gradient(96.3deg, #303179 0.84%, #575DA8 46.82%, #141850 100%), #FFFFFF;
 }
+
+.info_popup {
+    position: absolute; 
+    left: -200px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 0, 1);
+    display: none;
+    white-space: nowrap;
+}
+
+.info_popup_trigger:hover > * > .info_popup {
+    display: inline;
+}

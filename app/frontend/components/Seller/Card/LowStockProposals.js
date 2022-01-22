@@ -1,6 +1,6 @@
 import { Table, Spinner } from "react-bootstrap"
 import SellerCard from "components/Seller/Card"
-import { BsPlusSquare, BsArrowRightSquare, BsFillExclamationTriangleFill } from "react-icons/bs";
+import { BsArrowRightSquare, BsFillExclamationTriangleFill } from "react-icons/bs";
 import Link from "next/link";
 
 import useFetchData from "hooks/useFetchData"
@@ -48,7 +48,12 @@ function LowStockProposalsLine({ proposal }) {
     <td> {stock} </td>
     <td> {(loadingStockSuggestion && <Spinner animation="border" size="sm" />)
       || stockSuggestion
-      || <BsFillExclamationTriangleFill />}
+      || <div className={styles.info_popup_trigger}>
+        <BsFillExclamationTriangleFill />
+        <div style={{ "position": "relative" }}>
+          <div className={styles.info_popup}>Not enough data available to forecast.</div>
+        </div>
+      </div>}
     </td>
     <td>
       <div style={{ "display": "flex", "gap": "5px" }}>
