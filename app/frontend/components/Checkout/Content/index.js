@@ -31,7 +31,7 @@ function calcShipping(state) {
 
 export default function Content(props) {
 
-    const [step,setStep] = props.step
+    const [step,_] = props.step
     const [address,setAddress] = useState(undefined);
 
     return (
