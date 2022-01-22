@@ -13,7 +13,6 @@ export default function StockPrediction({ predictions, ...props }) {
       period: getPeriod(i),
       units: count,
     }))
-    console.log(data)
     
     return <SellerCard title={"Stock Prediction"}  className={styles.panel_details} {...props}>
             <ResponsiveBar

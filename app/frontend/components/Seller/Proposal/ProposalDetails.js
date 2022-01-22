@@ -2,9 +2,11 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import SellerCard from "components/Seller/Card";
 import styles from 'styles/Seller/proposal/proposaldetails.module.css'
 import { computeStars } from "components/Product/Product";
+import { BsGearFill } from "react-icons/bs";
+import { useState } from "react";
+import EditProposal from "./EditProposal";
 
 export default function ProposalDetails({ product, category, proposal,invoices, ...props }) {
-    console.log(invoices)
     const numberOrders = 0;
     const revenue = 0;
     for (let i = 0; i < invoices.length; i++) {
@@ -17,11 +19,25 @@ export default function ProposalDetails({ product, category, proposal,invoices, 
       
     }
     
-    console.log(numberOrders)
-    console.log(revenue)
+    const [modalShow, setModalShow] = useState(false);
+
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     return  <SellerCard className={styles.panel_details}
-      title={"Proposal Details"} {...props}>
+              injectTitle={<div>
+                              <span className={styles.injectTitleL}><h4>Proposal Details</h4></span>
+                              <span className={styles.injectTitleR}>
+                                <button type="submit" className={styles.btn}
+                                  onClick={() => setModalShow(true)}>
+                                <BsGearFill size={35}></BsGearFill>
+                                </button>
+                                <EditProposal
+                                  show={modalShow}
+                                  onHide={() => setModalShow(false)}
+                                  proposal={proposal}
+                                  product={product}
+                            />
+                                </span>
+                            </div>} {...props}>
           
         <Row md={12}>
             <Col md={3} >
