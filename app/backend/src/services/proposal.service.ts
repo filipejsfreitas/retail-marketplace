@@ -114,25 +114,25 @@ export class ProposalService {
       products_search.push(this.products.findById(element.product_id))
     });
 
-    const requests = [];
-
     return await Promise.all(products_search).then(async products => {
-      products.forEach(product => {
-        requests.push(fetch(process.env.FLASK_URL + `/forecast_stock/`+ product._id + `/`+ product.name, { method: 'GET' }))
-      })
+      const productStocks =
+        products.map(product => new Promise(async (resolve, _) => {
+          const rep = await fetch(process.env.FLASK_URL + `/forecast_stock/` + product._id + `/` + product.name, { method: 'GET' })
+          if (rep.ok) {
+            const json = await rep.json()
+            json.product_id = json.product_id ?? json.ProductID
+            delete json.ProductID
+            resolve(json)
+          } else {
+            resolve({ product_id: product._id, Stock_prevision: null })
+          }
+        }))
 
-      return await Promise.all(requests).then(async responses => {
-        const json = await Promise.all(responses.map(rep => rep.json()))
-        return json;
-
-      })
-        .catch(function (err) {
-          throw new HttpException(500, err.message); // some coding error in handling happened
-        });
+      return await Promise.all(productStocks)
     })
-    .catch(function (err) {
-      throw new HttpException(500,err.message); // some coding error in handling happened
-    });
+      .catch(function (err) {
+        throw new HttpException(500, err.message); // some coding error in handling happened
+      });
   }
 
   public async getStockPrevision(proposalId: string, sellerId){
