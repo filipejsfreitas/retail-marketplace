@@ -1,0 +1,49 @@
+.panel_details {
+    position: relative;
+    width: 390px;
+    height: 238px;
+}
+.panel_details > div:nth-of-type(2) {
+    padding: 0;
+}
+
+
+.row {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.text {
+    align-items: center;
+    display:flex; 
+    justify-content: center;
+    margin-top: 50px;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 24px;
+}
+
+.circle {
+    width: 160px;
+    height: 160px;
+    border:5px dashed rgb(12, 11, 11);
+    border-radius:50%;
+    text-align:center;
+    margin-left: 115px;
+    display: block;
+    margin-top: 10px;
+}
+
+.negative{
+    color: #FF0000;
+}
+
+.positive{
+    color: #008000;
+}
+.arrow{
+    size: 20px;
+}
