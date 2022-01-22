@@ -11,7 +11,7 @@ const Info = ({seller, token, proposals}) =>{
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     const [modalShow, setModalShow] = useState(false);
     const { userType} = useContext(TokenContext)
-    
+    const imagesrc = process.env.NEXT_PUBLIC_HOST + "/"
     return(  
     <>
         <Row className={styles.nameSeller}>
@@ -23,7 +23,7 @@ const Info = ({seller, token, proposals}) =>{
                     <div className={styles.recommended}>
                         <img
                             className={styles.recommendedPhoto}              
-                            src={ (seller.images && seller.images[0])  ? seller.images[0] : fallback}
+                            src={ (seller.image)  ? imagesrc + seller.image : fallback}
                         />
                     </div >
                 </Col >

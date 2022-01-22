@@ -14,6 +14,8 @@ import styles from "styles/Seller/index.module.css"
 import useFetchAuth from "hooks/useFetchAuth";
 import Comments from "components/Seller/Proposal/Comments";
 import OtherSeller from "components/Seller/Proposal/OtherSellers";
+import SoldToday from "components/Seller/Proposal/SoldToday";
+import Recommended from "components/Seller/Proposal/Recommended";
 
 function EditableText({ refs, value, edit, as, rows }) {
   return edit ? (
@@ -190,6 +192,12 @@ export default function Proposal(props) {
     () => `${process.env.NEXT_PUBLIC_HOST}/product/${proposal.product_id}`,
     { default: {}, when: !loadingProposal }
   );
+
+  const { data: recommendedPrice, loading: loadingRecommended } = useFetchData(
+    () => `${process.env.NEXT_PUBLIC_HOST}/product/priceStats/${proposal.product_id}`,
+    { default: {}, when: !loadingProposal }
+  );
+
   const { data: category, loading: loadingCategory } = useFetchData(
     () => `${process.env.NEXT_PUBLIC_HOST}/category/${product.category_id}`,
     { default: {}, when: !loadingProduct }
@@ -221,11 +229,14 @@ export default function Proposal(props) {
       <ProposalDetails product={product} category={category} proposal={proposal} invoices={invoices}/>}
       {!loadingProposals && 
       <OtherSeller proposals={proposals} proposalP={proposal}/>}
-      <Comments product={product}/>
+      {!loadingRecommended &&
+      <Recommended proposal={proposal} recommendedPrice={recommendedPrice}/>}
+      {!loadingInvoices &&
+      <SoldToday product={product}  proposal={proposal} invoices={invoices}/>}
       {stock_suggestions && stock_suggestions.Stock_prevision &&
-        <StockPrediction predictions={stock_suggestions.Stock_prevision} />}
+      <StockPrediction predictions={stock_suggestions.Stock_prevision} />}
       <CurrentStock proposal={proposal}/>
-      
+       <Comments product={product}/>
       </div>
     </Layout>
   );
