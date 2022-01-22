@@ -1,0 +1,19 @@
+.panel_details {
+    position: relative;
+    width: 370px;;
+    height: 238px;
+}
+
+.panel_details > div:nth-of-type(2) {
+    padding: 0;
+}
+
+.name{
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    margin-left: 20px;
+}
