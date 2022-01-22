@@ -8,6 +8,8 @@ import useFetchAuth from "hooks/useFetchAuth";
 
 import styles from "styles/Seller/index.module.css"
 import { useEffect, useState } from "react";
+import DottedOption from "components/common/DottedOption";
+import ActionSelector from "../ActionSelector";
 
 function useStockSuggestion(proposal_id){
   const { fetchAuth: fetch } = useFetchAuth()
@@ -37,8 +39,8 @@ function LowStockProposalsLine({ proposal }) {
   const { _id, stock, product_id, price } = proposal
   const { data: product, loading } =
     useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/${product_id}`)
-  
   const { stockSuggestion, loading: loadingStockSuggestion } = useStockSuggestion(proposal._id)
+  const [show, setShow] = useState(false)
   
   return <tr >
     <td> {loading ? <Spinner animation="border" size="sm" />
@@ -57,12 +59,12 @@ function LowStockProposalsLine({ proposal }) {
     </td>
     <td>
       <div style={{ "display": "flex", "gap": "5px" }}>
-        {/*<a > <BsPlusSquare /> </a>*/}
-        <Link href={`seller/proposal/${_id}`}>
-          <a>
-            <BsArrowRightSquare />
-          </a>
-        </Link>
+        <DottedOption onClick={() => setShow(true)} />
+        <ActionSelector show={show} setShow={setShow} options={[
+          <Link href={`seller/proposal/${_id}`}>
+            {"Inspect Proposal"}
+          </Link>
+        ]} />
       </div>
     </td>
   </tr>
