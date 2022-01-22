@@ -116,21 +116,19 @@ export class ProposalService {
 
     const requests = [];
 
-    Promise.all(products_search).then(products => {
-      for (let index = 0; index < products.length; index++) {
-        
-        requests.push(fetch(process.env.FLASK_URL + `/forecast_stock/`+ products[index]._id + `/`+ products[index].name, { method: 'GET' }))
-        
-        Promise.all(requests).then(responses => {
-          return JSON.stringify(responses);
-          
-        })
+    return await Promise.all(products_search).then(async products => {
+      products.forEach(product => {
+        requests.push(fetch(process.env.FLASK_URL + `/forecast_stock/`+ product._id + `/`+ product.name, { method: 'GET' }))
+      })
+
+      return await Promise.all(requests).then(async responses => {
+        const json = await Promise.all(responses.map(rep => rep.json()))
+        return json;
+
+      })
         .catch(function (err) {
-          throw new HttpException(500,err.message); // some coding error in handling happened
+          throw new HttpException(500, err.message); // some coding error in handling happened
         });
-
-
-      }
     })
     .catch(function (err) {
       throw new HttpException(500,err.message); // some coding error in handling happened
