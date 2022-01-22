@@ -16,6 +16,8 @@ import Comments from "components/Seller/Proposal/Comments";
 import OtherSeller from "components/Seller/Proposal/OtherSellers";
 import SoldToday from "components/Seller/Proposal/SoldToday";
 import Recommended from "components/Seller/Proposal/Recommended";
+import Feelings from "components/Seller/Proposal/Feelings";
+import Words from "components/Seller/Proposal/Words";
 
 function EditableText({ refs, value, edit, as, rows }) {
   return edit ? (
@@ -236,7 +238,9 @@ export default function Proposal(props) {
       {stock_suggestions && stock_suggestions.Stock_prevision &&
       <StockPrediction predictions={stock_suggestions.Stock_prevision} />}
       <CurrentStock proposal={proposal}/>
-       <Comments product={product}/>
+      <Feelings></Feelings>
+      <Comments product={product}/>
+      <Words></Words>
       </div>
     </Layout>
   );
