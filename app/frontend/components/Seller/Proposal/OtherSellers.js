@@ -30,7 +30,6 @@ function OtherSellersLine({ proposal, propP }) {
 
 
 export default function OtherSeller({ proposals, proposalP,  ...props }) {
-    console.debug(proposalP)
     return <SellerCard title={"Other Sellers"}  className={styles.panel_details} {...props}>
                 <Table striped hover responsive>
                     <thead>
