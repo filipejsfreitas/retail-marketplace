@@ -4,7 +4,6 @@ Headphones
 speakers
 GPS 
 PC
-Navigation
 Electronic Accessories
 Gadgets
 Portable Electronics
@@ -12,8 +11,10 @@ E-Book Readers
 MP3
 Portable Media Players
 Game Systems
-GPS
 Navigation
 TV
 Video Equipment
 Video Players
+image projection
+stereo
+small appliances

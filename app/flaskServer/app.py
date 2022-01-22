@@ -22,15 +22,14 @@ app = Flask(__name__)
 Metodo invocado sempre que é adicionado um novo comentario ao produto.
 Cada comentario é classificado e adicionado ao dataset
 '''
-@app.route('/add_review_classify', methods=['GET', 'POST'])
+@app.route('/add_review_classify', methods=['POST'])
 def add_review_classify():
 
     ##Recebe id do produto no pedido
     #productId = request.json['productId']
     #review = request.json['review']
 
-    data = {"productId" : "AVpf3txeLJeJML43FN82"
-    ,"review" : "The computer works very well."}
+    data =  request.get_json(force=True)
 
     #lê dados
     #data = pd.read_csv("datasets/reviews.csv", index_col=False,sep=',')
@@ -56,44 +55,17 @@ def product_evaluation(productId):
 '''
 Sugestão de preço de um produto
 '''
-@app.route('/seller_optimization', methods=['GET', 'POST'])
+@app.route('/seller_optimization', methods=['POST'])
 def seller_optimization():
     
     ## Esta função espera receber um vendedor, o id e nome do produto, e a lista de propostas para esse produto.
-    
-    data = {
-    "sellerID": 1,
-    "productId" : 10, 
-    "product_name": "panasonic tv",
-    "proposals": [{
-        "id": 0,
-        "sellerId": 3,
-        "productId": 10,
-        "price": 300,
-        "shipping_price": 6,
-        "stock": 8
-      },
-      {
-        "id": 10,
-        "sellerId": 1,
-        "productId": 10,
-        "price": 346,
-        "shipping_price": 7,
-        "stock": 9
-      },
-      {
-        "id": 10,
-        "sellerId": 4,
-        "productId": 10,
-        "price": 310,
-        "shipping_price": 3,
-        "stock": 9
-      }]
-      
-      
-  }
 
-    res = price_optimization( data)
+    data =  request.get_json(force=True)
+
+    print(data)
+ 
+
+    res = price_optimization(data)
     
     "retorna um objeto com o id do seller, do produto, da proposta e sugetsão de preço"
     return res
@@ -133,13 +105,21 @@ def new_categories(geo):
 '''
 Obter forecasting stock
 '''
-@app.route('/forecast_stock/<id>/<productName>', methods=['GET'])
+@app.route('/forecast_stock/', methods=['POST'])
 
 ## Recebe a geolocalização
-def forecast_stock(id, productName): 
-   # print (productName)
+def forecast_stock(): 
 
-    fCast = forecast(id,productName)
+    '''
+    data = {
+        "id":"99999999",
+        "productName":"HP Deskotp"
+    }
+    '''
+   
+    data =  request.get_json(force=True)
+
+    fCast = forecast(data["id"],data["productName"])
     #print (fCast)
     return fCast
 

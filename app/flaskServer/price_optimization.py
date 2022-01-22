@@ -19,10 +19,11 @@ def get_interest_over_time(product):
         
         ## Manter apenas os resultados das duas ultimas semanas
         trends = df.iloc[-2:]
+        status = True
     except:
-        print ("[ERROR] get_interest_over_time")
+       return None, False
 
-    return trends
+    return trends, status
 
 
 '''
@@ -96,11 +97,19 @@ def price_optimization(data):
     name = data["product_name"].split()
     name = [n for n in name if n.isalpha() ]
     n = ''.join([ i + " " for i in name[:2] if i.isalpha()])
-    trend = get_interest_over_time(n)
 
+
+################################################### Se não for possivel extrair dados
+    trend, status = get_interest_over_time(n)
+    if status == False:
+        return    {
+        "sellerId": id_seller,
+        "productId": id_product,
+        "proposalId":proposal_id,
+        "priceSugestion": None }
 
     
-    print(trend)
+
     
     ## preço obtido ao consultar a tendencia de procuras no google trends
     price_trends = analyse_trends(trend, price_proposal)
