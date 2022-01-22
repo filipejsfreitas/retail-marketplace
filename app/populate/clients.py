@@ -37,3 +37,7 @@ def add_client(logger, clientKey):
 
     rep = requests.request("POST", url, headers=default_headers(), data=json.dumps(payload))
     login_client(logger, clientKey)
+
+def add_clients(state):
+    for client in state.clients:
+        add_client(state.logger, client)

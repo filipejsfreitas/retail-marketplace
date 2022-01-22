@@ -4,10 +4,15 @@ class Logger:
 
     def spc(self):
         for i in range(self.depth):
-            print("  ", end="")
+            print(" ", end="")
 
     def info(self, str):
         print("[INFO]: ", end="")
+        self.spc()
+        print(str)
+
+    def warn(self, str):
+        print("[WARN]: ", end="")
         self.spc()
         print(str)
 

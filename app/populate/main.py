@@ -2,11 +2,18 @@
 from logger import Logger
 from clients import *
 from sellers import *
+from categories import *
+from products import *
 
-logger = Logger()
+class State():
+    logger = Logger()
+    clients = clients
+    sellers = sellers
+    categories = categories
+    products = products
 
-for client in clients:
-    add_client(logger, client)
+state = State()
 
-for seller in sellers:
-    add_seller(logger, seller)
+add_clients(state)
+add_sellers(state)
+add_categories(state)

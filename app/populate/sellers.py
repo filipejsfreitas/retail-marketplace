@@ -37,3 +37,7 @@ def add_seller(logger, sellerKey):
 
     rep = requests.request("POST", url, headers=default_headers(), data=json.dumps(payload))
     login_seller(logger, sellerKey)
+
+def add_sellers(state):
+    for seller in state.sellers:
+        add_seller(state.logger, seller)
