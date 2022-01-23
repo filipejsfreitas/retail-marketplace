@@ -65,7 +65,6 @@ def identify_words(common_words):
 
     words = []
     for c,v in common_words:
-
         if c in list_words:
            words.append(c)
 
@@ -73,8 +72,15 @@ def identify_words(common_words):
 
 
 def give_sentiment_product (product):
-    sentiments = dict(product['classification'].value_counts())
-    return ((list(sentiments.keys())))
+    
+    try:
+        sentiments = dict(product['classification'].value_counts())
+        print (sentiments)
+        return ((list(sentiments.keys()))[:1])
+
+    except:
+        return []   
+   
 
 
 def product_info (idProduct, language = "english"):
@@ -102,7 +108,7 @@ def product_info (idProduct, language = "english"):
 
         context = {
             "id_product": idProduct,
-            "sentiments": sentiments [:2],
+            "sentiments": sentiments,
             "most_used_words": words
         }
 

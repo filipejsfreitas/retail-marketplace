@@ -33,9 +33,9 @@ def sentimentAnalysis(review):
 
 def update_dataset(id_product, review):
     
-    res = dataPrep(review)
+    review_clean = dataPrep(review)
 
-    emotions = sentimentAnalysis(res)
+    emotions = sentimentAnalysis(review_clean)
 
     
     print(emotions)
@@ -49,11 +49,15 @@ def update_dataset(id_product, review):
         if highValue < emotions[x]:
             highValue = emotions[x]
             highemotion = x
-    if highValue == emotions["negative"]:
+    if highValue == emotions["negative"] and highValue !=0 :
         highemotion = "negative"
 
+    if emotions["negative"] ==  emotions["positive"] ==  emotions["fear"] == emotions["anger"]  == emotions["anticip"]  == emotions["trust"] == emotions["surprise"] == emotions["sadness"]:
+        highemotion = "neutral"
 
-    row = {'id': id_product, "review": review, "classification": highemotion}
+  
+
+    row = {'id': id_product, "review": review_clean, "classification": highemotion}
     # Adicionar a nova linha ao dataset
     data = data.append(row,  ignore_index=True)
 

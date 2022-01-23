@@ -44,7 +44,7 @@ def add_review_classify():
 '''
 Metodo invocado para obter sentimentos e topicos de palavras mais usadas nos comentarios de um produto 
 '''
-@app.route('/product_evaluation/<productId>', methods=['GET', 'POST'])
+@app.route('/product_evaluation/<productId>', methods=['GET'])
 def product_evaluation(productId):  
     #lê dados
     payload = product_info(productId)
