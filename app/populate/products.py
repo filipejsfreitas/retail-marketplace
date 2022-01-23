@@ -7,6 +7,9 @@ products = {
         "name": "HP Pavilion Gaming Desktop TG01-2003np",
         "files": ["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/_/1_2_122_1_1.jpg", "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/2/_/2_2_103_1_1.jpg", "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/3/_/3_1_97_1_1.jpg"],
         "minprice": 700, "maxprice": 800,
+        "description": "Play on your own terms. This powerful line-up is designed to keep pace with current and new game releases. Underneath the compact and sleek outer shell, you’ll find everything you need for gaming performance, as well as space for new expansions and upgrades.",
+        "characteristic": '[{"name": "color", "value": "black"}]',
+        "tecnical": '["CPU: Intel Core i5"]'
     },
     "desktophp2" : {
         "name": "HP Desktop M01-F1017np",
@@ -67,6 +70,36 @@ products = {
         "name": "Detransition, Baby : A Novel",
         "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/44/27/75/7677764/1540-1.jpg"],
         "minprice": 10, "maxprice": 25,
+    },
+    "tablet1": {
+        "name": "Samsung Galaxy Tab A7",
+        "files": ["https://c1.neweggimages.com/ProductImage/A24GD210714Y9VU0.jpg"],
+        "minprice": 100, "maxprice": 200,
+    },
+    "tablet2": {
+        "name": "Android 10, 8-inch Android Tablet",
+        "files": ["https://c1.neweggimages.com/ProductImage/ARTPD21052862K2E.jpg"],
+        "minprice": 70, "maxprice": 140,
+    },
+    "headphones1": {
+        "name": "Beyerdynamic DT 1990 Pro",
+        "files": ["https://c1.neweggimages.com/ProductImage/0TH-00JD-000R7-S08.jpg"],
+        "minprice": 70, "maxprice": 140,
+    },
+    "headphones2": {
+        "name": "Bose Soundlink Around-Ear Wireless",
+        "files": ["https://c1.neweggimages.com/ProductImage/26-627-052-14.jpg"],
+        "minprice": 70, "maxprice": 140,
+    },
+    "phone1": {
+        "name": "Apple iPhone 13 Pro",
+        "files": ["https://c1.neweggimages.com/ProductImage/AN2HS2109174jMfO.jpg"],
+        "minprice": 1500, "maxprice": 1600,
+    },
+    "phone2": {
+        "name": "Samsung Galaxy Note 20 Ultra 5G",
+        "files": ["https://c1.neweggimages.com/ProductImage/26-627-052-14.jpg"],
+        "minprice": 1300, "maxprice": 1500,
     },
 }
 

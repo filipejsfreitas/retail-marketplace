@@ -24,6 +24,15 @@ categories = [
             {"name": "Fiction", "productKeys": ["book3", "book4"] },
         ],
     },
+    {
+        "name": "Eletronics",
+        "children": [
+            {"name": "Phones", "productKeys": ["phone1", "phone2"]},
+            {"name": "Tablets", "productKeys": ["tablet1", "tablet2"]},
+            {"name": "Headphones", "productKeys": [
+                "headphones1", "headphones2"]},
+        ],
+    },
 ]
 
 def add_category(state, category, parent=None):
