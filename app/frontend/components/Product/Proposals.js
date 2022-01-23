@@ -16,7 +16,7 @@ const SellerInfo = ({ idSeller }) => {
   <>
     <p></p>
     <p className={styles.nameSeller}>
-    <Link href={`/infoseller/${idSeller}`}><a>{seller.firstName} {seller.lastName}</a></Link>
+    <Link href={`/infoseller/${idSeller}`}><a>{seller.companyName} </a></Link>
     </p>
     <p className={styles.stars}>{computeStars(seller.rating)}</p>
   </>
@@ -24,30 +24,6 @@ const SellerInfo = ({ idSeller }) => {
 
 export default function Proposals(proposals) {
   const cart = useContext(CartContext);
-
-  const sellers = [
-    {
-      name: "HouseMarket.pt",
-      rating: 3,
-      price: 10,
-      shipping: 4,
-      stock: 8,
-    },
-    {
-      name: "HouseMarketHouse.pt",
-      rating: 4,
-      price: 2000.08,
-      shipping: 2,
-      stock: 0,
-    },
-    {
-      name: "HouseMarket.pt",
-      rating: 4,
-      price: 20,
-      shipping: 2,
-      stock: 102,
-    },
-  ];
 
   const proposalsOrd = proposals.proposals.sort((a, b) => a.price - b.price);
   const isLog = proposals.isLog
