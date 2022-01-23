@@ -5,8 +5,10 @@ from headers import auth_headers
 
 
 def generate_proposal(state, sellerKey, productKey):
+    minprice = state.products[productKey].get("minprice", 10)
+    maxprice = state.products[productKey].get("maxprice", 100)
     return {
-        "price": random.randrange(10, 100), "shipping": random.randrange(1, 10),
+        "price": random.randrange(minprice, maxprice), "shipping": random.randrange(1, 10),
         "stock": random.randrange(1, 50), "maxPerPurchase": random.randrange(1, 10),
         "sellerKey": sellerKey, "productKey": productKey,
         "special_conditions": "",
