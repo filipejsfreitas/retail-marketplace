@@ -2,33 +2,6 @@ import random
 import datetime
 from bson.objectid import ObjectId
 
-#{
-#	"_id": "61eca2bf332f07b7e2d0aa82",
-#	"client_id": "61eca272332f07b7e2d0aa10",
-#	"date": ISODate("2022-01-23T00:35:11Z"),
-#	"total": 20,
-#	"address": {
-#		"nif": "string",
-#		"address": "string",
-#		"postal_code": "string",
-#		"name": "string",
-#		"contact": "string",
-#		"_id": ObjectId("61eca2bf332f07b7e2d0aa83")
-#	},
-#	"items": [{
-#		"quantity": 1,
-#		"price": 10,
-#		"shipping": 10,
-#		"product_id": "61eca273332f07b7e2d0aa26",
-#		"proposal_id": "61eca275332f07b7e2d0aa36",
-#		"seller_id": "61eca272332f07b7e2d0aa18",
-#		"state": "indefinido",
-#		"special_conditions": "",
-#		"_id": ObjectId("61eca2bf332f07b7e2d0aa84")
-#	}],
-#	"__v": 0
-#}
-
 
 def random_order(state):
     ret = {}
@@ -90,21 +63,6 @@ def add_order(state, order):
         "items": sellerItems,
         "state": "processing",
     })
-#	"seller_id": order["client"]["_id"],
-#	"date": datetime.datetime.utcnow(),
-#	"total": 20,
-#	"address": {
-#	},
-#    "state": "processing",
-#	"items": [{
-#            "quantity": order["quantity"],
-#          		"price": order["proposal"]["price"],
-#          		"shipping": order["proposal"]["shipping"],
-#          		"product_id": order["product"]["_id"],
-#          		"proposal_id": order["proposal"]["_id"],
-#          		"special_conditions": "",
-#          		"_id": ObjectId("000000000000000000000000")
-#	}]})
 
 
 def add_orders(state):
