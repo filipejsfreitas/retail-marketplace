@@ -9,10 +9,10 @@ export default function StockPrediction({ predictions, ...props }) {
       now.setDate(now.getDate() + i)
       return `${now.getDate()}/${now.getMonth() + 1}`
     }
-    const data = predictions.map((count, i) => ({
+    const data = predictions ?  predictions.Stock_prevision.map((count, i) => ({
       period: getPeriod(i),
       units: count,
-    }))
+    })) : []
     
     return <SellerCard title={"Stock Prediction"}  className={styles.panel_details} {...props}>
             <ResponsiveBar
