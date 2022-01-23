@@ -215,6 +215,11 @@ export default function Proposal(props) {
     { default: {} }
   );
 
+  const { data: evaluation, loading: loadingEvaluation } = useFetchData(
+    () => `${process.env.NEXT_PUBLIC_HOST}/product/evaluation/${proposal.product_id}`,
+    { default: {}, when: !loadingProposal }
+  );
+
   const { data: stock_suggestions, loading: loadingStockSuggestions } =
     useFetchData(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
 
@@ -235,12 +240,14 @@ export default function Proposal(props) {
       <Recommended proposal={proposal} recommendedPrice={recommendedPrice}/>}
       {!loadingInvoices &&
       <SoldToday product={product}  proposal={proposal} invoices={invoices}/>}
-      {stock_suggestions && stock_suggestions.Stock_prevision &&
+      {!loadingStockSuggestions && stock_suggestions && stock_suggestions.Stock_prevision &&
       <StockPrediction predictions={stock_suggestions.Stock_prevision} />}
       <CurrentStock proposal={proposal}/>
-      <Feelings></Feelings>
+      {!loadingEvaluation &&
+      <Feelings feelings={evaluation.sentiments}></Feelings>}
       <Comments product={product}/>
-      <Words></Words>
+      {!loadingEvaluation &&
+      <Words feelings={evaluation.most_used_words}></Words>}
       </div>
     </Layout>
   );

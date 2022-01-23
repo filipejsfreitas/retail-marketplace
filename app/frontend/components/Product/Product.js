@@ -182,25 +182,15 @@ const Product = (props) => {
             </Row>
     
             <Row md={12}>
-                <div className={styles.reviewTop}>
-                <span className={styles.reviewName}>Reviews</span>
-                <span>
-                    <Button type="submit" 
-                        variant="secundary"
-                        className={styles.buttonComment}
-                        disabled={isLog ? false : true}
-                        onClick={() => setModalShow(true)}>
-                    New Review
-                    </Button>
-                    <MyModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                      id={prod._id}
-                    />
-                </span>
-                </div>
                 <Container className={styles.panelReviews}>
-                    <Reviews props1={commentsOrd} id={prod._id}/>
+                    <Reviews 
+                        prod={prod} 
+                        id={prod._id} 
+                        modalShow={modalShow} 
+                        setModalShow={setModalShow} 
+                        isLog={isLog} 
+                        props1={commentsOrd} 
+                        id={prod._id}/>
                 </Container> 
             </Row>
         </>
