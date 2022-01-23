@@ -1,6 +1,7 @@
 import requests
 import json
-from headers import default_headers
+import jwt
+from headers import default_headers, auth_headers
 from names import first_name, last_name
 
 sellers = {
@@ -25,6 +26,8 @@ def login_seller(logger, sellerKey):
 
     rep = requests.request("POST", url, headers=default_headers(), data=json.dumps(payload))
     seller["token"] = "Bearer " + rep.json()["token"]
+
+    seller["_id"] = jwt.decode(rep.json()["token"], options={"verify_signature": False})["_id"]
 
 def add_seller(logger, sellerKey):
     seller = sellers[sellerKey]

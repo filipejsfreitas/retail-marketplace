@@ -1,6 +1,7 @@
 import requests
 import json
-from headers import default_headers
+import jwt
+from headers import default_headers, auth_headers
 from names import first_name, last_name
 
 clients = {
@@ -25,6 +26,8 @@ def login_client(logger, clientKey):
 
     rep = requests.request("POST", url, headers=default_headers(), data=json.dumps(payload))
     client["token"] = "Bearer " + rep.json()["token"]
+
+    client["_id"] = jwt.decode(rep.json()["token"], options={"verify_signature": False})["_id"]
 
 def add_client(logger, clientKey):
     client = clients[clientKey]
