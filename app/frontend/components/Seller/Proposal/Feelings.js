@@ -4,14 +4,13 @@ import { BsBoxSeam } from "react-icons/bs";
 import { Row } from "react-bootstrap"
 
 
-export default function Feelings({proposal, recommendedPrice, ...props }) {
-    
+export default function Feelings({feelings, ...props }) {
     const positive = ["trust", "surprise", "positive", "joy"]
     const negative = ["negative", "sadness", "anger", "disgust" , "fear"]
     const neutral = ["anticipation"]
 
-    const word1 = "trust"
-    const word2 = "anticipation"
+    const word1 = "trust";     {/*só descomentar quando estiver a dar -  feelings[0]*/}
+    const word2 = "surprise";     {/*só descomentar quando estiver a dar -  feelings[1]*/}
 
     const styleFeeling = (word) =>
         positive.includes(word) ? "#008000"

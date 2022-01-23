@@ -4,12 +4,13 @@ import styles from 'styles/Seller/proposal/words.module.css'
 import { ListGroup, ListGroupItem } from "react-bootstrap"
 
 
-export default function Words({product, proposal, invoices, ...props }) {
+export default function Words({feelings, ...props }) {
     const words=[
         "cenas", "cenas2", "cenas3", "cenas4", "cenas5", "cenas6"
     ]
     return <SellerCard title={"Most Used Words"}  className={styles.panel_details} {...props}>
            <ListGroup variant="flush">
+            {/*trocar words por feelings */}
                 {words.map((key, value) => (
                     <ListGroupItem key={value}>
                         <div> 

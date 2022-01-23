@@ -152,7 +152,7 @@
 }
 
 .reviewTop{
-    margin-top: 40px;
+    margin-top: 0px;
 }
 .reviewTitle{
     color: #000000;
@@ -220,4 +220,12 @@
 
 .reviewCol2{
     margin-right: 8px;
+}
+
+.panel_details {
+    max-height: 600px;
+}
+
+.panel_details > div:nth-of-type(2) {
+    padding: 0;
 }
