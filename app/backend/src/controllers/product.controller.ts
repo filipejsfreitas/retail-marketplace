@@ -202,7 +202,7 @@ export class ProductController {
       images: imagePaths,
     });
     //return {data: product, message: 'Product created'}
-    return { message: 'Product created' };
+    return { data: product, message: 'Product created' };
   }
 
   //falta apagar as imagens
