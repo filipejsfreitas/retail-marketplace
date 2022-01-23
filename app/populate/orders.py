@@ -3,27 +3,42 @@ import datetime
 from bson.objectid import ObjectId
 
 
-def random_order(state):
+def generate_order(state, date, address, proposal):
     ret = {}
-    ret["address"] = state.addresses[random.randrange(len(state.addresses))]
+    ret["date"] = date
+    ret["address"] = address
     ret["client"] = state.clients[ret["address"]["clientKey"]]
-    ret["proposal"] = state.proposals[random.randrange(len(state.proposals))]
+    ret["proposal"] = proposal
     ret["product"] = state.products[ret["proposal"]["productKey"]]
     ret["seller"] = state.sellers[ret["proposal"]["sellerKey"]]
     ret["quantity"] = random.randrange(2) + 1
+    rand = random.random()
+    if rand < 0.6:
+        ret["state"] = "complete"
+    elif rand < 0.8:
+        ret["state"] = "sent"
+    else:
+        ret["state"] = "processing"
 
     return ret
 
 
 def populate_orders(state):
+    random.seed(0)
     state.logger.info("Generating orders.")
-    state.orders.append(random_order(state))
+    for day in range(1, 23):
+        date = datetime.datetime(2022,1,day)
+        for address in state.addresses:
+            for proposal in state.proposals:
+                if random.random() < 0.05:
+                    state.orders.append(generate_order(state, date, address, proposal))
 
 
 def add_order(state, order):
+    state.logger.info("Adding order on client '" + order["address"]["clientKey"] + "', seller '" + order["proposal"]["sellerKey"] + "'.")
     addr = {"nif": order["address"]["nif"], "address": order["address"]["address"], "postal_code": order["address"]["postal_code"],
             "name": order["address"]["name"], "contact": order["address"]["contact"], "_id": ObjectId()}
-    date = datetime.datetime.utcnow()
+    date = order["date"]
     total = order["proposal"]["shipping"] * \
         order["proposal"]["shipping"] * order["quantity"]
     clientItems = [{
@@ -33,7 +48,7 @@ def add_order(state, order):
         "product_id": order["product"]["_id"],
         "proposal_id": order["proposal"]["_id"],
         "seller_id": order["seller"]["_id"],
-        "state": 'indefinido',
+        "state": order["state"],
         "special_conditions": "",
         "_id": ObjectId(),
     }]
@@ -61,7 +76,7 @@ def add_order(state, order):
         "total": total,
         "address": addr,
         "items": sellerItems,
-        "state": "processing",
+        "state": order["state"],
     })
 
 

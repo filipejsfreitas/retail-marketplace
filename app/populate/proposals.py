@@ -16,16 +16,17 @@ def generate_proposal(state, sellerKey, productKey):
 def populate_proposals(state):
     random.seed(0)
     state.logger.info("Generating proposals.")
+    print(list(state.sellers.keys()))
     for sellerKey in state.sellers:
         for productKey in state.products:
-            if random.random() < 0.2:
+            if random.random() < 0.3:
                 state.proposals.append(generate_proposal(
                     state, sellerKey, productKey))
 
 
 def add_proposal(state, proposal):
     url = "http://localhost:3001/proposal"
-    state.logger.info("Adding proposal on '" + proposal["productKey"] + "'.")
+    state.logger.info("Adding proposal on '" + proposal["productKey"] + "' from '" + proposal["sellerKey"] + "'.")
 
     proposal["product_id"] = state.products[proposal["productKey"]]["_id"]
     payload = {}
