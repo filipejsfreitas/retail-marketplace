@@ -6,6 +6,7 @@ from categories import *
 from products import *
 from proposals import *
 from comments import *
+from addresses import *
 
 class State():
     logger = Logger()
@@ -15,6 +16,7 @@ class State():
     products = products
     proposals = proposals
     comments = comments
+    addresses = addresses
 
 state = State()
 
@@ -23,3 +25,4 @@ add_sellers(state)
 add_categories(state)
 add_proposals(state)
 add_comments(state)
+add_addresses(state)
