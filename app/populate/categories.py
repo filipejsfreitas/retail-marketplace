@@ -10,20 +10,20 @@ categories = [
             {"name": "Desktops", "productKeys": [ "desktophp", "desktophp2"]},
             {"name": "Laptops", "productKeys": ["laptophp"]},
             {"name": "Components",
-             "_children": [
+             "children": [
                  {"name": "Processors", "productKeys": [ "cpu", "cpu2"]},
                  {"name": "GPU", "productKeys": [ "gpu", "gpu2"]},
                  {"name": "Ram", "productKeys": [ "ram", "ram2"]},
              ]},
         ],
     },
-#    {
-#        "name": "Books",
-#        "children": [
-#            {"name": "Romance", "products": ["book", "book2"] },
-#            {"name": "Fiction", "products": ["book3", "book4"] },
-#        ],
-#    },
+    {
+        "name": "Books",
+        "children": [
+            {"name": "Romance", "productKeys": ["book", "book2"] },
+            {"name": "Fiction", "productKeys": ["book3", "book4"] },
+        ],
+    },
 ]
 
 def add_category(state, category, parent=None):

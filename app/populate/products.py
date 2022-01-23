@@ -39,22 +39,22 @@ products = {
         "name": "Gigabyte GeForce RTX 3080 Ti Gaming 12G GDDR6X OC",
         "files": ["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/_/1_21_2.jpg", "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/7/_/7_10_7.jpg"]
     },
-#    "book": {
-#        "name": "The Wedding Dress",
-#        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/7f/6b/67/6777727/1540-1.jpg"]
-#    },
-#    "book2": {
-#        "name": "Honest Illusions",
-#        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/7d/6b/67/6777725/1540-1.jpg"]
-#    },
-#    "book3": {
-#        "name": "Beautiful World, Where Are You",
-#        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/53/76/6a/6977107/1540-1.jpg"]
-#    },
-#    "book4": {
-#        "name": "Detransition, Baby : A Novel",
-#        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/44/27/75/7677764/1540-1.jpg"]
-#    },
+    "book": {
+        "name": "The Wedding Dress",
+        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/7f/6b/67/6777727/1540-1.jpg"]
+    },
+    "book2": {
+        "name": "Honest Illusions",
+        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/7d/6b/67/6777725/1540-1.jpg"]
+    },
+    "book3": {
+        "name": "Beautiful World, Where Are You",
+        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/53/76/6a/6977107/1540-1.jpg"]
+    },
+    "book4": {
+        "name": "Detransition, Baby : A Novel",
+        "files": ["https://static.fnac-static.com/multimedia/Images/PT/NR/44/27/75/7677764/1540-1.jpg"]
+    },
 }
 
 for product in products:

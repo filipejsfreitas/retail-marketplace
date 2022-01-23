@@ -1,15 +1,26 @@
 import requests
 import json
+import random
 from headers import auth_headers
 
-proposals = [
-    {"price": 10, "shipping": 10, "stock": 10, "maxPerPurchase": 10,
-        "sellerKey": "seller", "productKey": "desktophp"}
-]
 
-for proposal in proposals:
-    proposal["special_conditions"] = ""
+def generate_proposal(state, sellerKey, productKey):
+    return {
+        "price": random.randrange(10, 100), "shipping": random.randrange(1, 10),
+        "stock": random.randrange(1, 50), "maxPerPurchase": random.randrange(1, 10),
+        "sellerKey": sellerKey, "productKey": productKey,
+        "special_conditions": "",
+    }
 
+
+def populate_proposals(state):
+    random.seed(0)
+    state.logger.info("Generating proposals.")
+    for sellerKey in state.sellers:
+        for productKey in state.products:
+            if random.random() < 0.2:
+                state.proposals.append(generate_proposal(
+                    state, sellerKey, productKey))
 
 
 def add_proposal(state, proposal):

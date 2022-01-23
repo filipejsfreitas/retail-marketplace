@@ -8,6 +8,9 @@ clients = {
     "client": {}
 }
 
+for i in range(0,10):
+    clients["client" + str(i)] = {}
+
 for client in clients:
     clients[client]["email"] = client + "@email.com"
     clients[client]["firstName"] = first_name()

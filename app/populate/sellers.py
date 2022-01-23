@@ -1,12 +1,19 @@
 import requests
 import json
 import jwt
+import random
 from headers import default_headers, auth_headers
 from names import first_name, last_name
 
 sellers = {
-    "seller": { "companyName": "string", "tin": "string", "companyPhoneNumber": "string", "customerServiceEmail": "user@example.com"}
+    "pcdiga": {"companyName": "PCDiga"},
+    "seller": {"companyName": "Seller"},
 }
+
+for i in range(0,5):
+    sellers["seller" + str(i)] = {"companyName": "Seller" + str(i)}
+
+random.seed(0)
 
 for seller in sellers:
     sellers[seller]["email"] = seller + "@email.com"
@@ -14,6 +21,9 @@ for seller in sellers:
     sellers[seller]["lastName"] = last_name()
     sellers[seller]["password"] = "123456"
     sellers[seller]["passwordConfirmation"] = "123456"
+    sellers[seller]["customerServiceEmail"] = seller + ".noreply@email.com"
+    sellers[seller]["companyPhoneNumber"] = "25801234"
+    sellers[seller]["tin"] = str(random.randrange(100000000, 999999999))
 
 def login_seller(logger, sellerKey):
     seller = sellers[sellerKey]

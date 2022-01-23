@@ -1,11 +1,18 @@
 import requests
 import json
+import random
 from headers import auth_headers
 
-addresses = [
-    {"nif": "string", "address": "string", "postal_code": "string",
-        "name": "string", "contact": "string", "clientKey": "client"}
-]
+
+def generate_address(state, clientKey):
+    return {"nif": "string", "address": "string", "postal_code": "string",
+            "name": "string", "contact": "string", "clientKey": clientKey}
+
+
+def populate_addresses(state):
+    state.logger.info("Generating addresses.")
+    for clientKey in state.clients:
+        state.addresses.append(generate_address(state, clientKey))
 
 
 def add_address(state, address):

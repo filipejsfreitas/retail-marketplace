@@ -18,17 +18,19 @@ class State():
     sellers = sellers
     categories = categories
     products = products
-    proposals = proposals
+    proposals = []
     comments = comments
-    addresses = addresses
+    addresses = []
     orders = []
 
 state = State()
 
 add_clients(state)
+populate_addresses(state)
 add_addresses(state)
 add_sellers(state)
 add_categories(state)
+populate_proposals(state)
 add_proposals(state)
 add_comments(state)
 populate_orders(state)
