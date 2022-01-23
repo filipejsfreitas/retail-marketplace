@@ -6,6 +6,7 @@ import Status from "components/common/Status";
 import { BsXLg } from "react-icons/bs";
 import { useState, useEffect, useContext } from "react";
 import CartContext from "components/NavBar/Cart/context";
+import Select from 'react-select';
 
 function getQuantityOpts(max_quantity) {
     let opts = []
@@ -15,13 +16,25 @@ function getQuantityOpts(max_quantity) {
     return opts
 }
 
+function getQuantityOpts2(max_quantity) {
+    let opts = []
+    for (let i = 1; i <= max_quantity; i++) {
+        opts.push({ value: i, label: i })
+    }
+    return opts
+}
+
 
 export default function Item({id,basket,img,title,price,quantity,category,stock,seller,max_quantity}) {
 
     const cartContext = useContext(CartContext)
-    
+    const onChange = (value) => {
+        setValue(value)
+        cartContext.updateItem(id,Number(value))
+    }
     const [value,setValue] = useState(quantity)
     const [state,_] = basket
+
 
 
     useEffect(()=> {
@@ -58,10 +71,12 @@ export default function Item({id,basket,img,title,price,quantity,category,stock,
                     <div className={styles.quantity}>
                         <button onClick={ () => cartContext.deleteItem(id) }><BsXLg size={24} className={styles.cross}/></button>
                         <div>
-                            <input className={styles.form_select} value={value} onChange={ (e) => {setValue(e.target.value);cartContext.updateItem(id,Number(e.target.value))}} type="text" name="product" list={`options-${id}`}/>
-                            <datalist id={`options-${id}`}>
-                                {getQuantityOpts(max_quantity).map( x => (<option key={`key-${id}-${x}`} value={`${x}`}>{`${x}`}</option>) )}
-                            </datalist>
+                            <Select
+                                defaultValue={value}
+                                placeholder={value}
+                                onChange={(obj,_) => {onChange(obj.value)}}
+                                options={getQuantityOpts2(max_quantity)}
+                            />
                         </div>
                     </div>
                 </div>

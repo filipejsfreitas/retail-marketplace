@@ -73,6 +73,10 @@ export default function Checkout() {
         );
       });
     };
+    
+    if (cartContext.loading){
+      setLoading(true)
+    }
 
     if (!cartContext.loading && loading) {
       Promise.all(fetchAditional(cartContext.cart)).then((items) => {
