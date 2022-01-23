@@ -5,7 +5,7 @@ import io
 products = {
     "desktophp" : {
         "name": "HP Pavilion Gaming Desktop TG01-2003np",
-        "files": ["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/_/1_2_122_1_1.jpg", "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/2/_/2_2_103_1_1.jpg", "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/3/_/3_1_97_1_1.jpg"]
+        "files": ["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/_/1_2_122_1_1.jpg", "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/2/_/2_2_103_1_1.jpg", "https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/3/_/3_1_97_1_1.jpg"],
     },
     "desktophp2" : {
         "name": "HP Desktop M01-F1017np",
@@ -82,3 +82,4 @@ def add_product(state, product):
         files.append(('images', (str(i) + '.jpg', img, 'image/jpeg')))
 
     response = requests.request("POST", url, headers={}, data=payload, files=files)
+    product["_id"] = response.json()["data"]["_id"]

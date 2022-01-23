@@ -10,7 +10,7 @@ categories = [
             {"name": "Desktops", "productKeys": [ "desktophp", "desktophp2"]},
             {"name": "Laptops", "productKeys": ["laptophp"]},
             {"name": "Components",
-             "children": [
+             "_children": [
                  {"name": "Processors", "productKeys": [ "cpu", "cpu2"]},
                  {"name": "GPU", "productKeys": [ "gpu", "gpu2"]},
                  {"name": "Ram", "productKeys": [ "ram", "ram2"]},
