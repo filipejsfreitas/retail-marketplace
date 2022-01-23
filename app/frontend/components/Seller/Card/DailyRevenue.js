@@ -7,11 +7,11 @@ export default function RevenueOverviewBar({ revenueOverview, ...props }) {
   const currDate = new Date()
   const data = []
   for (var i = 0; i < 7; i++) {
-    const date = new Date(new Date(currDate).setDate(currDate.getDate() - currDate.getDay() + i))
+    const date = new Date(new Date(currDate).setDate(currDate.getDate() - 6 + i))
     const { count } = (revenueOverview ?? [])
       .find(({ _id }) => _id.year === date.getFullYear() && _id.month === date.getMonth() + 1 && _id.day === date.getDate()) ??
       { count: 0 }
-    data[i] = { date: date.toLocaleDateString('en-GB', { weekday: 'long' }).slice(0, 3), revenue: count }
+    data[i] = { date: date.toLocaleDateString('en-GB', { weekday: 'short', month: 'short', day: 'numeric' }), revenue: count }
   }
 
   return <SellerCard className={styles.panel_revenue} title={"Daily Sales"} {...props}>
