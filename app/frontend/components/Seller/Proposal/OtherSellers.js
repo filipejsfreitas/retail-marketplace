@@ -42,7 +42,7 @@ export default function OtherSeller({ proposals, proposalP,  ...props }) {
                       </tr>
                     </thead>
                     <tbody>
-                    {(proposals).map(proposal =>
+                    {proposals.map(proposal =>
                         proposal.seller_id != proposalP.seller_id &&
                         <OtherSellersLine  proposal={proposal} propP={proposalP} />)}
                     </tbody>

@@ -207,7 +207,7 @@ export default function Proposal(props) {
 
   const { data: proposals, loading: loadingProposals } = useFetchData(
     () => `${process.env.NEXT_PUBLIC_HOST}/proposal/product/${proposal.product_id}`,
-    { default: {}, when: !loadingProduct }
+    { default: {}, when: !loadingProposal }
   );
 
   const { data: invoices, loading: loadingInvoices } = useFetchData(
@@ -232,22 +232,15 @@ export default function Proposal(props) {
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>
       <div className={styles.content}>
-      {!loadingInvoices &&
-      <ProposalDetails product={product} category={category} proposal={proposal} invoices={invoices}/>}
-      {!loadingProposals && 
-      <OtherSeller proposals={proposals} proposalP={proposal}/>}
-      {!loadingRecommended &&
-      <Recommended proposal={proposal} recommendedPrice={recommendedPrice}/>}
-      {!loadingInvoices &&
-      <SoldToday product={product}  proposal={proposal} invoices={invoices}/>}
-      {!loadingStockSuggestions && stock_suggestions && stock_suggestions.Stock_prevision &&
-      <StockPrediction predictions={stock_suggestions.Stock_prevision} />}
+      <ProposalDetails product={product} category={category} proposal={proposal} invoices={invoices} loading={loadingInvoices}/>
+      <OtherSeller proposals={proposals} proposalP={proposal} loading={loadingProposals}/>
+      <Recommended proposal={proposal} recommendedPrice={recommendedPrice} loading={loadingRecommended}/>
+      <SoldToday product={product}  proposal={proposal} invoices={invoices} loading={loadingInvoices}/>
+      <StockPrediction predictions={stock_suggestions} loading={loadingStockSuggestions}/>
       <CurrentStock proposal={proposal}/>
-      {!loadingEvaluation &&
-      <Feelings feelings={evaluation.sentiments}></Feelings>}
+      <Feelings feelings={evaluation} loading={loadingEvaluation}></Feelings>
       <Comments product={product}/>
-      {!loadingEvaluation &&
-      <Words feelings={evaluation.most_used_words}></Words>}
+      <Words feelings={evaluation} loading={loadingEvaluation}></Words>
       </div>
     </Layout>
   );
