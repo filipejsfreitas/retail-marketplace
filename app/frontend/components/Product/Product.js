@@ -155,15 +155,16 @@ const Product = (props) => {
                         <Container className={styles.table1}>
                             <Table responsive borderless >
                                 <tbody>
-                                    <th> 
-                                        {Object.values(prod.characteristic).map((key, value) => (
+                                    <th>{prod.characteristic ?  
+                                        Object.values(prod.characteristic).map((key, value) => (
                                           <tr key={value}>{key.name}</tr>
-                                        ))}
+                                        )) : []}
                                     </th>
                                     <td>
-                                        {Object.values(prod.characteristic).map((key, value) => (
+                                        {prod.characteristic ? 
+                                        Object.values(prod.characteristic).map((key, value) => (
                                             <tr key={value}>{key.value}</tr>
-                                        ))}
+                                        )) : []}
                                     </td>
                                 </tbody>
                             </Table>
@@ -171,34 +172,25 @@ const Product = (props) => {
                         <div className={styles.description}>{prod.description}</div>
                         <h3 className={styles.technicalDescription}>Technical Description</h3>
                             <ListGroup>
-                                {Object.values(prod.tecnical).map((key, value) => (
+                                {prod.tecnical ?
+                                Object.values(prod.tecnical).map((key, value) => (
                                 <ListGroupItem  key={value}><span className={styles.description2}>{key.split(":")[0]+":"}</span> <span>{key.split(":")[1]}</span></ListGroupItem>
-                                ))}      
+                                )) : []}      
                             </ListGroup>
                     </Container> 
                 </Col>   
             </Row>
     
             <Row md={12}>
-                <div className={styles.reviewTop}>
-                <span className={styles.reviewName}>Reviews</span>
-                <span>
-                    <Button type="submit" 
-                        variant="secundary"
-                        className={styles.buttonComment}
-                        disabled={isLog ? false : true}
-                        onClick={() => setModalShow(true)}>
-                    New Review
-                    </Button>
-                    <MyModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                      id={prod._id}
-                    />
-                </span>
-                </div>
                 <Container className={styles.panelReviews}>
-                    <Reviews props1={commentsOrd} id={prod._id}/>
+                    <Reviews 
+                        prod={prod} 
+                        id={prod._id} 
+                        modalShow={modalShow} 
+                        setModalShow={setModalShow} 
+                        isLog={isLog} 
+                        props1={commentsOrd} 
+                        id={prod._id}/>
                 </Container> 
             </Row>
         </>
