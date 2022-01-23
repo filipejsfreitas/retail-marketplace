@@ -6,7 +6,7 @@ import { SellerCommentDto } from '../dtos/sellerComment.dto';
 import { UpdateSellerDto } from '../dtos/seller.dto';
 import { RequestWithUser } from 'interfaces/auth.interface';
 import { InvoiceUpdateDto } from '../dtos/invoice-update.dto';
-import fs from 'fs';
+import { promises as fs}  from 'fs';
 
 import { v4 as uuidv4 } from 'uuid';
 import { HttpException } from 'exceptions/HttpException';
@@ -120,21 +120,29 @@ export class SellerController {
 
     const foldername = uuidv4();
 
-    fs.mkdir('./public/sellerImage/' + foldername, { recursive: true }, err => {
-      if (err) {
-        throw new HttpException(500, err.message);
-      }
-        fs.writeFile('./public/sellerImage/' + foldername + '/' + imagem.originalname, imagem.buffer, err => {
-          if (err) {
-            console.log(err);
-            throw new HttpException(500, err.message);
-          }
-          let path = 'sellerImage/' + foldername + '/' + imagem.originalname;
-          this.sellerService.addImage(sellerId, path).then(result =>{
-            return { data: result, message: 'Image added' };
-          });
-        });
-    });
+
+    return fs.mkdir('./public/sellerImage/' + foldername, { recursive: true }).then( () =>{
+
+      return fs.writeFile('./public/sellerImage/' + foldername + '/' + imagem.originalname, imagem.buffer).then( () => {
+
+        let path = 'sellerImage/' + foldername + '/' + imagem.originalname;
+        return this.sellerService.addImage(sellerId, path).then(result =>{
+          console.log(result);
+          return result;
+        })
+        .catch(function (err) {
+          throw new HttpException(500,err.message); // some coding error in handling happened
+        })
+
+      })
+      .catch(function (err) {
+        throw new HttpException(500,err.message); // some coding error in handling happened
+      })
+
+    })
+    .catch(function (err) {
+      throw new HttpException(500,err.message); // some coding error in handling happened
+    })
     
   }
 
@@ -147,29 +155,36 @@ export class SellerController {
     const foldername = uuidv4();
 
     const seller = await this.sellerService.getSeller(sellerId);
-    
-    fs.unlink('./public/' + seller.image, err => {
-      if (err) {
-        console.log(err);
-        throw new HttpException(500, err.message);
-      }
-    });
 
-    fs.mkdir('./public/sellerImage/' + foldername, { recursive: true }, err => {
-      if (err) {
-        throw new HttpException(500, err.message);
-      }
-        fs.writeFile('./public/sellerImage/' + foldername + '/' + imagem.originalname, imagem.buffer, err => {
-          if (err) {
-            console.log(err);
-            throw new HttpException(500, err.message);
-          }
+    return fs.unlink('./public/' + seller.image).then( () =>{
+      return fs.mkdir('./public/sellerImage/' + foldername, { recursive: true }).then( () =>{
+
+        return fs.writeFile('./public/sellerImage/' + foldername + '/' + imagem.originalname, imagem.buffer).then( () => {
+  
           let path = 'sellerImage/' + foldername + '/' + imagem.originalname;
-          this.sellerService.updateImage(sellerId, path).then(result =>{
-            return { data: result, message: 'Image updated' };
-          });
-        });
-    });
+          return this.sellerService.updateImage(sellerId, path).then(result => {
+            console.log(result);
+            return result;
+          })
+          .catch(function (err) {
+            throw new HttpException(500,err.message); // some coding error in handling happened
+          })
+  
+        })
+        .catch(function (err) {
+          throw new HttpException(503,err.message); // some coding error in handling happened
+        })
+  
+      })
+      .catch(function (err) {
+        throw new HttpException(500,err.message); // some coding error in handling happened
+      })
+    })
+    .catch(function (err) {
+      throw new HttpException(500,err.message); // some coding error in handling happened
+    })
+
+    
     
   }
 

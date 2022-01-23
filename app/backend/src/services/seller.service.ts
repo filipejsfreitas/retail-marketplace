@@ -33,7 +33,7 @@ export class SellerService {
       companyPhoneNumber,
       customerServiceEmail,
       rating: 0,
-      numberRating: 0,
+      numberRating: 0
     });
 
     return seller;
@@ -172,23 +172,23 @@ export class SellerService {
   }
 
   public async addImage(sellerId: string, imagePath: string){
-    const seller = await this.sellers.findById(sellerId);
+    const seller = await this.sellers.findOne({userId:sellerId});
+    console.log(seller)
     if(seller.image){
       throw new HttpException(400, "Already as image");
     }
     
-    const newSeller = await this.sellers.findByIdAndUpdate(sellerId, {image: imagePath});
-
+    const newSeller = await this.sellers.findOneAndUpdate({userId:sellerId}, {image: imagePath},{new:true});
     return newSeller;   
   }
 
   public async updateImage(sellerId: string, imagePath: string){
-    const seller = await this.sellers.findById(sellerId);
+    const seller = await this.sellers.findOne({userId:sellerId});
     if(!(seller.image)){
       throw new HttpException(400, "Does not have an image image");
     }
     
-    const newSeller = await this.sellers.findByIdAndUpdate(sellerId, {image: imagePath});
+    const newSeller = await this.sellers.findOneAndUpdate({userId:sellerId}, {image: imagePath},{new:true});
 
     return newSeller;   
   }
