@@ -20,7 +20,6 @@ export default function NavBarSeller(props) {
     const { data: seller, loading } =
      useFetchData(() => `${process.env.NEXT_PUBLIC_HOST}/seller/${token._id}`,
         {  when:token && token._id})
-    console.log(token)
     return <>
             <Navbar className={styles.navbar} bg="primary" >
                 <Container fluid>
