@@ -117,7 +117,14 @@ export class ProposalService {
     return await Promise.all(products_search).then(async products => {
       const productStocks =
         products.map(product => new Promise(async (resolve, _) => {
-          const rep = await fetch(process.env.FLASK_URL + `/forecast_stock/` + product._id + `/` + product.name, { method: 'GET' })
+
+          let info = {
+            id:product._id,
+            productName: product.name
+          }
+
+          
+          const rep = await fetch(process.env.FLASK_URL + `/forecast_stock/`, { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) })
           if (rep.ok) {
             const json = await rep.json()
             json.product_id = json.product_id ?? json.ProductID
@@ -139,8 +146,12 @@ export class ProposalService {
     const proposal = await this.proposals.findOne({_id:proposalId,seller_id: sellerId});
     const product = await this.products.findById(proposal.product_id)
 
-    const response = await fetch(process.env.FLASK_URL + `/forecast_stock/`+ product._id + `/`+ product.name, { method: 'GET' });
+    let info = {
+      id:product._id,
+      productName: product.name
+    }
 
+    const response = await fetch(process.env.FLASK_URL + `/forecast_stock/`, { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) })
     if (!response.ok) {
       throw new HttpException(500, await response.json());
     }
