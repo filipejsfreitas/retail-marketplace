@@ -86,7 +86,7 @@
     line-height: 24px;
     color: #313131;
     text-align: justify;
-    overflow: scroll;
+    overflow: auto;
     text-overflow: ellipsis;
 }
 
