@@ -22,6 +22,7 @@ const SideBarSeller = (props) =>{
     const fallback = "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png"
     const contents = props.sidebar.contents
     const rootpath = props.sidebar.rootpath
+
     const { token } = useToken()
 
     const { data: seller, loading } =
@@ -41,7 +42,7 @@ const SideBarSeller = (props) =>{
                     <Spinner animation="border" />
                 </div>
                 : <>
-                    <img className={styles.companyLogo} src={fallback} />
+                    <img className={styles.companyLogo} src={ (seller.image && `${process.env.NEXT_PUBLIC_HOST}/${seller.image}`) || fallback} />
                     <div className={styles.companyName}>{seller.companyName}</div>
                 </>}
         </div>

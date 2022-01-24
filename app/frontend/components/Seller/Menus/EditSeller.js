@@ -6,12 +6,14 @@ import { computeStars } from 'components/Product/Product';
 import styles from 'styles/Management/ProfileSeller.module.css'
 import {BsImage} from 'react-icons/bs'
 import AddImage from './AddImage';
+import EditSellerModal from './EditSellerModal';
 
 
 const EditSeller = (props) =>{ 
     const router = useRouter()
     const { fetchAuth } = useFetchAuth()
     const [modalShowImg, setModalShowImg] = React.useState(false);
+    const [modalShowEdit, setModalShowEdit] = React.useState(false);
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -57,7 +59,7 @@ const EditSeller = (props) =>{
                     <div className={styles.company}>
                        <img
                            className={styles.companyLogo}              
-                           src={fallback}
+                           src={ (seller.image && `${process.env.NEXT_PUBLIC_HOST}/${seller.image}`) || fallback}
                        />
                        <BsImage 
                             size={30} 
@@ -67,6 +69,7 @@ const EditSeller = (props) =>{
                        <AddImage
                             show={modalShowImg}
                             onHide={() => setModalShowImg(false)}
+                            seller={seller.image}
                         />
                     </div>
                 </Col>
@@ -74,31 +77,40 @@ const EditSeller = (props) =>{
             </Row>
     
             <Row md={12}>
-                <Col md={12}>
+                <Col md={9}>
                     <span className={styles.titles}>Company Phone Number:</span>  
                     <span className={styles.infos}>{seller.companyPhoneNumber}</span>
                 </Col>
             </Row>
             <Row md={12}>
-                <Col md={12}>
+                <Col md={9}>
                     <span className={styles.titles}>Tax Identification Number:</span>  
                     <span className={styles.infos}>{seller.tin}</span>
                 </Col>
             </Row>
             <Row md={12}>
-                <Col md={12}>
+                <Col md={9}>
                     <span className={styles.titles}>Rating:</span>  
                     <span className={styles.infos}>{computeStars(seller.rating)}</span>
                 </Col>
             </Row>
             <Row md={12}>
-                <Col md={12}>
+                <Col md={9}>
                     <span className={styles.titles}>Number Reviews:</span>  
                     <span className={styles.infos}>{seller.numberRating}</span>
                 </Col>
             </Row> 
            
         </Modal.Body>
+        <Modal.Footer>
+            <Button onClick={() => setModalShowEdit(true)}
+                variant="primary" type="submit"> Edit</Button>
+            <EditSellerModal
+               show={modalShowEdit}
+               onHide={() => setModalShowEdit(false)}
+               seller={seller}
+            />
+        </Modal.Footer>
       </Modal>
     )
 }

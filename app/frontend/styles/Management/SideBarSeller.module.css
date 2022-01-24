@@ -76,7 +76,7 @@
 .companyLogo{
     width: 140px;
     height: 140px;
-    background: #C4C4C4;
+    background: transparent;
     border-radius: 100px;
     margin: 10px;
     position: static;
