@@ -8,7 +8,7 @@ export default function TabCard({ tabs, children, ...props }) {
   return <Card {...props} style={{
     "filter": "drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25))",
     "border": "1px solid #EAEDF2",
-    "border-radius": "10px",
+    "borderRadius": "10px",
   }}>
     <div className={styles.header}>
       {tabs.map(({ tab }, i) =>
@@ -26,8 +26,8 @@ export default function TabCard({ tabs, children, ...props }) {
     <Card.Body style={{
       "width": "100%",
       "height": "90%",
-      "overflow-x": "auto",
-      "overflow-y": "auto",
+      "overflowX": "auto",
+      "overflowY": "auto",
       "padding": "0",
     }}>
       {tabs[selected].content}
