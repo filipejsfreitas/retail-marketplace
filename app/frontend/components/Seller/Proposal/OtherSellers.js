@@ -44,7 +44,7 @@ export default function OtherSeller({ proposals, proposalP,  ...props }) {
                     <tbody>
                     {proposals.map(proposal =>
                         proposal.seller_id != proposalP.seller_id &&
-                        <OtherSellersLine  proposal={proposal} propP={proposalP} />)}
+                        <OtherSellersLine key={proposal.seller_id} proposal={proposal} propP={proposalP} />)}
                     </tbody>
                 </Table>
         </SellerCard>
