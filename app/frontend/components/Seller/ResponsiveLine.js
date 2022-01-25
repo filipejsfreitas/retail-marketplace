@@ -1,8 +1,8 @@
 import { ResponsiveLine } from '@nivo/line'
-export default function Line({ ...props }) {
+export default function Line({ data }) {
     return <ResponsiveLine
         margin={{ top: 25, right: 25, bottom: 25, left: 60 }}
-  
+        data={data}
         xScale={{ type: 'point' }}
         yScale={{
             type: 'linear',
@@ -35,6 +35,5 @@ export default function Line({ ...props }) {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-21}
         useMesh={true}
-        {...props}
     />
 }
