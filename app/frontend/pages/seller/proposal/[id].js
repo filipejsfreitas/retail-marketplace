@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Layout, { SELLER_SIDEBAR } from "components/Management/Layout";
 import useFetchData from "hooks/useFetchData";
 import { useEffect, useRef, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import Link from "next/link";
 import { ResponsiveBar } from "@nivo/bar";
@@ -232,15 +232,15 @@ export default function Proposal(props) {
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>
       <div className={styles.content}>
-      <ProposalDetails product={product} category={category} proposal={proposal} invoices={invoices} loading={loadingInvoices}/>
-      <OtherSeller proposals={proposals} proposalP={proposal} loading={loadingProposals}/>
-      <Recommended proposal={proposal} recommendedPrice={recommendedPrice} loading={loadingRecommended}/>
-      <SoldToday product={product}  proposal={proposal} invoices={invoices} loading={loadingInvoices}/>
-      <StockPrediction predictions={stock_suggestions} loading={loadingStockSuggestions}/>
-      <CurrentStock proposal={proposal}/>
-      <Feelings feelings={evaluation} loading={loadingEvaluation}></Feelings>
-      <Comments product={product}/>
-      <Words feelings={evaluation} loading={loadingEvaluation}></Words>
+        <ProposalDetails product={product} category={category} proposal={proposal} invoices={invoices} loading={loadingInvoices}/>
+        <OtherSeller proposals={proposals} proposalP={proposal} loading={loadingProposals}/>
+        <Recommended proposal={proposal} recommendedPrice={recommendedPrice} loading={loadingRecommended}/>
+        <SoldToday product={product}  proposal={proposal} invoices={invoices} loading={loadingInvoices}/>
+        <StockPrediction predictions={stock_suggestions} loading={loadingStockSuggestions}/>
+        <CurrentStock proposal={proposal}/>
+        <Feelings feelings={evaluation} loading={loadingEvaluation}></Feelings>
+        <Comments product={product}/>
+        <Words feelings={evaluation} loading={loadingEvaluation}></Words>
       </div>
     </Layout>
   );

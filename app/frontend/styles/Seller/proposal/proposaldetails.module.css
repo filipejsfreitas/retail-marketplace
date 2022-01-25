@@ -117,16 +117,6 @@
     margin-top: 10px;
 }
 
-.shipping{
-    font-family: Fira Sans;
-    font-style: italic;
-    font-weight: 275;
-    font-size: 24px;
-    line-height: 24px;
-    color: #313131;
-    position: relative;
-}
-
 .injectTitleR{
     position: relative;
     float: right;
