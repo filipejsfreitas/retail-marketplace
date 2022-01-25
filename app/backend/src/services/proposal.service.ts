@@ -106,52 +106,61 @@ export class ProposalService {
     return l.length > 0;
   }
 
-  public async getAllStocksPrevisions(sellerId:string){
-    const proposals = await this.proposals.find({seller_id: sellerId});
+  public async getAllStocksPrevisions(sellerId: string) {
+    const proposals = await this.proposals.find({ seller_id: sellerId });
 
-    const products_search= [];
+    const products_search = [];
     proposals.forEach(element => {
-      products_search.push(this.products.findById(element.product_id))
+      products_search.push(this.products.findById(element.product_id));
     });
 
-    return await Promise.all(products_search).then(async products => {
-      const productStocks =
-        products.map(product => new Promise(async (resolve, _) => {
+    return await Promise.all(products_search)
+      .then(async products => {
+        const productStocks = products.map(
+          product =>
+            new Promise(async (resolve, _) => {
+              const info = {
+                id: product._id,
+                productName: product.name,
+              };
 
-          let info = {
-            id:product._id,
-            productName: product.name
-          }
+              const rep = await fetch(process.env.FLASK_URL + `/forecast_stock/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(info),
+              });
+              if (rep.ok) {
+                const json = await rep.json();
+                json.product_id = json.product_id ?? json.ProductID;
+                delete json.ProductID;
+                resolve(json);
+              } else {
+                resolve({ product_id: product._id, Stock_prevision: null });
+              }
+            }),
+        );
 
-          
-          const rep = await fetch(process.env.FLASK_URL + `/forecast_stock/`, { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) })
-          if (rep.ok) {
-            const json = await rep.json()
-            json.product_id = json.product_id ?? json.ProductID
-            delete json.ProductID
-            resolve(json)
-          } else {
-            resolve({ product_id: product._id, Stock_prevision: null })
-          }
-        }))
-
-      return await Promise.all(productStocks)
-    })
+        return await Promise.all(productStocks);
+      })
       .catch(function (err) {
         throw new HttpException(500, err.message); // some coding error in handling happened
       });
   }
 
-  public async getStockPrevision(proposalId: string, sellerId){
-    const proposal = await this.proposals.findOne({_id:proposalId,seller_id: sellerId});
-    const product = await this.products.findById(proposal.product_id)
+  public async getStockPrevision(proposalId: string, sellerId) {
+    const proposal = await this.proposals.findOne({ _id: proposalId, seller_id: sellerId });
+    const product = await this.products.findById(proposal.product_id);
 
-    let info = {
-      id:product._id,
-      productName: product.name
-    }
+    const info = {
+      id: product._id,
+      productName: product.name,
+    };
 
-    const response = await fetch(process.env.FLASK_URL + `/forecast_stock/`, { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) })
+    const response = await fetch(process.env.FLASK_URL + `/forecast_stock/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(info),
+    });
     if (!response.ok) {
       throw new HttpException(500, await response.json());
     }

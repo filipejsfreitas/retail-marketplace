@@ -54,4 +54,53 @@ export class SellerPanelService {
 
     return await response.json();
   }
+
+  async getAmountsSoldInLastXDays(userId: string, days: number) {
+    const xDaysAgo = moment().subtract(days, 'days').toDate();
+    const previousXDays = moment(xDaysAgo).subtract(days, 'days').toDate();
+
+    const invoicesFromLastXDays = await SellerInvoiceModel.aggregate<SellerInvoiceModel>([
+      {
+        $match: {
+          date: {
+            $gte: xDaysAgo,
+          },
+        },
+      },
+    ]);
+
+    const totalLastXDays = invoicesFromLastXDays.reduce((x, y) => x + y.total, 0);
+
+    const invoicesFromPreviousXDays = await SellerInvoiceModel.aggregate<SellerInvoiceModel>([
+      {
+        $match: {
+          date: {
+            $lt: xDaysAgo,
+            $gte: previousXDays,
+          },
+        },
+      },
+    ]);
+
+    const totalPreviousXDays = invoicesFromPreviousXDays.reduce((x, y) => x + y.total, 0);
+
+    const diffInPercent = Math.round((totalLastXDays / (totalPreviousXDays === 0 ? 1 : totalPreviousXDays)) * 100);
+
+    const countLastXDays = invoicesFromLastXDays.length;
+    const countPreviousXDays = invoicesFromPreviousXDays.length;
+    const countDiffInPercent = Math.round((countLastXDays / (countPreviousXDays === 0 ? 1 : countPreviousXDays)) * 100);
+
+    return {
+      totals: {
+        lastXDays: totalLastXDays,
+        previousXDays: totalPreviousXDays,
+        diffInPercent: isNaN(diffInPercent) || !isFinite(diffInPercent) ? 0 : diffInPercent,
+      },
+      counts: {
+        lastXDays: countLastXDays,
+        previousXDays: countPreviousXDays,
+        diffInPercent: isNaN(countDiffInPercent) || !isFinite(countDiffInPercent) ? 0 : countDiffInPercent,
+      },
+    };
+  }
 }
