@@ -110,7 +110,7 @@ export default function Orders({ orders, setQuery, setOrderState, ...props }) {
   return <SellerCard className={styles.panel_orders} injectTitle={
     <div style={{ "display": "flex" }}>
       <h4>Orders</h4>
-      <div style={{ "margin-left": "auto" }}>
+      <div style={{ marginLeft: "auto" }}>
         <Form.Control placeholder="Search" onChange={e => {
           if (setQuery)
             setQuery(e.target.value)
