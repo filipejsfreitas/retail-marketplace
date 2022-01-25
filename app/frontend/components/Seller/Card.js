@@ -26,7 +26,7 @@ export function SimpleCard({ title, value, oldvalue, newvalue, description, icon
             <div>
                 <h4>{value}</h4>
             </div>
-            <div style={{ "display": "flex", "flex-direction": "row", "align-items": "center" }}>
+            <div style={{ "display": "flex", "flexDirection": "row", "alignItems": "center" }}>
                 <div className={colorClass} style={{ "marginRight": "5px" }}>
                     {iconDiff}
                     {`${diff}%`}
