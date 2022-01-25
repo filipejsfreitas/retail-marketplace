@@ -21,6 +21,7 @@ import usePanelRecommendedCategories from "hooks/Seller/usePanelRecommendedCateg
 import useAllPriceStats from "hooks/Seller/useAllPriceStats"
 
 import styles from "styles/Seller/index.module.css"
+import useWeekStatistics from "hooks/Seller/useWeekStatistics"
 
 export default function Home() {
 
@@ -28,14 +29,21 @@ export default function Home() {
   const { revenueOverview, loading: loadingRevenueOverview } = usePanelRevenueOverview()
   const { lowStockProposals, loading: loadingAlerts } = usePanelAlerts()
   const { recommendedCategories, loading: loadingRecommendedCategories } = usePanelRecommendedCategories()
+  const { currentWeekOrders, currentWeekSales } = useWeekStatistics()
 
   return <Layout sidebar={SELLER_SIDEBAR}>
     <div className={styles.content}>
-      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={30} newvalue={40} description={"this week"} className={styles.simple_panel} icon={<BsTruck />} />
-      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={40} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBank />} />
-      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
-      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
-      <HomeAlerts/>
+      <SimpleCard title={"SALES"} value={`${currentWeekSales.current}€`}
+        oldvalue={currentWeekSales.previous} newvalue={currentWeekSales.current}
+        icon={<BsTruck />} loading={currentWeekSales.loading}
+        description={"this week"} className={styles.simple_panel} />
+      <SimpleCard title={"ORDERS"} value={`${currentWeekOrders.current}`}
+        oldvalue={currentWeekOrders.previous} newvalue={currentWeekOrders.current}
+        icon={<BsBoxSeam />} loading={currentWeekOrders.loading}
+        description={"this week"} className={styles.simple_panel} />
+      {/*<SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
+      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />*/}
+      <HomeAlerts />
       <DailyRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <YearRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <OrdersPie ordersOverview={ordersOverview} loading={loadingOrdersOverview} />

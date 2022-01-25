@@ -3,19 +3,18 @@ import { Card, Spinner } from "react-bootstrap"
 import { BsArrowUp, BsArrowDown, BsArrowUpShort, BsArrowDownShort, BsFillExclamationTriangleFill } from "react-icons/bs"
 import styles from "styles/Seller/card.module.css"
 
-export function SimpleCard({ title, value, oldvalue, newvalue, description, icon, className }) {
-    const diff = parseFloat((Math.max(newvalue, oldvalue) / Math.min(newvalue, oldvalue) - 1) *
-        (newvalue > oldvalue ? 100 : -100)).toFixed(2)
-    const valuedesc = (diff < -0.1 && "decrease")
-        || (diff > -0.1 && "increase")
+export function SimpleCard({ title, value, oldvalue, newvalue, description, icon, loading, className }) {
+    const diff = parseFloat(100 * newvalue / oldvalue).toFixed(2)
+    const valuedesc = (newvalue < oldvalue && "decrease")
+        || (newvalue > oldvalue && "increase")
         || "maintain"
-    const colorClass = (diff < -10 && styles.simple_card_percentage_red)
-        || (diff < 0 && styles.simple_card_percentage_yellow)
-        || (diff > 10 && styles.simple_card_percentage_green)
+    const colorClass = (newvalue < oldvalue && diff > 10 && styles.simple_card_percentage_red)
+        || (newvalue < oldvalue && styles.simple_card_percentage_yellow)
+        || (newvalue > oldvalue && diff > 10 && styles.simple_card_percentage_green)
         || (styles.simple_card_percentage_green_light)
-    const iconDiff = (diff < -10 && <BsArrowDown />)
-        || (diff < 0 && <BsArrowDownShort />)
-        || (diff > 10 && <BsArrowUp />)
+    const iconDiff = (newvalue < oldvalue && diff > 10 && <BsArrowDown />)
+        || (newvalue < oldvalue && <BsArrowDownShort />)
+        || (newvalue > oldvalue && diff > 10 && <BsArrowUp />)
         || (<BsArrowUpShort />)
 
     return <div className={`${styles.simple_card} ${className || ""}`}>
@@ -23,19 +22,24 @@ export function SimpleCard({ title, value, oldvalue, newvalue, description, icon
             <div>
                 {title}
             </div>
-            <div>
-                <h4>{value}</h4>
-            </div>
-            <div style={{ "display": "flex", flexDirection: "row", alignItems: "center" }}>
-                <div className={colorClass} style={{ "marginRight": "5px" }}>
-                    {iconDiff}
-                    {`${diff}%`}
+            {oldvalue && newvalue && !loading && <>
+                <div>
+                    <h4>{value}</h4>
                 </div>
-                {`${valuedesc} ${description}`}
-            </div>
+                <div style={{ "display": "flex", flexDirection: "row", alignItems: "center" }}>
+                    <div className={colorClass} style={{ "marginRight": "5px" }}>
+                        {iconDiff}
+                        {`${diff}%`}
+                    </div>
+                    {`${valuedesc} ${description}`}
+                </div>
+            </>}
         </div>
         <div className={styles.simple_card_icon}>
-            {icon}
+            {loading ? <Spinner animation="border" />
+            : !(oldvalue && newvalue) ? <BsFillExclamationTriangleFill/>
+            : icon
+            }
         </div>
     </div>
 }
