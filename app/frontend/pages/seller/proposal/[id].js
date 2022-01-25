@@ -223,11 +223,6 @@ export default function Proposal(props) {
   const { data: stock_suggestions, loading: loadingStockSuggestions } =
     useFetchData(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
 
-  useEffect(async () => {
-    const json = await
-      fetch(`${process.env.NEXT_PUBLIC_HOST}/proposal/${id}/stock_suggestions`)
-        .then(rep => rep.json())
-  }, [])
 
   return (
     <Layout sidebar={SELLER_SIDEBAR} isLoading={loadingCategory}>

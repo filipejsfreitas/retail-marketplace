@@ -4,7 +4,6 @@ import { BsCaretUpFill ,BsCaretDownFill} from "react-icons/bs";
 
 
 export default function Recommended({proposal, recommendedPrice, ...props }) {
-    console.log(recommendedPrice)
     const priceR = parseInt(recommendedPrice.priceSugestion);
     const priceC = parseInt(proposal.price);
     const diff =  priceR - priceC; 
