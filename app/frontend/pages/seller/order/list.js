@@ -14,7 +14,7 @@ function OrderStats({ orders }) {
   return <Card className={styles.panel_stats} style={{
     "filter": "drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.25))",
     "border": "1px solid #EAEDF2",
-    "border-radius": "10px",
+    borderRadius: "10px",
   }}>
     <div className={`${styles.panel_box} ${styles.panel_box_border}`}>
       <h2>Orders</h2>

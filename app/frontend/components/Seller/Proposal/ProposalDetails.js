@@ -1,4 +1,4 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import SellerCard from "components/Seller/Card";
 import styles from 'styles/Seller/proposal/proposaldetails.module.css'
 import { computeStars } from "components/Product/Product";
@@ -63,10 +63,14 @@ export default function ProposalDetails({ product, category, proposal,invoices, 
                   {product.description}
                 </div>
                 <div className={styles.stats}>
-                  <Row md={9} >
+                  <Row md="5" className="justify-content-md-center" >
                     <Col>
                       <div className={styles.statTitle}>Proposal Price:</div>
-                      <div className={styles.statInfo}>{proposal.price}€<span className={styles.shipping}>+{proposal.shipping}</span> </div>
+                      <div className={styles.statInfo}>{proposal.price}€</div>
+                    </Col>
+                    <Col>
+                      <div className={styles.statTitle}>Shipping Cost:</div>
+                      <div className={styles.statInfo}>{proposal.shipping}€</div>
                     </Col>
                     <Col>
                       <div className={styles.statTitle}>Maximum per cart:</div>

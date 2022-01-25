@@ -66,7 +66,7 @@ function ProductLine({ product, setProposalProduct }) {
 }
 
 function ProductsTable({ products, setProposalProduct }) {
-  return <div class={styles.table}>
+  return <div className={styles.table}>
     <Table striped hover responsive>
       <thead>
         <tr>

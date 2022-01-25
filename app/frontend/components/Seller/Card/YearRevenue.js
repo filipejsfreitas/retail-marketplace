@@ -12,8 +12,9 @@ export default function YearRevenue({ revenueOverview, ...props }) {
   (revenueOverview ?? []).forEach(({_id, count}) => {
     data[_id.month-1].y = data[_id.month-1].y + count
   })
+
   return <SellerCard className={styles.panel_revenue_cal} title={"Yearly Sales Overview"} {...props}>
-    <ResponsiveLine data={[{ "data": data }]}></ResponsiveLine>
+    <ResponsiveLine data={[{ id:"cenas", data: data }]}></ResponsiveLine>
   </SellerCard>
 }
 
