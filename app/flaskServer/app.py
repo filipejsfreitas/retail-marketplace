@@ -5,12 +5,10 @@ from flask import Flask, request
 from product_info import product_info
 from update_dataset import update_dataset
 from price_optimization import price_optimization
-from product_recomendation import calculoRecomenda
+from product_recomendation import getProductRecommendations, addOrder
 from Forecasting import forecast
 from recom_category import categories
-from pytrends.request import TrendReq
-import pandas as pd
-import numpy as np                        
+from pytrends.request import TrendReq                    
 
 
 # define the app
@@ -37,7 +35,6 @@ def add_review_classify():
     update_dataset(data ["productId"], data ["review"])
     
     return "True"
-
 
 
 
@@ -75,14 +72,32 @@ def seller_optimization():
 '''
 Metodo invocado para obter lista de produtos recommendados 
 '''
-@app.route('/products_recomendation/<clientId>/<productId>', methods=['GET'])
-def products_recomendation(clientId, productId): 
+@app.route('/products_recommendation/<productId>', methods=['GET'])
+def products_recomendation(productId):
+    # Read recommendations for given product
+    return getProductRecommendations(productId)
 
-    print (clientId, productId) 
-    #lê dados
-    payload = calculoRecomenda(productId, clientId)
+
+
+'''
+Metodo invocado para o guardar novas orders, usadas para calcular recomendações
+'''
+@app.route('/add_order',  methods=['GET', 'POST'])
+def save_order():
+    # Read incoming data
+    data = request.get_json(force=True)
+
+    # Get order 
+    orderId, productIds, clientId = data["orderId"], data["productIds"], data["clientId"]
+
+    # Add order to DataFrame
+    try:
+        addOrder(orderId, productIds, clientId)
+    except:
+        return False
     
-    return payload
+    return True
+
 
 
 '''

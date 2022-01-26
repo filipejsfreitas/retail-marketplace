@@ -5,3 +5,5 @@ spacy
 nrclex
 pytrends
 statsmodels
+pandas
+numpy
