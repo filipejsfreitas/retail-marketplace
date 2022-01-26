@@ -30,6 +30,7 @@ export default function Home() {
   const { lowStockProposals, loading: loadingAlerts } = usePanelAlerts()
   const { recommendedCategories, loading: loadingRecommendedCategories } = usePanelRecommendedCategories()
   const { currentWeekOrders, currentWeekSales } = useWeekStatistics()
+  console.debug(revenueOverview)
 
   return <Layout sidebar={SELLER_SIDEBAR}>
     <div className={styles.content}>

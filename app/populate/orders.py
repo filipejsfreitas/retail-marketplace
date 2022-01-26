@@ -26,12 +26,13 @@ def generate_order(state, date, address, proposal):
 def populate_orders(state):
     random.seed(0)
     state.logger.info("Generating orders.")
-    for day in range(1, 23):
-        date = datetime.datetime(2022,1,day)
+    date = datetime.datetime(2021, 9, 1)
+    while date <= datetime.datetime.now():
         for address in state.addresses:
             for proposal in state.proposals:
-                if random.random() < 0.05:
+                if random.random() < 0.015:
                     state.orders.append(generate_order(state, date, address, proposal))
+        date += datetime.timedelta(days=1)
 
 
 def add_order(state, order):
