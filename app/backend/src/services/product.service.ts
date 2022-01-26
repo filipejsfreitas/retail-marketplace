@@ -422,13 +422,13 @@ export class ProductService {
   }
 
   public async getSuggestions(clientId: string, prodId: String) {
-    const response = await fetch(process.env.FLASK_URL + `/products_recomendation/${prodId}`, { method: 'GET' });
+    const response = await fetch(process.env.FLASK_URL + `/products_recommendation/${prodId}`, { method: 'GET' });
 
     if (!response.ok) {
       throw new HttpException(500, await response.json());
     }
 
-    const prod_list  = await response.json();
+    const prod_list  = await response.json()["recommendations"];
 
     if(prod_list.length === 0){
       const prod = await this.products.findById(prodId);
