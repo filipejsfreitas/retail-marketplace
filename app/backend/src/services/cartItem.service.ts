@@ -172,6 +172,8 @@ export class CartItemService {
       contact: address.contact,
     };
 
+    const itemIdUpdate = [];
+
     const clientItems = [];
 
     let clientTotal = 0;
@@ -182,6 +184,7 @@ export class CartItemService {
 
     itemList.forEach(element => {
       clientTotal += element.quantity * (element.price + element.shipping);
+      itemIdUpdate.push(element.product_id);
 
       clientItems.push({
         quantity: element.quantity,
@@ -246,6 +249,14 @@ export class CartItemService {
     }
 
     await this.cartItems.deleteMany({ client_id: clientId, locked: true });
+
+    const body = {
+      orderId: clientInvoice._id,
+      productIds: itemIdUpdate,
+      clientId: clientId
+    }
+
+    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(body) });
 
     Promise.all(sellersInvoice).then(res => {
       return;
