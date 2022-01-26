@@ -1,77 +1,88 @@
-import math
+import os
 import pandas as pd
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
 
 
-#df = pd.read_csv('ficheiro')
+# Product recommendations configs
+MIN_SALES_PER_ITEM = 5
+NUM_RECOMMENDATIONS_PER_PRODUCT = 5
+
+# Filenames 
+RECOMMENDATIONS_PICKLE_FILENAME = "recommendations.pkl"
+ORDERS_PICKLE_FILENAME = "orders.pkl"
+
+NEW_RECOMMENDATIONS_FREQUENCY = 500 # Calculate new recommendation every 500 new orders
+RECOMMENDATION_MAX_ORDERS = 50000 # Maximmum number of order to consider for calculations
 
 
-def getMoradaEProdutos(idCliente):
-    return list(df[df['idCliente']== idCliente]['morada']), list(df[df['idCliente']== idCliente]['listaP'])
+# Keep track of orders
+def addOrder(orderId, productIds, clientId):
+    # Read existing file or create if no previous order record exists
+    orders_df = pd.read_pickle(ORDERS_PICKLE_FILENAME) if os.path.isfile(ORDERS_PICKLE_FILENAME) else pd.DataFrame(columns=["orderId, productId, clientId"])
 
-
-def getIDCategoriaNumVisPontuacaoNumPontuacoes (idProduto):
-    return list(df[df['idProduto']== idProduto]['idCategoria']) , list(df[df['idProduto']== idProduto]['NumVisualizacoes']) , list(df[df['idProduto']== idProduto]['Pontuacao']) ,list(df[df['idProduto']== idProduto]['NumPontuacoes'])
-
-def getIDCategoriaAcimaNivel(idCategoria):
-    return list(df[df['idCategoria']== idCategoria]['id']) , list(df[df['idCategoria']== idCategoria]['idCategoriaAcima']) , list(df[df['idCategoria']== idCategoria]['Nivel'])
-
-
-def getCodigoPostal(morada):
-    return list(df[df['morada']== morada]['cp'])
-
-
-def getIDCatNumVisPontuacaoNumPontuacoesNumVezes(listaPVistos):
-    listaIDs = [i[0] for i in listaPVistos]
-    for idProd in listaIDs:
-        num_vezes= listaIDs.count(idProd)
-        return list(df[df['idProduto']== idProd]['idCategoria']) , list(df[df['idProduto']== idProd]['NumVisualizacoes']) , list(df[df['idProduto']== idProd]['Pontuacao']) , list(df[df['idProduto']== idProd]['NumPontuacoes']) , num_vezes
-
-def getProduto(dfprodutos,idCat):
-    return list(df[df['idCat']== idCat]['id'])
-
-
-def calculoRecomenda(idProduto, idCliente):
-    IDCat, NumVis, Pontuacao, NumPontuacoes = getIDCategoriaNumVisPontuacaoNumPontuacoes(idProduto)
-    saldoProd = (sum(NumPontuacoes) * sum(Pontuacao)) / sum(NumVis)
-    ID, IDCatAcima, Nivel = getIDCategoriaAcimaNivel(IDCat[0])
-    listaIDProd = getProduto(dfprodutos, ID)
-    morada, prodVistos = getMoradaEProdutos(idCliente)
-    #cp = getCodigoPostal(morada[0])
-    listaIDCats, listaNumVis, listaPontuacoes, listaNumPontuacoes, num_vezes = getIDCatNumVisPontuacaoNumPontuacoesNumVezes(prodVistos)
+    # Add order
+    for productId in productIds:
+        orders_df.append([orderId, productId, clientId])
     
-    listaProdSaldo = []
-    for idProd in listaIDProd:
-        saldo = 1
-        idCatTemp, NumVisTemp, PontuacaoTemp, NumPontuacoesTemp = getIDCategoriaNumVisPontuacaoNumPontuacoes(idProd)
-        if idCatTemp[0] == IDCat[0]:
-            saldo *= 2
-        elif idCatTemp[0] == IDCatAcima[0]:
-            saldo *= 1.5
-        elif idCatTemp[0] in listaIDCats:
-            saldo *= 1.2
-        saldoProdTemp = (sum(NumPontuacoesTemp) * sum(PontuacaoTemp)) / sum(NumVisTemp)
-        if math.abs(saldoProdTemp - SaldoProd) <= VALOR_TEMP :
-            saldo *= 2
-        if idProd in prodVistos :
-            saldo *= 5
-        listaProdSaldo.append((idProd, saldo*2))
+    # Save orders pickle
+    orders_df.to_pickle(ORDERS_PICKLE_FILENAME)
+
+    # Check need for recalculation
+    if (orders_df["orderId"].unique().size % NEW_RECOMMENDATIONS_FREQUENCY) == 0:
+        calculateRecommendations()
+
+
+# Get recommendations for product
+def getProductRecommendations(productId):
+    # Check if recommendations file exist
+    if not os.path.isfile(RECOMMENDATIONS_PICKLE_FILENAME):
+        return []
+
+    # Read recommendations DataFrame
+    recommendations = pd.read_pickle(RECOMMENDATIONS_PICKLE_FILENAME)
+
+    # Get recommendations for productId (empty list if not available)
+    return recommendations.loc[[productId]].recommendations.to_numpy()[0] if productId in recommendations.index else []
+
+
+# Calculate recommendations
+def calculateRecommendations():    
+    # Read orders data
+    orders_df = pd.read_pickle(ORDERS_PICKLE_FILENAME)
+
+    # Each row is now a order, and the columns are the productIDs
+    pivot_df = pd.pivot_table(orders_df, index='orderId', columns='productId', values="clientId", aggfunc='count')
+    pivot_df.reset_index(inplace=True)
+    pivot_df = pivot_df.fillna(0)
+    pivot_df = pivot_df.drop('orderId', axis=1)
+
+    # Get RECOMMENDATION_MAX_ORDERS, starting from most recent
+    pivot_df = pivot_df.tail(RECOMMENDATION_MAX_ORDERS)
     
-    listaIDProdCatAcima = getProduto(dfprodutos, IDCatAcima)
-    for idProd in listaIDProd:
-        saldo = 1
-        idCatTemp, NumVisTemp, PontuacaoTemp, NumPontuacoesTemp = getIDCategoriaNumVisPontuacaoNumPontuacoes(idProd)
-        if idCatTemp[0] == IDCat[0]:
-            saldo *= 2
-        elif idCatTemp[0] == IDCatAcima[0]:
-            saldo *= 1.5
-        elif idCatTemp[0] in listaIDCats:
-            saldo *= 1.2
-        saldoProdTemp = (sum(NumPontuacoesTemp) * sum(PontuacaoTemp)) / sum(NumVisTemp)
-        if math.abs(saldoProdTemp - SaldoProd) <= VALOR_TEMP :
-            saldo *= 2
-        if idProd in prodVistos :
-            saldo *= 5
-        listaProdSaldo.append((idProd, saldo*1.5))
-    
-    return listaProdSaldo
-#confirmar com o pessoal de AI se querem usar mais coisas para as contas
+    # Filter out products without minimum amount of sales (little data for accurate recommendation)
+    for label, content in pivot_df.iteritems():
+        if np.sum(content) < MIN_SALES_PER_ITEM:
+            pivot_df.drop(columns=label, inplace=True)
+
+    # Get co-occurrence matrix
+    co_matrix = pivot_df.T.dot(pivot_df)
+    np.fill_diagonal(co_matrix.values, 0)
+
+    # Get cosine similarities matrix
+    cos_score_df = pd.DataFrame(cosine_similarity(co_matrix))
+    cos_score_df.index = co_matrix.index
+    cos_score_df.columns = np.array(co_matrix.index)
+
+    # Get top X product recommendations
+    product_recs = []
+    for i in cos_score_df.index:
+        product_recs.append(cos_score_df[cos_score_df.index!=i][i].sort_values(ascending=False)[0:NUM_RECOMMENDATIONS_PER_PRODUCT].index)
+        
+    # DataFrame that associates productId with its top recommendations
+    product_recs_df = pd.DataFrame(product_recs)
+    product_recs_df['recommendations'] = product_recs_df.values.tolist()
+    product_recs_df.index = cos_score_df.index
+
+    # Save recommendations DataFrame
+    product_recs_df[['recommendations']].to_pickle(RECOMMENDATIONS_PICKLE_FILENAME)
