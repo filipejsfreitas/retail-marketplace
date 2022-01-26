@@ -256,7 +256,7 @@ export class CartItemService {
       clientId: clientId
     }
 
-    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(body) });
+    await fetch(process.env.FLASK_URL + '/add_order', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(body) });
 
     Promise.all(sellersInvoice).then(res => {
       return;
