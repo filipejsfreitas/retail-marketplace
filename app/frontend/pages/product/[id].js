@@ -54,8 +54,8 @@ export default function ProductPage({categories,product, proposals}){
 export async function getStaticProps(context) {
  
   const id = context.params.id;
-  const product = await fetchProduct(id);
-  const proposals = await fetchProposals(id);
+  const product = await fetchProduct(id, process.env.API_HOST);
+  const proposals = await fetchProposals(id, process.env.API_HOST);
   const categories = await fetchCategories();
   
 
