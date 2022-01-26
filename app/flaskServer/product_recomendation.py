@@ -4,13 +4,12 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-# Product recommendations configs
-MIN_SALES_PER_ITEM = 5
-NUM_RECOMMENDATIONS_PER_PRODUCT = 5
-
 # Filenames 
 RECOMMENDATIONS_PICKLE_FILENAME = "recommendations.pkl"
 ORDERS_PICKLE_FILENAME = "orders.pkl"
+
+MIN_SALES_PER_ITEM = 5 # Minimum number of sales a product needs to have recommendations calculated
+NUM_RECOMMENDATIONS_PER_PRODUCT = 5 # Number of output recommendations (other productIds)
 
 NEW_RECOMMENDATIONS_FREQUENCY = 500 # Calculate new recommendation every 500 new orders
 RECOMMENDATION_MAX_ORDERS = 50000 # Maximmum number of order to consider for calculations
