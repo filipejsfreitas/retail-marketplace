@@ -35,7 +35,7 @@ while len(sys.argv) > 1:
         args["db"] = sys.argv.pop(0)
     elif arg == "--host":
         args["host"] = sys.argv.pop(0)
-    elif arg == "--host":
+    elif arg == "--port":
         args["port"] = sys.argv.pop(0)
     elif arg == "--dbhost":
         args["dbhost"] = sys.argv.pop(0)
