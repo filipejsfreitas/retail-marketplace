@@ -5,3 +5,4 @@ spacy
 nrclex
 pytrends
 statsmodels
+flask_pymongo

@@ -29,6 +29,7 @@ def populate(state):
 program = sys.argv.pop(0)
 
 if len(sys.argv) == 0 or len(sys.argv) != 2:
+    print (len(sys.argv))
     print("The database should be empty when populating prevent errors.")
     print("To remove the database you can use the following commands:")
     print("  mongo")

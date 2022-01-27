@@ -6,11 +6,9 @@ from product_info import product_info
 from update_dataset import update_dataset
 from price_optimization import price_optimization
 from product_recomendation import calculoRecomenda
-from Forecasting import forecast
+from Forecasting import forecasting
 from recom_category import categories
 from pytrends.request import TrendReq
-import pandas as pd
-import numpy as np                        
 
 
 # define the app
@@ -37,8 +35,6 @@ def add_review_classify():
     update_dataset(data ["productId"], data ["review"])
     
     return "True"
-
-
 
 
 '''
@@ -119,9 +115,21 @@ def forecast_stock():
    
     data =  request.get_json(force=True)
 
-    fCast = forecast(data["id"],data["productName"])
+    fCast = forecasting(data["id"],data["productName"])
     #print (fCast)
     return fCast
+
+
+'''
+retornar forecast do numero de vendas e valor ganho
+'''
+@app.route("/forecast")
+def forecast():
+    data =  request.get_json(force=True)
+
+    return ("True")
+
+
 
 if __name__ == '__main__':
     # This is used when running locally.

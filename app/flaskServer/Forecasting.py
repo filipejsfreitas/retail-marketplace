@@ -8,7 +8,7 @@ import math
 
 
 
-def forecast (id,productName):
+def forecasting (id,productName):
 
     name = productName.split()
     name = [n for n in name if n.isalpha() ]
