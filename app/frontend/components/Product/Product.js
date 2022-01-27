@@ -27,32 +27,7 @@ export function computeStars(stars) {
 const Product = (props) => {
     
     const [modalShow, setModalShow] = React.useState(false);
-    const recomended = [
-        {
-          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg"],
-          name: "Very nice and long pruduct pruduct pruduct name",
-          price: "20",
-          score: 2
-        },
-        {
-          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg"],
-          name: "Very nice and long pruduct product name",
-          price: "20",
-          score: 2
-        },
-        {
-          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg"],
-          name: "Very nice and long name",
-          price: "20",
-          score: 4
-        },
-        {
-          images:[],
-          name: "Very nice and long pruduct name",
-          price: "40",
-          score: 3
-        }
-      ]
+    const recommended = props.recommended
     
     const favoriteProducts = props.favs
     const [fav, setfav] = useState(null)
@@ -78,8 +53,8 @@ const Product = (props) => {
       boxShadow:"0px 0px 0px 0px black"
     }
     
-    const prod = props.props
-    const idP = prod._id
+    const prod = props.prod
+    const idP = prod._ids
     const proposals = props.proposals
     const cats = props.cats
     const catsOrd = []
@@ -115,11 +90,11 @@ const Product = (props) => {
                             <CarouselComponent props={prod.images}/>
                         </Container>
                     </Row>
-                    <Row>
-                        <Container className={styles.carousel}>
+                    <Row>{recommended &&
+                        <Container className={styles.carousel}> 
                             <h3 className={styles.technicalDescription}>Also Recommended:</h3>
-                            <RecomendedProducts props={recomended} />
-                        </Container>
+                            <RecomendedProducts props={recommended} />
+                        </Container>}
                     </Row>
                 </Col>
                 <Col md={6}>

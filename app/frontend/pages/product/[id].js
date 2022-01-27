@@ -30,13 +30,15 @@ export default function ProductPage({categories,product, proposals}){
  
   const { data: cats, loading: loading} = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/category/above/${product.category_id}`)
   const { data: favs, loading: loading2 } = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`, { when: (userType === UserType.CLIENT) })
+  const { data: recommended, loading: loading3 } = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/sugestions/${product._id}`, { when: (userType === UserType.CLIENT) })
+
   return ( 
       <Layout categories={categories} >
-        {loading || (userType === UserType.CLIENT && loading2) ? 
+        {loading || (userType === UserType.CLIENT && loading2) || (userType === UserType.CLIENT && loading3) ? 
           <div  style={{ "display": "flex", "justifyContent": "center" }}>
           <Spinner animation="border" />
           </div>  :
-          <Product props={product} proposals={proposals} cats={cats} favs={favs}></Product>
+          <Product prod={product} proposals={proposals} cats={cats} favs={favs} recommended={recommended}></Product>
         }
       </Layout>
   )
