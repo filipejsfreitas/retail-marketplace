@@ -18,11 +18,11 @@ RECOMMENDATION_MAX_ORDERS = 50000 # Maximmum number of order to consider for cal
 # Keep track of orders
 def addOrder(orderId, productIds, clientId):
     # Read existing file or create if no previous order record exists
-    orders_df = pd.read_pickle(ORDERS_PICKLE_FILENAME) if os.path.isfile(ORDERS_PICKLE_FILENAME) else pd.DataFrame(columns=["orderId, productId, clientId"])
+    orders_df = pd.read_pickle(ORDERS_PICKLE_FILENAME) if os.path.isfile(ORDERS_PICKLE_FILENAME) else pd.DataFrame(columns=["orderId", "productId", "clientId"])
 
     # Add order
     for productId in productIds:
-        orders_df.append([orderId, productId, clientId])
+        orders_df.loc[orders_df.shape[0]] = [orderId, productId, clientId]
     
     # Save orders pickle
     orders_df.to_pickle(ORDERS_PICKLE_FILENAME)
