@@ -33,7 +33,7 @@ def populate_comments(state):
 
 
 def add_comment(state, comment):
-    url = "http://localhost:3001/product/" + \
+    url = state.baseurl + "/product/" + \
         state.products[comment["productKey"]]["_id"] + "/comment"
     state.logger.info("Adding comment on '" + comment["productKey"] + "'.")
 

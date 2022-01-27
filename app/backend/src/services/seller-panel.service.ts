@@ -56,7 +56,7 @@ export class SellerPanelService {
   }
 
   async getAmountsSoldInLastXDays(userId: string, days: number) {
-    const xDaysAgo = moment().subtract(days, 'days').toDate();
+    const xDaysAgo = moment().startOf('day').subtract(days, 'days').toDate();
     const previousXDays = moment(xDaysAgo).subtract(days, 'days').toDate();
 
     const invoicesFromLastXDays = await SellerInvoiceModel.aggregate<SellerInvoiceModel>([
@@ -102,5 +102,82 @@ export class SellerPanelService {
         diffInPercent: isNaN(countDiffInPercent) || !isFinite(countDiffInPercent) ? 0 : countDiffInPercent,
       },
     };
+  }
+
+  async getAmountsSoldInLastXDaysOverNPeriods(userId: string, days: number, periods: number) {
+    const periodicChanges = [];
+
+    let xDaysAgo = moment().startOf('day').subtract(days, 'days').toDate();
+    let previousXDays = moment(xDaysAgo).subtract(days, 'days').toDate();
+
+    let invoicesFromLastXDays = await SellerInvoiceModel.aggregate<SellerInvoiceModel>([
+      {
+        $match: {
+          date: {
+            $gte: xDaysAgo,
+          },
+        },
+      },
+    ]);
+
+    let totalLastXDays = invoicesFromLastXDays.reduce((x, y) => x + y.total, 0);
+
+    for (let i = 0; i < periods; i++) {
+      const invoicesFromPreviousXDays = await SellerInvoiceModel.aggregate<SellerInvoiceModel>([
+        {
+          $match: {
+            date: {
+              $lt: xDaysAgo,
+              $gte: previousXDays,
+            },
+          },
+        },
+      ]);
+
+      const totalPreviousXDays = invoicesFromPreviousXDays.reduce((x, y) => x + y.total, 0);
+      const diffInPercent = Math.round((totalLastXDays / (totalPreviousXDays === 0 ? 1 : totalPreviousXDays)) * 100);
+
+      const countLastXDays = invoicesFromLastXDays.length;
+      const countPreviousXDays = invoicesFromPreviousXDays.length;
+      const countDiffInPercent = Math.round((countLastXDays / (countPreviousXDays === 0 ? 1 : countPreviousXDays)) * 100);
+
+      periodicChanges.push({
+        period: {
+          start: previousXDays.toISOString(),
+          end: xDaysAgo.toISOString(),
+        },
+        totals: {
+          lastXDays: totalLastXDays,
+          previousXDays: totalPreviousXDays,
+          diffInPercent: isNaN(diffInPercent) || !isFinite(diffInPercent) ? 0 : diffInPercent,
+        },
+        counts: {
+          lastXDays: countLastXDays,
+          previousXDays: countPreviousXDays,
+          diffInPercent: isNaN(countDiffInPercent) || !isFinite(countDiffInPercent) ? 0 : countDiffInPercent,
+        },
+      });
+
+      invoicesFromLastXDays = invoicesFromPreviousXDays;
+      totalLastXDays = totalPreviousXDays;
+
+      xDaysAgo = previousXDays;
+      previousXDays = moment(xDaysAgo).subtract(days, 'days').toDate();
+    }
+
+    const response = await fetch(process.env.FLASK_URL + '/forecast', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(periodicChanges),
+    });
+
+    if (!response.ok) {
+      return [];
+    }
+
+    return periodicChanges;
+    // return await response.json();
   }
 }

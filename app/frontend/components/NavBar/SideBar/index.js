@@ -32,13 +32,6 @@ const SideBar = (props) => {
         </Offcanvas.Header>
         {subCategorie === false ? (
           <Offcanvas.Body className={styles.body}>
-            <div className={styles.link}>
-              <Link href="/trending">Trending</Link>
-            </div>
-            <div className={styles.link}>
-              <Link href="/new">New</Link>
-            </div>
-            <div className={styles.line}></div>
             {renderCategories(props.categories)}
           </Offcanvas.Body>
         ) : (

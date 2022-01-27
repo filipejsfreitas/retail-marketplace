@@ -1,14 +1,14 @@
 export default async function fetchProducts() {
-  const products = await fetch(`${process.env.NEXT_PUBLIC_HOST}/product/list`)
+  const products = await fetch(`${process.env.API_HOST}/product/list`)
     .then((res) => res.json())
     .then((data) => data.data)
     .catch(() => false);
   return products;
 }
 
-export async function fetchProposals(id) {
+export async function fetchProposals(id, host) {
   const proposals = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST}/proposal/product/${id}`
+    `${host || process.env.NEXT_PUBLIC_HOST}/proposal/product/${id}`
   )
     .then((res) => res.json())
     .then((data) => data.data)
@@ -16,8 +16,8 @@ export async function fetchProposals(id) {
   return proposals;
 }
 
-export async function fetchProduct(id) {
-  const product = await fetch(`${process.env.NEXT_PUBLIC_HOST}/product/${id}`)
+export async function fetchProduct(id, host) {
+  const product = await fetch(`${host || process.env.NEXT_PUBLIC_HOST}/product/${id}`)
     .then((res) => res.json())
     .then((data) => data.data)
     .catch(() => false);

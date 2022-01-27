@@ -7,25 +7,37 @@ import fetchProducts from "helper/ProductPageHelper";
 import useProductList from "hooks/useProductList"
 import Error from "next/error";
 import Search from "components/Search/index"
+import { computeStars } from "components/Product/Product";
 import { useRouter } from "next/router";
+import Link from "next/link";
+
+function Product({ product }) {
+  const { _id, images, name, score, best_offer } = product
+  return <div className={styles.root}>
+    <Link className={styles.title} href={`/product/${_id}`}>
+      <a className={styles.title}>
+        <div className={styles.recommended}>
+          <img
+            className={styles.recommendedPhoto}
+            src={(images[0] && `${process.env.NEXT_PUBLIC_HOST}/${images[0]}`) || fallback}
+          />
+        </div>
+        <div className={styles.textProd}>
+          <div className={styles.product_name}>{`${name}`}</div>
+          <Row>
+            <Col className={styles.product_stars}> {computeStars(score)} </Col>
+            <Col className={styles.product_price}>{best_offer}€</Col>
+          </Row>
+        </div>
+      </a>
+    </Link>
+  </div>
+}
 
 function HomeContent({ products }) {
-  return <>
-    <h2 className={styles.titles} >Trending</h2>
-    <RootCarousel props={products} number={6} />
-    <Row md={12} className={styles.row}>
-      <Col md={6} className={styles.col1}>
-        <h2 className={styles.titles} >New</h2>
-        <RootCarousel props={products} number={3} />
-      </Col>
-      <Col md={6} className={styles.col2}>
-        <h2 className={styles.titles}>On Sale</h2>
-        <RootCarousel props={products} number={3} />
-      </Col>
-    </Row>
-    <h2 className={styles.titles}>Best Sellers</h2>
-    <RootCarousel props={products} number={6} />
-  </>
+  return <div className={styles.frame}>
+    {products.map(product => <Product key={product._id} product={product}/>)}
+  </div>
 }
 
 export default function Home({ categories, products }) {

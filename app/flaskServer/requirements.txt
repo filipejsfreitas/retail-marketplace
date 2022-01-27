@@ -5,4 +5,9 @@ spacy
 nrclex
 pytrends
 statsmodels
+<<<<<<< HEAD
 flask_pymongo
+=======
+pandas
+numpy
+>>>>>>> e1f07f0e988742189c74a5acb308b02fb572cf22

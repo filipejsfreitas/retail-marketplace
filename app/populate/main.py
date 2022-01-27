@@ -27,9 +27,25 @@ def populate(state):
 
 
 program = sys.argv.pop(0)
+args = {}
 
+<<<<<<< HEAD
 if len(sys.argv) == 0 or len(sys.argv) != 2:
     print (len(sys.argv))
+=======
+while len(sys.argv) > 1:
+    arg = sys.argv.pop(0)
+    if arg == "--db":
+        args["db"] = sys.argv.pop(0)
+    elif arg == "--host":
+        args["host"] = sys.argv.pop(0)
+    elif arg == "--host":
+        args["port"] = sys.argv.pop(0)
+    elif arg == "--dbhost":
+        args["dbhost"] = sys.argv.pop(0)
+
+if not "db" in args:
+>>>>>>> e1f07f0e988742189c74a5acb308b02fb572cf22
     print("The database should be empty when populating prevent errors.")
     print("To remove the database you can use the following commands:")
     print("  mongo")
@@ -37,19 +53,31 @@ if len(sys.argv) == 0 or len(sys.argv) != 2:
     print("  > db.dropDatabase()")
     print("To populate use '" + program +
           " --db [dbname]'. (Both servers must be running)")
-elif sys.argv.pop(0) == "--db" and len(sys.argv) == 1:
-    class State():
-        mongo = MongoClient("localhost", 27017)[sys.argv.pop(0)]
-        logger = Logger()
-        clients = clients
-        sellers = sellers
-        categories = categories
-        products = products
-        proposals = []
-        comments = comments
-        addresses = []
-        orders = []
-    state = State()
+    print("Other valid parameters are '--host [hostname]' and '--port [port]'.")
+    sys.exit(1)
 
-    populate(state)
-    state.logger.info("ended :)")
+class State():
+    db = args["db"]
+    host = args.get("host", "localhost")
+    port = args.get("port", "3001")
+    baseurl = "http://" + host + ":" + port
+    dbhost = args.get("dbhost", "localhost")
+    mongo = MongoClient(dbhost, 27017)[db]
+    logger = Logger()
+    clients = clients
+    sellers = sellers
+    categories = categories
+    products = products
+    proposals = []
+    comments = comments
+    addresses = []
+    orders = []
+
+state = State()
+state.logger.info("Using '" + state.dbhost + "' as database host.")
+state.logger.info("Using '" + state.db + "' as selected database.")
+state.logger.info("Using '" + state.baseurl + "' as backend base url.")
+
+populate(state)
+
+state.logger.info("ended :)")

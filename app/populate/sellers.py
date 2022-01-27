@@ -25,10 +25,10 @@ for seller in sellers:
     sellers[seller]["companyPhoneNumber"] = "25801234"
     sellers[seller]["tin"] = str(random.randrange(100000000, 999999999))
 
-def login_seller(logger, sellerKey):
+def login_seller(state, sellerKey):
     seller = sellers[sellerKey]
-    url = "http://localhost:3001/auth/login"
-    logger.info("Login in seller '" + sellerKey + "'.")
+    url = state.baseurl + "/auth/login"
+    state.logger.info("Login in seller '" + sellerKey + "'.")
 
     payload = {}
     for key in ["email", "password"]:
@@ -39,18 +39,18 @@ def login_seller(logger, sellerKey):
 
     seller["_id"] = jwt.decode(rep.json()["token"], options={"verify_signature": False})["_id"]
 
-def add_seller(logger, sellerKey):
+def add_seller(state, sellerKey):
     seller = sellers[sellerKey]
-    url = "http://localhost:3001/auth/register/seller"
-    logger.info("Adding seller '" + sellerKey + "'.")
+    url = state.baseurl + "/auth/register/seller"
+    state.logger.info("Adding seller '" + sellerKey + "'.")
 
     payload = {}
     for key in ["email", "password", "passwordConfirmation", "firstName", "lastName", "companyName", "tin", "companyPhoneNumber", "customerServiceEmail"]:
         payload[key] = seller[key]
 
     rep = requests.request("POST", url, headers=default_headers(), data=json.dumps(payload))
-    login_seller(logger, sellerKey)
+    login_seller(state, sellerKey)
 
 def add_sellers(state):
     for seller in state.sellers:
-        add_seller(state.logger, seller)
+        add_seller(state, seller)

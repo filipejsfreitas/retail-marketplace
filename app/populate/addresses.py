@@ -16,7 +16,7 @@ def populate_addresses(state):
 
 
 def add_address(state, address):
-    url = "http://localhost:3001/address"
+    url = state.baseurl + "/address"
     state.logger.info("Adding address on '" + address["clientKey"] + "'.")
 
     payload = {}

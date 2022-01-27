@@ -69,4 +69,11 @@ export class SellerPanelController {
   async getAmountsSoldInLast7Days(@Req() req: RequestWithUser) {
     return await this.sellerPanelService.getAmountsSoldInLastXDays(req.user._id.toString(), 7);
   }
+
+  @Get('/amountsSoldOverLastYear')
+  @Authorized('Seller')
+  @OpenAPI({ summary: 'get seller panel information' })
+  async getAmountsSoldOverLastYear(@Req() req: RequestWithUser) {
+    return await this.sellerPanelService.getAmountsSoldInLastXDaysOverNPeriods(req.user._id.toString(), 7, 52);
+  }
 }

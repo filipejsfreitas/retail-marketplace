@@ -4,17 +4,22 @@ import ResponsiveLine from 'components/Seller/ResponsiveLine'
 import styles from "styles/Seller/index.module.css"
 
 export default function YearRevenue({ revenueOverview, ...props }) {
+  const curr = new Date()
   const data = []
   for (var i = 0; i < 12; i++) {
-    data[i] = { y: 0, x: new Date(0, i).toLocaleDateString('en-GB', { month: 'short' }) }
+    const date = new Date(curr)
+    date.setMonth(date.getMonth() - 11 + i)
+    data[i] = { y: 0, x: date.toLocaleDateString('en-GB', { year: 'numeric', month: 'short' }), date: date }
   }
 
   (revenueOverview ?? []).forEach(({_id, count}) => {
-    data[_id.month-1].y = data[_id.month-1].y + count
+    const acc = data.find(({ date }) => date.getFullYear() === _id.year && date.getMonth() + 1 === _id.month)
+    if (acc)
+      acc.y += count
   })
 
   return <SellerCard className={styles.panel_revenue_cal} title={"Yearly Sales Overview"} {...props}>
-    <ResponsiveLine data={[{ id:"cenas", data: data }]}></ResponsiveLine>
+    <ResponsiveLine data={[{ id:"cenas", data: data }]}/>
   </SellerCard>
 }
 

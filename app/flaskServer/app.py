@@ -5,10 +5,12 @@ from flask import Flask, request
 from product_info import product_info
 from update_dataset import update_dataset
 from price_optimization import price_optimization
-from product_recomendation import calculoRecomenda
 from Forecasting import forecasting
 from recom_category import categories
 from pytrends.request import TrendReq
+from product_recomendation import getProductRecommendations, addOrder
+from forecast_salles import forecast_salles_orders
+             
 
 
 # define the app
@@ -31,8 +33,11 @@ def add_review_classify():
 
     #lê dados
     #data = pd.read_csv("datasets/reviews.csv", index_col=False,sep=',')
-
-    update_dataset(data ["productId"], data ["review"])
+    try:
+        update_dataset(data ["productId"], data ["review"])
+    except:
+        return False
+    
     
     return "True"
 
@@ -71,14 +76,32 @@ def seller_optimization():
 '''
 Metodo invocado para obter lista de produtos recommendados 
 '''
-@app.route('/products_recomendation/<clientId>/<productId>', methods=['GET'])
-def products_recomendation(clientId, productId): 
+@app.route('/products_recommendation/<productId>', methods=['GET'])
+def products_recomendation(productId):
+    # Read recommendations for given product
+    return {"recommendations": getProductRecommendations(productId)}
 
-    print (clientId, productId) 
-    #lê dados
-    payload = calculoRecomenda(productId, clientId)
+
+
+'''
+Metodo invocado para o guardar novas orders, usadas para calcular recomendações
+'''
+@app.route('/add_order',  methods=['GET', 'POST'])
+def save_order():
+    # Read incoming data
+    data = request.get_json(force=True)
+
+    # Get order 
+    orderId, productIds, clientId = data["orderId"], data["productIds"], data["clientId"]
+
+    # Add order to DataFrame
+    try:
+        addOrder(orderId, productIds, clientId)
+    except:
+        return False
     
-    return payload
+    return True
+
 
 
 '''
@@ -123,11 +146,17 @@ def forecast_stock():
 '''
 retornar forecast do numero de vendas e valor ganho
 '''
-@app.route("/forecast")
+@app.route("/forecast" , methods=['POST'])
 def forecast():
     data =  request.get_json(force=True)
+    
 
-    return ("True")
+    try:    
+        fcast = forecast_salles_orders(data)
+    except:
+        None
+
+    return fcast
 
 
 

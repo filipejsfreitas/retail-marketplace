@@ -18,10 +18,10 @@ for client in clients:
     clients[client]["password"] = "123456"
     clients[client]["passwordConfirmation"] = "123456"
 
-def login_client(logger, clientKey):
+def login_client(state, clientKey):
     client = clients[clientKey]
-    url = "http://localhost:3001/auth/login"
-    logger.info("Login in client '" + clientKey + "'.")
+    url = state.baseurl + "/auth/login"
+    state.logger.info("Login in client '" + clientKey + "'.")
 
     payload = {}
     for key in ["email", "password"]:
@@ -32,18 +32,18 @@ def login_client(logger, clientKey):
 
     client["_id"] = jwt.decode(rep.json()["token"], options={"verify_signature": False})["_id"]
 
-def add_client(logger, clientKey):
+def add_client(state, clientKey):
     client = clients[clientKey]
-    url = "http://localhost:3001/auth/register/client"
-    logger.info("Adding client '" + clientKey + "'.")
+    url = state.baseurl + "/auth/register/client"
+    state.logger.info("Adding client '" + clientKey + "'.")
 
     payload = {}
     for key in ["email", "password", "passwordConfirmation", "firstName", "lastName"]:
         payload[key] = client[key]
 
     rep = requests.request("POST", url, headers=default_headers(), data=json.dumps(payload))
-    login_client(logger, clientKey)
+    login_client(state, clientKey)
 
 def add_clients(state):
     for client in state.clients:
-        add_client(state.logger, client)
+        add_client(state, client)
