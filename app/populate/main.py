@@ -29,10 +29,6 @@ def populate(state):
 program = sys.argv.pop(0)
 args = {}
 
-<<<<<<< HEAD
-if len(sys.argv) == 0 or len(sys.argv) != 2:
-    print (len(sys.argv))
-=======
 while len(sys.argv) > 1:
     arg = sys.argv.pop(0)
     if arg == "--db":
@@ -45,7 +41,6 @@ while len(sys.argv) > 1:
         args["dbhost"] = sys.argv.pop(0)
 
 if not "db" in args:
->>>>>>> e1f07f0e988742189c74a5acb308b02fb572cf22
     print("The database should be empty when populating prevent errors.")
     print("To remove the database you can use the following commands:")
     print("  mongo")

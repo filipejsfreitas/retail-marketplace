@@ -137,8 +137,11 @@ def forecast_stock():
     '''
    
     data =  request.get_json(force=True)
-
-    fCast = forecasting(data["id"],data["productName"])
+    try:    
+       fCast = forecasting(data["id"],data["productName"])
+    except:
+        None
+    
     #print (fCast)
     return fCast
 
