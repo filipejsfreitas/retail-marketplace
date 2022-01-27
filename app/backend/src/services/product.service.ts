@@ -437,6 +437,6 @@ export class ProductService {
       return similar;
     }
 
-    return prod_listt["recommendations"];
+    return prod_list["recommendations"];
   }
 }
