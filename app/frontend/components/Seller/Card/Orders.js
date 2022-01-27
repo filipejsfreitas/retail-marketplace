@@ -71,7 +71,7 @@ function OrderLine({ order, setOrderState, setInspectOrder }) {
     <td>{order._id}</td>
     <td>{new Date(order.date).toLocaleDateString("en-GB")}</td>
     <td>{order.items.reduce((acc, { quantity }) => acc + quantity, 0)}</td>
-    <td>{`${order.items.reduce((acc, { price }) => acc + price, 0)}€`}</td>
+    <td>{`${order.items.reduce((acc, { price, quantity, shipping }) => acc + (price + shipping) * quantity, 0)}€`}</td>
     <td style={{ "paddingBottom": "0px" }}>
       <ProgressBar striped variant={progressbar.variant} now={progressbar.now} />
       <div className={`${styles.progress_bar_text} ${progressbar.class}`}>{progressbar.state}</div>
