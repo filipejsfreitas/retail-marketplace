@@ -253,10 +253,14 @@ export class CartItemService {
     const body = {
       orderId: clientInvoice._id,
       productIds: itemIdUpdate,
-      clientId: clientId
-    }
+      clientId: clientId,
+    };
 
-    await fetch(process.env.FLASK_URL + '/add_order', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(body) });
+    await fetch(process.env.FLASK_URL + '/add_order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
 
     Promise.all(sellersInvoice).then(res => {
       return;
