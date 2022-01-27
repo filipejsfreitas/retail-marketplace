@@ -17,7 +17,7 @@ export class SellerPanelService {
   }
 
   async getRevenueOverview(userId) {
-    const startOfMonth = moment().subtract(1, 'month').toDate();
+    const startOfMonth = moment().startOf('day').subtract(1, 'month').toDate();
 
     const invoices = await SellerInvoiceModel.aggregate<SellerInvoiceModel>([
       {

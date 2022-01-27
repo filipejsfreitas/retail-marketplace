@@ -9,6 +9,7 @@ import { CartController } from './cart.controller';
 import { ClientController } from './client.controller';
 import { SellerController } from './seller.controller';
 import { SellerPanelController } from './seller-panel.controller';
+import { AlertsController } from './alerts.controller';
 
 export const CONTROLLERS = [
   AuthController,
@@ -22,4 +23,5 @@ export const CONTROLLERS = [
   SellerController,
   ClientController,
   SellerPanelController,
+  AlertsController,
 ];

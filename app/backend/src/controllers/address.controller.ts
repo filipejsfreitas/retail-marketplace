@@ -24,7 +24,7 @@ export class AddressController {
   @Authorized('Client')
   @UseBefore(validationMiddleware(CreateAddressDto, 'body'))
   @OpenAPI({ summary: 'update address' })
-  async updateAddress(@Param('id') addressId: string, @Body() addressInfo: CreateAddressDto,@Req() req: RequestWithUser) {
+  async updateAddress(@Param('id') addressId: string, @Body() addressInfo: CreateAddressDto, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
     const address = await this.addressService.updateAddress(clientId, addressInfo, addressId);
     return { data: address, message: 'Address Updated' };
@@ -33,7 +33,7 @@ export class AddressController {
   @Delete('/:id')
   @Authorized('Client')
   @OpenAPI({ summary: 'delete address' })
-  async deleteAddress(@Param('id') addressId: string,@Req() req: RequestWithUser) {
+  async deleteAddress(@Param('id') addressId: string, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
     const address = await this.addressService.deleteAddress(clientId, addressId);
     return { data: address, message: 'Address deleted' };
@@ -51,7 +51,7 @@ export class AddressController {
   @Get('/:id')
   @Authorized('Client')
   @OpenAPI({ summary: 'retrive address information' })
-  async getAddress(@Param('id') addressId: string,@Req() req: RequestWithUser) {
+  async getAddress(@Param('id') addressId: string, @Req() req: RequestWithUser) {
     const clientId = req.token._id;
     const address = await this.addressService.getAddress(clientId, addressId);
     return { data: address, message: 'Address retrived' };
