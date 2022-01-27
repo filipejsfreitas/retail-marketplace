@@ -21,8 +21,8 @@ function OtherSellersLine({ proposal, propP }) {
       <td> {`${shipping}€`} </td>
       <td>
           {price - propP.price >=0 ? 
-          <span className={styles.negative}> <BsCaretDownFill size={22} />{Math.abs(price - propP.price )}</span> : 
-          <span className={styles.positive}> <BsCaretUpFill size={22}/>{Math.abs(price - propP.price )}</span> }
+          <span className={styles.negative}> <BsCaretDownFill size={22} />{Math.abs(price - propP.price )}€</span> : 
+          <span className={styles.positive}> <BsCaretUpFill size={22}/>{Math.abs(price - propP.price )}€</span> }
       </td>
     </tr>
   }

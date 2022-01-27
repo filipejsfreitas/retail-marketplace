@@ -7,7 +7,7 @@ export default function StockPrediction({ predictions, ...props }) {
     const getPeriod = (i, prev) => {
       const now = new Date()
       now.setDate(now.getDate() + i)
-      return `${now.getDate()}/${now.getMonth() + 1}`
+      return `${now.getDate()+1}/${now.getMonth() + 1}`
     }
     const data = predictions ?  predictions.Stock_prevision.map((count, i) => ({
       period: getPeriod(i),

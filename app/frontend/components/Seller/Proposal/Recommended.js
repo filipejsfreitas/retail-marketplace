@@ -11,7 +11,7 @@ export default function Recommended({proposal, recommendedPrice, ...props }) {
     return <SellerCard title={"Recommended Price"}  className={styles.panel_details} {...props}>
             <div className={styles.circle}> 
             <div className={styles.text}>
-                {priceR}
+                {priceR}€
             </div>
             <p>{diff <0 ? 
                 <span className={styles.negative}> <BsCaretDownFill size={22} />{perc}%</span> : 
