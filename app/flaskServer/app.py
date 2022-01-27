@@ -75,7 +75,7 @@ Metodo invocado para obter lista de produtos recommendados
 @app.route('/products_recommendation/<productId>', methods=['GET'])
 def products_recomendation(productId):
     # Read recommendations for given product
-    return getProductRecommendations(productId)
+    return {"recommendations": getProductRecommendations(productId)}
 
 
 
