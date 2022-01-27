@@ -36,7 +36,7 @@ categories = [
 ]
 
 def add_category(state, category, parent=None):
-    url = "http://localhost:3001/category/"
+    url = state.baseurl + "/category/"
     state.logger.info("Adding category '" + category["name"] + "'.")
     payload = {"name": category["name"]}
     if parent != None:
