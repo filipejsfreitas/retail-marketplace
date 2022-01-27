@@ -13,11 +13,6 @@ import styles from "../styles/login.module.css"
 
 
 export default function Login() {
-  console.debug(`${process.env.NEXT_PUBLIC_HOST}`)
-  console.debug(`${process.env.NEXT_PUBLIC_HOST}`)
-  console.debug(`${process.env.NEXT_PUBLIC_HOST}`)
-  console.debug(`${process.env.NEXT_PUBLIC_HOST}`)
-  console.debug(`${process.env.NEXT_PUBLIC_HOST}`)
   const refs = { email: useRef(), password: useRef() }
   const router = useRouter()
   const [showAlert, setShowAlert] = useState(false);
