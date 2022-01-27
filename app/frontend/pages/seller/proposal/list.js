@@ -37,7 +37,7 @@ function ProposalsTable({ proposals }) {
         <th>PRODUCT</th>
         <th>CATEGORY</th>
         <th>PRICE</th>
-        <th>#</th>
+        <th>STOCK</th>
         <th>ACTION</th>
       </tr>
     </thead>

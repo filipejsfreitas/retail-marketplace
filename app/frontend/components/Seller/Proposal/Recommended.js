@@ -8,7 +8,7 @@ export default function Recommended({proposal, recommendedPrice, ...props }) {
     const priceC = parseInt(proposal.price);
     const diff =  priceR - priceC; 
     const perc = parseInt(Math.abs(diff/priceC*100));
-    return <SellerCard title={"Recommended"}  className={styles.panel_details} {...props}>
+    return <SellerCard title={"Recommended Price"}  className={styles.panel_details} {...props}>
             <div className={styles.circle}> 
             <div className={styles.text}>
                 {priceR}

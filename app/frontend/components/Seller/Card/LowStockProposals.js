@@ -78,8 +78,8 @@ export default function LowStockProposals({ lowStockProposals, ...props }) {
         <tr>
           <th>PRODUCT</th>
           <th>PRICE</th>
-          <th>#</th>
-          <th>Forecast #</th>
+          <th>STOCK</th>
+          <th>STOCK FORECAST</th>
           <th>ACTION</th>
         </tr>
       </thead>
