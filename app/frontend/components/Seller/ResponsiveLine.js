@@ -12,7 +12,6 @@ export default function Line({ data }) {
             reverse: false
         }}
         yFormat=" >-.2f"
-        curve="natural"
         axisTop={null}
         axisRight={null}
         axisLeft={{

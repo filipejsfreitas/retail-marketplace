@@ -116,7 +116,7 @@ for product in products:
 
 def add_product(state, product):
     state.logger.info("Adding product '" + product["name"][:10] + "'.")
-    url = "http://localhost:3001/product"
+    url = state.baseurl + "/product"
 
     payload = {}
     for key in ["name", "description", "category_id", "forSale", "characteristic", "tecnical", "imagesToDelete", "score", "number_scores", "best_offer"]:

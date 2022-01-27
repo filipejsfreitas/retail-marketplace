@@ -27,7 +27,7 @@ def populate_proposals(state):
 
 
 def add_proposal(state, proposal):
-    url = "http://localhost:3001/proposal"
+    url = state.baseurl + "/proposal"
     state.logger.info("Adding proposal on '" + proposal["productKey"] + "' from '" + proposal["sellerKey"] + "'.")
 
     proposal["product_id"] = state.products[proposal["productKey"]]["_id"]
