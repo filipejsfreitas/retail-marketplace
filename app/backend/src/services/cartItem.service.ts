@@ -11,6 +11,7 @@ import { Address } from '../interfaces/address.interface';
 import { AddressModel } from '../models/address.model';
 import { ClientInvoiceModel } from '../models/clientInvoice.model';
 import { SellerInvoiceModel } from '../models/sellerInvoice.model';
+import fetch from 'node-fetch';
 
 export class CartItemService {
   public proposals = ProposalModel;
