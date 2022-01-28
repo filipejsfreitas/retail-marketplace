@@ -9,7 +9,7 @@ from Forecasting import forecasting
 from recom_category import categories
 from pytrends.request import TrendReq
 from product_recomendation import getProductRecommendations, addOrder
-from forecast_salles import forecast_salles_orders
+from forecast_sales import forecast_sales_orders
              
 
 
@@ -137,6 +137,7 @@ def forecast_stock():
     '''
    
     data =  request.get_json(force=True)
+
     try:    
        fCast = forecasting(data["id"],data["productName"])
     except:
@@ -152,12 +153,10 @@ retornar forecast do numero de vendas e valor ganho
 @app.route("/forecast" , methods=['POST'])
 def forecast():
     data =  request.get_json(force=True)
-    
-
     try:    
-        fcast = forecast_salles_orders(data)
+        fcast = forecast_sales_orders(data)
     except:
-        None
+        return None
 
     return fcast
 

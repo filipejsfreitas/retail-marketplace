@@ -177,7 +177,7 @@ export class SellerPanelService {
       return [];
     }
 
-    return periodicChanges;
-    // return await response.json();
+    //return periodicChanges;
+    return await response.json();
   }
 }
