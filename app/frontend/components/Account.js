@@ -1,11 +1,14 @@
+import { useContext } from "react"
 import { Row, Col } from "react-bootstrap"
 
 import Layout from "../components/Layout"
 
 import styles from '../styles/account.module.css'
+import TokenContext from "./Context/TokenContext"
 
 const Account = (props) => {
     const selected = props.selected
+    const { token } = useContext(TokenContext)
     const menu = [
         { id: "info", text: "Account Information" },
         { id: "address", text: "My Addresses" },
@@ -25,7 +28,7 @@ const Account = (props) => {
         <Layout categories={props.categories}>
             <Row>
                 <Col xs={3}>
-                    <h3>Hi, Name</h3> <br />
+                    <h3>{`Hi${(token??{}).clientInfo ? `, ${token.clientInfo.firstName}` : ""}`}</h3> <br />
                     {menu[0]["html"]} <br />
                     {menu[1]["html"]} <br />
                     {menu[2]["html"]} <br />
