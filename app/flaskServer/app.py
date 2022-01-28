@@ -82,8 +82,8 @@ def products_recomendation(productId):
 '''
 Metodo invocado para o guardar novas orders, usadas para calcular recomendações
 '''
-@app.route('/add_order',  methods=['GET', 'POST'])
-def save_order():
+@app.route('/add_order',  methods=['POST'])
+def add_order():
     # Read incoming data
     data = request.get_json(force=True)
 
@@ -94,9 +94,9 @@ def save_order():
     try:
         addOrder(orderId, productIds, clientId)
     except:
-        return False
+        return "Something went wrong."
     
-    return True
+    return "Order added successfully."
 
 
 
