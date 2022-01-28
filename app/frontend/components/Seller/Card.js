@@ -70,7 +70,7 @@ export function SimpleCard({
                 <div style={{ "display": "flex", flexDirection: "row", alignItems: "center" }}>
                     <div className={prevs.color} style={{ "marginRight": "5px" }}>
                         {prevs.icon}
-                        {`${prevs.diffPercentage}%`}
+                        {`${parseInt(prevs.diffPercentage)}%`}
                     </div>
                     {`${prevs.description} ${descriptionLeft}`}
                 </div>
@@ -96,7 +96,7 @@ export function SimpleCard({
                 <div style={{ "display": "flex", flexDirection: "row", alignItems: "center" }}>
                     <div className={nexts.color} style={{ "marginRight": "5px" }}>
                         {nexts.icon}
-                        {`${nexts.diffPercentage}%`}
+                        {`${parseInt(nexts.diffPercentage)}%`}
                     </div>
                     {`${descriptionRight}`}
                 </div>
