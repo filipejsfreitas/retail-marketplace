@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useFetchAuth from "/hooks/useFetchAuth";
 
-export default function usePanelAlerts() {
+export default function useLowStockProposals() {
   const { isReady } = useRouter()
   const { fetchAuth: fetch } = useFetchAuth()
 

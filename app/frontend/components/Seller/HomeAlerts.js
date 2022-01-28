@@ -3,13 +3,12 @@ import { useState } from "react";
 import styles from "styles/Seller/index/alerts.module.css"
 import DeleteAlert from "./DeleteAlert";
 
-function AlertItem({ index, text, id }) {
+function AlertItem({ alert, removeAlert, className }) {
   const [modalShow, setModalShow] = useState(false);
 
-  return <div className={`${styles.alerts_item} ${index % 2 === 0 ? styles.alerts_item_even : styles.alerts_item_odd}`}>
-    {text}
+  return <div className={`${styles.alerts_item} ${className}`}>
+    {alert.message}
     <div className={styles.alerts_buttons}>
-      <BsPlusSquare />
       <button type="submit" className={styles.alerts_buttons}
         onClick={() => setModalShow(true)}>
         <BsXSquare />
@@ -17,21 +16,23 @@ function AlertItem({ index, text, id }) {
       <DeleteAlert
           show={modalShow}
           onHide={() => setModalShow(false)}
-          id={id}
+          alert={alert}
+          removeAlert={removeAlert}
       />
     </div>
   </div>
 
 }
 
-export default function HomeAlerts({ alerts}) {
+export default function HomeAlerts({ alerts, removeAlert }) {
 
-  return <div className={styles.alerts}>
+  return (!alerts || alerts.length === 0) ? <></> : <div className={styles.alerts}>
     <div className={styles.alerts_top}>
       <BsFillExclamationTriangleFill />
     </div>
     <div className={styles.alerts_content}>
-      {alerts.map((alert, i) => <AlertItem key={i} text={alert.message} index={i} id={alert._id} />)}
+      {(alerts ?? []).map((alert, i) => <AlertItem key={alert._id} className={i % 2 === 0 ? styles.alerts_item_even : styles.alerts_item_odd}
+        alert={alert} removeAlert={removeAlert} />)}
     </div>
     <div className={styles.alerts_bottom}></div>
   </div>

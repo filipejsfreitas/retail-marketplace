@@ -4,6 +4,8 @@
     flex: 1 0;
     flex-wrap: wrap;
     gap: 25px;
+    justify-content: center;
+    width: 1602px;
 }
 
 .panel {
@@ -64,7 +66,7 @@
 
 .simple_panel {
     height: 150px;
-    width: 381px;
+    width: 787.5px;
     background: linear-gradient(96.3deg, #303179 0.84%, #575DA8 46.82%, #141850 100%), #FFFFFF;
 }
 
