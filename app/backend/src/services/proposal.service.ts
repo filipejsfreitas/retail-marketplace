@@ -147,9 +147,14 @@ export class ProposalService {
       });
   }
 
-  public async getStockPrevision(proposalId: string, sellerId) {
-    const proposal = await this.proposals.findOne({ _id: proposalId, seller_id: sellerId });
-    const product = await this.products.findById(proposal.product_id);
+  public async getStockPrevision(proposalId: string, sellerId, proposal = null, product = null) {
+    if (!proposal) {
+      proposal = await this.proposals.findOne({ _id: proposalId, seller_id: sellerId });
+    }
+
+    if (!product) {
+      product = await this.products.findById(proposal.product_id);
+    }
 
     const info = {
       id: product._id,
@@ -161,6 +166,7 @@ export class ProposalService {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(info),
     });
+
     if (!response.ok) {
       throw new HttpException(500, await response.json());
     }

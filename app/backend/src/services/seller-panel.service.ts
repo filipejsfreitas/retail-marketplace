@@ -39,7 +39,7 @@ export class SellerPanelService {
     return invoices;
   }
 
-  async getAlerts(userId: string) {
+  async getLowStockProposals(userId: string): Promise<{ lowStockProposals: ProposalModel[] }> {
     const lowStockProposals = await ProposalModel.find({ seller_id: userId, stock: { $lte: 10 } });
 
     return { lowStockProposals };

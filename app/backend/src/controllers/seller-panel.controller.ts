@@ -15,18 +15,20 @@ export class SellerPanelController {
   @OpenAPI({ summary: 'get seller panel information' })
   async get(@Req() req: RequestWithUser) {
     const revenueOverview = await this.sellerPanelService.getRevenueOverview(req.user._id.toString());
-    const alerts = await this.sellerPanelService.getAlerts(req.user._id.toString());
+    const alerts = await this.sellerPanelService.getLowStockProposals(req.user._id.toString());
     const ordersOverview = await this.sellerPanelService.getOrdersOverview(req.user._id.toString());
     const recommendedCategories = await this.sellerPanelService.getRecommendedCategories(req.user._id.toString());
     const amountsSoldInLastXDays = await this.sellerPanelService.getAmountsSoldInLastXDays(req.user._id.toString(), 7);
 
-    return {
+    const result = {
       revenueOverview,
       alerts,
       ordersOverview,
       recommendedCategories,
       amountsSoldInLastXDays,
     };
+
+    return result;
   }
 
   @Get('/ordersOverview')
@@ -47,9 +49,9 @@ export class SellerPanelController {
 
   @Get('/alerts')
   @Authorized('Seller')
-  @OpenAPI({ summary: 'get alerts information' })
-  async getAlerts(@Req() req: RequestWithUser) {
-    const alerts = await this.sellerPanelService.getAlerts(req.user._id.toString());
+  @OpenAPI({ summary: 'get low stock proposals information' })
+  async getLowStockProposals(@Req() req: RequestWithUser) {
+    const alerts = await this.sellerPanelService.getLowStockProposals(req.user._id.toString());
 
     return alerts;
   }

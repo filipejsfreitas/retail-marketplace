@@ -15,7 +15,7 @@ export class ProductService {
   public categories = CategoryModel;
   public proposals = ProposalModel;
 
-  public async getproducts(): Promise<Product[]> {
+  public async getProducts(): Promise<Product[]> {
     const prodList: Product[] = await this.products.find();
 
     return prodList;
@@ -57,7 +57,7 @@ export class ProductService {
     return cat_products;
   }
 
-  public listproducts(parameters: QueryParameters) {
+  public listProducts(parameters: QueryParameters) {
     if (parameters.category_id) {
       if (parameters.sort_by && parameters.order_by) {
         if (parameters.order_by === 'desc') {
@@ -180,17 +180,17 @@ export class ProductService {
     return updateProductData;
   }
 
-  public async findProductById(prodId: string): Promise<Product> {
+  public async findProductById(prodId: string): Promise<ProductModel> {
     if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
 
-    const findProduct: Product = await this.products.findOne({ _id: prodId });
+    const findProduct = await this.products.findOne({ _id: prodId });
 
     if (!findProduct) throw new HttpException(409, "You're not product");
 
     return findProduct;
   }
 
-  public async commentProduct(prodId: string, comment: CommentChecker): Promise<Product> {
+  public async commentProduct(prodId: string, comment: CommentChecker): Promise<ProductModel> {
     if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
 
     const findProduct: Product = await this.products.findOne({ _id: prodId });
@@ -201,7 +201,7 @@ export class ProductService {
 
     const newScore = (findProduct.score * findProduct.number_scores + comment.score) / newNumberScores;
 
-    const updateProductData: Product = await this.products.findOneAndUpdate(
+    const updateProductData = await this.products.findOneAndUpdate(
       { _id: prodId },
       { score: newScore, number_scores: newNumberScores, $addToSet: { comments: comment } },
       { new: true },
@@ -209,7 +209,11 @@ export class ProductService {
 
     const aiComment = { productId: prodId, review: comment.comment };
 
-    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(aiComment) });
+    await fetch(process.env.FLASK_URL + '/add_review_classify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(aiComment),
+    });
 
     return updateProductData;
   }
@@ -220,7 +224,7 @@ export class ProductService {
     return prod.images[0];
   }
 
-  public async updateComment(prodId: string, commentId: string, comment: CommentChecker): Promise<Product> {
+  public async updateComment(prodId: string, commentId: string, comment: CommentChecker): Promise<ProductModel> {
     if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
 
     const findProduct = await this.products.findById(prodId);
@@ -254,12 +258,16 @@ export class ProductService {
 
     const aiComment = { productId: prodId, review: comment.comment };
 
-    await fetch(process.env.FLASK_URL + '/add_review_classify', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(aiComment) });
+    await fetch(process.env.FLASK_URL + '/add_review_classify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(aiComment),
+    });
 
     return result;
   }
 
-  public async deleteComment(prodId: string, commentId: string, clientId: string): Promise<Product> {
+  public async deleteComment(prodId: string, commentId: string, clientId: string): Promise<ProductModel> {
     if (isEmpty(prodId)) throw new HttpException(400, "You're not productId");
 
     const findProduct: Product = await this.products.findById(prodId);
@@ -283,7 +291,7 @@ export class ProductService {
       newScore = (findProduct.score * findProduct.number_scores - oldComment.score) / newNumberScores;
     }
 
-    const parent: Product = await this.products.findOneAndUpdate(
+    const parent = await this.products.findOneAndUpdate(
       { _id: prodId },
       { score: newScore, number_scores: newNumberScores, $pull: { comments: { _id: commentId } } },
       { new: true },
@@ -291,86 +299,84 @@ export class ProductService {
     return parent;
   }
 
-  public async getAllPriceStats(sellerId: string){
-    const seller_proposals= await this.proposals.find({seller_id:sellerId});
+  public async getAllPriceStats(sellerId: string) {
+    const seller_proposals = await this.proposals.find({ seller_id: sellerId });
 
     const product_proposal_search = [];
-    const product_search = []
+    const product_search = [];
 
-    seller_proposals.forEach(element =>{
-      product_proposal_search.push( this.proposals.find({product_id: element.product_id}) )
-      product_search.push(this.products.findOne({ _id: element.product_id}));
-    })
+    seller_proposals.forEach(element => {
+      product_proposal_search.push(this.proposals.find({ product_id: element.product_id }));
+      product_search.push(this.products.findOne({ _id: element.product_id }));
+    });
 
-    const requests = []
-    return Promise.all(product_search).then(productsArray => {
+    const requests = [];
+    return Promise.all(product_search)
+      .then(productsArray => {
+        return Promise.all(product_proposal_search)
+          .then(proposalsArray => {
+            for (let i = 0; i < seller_proposals.length; i++) {
+              const proposal = seller_proposals[i];
+              const newFormatProps = [];
+              let seller_Index = -1;
 
-      return Promise.all(product_proposal_search).then(proposalsArray => {
-      
-        for (let i = 0; i < seller_proposals.length; i++) {
-          const proposal = seller_proposals[i];
-          const newFormatProps = [];
-          let seller_Index = -1;
-  
-          const productProposals = proposalsArray[i];
-  
-          for (let index = 0; index < productProposals.length; index++) {
-            if (productProposals[index].seller_id === sellerId) {
-              seller_Index = index;
+              const productProposals = proposalsArray[i];
+
+              for (let index = 0; index < productProposals.length; index++) {
+                if (productProposals[index].seller_id === sellerId) {
+                  seller_Index = index;
+                }
+
+                newFormatProps.push({
+                  id: productProposals[index]._id,
+                  sellerId: productProposals[index].seller_id,
+                  productId: productProposals[index].product_id,
+                  price: productProposals[index].price,
+                  shipping_price: productProposals[index].shipping,
+                  stock: productProposals[index].stock,
+                });
+              }
+              if (seller_Index === -1) {
+                throw new HttpException(400, 'You do not have a proposal on this product');
+              }
+
+              const info = {
+                sellerID: sellerId,
+                productId: proposal.product_id,
+                product_name: productsArray[i].name,
+                proposals: newFormatProps,
+              };
+
+              requests.push(
+                fetch(process.env.FLASK_URL + '/seller_optimization', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(info),
+                }),
+              );
             }
-    
-            newFormatProps.push({
-              id: productProposals[index]._id,
-              sellerId: productProposals[index].seller_id,
-              productId: productProposals[index].product_id,
-              price: productProposals[index].price,
-              shipping_price: productProposals[index].shipping,
-              stock: productProposals[index].stock,
-            });
-          }
-          if (seller_Index === -1) {
-            throw new HttpException(400, 'You do not have a proposal on this product');
-          }
-    
-          const info = {
-            sellerID: sellerId,
-            productId: proposal.product_id,
-            product_name: productsArray[i].name,
-            proposals: newFormatProps,
-          };
-    
-          requests.push( fetch(process.env.FLASK_URL + '/seller_optimization', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) }))
-          
 
-    
-  
-        }
-
-        return Promise.all(requests).then(async (price_optimmized) => {
-          return Promise.all(price_optimmized.map(req => req.json())).then(reps => {
-            return reps
+            return Promise.all(requests)
+              .then(async price_optimmized => {
+                return Promise.all(price_optimmized.map(req => req.json())).then(reps => {
+                  return reps;
+                });
+              })
+              .catch(function (err) {
+                throw new HttpException(500, err.message); // some coding error in handling happened
+              });
           })
-        })
-        .catch(function (err) {
-          throw new HttpException(500,err.message); // some coding error in handling happened
-        });
-        
+          .catch(function (err) {
+            throw new HttpException(500, err.message); // some coding error in handling happened
+          });
       })
       .catch(function (err) {
-        throw new HttpException(500,err.message); // some coding error in handling happened
+        throw new HttpException(500, err.message); // some coding error in handling happened
       });
-
-    })
-    .catch(function (err) {
-      throw new HttpException(500,err.message); // some coding error in handling happened
-    });
-    
   }
 
-
-
   public async getPriceStats(prodId: string, sellerId: string) {
-    const props: Proposal[] = await this.proposals.find({ product_id: prodId});
+    const props: Proposal[] = await this.proposals.find({ product_id: prodId });
     const product: Product = await this.products.findOne({ _id: prodId });
     let seller_proposal: Proposal;
     let seller_Index = -1;
@@ -402,7 +408,11 @@ export class ProductService {
       proposals: newFormatProps,
     };
 
-    const response = await fetch(process.env.FLASK_URL + '/seller_optimization', { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(info) });
+    const response = await fetch(process.env.FLASK_URL + '/seller_optimization', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(info),
+    });
 
     if (!response.ok) {
       throw new HttpException(500, await response.json());
@@ -428,15 +438,15 @@ export class ProductService {
       throw new HttpException(500, await response.json());
     }
 
-    const prod_list  = await response.json();
+    const prod_list = await response.json();
 
-    if(prod_list["recommendations"].length === 0){
+    if (prod_list['recommendations'].length === 0) {
       const prod = await this.products.findById(prodId);
-      const similar = await this.products.find({category_id: prod.category_id}).limit(5);
+      const similar = await this.products.find({ category_id: prod.category_id }).limit(5);
 
       return similar;
     }
 
-    return prod_list["recommendations"];
+    return prod_list['recommendations'];
   }
 }

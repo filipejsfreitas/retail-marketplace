@@ -20,8 +20,8 @@ export class ProposalController {
   @Get('/:id/stock_suggestions')
   @Authorized('Seller')
   @OpenAPI({ summary: 'get stock suggestions for this proposal' })
-  async getProposalStockSuggestions(@Param('id') proposalId: string,@Req() req: RequestWithUser) {
-    const res = await this.proposals.getStockPrevision(proposalId,req.token._id);
+  async getProposalStockSuggestions(@Param('id') proposalId: string, @Req() req: RequestWithUser) {
+    const res = await this.proposals.getStockPrevision(proposalId, req.token._id);
     return { data: res, message: 'stock suggestions' };
   }
 
@@ -74,5 +74,4 @@ export class ProposalController {
     const props = await this.proposals.getSellerProposals(sellerId);
     return { data: props, message: 'sellers proposals' };
   }
-
 }

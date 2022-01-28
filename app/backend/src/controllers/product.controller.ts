@@ -41,7 +41,7 @@ export class ProductController {
       parametros.max_price = 100000000000;
     }
 
-    const prodData = await this.productService.listproducts(parametros);
+    const prodData = await this.productService.listProducts(parametros);
     //const prodData = await this.productService.getproducts();
     return { data: prodData, message: 'found Product' };
   }
@@ -67,10 +67,10 @@ export class ProductController {
   @Get('/priceStats')
   @Authorized()
   @OpenAPI({ summary: 'get price stats on all proposals' })
-  async getAllPriceStats( @Req() req: RequestWithUser) {
+  async getAllPriceStats(@Req() req: RequestWithUser) {
     const sellerId = req.token._id;
 
-    const results = await this.productService.getAllPriceStats( sellerId);
+    const results = await this.productService.getAllPriceStats(sellerId);
     return { data: results, message: 'price stats retrieved' };
   }
 
