@@ -43,6 +43,8 @@
 }
 
 .alerts_buttons {
+    background-color: transparent;
+    border-color: transparent;
     display: flex;
     gap: 10px;
     margin-left: auto;

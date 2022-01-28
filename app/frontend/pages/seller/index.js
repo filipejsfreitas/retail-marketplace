@@ -22,6 +22,7 @@ import useAllPriceStats from "hooks/Seller/useAllPriceStats"
 
 import styles from "styles/Seller/index.module.css"
 import useWeekStatistics from "hooks/Seller/useWeekStatistics"
+import useFetchData from "hooks/useFetchData"
 
 export default function Home() {
 
@@ -30,6 +31,12 @@ export default function Home() {
   const { lowStockProposals, loading: loadingAlerts } = usePanelAlerts()
   const { recommendedCategories, loading: loadingRecommendedCategories } = usePanelRecommendedCategories()
   const { currentWeekOrders, currentWeekSales } = useWeekStatistics()
+
+  const { data: alerts, loading: loadingAlerts2 } = useFetchData(
+    () => `${process.env.NEXT_PUBLIC_HOST}/alerts/today/`,
+    { default: {} }
+  );
+
 
   return <Layout sidebar={SELLER_SIDEBAR}>
     <div className={styles.content}>
@@ -43,7 +50,8 @@ export default function Home() {
         description={"this week"} className={styles.simple_panel} />
       {/*<SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
       <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />*/}
-      <HomeAlerts />
+      {!loadingAlerts2 &&
+      <HomeAlerts alerts={alerts}/>}
       <DailyRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <YearRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <OrdersPie ordersOverview={ordersOverview} loading={loadingOrdersOverview} />
