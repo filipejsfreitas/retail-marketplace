@@ -3,43 +3,104 @@ import { Card, Spinner } from "react-bootstrap"
 import { BsArrowUp, BsArrowDown, BsArrowUpShort, BsArrowDownShort, BsFillExclamationTriangleFill } from "react-icons/bs"
 import styles from "styles/Seller/card.module.css"
 
-export function SimpleCard({ title, value, oldvalue, newvalue, description, icon, loading, className }) {
-    const diff = parseFloat(100 * newvalue / oldvalue).toFixed(2)
-    const valuedesc = (newvalue < oldvalue && "decrease")
-        || (newvalue > oldvalue && "increase")
-        || "maintain"
-    const colorClass = (newvalue < oldvalue && diff > 10 && styles.simple_card_percentage_red)
-        || (newvalue < oldvalue && styles.simple_card_percentage_yellow)
-        || (newvalue > oldvalue && diff > 10 && styles.simple_card_percentage_green)
-        || (styles.simple_card_percentage_green_light)
-    const iconDiff = (newvalue < oldvalue && diff > 10 && <BsArrowDown />)
-        || (newvalue < oldvalue && <BsArrowDownShort />)
-        || (newvalue > oldvalue && diff > 10 && <BsArrowUp />)
-        || (<BsArrowUpShort />)
+export function SimpleCard({
+    titleLeft, titleRight,
+    descriptionLeft, descriptionRight,
+    previous, current, next, valueToString,
+    icon, loading, className }) {
+    const failed = !(previous && current && next) && !loading
+    const showable = !loading && !failed
+    const diffPrev = parseFloat(current/previous - 1).toFixed(2)
+    const diffNext = parseFloat(next/current - 1).toFixed(2)
+
+    const prevs =
+        (diffPrev < -0.1 && {
+            description: "decrease",
+            color: styles.simple_card_percentage_red,
+            icon: <BsArrowDown />
+        })
+        || (diffPrev < 0 && {
+            description: "decrease",
+            color: styles.simple_card_percentage_yellow,
+            icon: <BsArrowDownShort />
+        })
+        || (diffPrev > 0.1 && {
+            description: "increase",
+            color: styles.simple_card_percentage_green_light,
+            icon: <BsArrowUp />
+        })
+        || {
+            description: "increase",
+            color: styles.simple_card_percentage_green_light,
+            icon: <BsArrowUpShort />
+        }
+    prevs.diffPercentage = Math.abs(diffPrev*100)
+
+    const nexts =
+        (diffNext > 0.1 && {
+            description: "decrease",
+            color: styles.simple_card_percentage_red,
+            icon: <BsArrowDown />
+        })
+        || (diffNext > 0 && {
+            description: "decrease",
+            color: styles.simple_card_percentage_yellow,
+            icon: <BsArrowDownShort />
+        })
+        || (diffNext < -0.1 && {
+            description: "increase",
+            color: styles.simple_card_percentage_green_light,
+            icon: <BsArrowUp />
+        })
+        || {
+            description: "increase",
+            color: styles.simple_card_percentage_green_light,
+            icon: <BsArrowUpShort />
+        }
+    nexts.diffPercentage = Math.abs(diffNext*100)
 
     return <div className={`${styles.simple_card} ${className || ""}`}>
+        {/* LEFT SIDE */}
         <div>
-            <div>
-                {title}
+            <div style={{ "color": "#D1D1D1" }}>
+                {titleRight}
             </div>
-            {oldvalue && newvalue && !loading && <>
-                <div>
-                    <h4>{value}</h4>
-                </div>
+            {showable && <>
+                <h4>{valueToString(next)}</h4>
                 <div style={{ "display": "flex", flexDirection: "row", alignItems: "center" }}>
-                    <div className={colorClass} style={{ "marginRight": "5px" }}>
-                        {iconDiff}
-                        {`${diff}%`}
+                    <div className={prevs.color} style={{ "marginRight": "5px" }}>
+                        {prevs.icon}
+                        {`${prevs.diffPercentage}%`}
                     </div>
-                    {`${valuedesc} ${description}`}
+                    {`${prevs.description} ${descriptionLeft}`}
                 </div>
-            </>}
+            </>
+            }
         </div>
+
+        {/* MIDDLE */}
         <div className={styles.simple_card_icon}>
             {loading ? <Spinner animation="border" />
-            : !(oldvalue && newvalue) ? <BsFillExclamationTriangleFill/>
-            : icon
+                : failed ? <BsFillExclamationTriangleFill />
+                    : icon
             }
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div style={{"display": "flex", "flexDirection": "column", "alignItems": "end"}}>
+            <div style={{ "color": "#D1D1D1" }}>
+                {titleLeft}
+            </div>
+            {showable && <>
+                <h4>{valueToString(current)}</h4>
+                <div style={{ "display": "flex", flexDirection: "row", alignItems: "center" }}>
+                    <div className={nexts.color} style={{ "marginRight": "5px" }}>
+                        {nexts.icon}
+                        {`${nexts.diffPercentage}%`}
+                    </div>
+                    {`${nexts.diffPercentage} ${descriptionRight}`}
+                </div>
+            </>}
         </div>
     </div>
 }

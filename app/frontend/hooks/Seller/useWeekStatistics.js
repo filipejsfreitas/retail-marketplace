@@ -6,31 +6,38 @@ export default function useWeekStatistics() {
   const { isReady } = useRouter()
   const { fetchAuth: fetch } = useFetchAuth()
 
-  const [currentWeekSales, setCurrentWeekSales] = useState({ loading: true })
-  const [currentWeekOrders, setCurrentWeekOrders] = useState({ loading: true })
+  const [salesStatistics, setSalesStatistics] = useState({ loading: true })
+  const [orderStatistics, setOrderStatistics] = useState({ loading: true })
 
   useEffect(async () => {
     if (!isReady) return
-    const statsBackend = await fetch(`${process.env.NEXT_PUBLIC_HOST}/sellerPanel/amountsSoldInLast7Days`)
-      .then(r => r.json())
-    
-    const currentWeekSales = (statsBackend.totals && {
+    const [statsBackend, statsForecast] = await Promise.all([
+      fetch(`${process.env.NEXT_PUBLIC_HOST}/sellerPanel/amountsSoldInLast7Days`)
+        .then(r => r.json()),
+      fetch(`${process.env.NEXT_PUBLIC_HOST}/sellerPanel/amountsSoldOverLastYear`)
+        .then(r => r.json()),
+    ])
+
+
+    const currentWeekSales = (statsBackend.totals && statsForecast && {
+      next: statsForecast.sales,
       current: statsBackend.totals.lastXDays,
       previous: statsBackend.totals.previousXDays,
       loading: false
     }) || { loading: false }
-    setCurrentWeekSales(() => currentWeekSales)
+    setSalesStatistics(() => currentWeekSales)
 
-    const currentWeekOrders = (statsBackend.counts && {
+    const currentWeekOrders = (statsBackend.counts && statsForecast && {
+      next: statsForecast.orders,
       current: statsBackend.counts.lastXDays,
       previous: statsBackend.counts.previousXDays,
       loading: false
     }) || { loading: false }
-    setCurrentWeekOrders(() => currentWeekOrders)
+    setOrderStatistics(() => currentWeekOrders)
   }, [isReady])
 
   return {
-    currentWeekOrders,
-    currentWeekSales,
+    orderStatistics,
+    salesStatistics,
   }
 }

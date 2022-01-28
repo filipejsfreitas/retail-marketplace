@@ -64,10 +64,16 @@
 }
 
 
-.simple_panel {
+.simple_panel_left {
     height: 150px;
     width: 787.5px;
-    background: linear-gradient(96.3deg, #303179 0.84%, #575DA8 46.82%, #141850 100%), #FFFFFF;
+    background: linear-gradient(96.3deg, #141850 0.84%, #303467 13.75%, #6D74AB 88.12%), #FFFFFF;
+}
+
+.simple_panel_right {
+    height: 150px;
+    width: 787.5px;
+    background: linear-gradient(96.3deg, #6D74AB 20.46%, #303467 86.57%, #141850 100%), #FFFFFF;
 }
 
 .info_popup {

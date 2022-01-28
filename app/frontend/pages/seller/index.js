@@ -25,25 +25,23 @@ import useAlerts from "hooks/Seller/useAlerts"
 
 export default function Home() {
 
+  const { orderStatistics, salesStatistics } = useWeekStatistics()
   const { ordersOverview, loading: loadingOrdersOverview } = usePanelOrdersOverview()
   const { revenueOverview, loading: loadingRevenueOverview } = usePanelRevenueOverview()
   const { lowStockProposals, loading: loadingLowStockProposals } = useLowStockProposals()
   const { recommendedCategories, loading: loadingRecommendedCategories } = usePanelRecommendedCategories()
-  const { currentWeekOrders, currentWeekSales } = useWeekStatistics()
   const { activeAlerts, removeAlert, loading: loadingAlerts } = useAlerts()
 
   return <Layout sidebar={SELLER_SIDEBAR}>
     <div className={styles.content}>
-      <SimpleCard title={"SALES"} value={`${currentWeekSales.current}€`}
-        oldvalue={currentWeekSales.previous} newvalue={currentWeekSales.current}
-        icon={<BsTruck />} loading={currentWeekSales.loading}
-        description={"this week"} className={styles.simple_panel} />
-      <SimpleCard title={"ORDERS"} value={`${currentWeekOrders.current}`}
-        oldvalue={currentWeekOrders.previous} newvalue={currentWeekOrders.current}
-        icon={<BsBoxSeam />} loading={currentWeekOrders.loading}
-        description={"this week"} className={styles.simple_panel} />
-      {/*<SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />
-      <SimpleCard title={"SALES"} value={"30.234€"} oldvalue={31} newvalue={30} description={"this week"} className={styles.simple_panel} icon={<BsBoxSeam />} />*/}
+      <SimpleCard titleRight={"SALES"} titleLeft={"SALES FORECAST"}
+        descriptionLeft={"from last week"} descriptionRight={"forecasted next week"}
+        valueToString={(v) => `${v}€`} icon={<BsTruck />}
+        {...salesStatistics} className={styles.simple_panel_left} />
+      <SimpleCard titleRight={"ORDERS"} titleLeft={"ORDERS FORECAST"}
+        descriptionLeft={"from last week"} descriptionRight={"forecasted next week"}
+        valueToString={v => v} icon={<BsBoxSeam />}
+        {...orderStatistics} className={styles.simple_panel_right} />
       <HomeAlerts alerts={activeAlerts} removeAlert={removeAlert} loading={loadingAlerts}/>
       <DailyRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
       <YearRevenue revenueOverview={revenueOverview} loading={loadingRevenueOverview} />
