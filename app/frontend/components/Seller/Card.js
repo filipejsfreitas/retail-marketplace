@@ -11,7 +11,7 @@ export function SimpleCard({
     const failed = !(previous && current && next) && !loading
     const showable = !loading && !failed
     const diffPrev = parseFloat(current/previous - 1).toFixed(2)
-    const diffNext = parseFloat(next/current - 1).toFixed(2)
+    const diffNext = parseFloat(current/next - 1).toFixed(2)
 
     const prevs =
         (diffPrev < -0.1 && {
@@ -37,17 +37,17 @@ export function SimpleCard({
     prevs.diffPercentage = Math.abs(diffPrev*100)
 
     const nexts =
-        (diffNext > 0.1 && {
+        (diffNext < -0.1 && {
             description: "decrease",
             color: styles.simple_card_percentage_red,
             icon: <BsArrowDown />
         })
-        || (diffNext > 0 && {
+        || (diffNext < 0 && {
             description: "decrease",
             color: styles.simple_card_percentage_yellow,
             icon: <BsArrowDownShort />
         })
-        || (diffNext < -0.1 && {
+        || (diffNext > 0.1 && {
             description: "increase",
             color: styles.simple_card_percentage_green_light,
             icon: <BsArrowUp />
@@ -98,7 +98,7 @@ export function SimpleCard({
                         {nexts.icon}
                         {`${nexts.diffPercentage}%`}
                     </div>
-                    {`${nexts.diffPercentage} ${descriptionRight}`}
+                    {`${descriptionRight}`}
                 </div>
             </>}
         </div>
