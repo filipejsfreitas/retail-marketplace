@@ -97,7 +97,8 @@ export class AlertsService {
 
       let expectedDemand = 0;
       try {
-        ({ Stock_prevision: expectedDemand } = await this.proposalService.getStockPrevision(proposal._id, userId, proposal, product));
+        const { Stock_prevision: demands } = await this.proposalService.getStockPrevision(proposal._id, userId, proposal, product);
+        expectedDemand = demands[0];
       } catch (e) {
         console.error(e);
       }
