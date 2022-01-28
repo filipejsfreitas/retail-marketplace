@@ -10,7 +10,7 @@ export default function State({state}) {
             return (
                 <Container className={styles.outside}>
                     <div className={styles.box}>
-                        <span onClick={() => setStep(1)} className={styles.wrapper}>
+                        <span onClick={() => (setStep(1))} className={styles.wrapper}>
                             <span className={styles.step}>1</span>
                             <span className={styles.basket}> Basket </span>
                         </span>
@@ -43,7 +43,7 @@ export default function State({state}) {
                             <span className={styles.step}>2</span>
                             <span className={`${styles.ship} ${styles.selected}`}> Shipping </span>
                         </span>
-                        <span onClick={() => setStep(3)} className={styles.wrapper}>
+                        <span className={styles.wrapper}>
                             <span className={styles.notStep}>3</span>
                             <span className={styles.pay}> Payment </span>
                         </span>
@@ -68,7 +68,7 @@ export default function State({state}) {
                             <span className={styles.notStep}>2</span>
                             <span className={styles.ship}> Shipping </span>
                         </span>
-                        <span onClick={() => setStep(3)} className={styles.wrapper}>
+                        <span className={styles.wrapper}>
                             <span className={styles.notStep}>3</span>
                             <span className={styles.pay}> Payment </span>
                         </span>

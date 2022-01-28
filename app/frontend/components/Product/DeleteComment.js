@@ -1,10 +1,12 @@
 import React from 'react'
 import {Modal,Form,FloatingLabel, Button} from 'react-bootstrap';
 import { useRouter } from 'next/router'
+import useFetchAuth from 'hooks/useFetchAuth';
 
 const DeleteComment = (props) =>{ 
     const router = useRouter()
     const pathC = router.query.id
+    const { fetchAuth } = useFetchAuth()
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -28,7 +30,7 @@ const DeleteComment = (props) =>{
         </Modal.Body>
         <Modal.Footer>
           <Button onClick = { async () => {
-                   fetch(`${process.env.NEXT_PUBLIC_HOST}/product/${pathC}/comment/${props.idC}`, {
+                   fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/product/${pathC}/comment/${props.idC}`, {
                       method: 'DELETE'
                   }).then(() => router.reload())
                     .catch((error) => console.log(error))

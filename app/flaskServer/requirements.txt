@@ -1,0 +1,9 @@
+flask
+nltk
+sklearn
+spacy
+nrclex
+pytrends
+statsmodels
+pandas
+numpy

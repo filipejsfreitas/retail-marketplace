@@ -1,19 +1,37 @@
-import { Container, Button, Form, Row, Col } from "react-bootstrap"
-import { useState } from "react"
-
+import { Container, Button, Form, Row, Col, Alert, Spinner } from "react-bootstrap"
+import { useState, useRef } from "react"
+import { useRouter } from 'next/router'
 
 import Logo from "components/Logos/Logo"
 
 import styles from "styles/register/client.module.css"
 
 export default function Register() {
-  const [validated, setValidated] = useState(false);
+  const refs = { firstName: useRef(), lastName: useRef(), email: useRef(), password: useRef(), passwordConfirmation: useRef(), }
+  const router = useRouter()
 
-  const handleSubmit = (event) => {
+  const [validated, setValidated] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
+    if (form.checkValidity()) {
+      setLoading(true)
+      const req = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
+      var rep = await fetch(`${process.env.NEXT_PUBLIC_HOST}/auth/register/client`, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(req),
+      })
+      if (rep.ok){
+        router.replace("/login/")
+      } else {
+        setLoading(false)
+        setShowAlert(true)
+      }
     }
 
     setValidated(true);
@@ -23,80 +41,89 @@ export default function Register() {
     <>
       <Container fluid className={styles.main} >
         <Container className={styles.edges} />
-          <Container className={styles.center}>
-            <Container className={styles.imgContainer}><Logo/></Container> 
-            <Container fluid className={styles.formContainer}>
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formBasicFirstName">
-                      <Form.Label>First name</Form.Label>
-                      <Form.Control
-                        required
-                        type="text"
-                        placeholder="First name"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Invalid input!
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formBasicLastName">
-                      <Form.Label>Last name</Form.Label>
-                      <Form.Control
-                        required
-                        type="text"
-                        placeholder="Last name"
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Invalid input!
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                  </Col>
-                </Row>
+        <Container className={styles.center}>
+          <Container className={styles.imgContainer}><Logo /></Container>
+          <Container fluid className={styles.formContainer}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="formBasicFirstName">
+                    <Form.Label>First name</Form.Label>
+                    <Form.Control
+                      ref={refs.firstName}
+                      required
+                      type="text"
+                      placeholder="First name"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Invalid input!
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group className="mb-3" controlId="formBasicLastName">
+                    <Form.Label>Last name</Form.Label>
+                    <Form.Control
+                      ref={refs.lastName}
+                      required
+                      type="text"
+                      placeholder="Last name"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Invalid input!
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Col>
+              </Row>
 
-                <Row >
-                  <Form.Group className="mb-3" controlId="formBasicFirstEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="name@example.com" required />
-                    <Form.Control.Feedback type="invalid">
-                      Invalid Email!
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicFirstPass">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" required aria-describedby="passwordHelpBlock" />
-                    <Form.Text id="passwordHelpBlock" muted>
-                      Your password must be 8-20 characters, contain letters, numbers, special characters.
-                    </Form.Text>
-                    <Form.Control.Feedback type="invalid">
-                      Invalid Passord!
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicFirstConfirmPass">
-                    <Form.Label>Confirm password</Form.Label>
-                    <Form.Control type="password" placeholder="Confirm Password" required />
-                    <Form.Control.Feedback type="invalid">
-                      Invalid Passord!
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                </Row>
-                <Form.Group className="mb-3">
-                  <Form.Check
-                    required
-                    label="Agree to terms and conditions"
-                    feedbackType="invalid"
-                  />
+              <Row >
+                <Form.Group className="mb-3" controlId="formBasicFirstEmail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control ref={refs.email} type="email" placeholder="name@example.com" required />
+                  <Form.Control.Feedback type="invalid">
+                    Invalid Email!
+                  </Form.Control.Feedback>
                 </Form.Group>
-                <Button type="submit" variant="primary" size="lg" className={styles.btn}>
-                    Register
-                </Button>
-              </Form>
-            </Container>
+                <Form.Group className="mb-3" controlId="formBasicFirstPass">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control ref={refs.password} type="password" placeholder="Password" required aria-describedby="passwordHelpBlock" />
+                  <Form.Text id="passwordHelpBlock" muted>
+                    Your password must be 8-20 characters, contain letters, numbers, special characters.
+                  </Form.Text>
+                  <Form.Control.Feedback type="invalid">
+                    Invalid Passord!
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicFirstConfirmPass">
+                  <Form.Label>Confirm password</Form.Label>
+                  <Form.Control ref={refs.passwordConfirmation} type="password" placeholder="Confirm Password" required />
+                  <Form.Control.Feedback type="invalid">
+                    Invalid Passord!
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <Form.Group className="mb-3">
+                <Form.Check
+                  required
+                  label="Agree to terms and conditions"
+                  feedbackType="invalid"
+                />
+              </Form.Group>
+              <Button hidden={loading} type="submit" variant="primary" size="lg" className={styles.btn}>
+                Register
+              </Button>
+            </Form>
+            <div hidden={!loading} style={{ "display": "flex", "justifyContent": "center" }}>
+              <Spinner animation="border" />
+            </div>
+            <br />
+            <Alert hidden={!showAlert} variant="danger" onClose={() => setShowAlert(false)} dismissible>
+              The registration failed.
+            </Alert>
           </Container>
+        </Container>
         <Container className={styles.edges} />
-      </Container> 
+      </Container>
     </>
   );
 }

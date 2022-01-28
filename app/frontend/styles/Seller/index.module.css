@@ -1,0 +1,92 @@
+
+.content {
+    display: flex;
+    flex: 1 0;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    width: 1602px;
+}
+
+.panel {
+    display: inline-block;
+}
+
+
+.panel_stock_prediction {
+    height: 300px;
+    width: 1200px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.panel_cat > * {
+    width: 300px;
+    height: 300px;
+}
+
+.carr_cat_elem {
+    text-align: center;
+}
+
+.panel_revenue {
+    height: 350px;
+    width: 785px;
+}
+
+.panel_revenue_cal {
+    height: 350px;
+    width: 790px;
+}
+
+.panel_orders {
+    height: 350px;
+    width: 350px;
+}
+
+.panel_recommended_categories {
+    height: 350px;
+    width: 350px;
+}
+
+.panel_recommended_categories > div:nth-of-type(2) {
+    padding: 0;
+}
+
+.panel_lowstock {
+    height: 350px;
+    width: 850px;
+}
+
+.panel_lowstock > div:nth-of-type(2) {
+    padding: 0;
+}
+
+
+.simple_panel_left {
+    height: 150px;
+    width: 787.5px;
+    background: linear-gradient(96.3deg, #141850 0.84%, #303467 13.75%, #6D74AB 88.12%), #FFFFFF;
+}
+
+.simple_panel_right {
+    height: 150px;
+    width: 787.5px;
+    background: linear-gradient(96.3deg, #6D74AB 20.46%, #303467 86.57%, #141850 100%), #FFFFFF;
+}
+
+.info_popup {
+    position: absolute; 
+    left: -200px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: rgb(0, 0, 0, 1);
+    display: none;
+    white-space: nowrap;
+}
+
+.info_popup_trigger:hover > * > .info_popup {
+    display: inline;
+}

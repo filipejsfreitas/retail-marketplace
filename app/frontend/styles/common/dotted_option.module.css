@@ -1,0 +1,11 @@
+
+.dot_div {
+    display: flex; 
+    border-radius: 50%;
+    transition-duration: 0.5s;
+}
+
+.dot_div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}

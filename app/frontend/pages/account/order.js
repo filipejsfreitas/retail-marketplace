@@ -1,33 +1,81 @@
 import Account from "components/Account"
-import AccountPanel from "components/AccountPanel"
-import { AccountPanelDescription, AccountPanelOpenOrderButtons } from "components/AccountPanel"
 import Error from "next/error";
+import { Container, Row, Col, Spinner } from "react-bootstrap"
+import useFetchData from "hooks/useFetchData"
+import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
+
+import addrstyles from 'styles/Account/address.module.css'
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
+import { useState } from "react";
+import { useRouter } from "next/router";
+
+function OrderItem({ item }) {
+    const { data: product, loading }
+        = useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/${item.product_id}`, { default: {} })
+    const Sep = () => <Col lg="auto">{"|"}</Col>
+
+    return <Row>
+        <Col lg="auto"> <h6 style={{ "lineHeight": "24px" }}>{"State:"}</h6> </Col>
+        <Col lg="auto"> {item.state} </Col>
+        {!loading && <> <Sep/> <Col lg="auto"> {product.name} </Col> </>}
+    </Row>
+}
+
+function OrderItems({ items }) {
+    const [show, setShow] = useState(undefined)
+    const { isReady } = useRouter()
+    return <Row>
+        <a className={addrstyles.back_btn} onClick={() => setShow(!show)}>
+            <Col lg="auto"> <h6 style={{ "lineHeight": "24px" }}>Products</h6> </Col>
+            <Col lg="auto"> {!show ? <BsCaretDownFill /> : <BsCaretUpFill />}</Col>
+        </a>
+        {(show === undefined || !isReady) ? <></> : <Container hidden={!show} style={{ "marginLeft": "10px" }}>
+            {items.map(item => <OrderItem item={item} />)}
+        </Container>}
+    </Row>
+}
+
+function OrderField({title, value}){
+    return <Row>
+        <Col lg="auto"> <h6 style={{ "lineHeight": "24px" }}>{title}</h6> </Col>
+        <Col lg="auto"> {value} </Col>
+    </Row>
+}
+
+function Order({ order }) {
+    const [hidden, setHidden] = useState(true)
+    return <div>
+        <a className={addrstyles.back_btn} onClick={() => setHidden(!hidden)}>
+            <Col lg="auto"> {hidden ? <BsCaretDownFill /> : <BsCaretUpFill />}</Col>
+            <Col lg="auto"><h5>Order nº {order._id}</h5></Col>
+        </a>
+        <Container hidden={hidden ?? true}>
+            <OrderField title={"Address:"} value={order.address.name}/>
+            <OrderField title={"Date:"} value={new Date(order.date).toLocaleString('en-GB')}/>
+            <OrderField title={"Cost:"} value={order.total.toString() + "€"}/>
+            <OrderItems items={order.items}/>
+        </Container>
+    </div>
+}
 
 export default function AccountInfo({ categories }) {
     if( !categories )
         return (<Error statusCode={503} />)
-    return (
-        <Account categories={categories} selected="order">
-            <h4>Account Information</h4>
-            <AccountPanel title="Order #1234"
-                fields={
-                    [
-                        [
-                            <AccountPanelDescription label="Name:" text="Test"/>,
-                            <AccountPanelDescription label="State:" text="Shipping"/>
-                        ],
-                        [
-                            <AccountPanelDescription label="Date:" text="10/10/10"/>,
-                            <AccountPanelDescription label="Total:" text="123€"/>
-                        ],
-                    ]
-                } >
-                <AccountPanelOpenOrderButtons />
-            </AccountPanel>
-        </Account>
-    );
+
+    const { data: orders, loading } =
+        useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client/invoice`, { default: [] })
+    
+    return <Account categories={categories} selected="order">
+        <Row>
+            <Col lg="auto"><h4>My Orders</h4></Col>
+            {loading ? <Col lg="auto"><Spinner animation="border" size="sm" /></Col> : undefined}
+        </Row>
+        <Container className={addrstyles.address_panel}>
+            {orders.sort((o1, o2) => o1.date < o2.date)
+                .map(order => <Order key={order._id} order={order} />)}
+        </Container>
+    </Account>
 }
 
 // This function gets called at build time on server-side.

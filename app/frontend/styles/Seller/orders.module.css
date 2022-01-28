@@ -1,0 +1,33 @@
+.panel_orders {
+    width: 1600px;
+    height: 650px;
+}
+
+.panel_orders > div:nth-of-type(2) {
+    padding: 0;
+}
+
+.progress_bar_text {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.panel_stats {
+    width: 1600px;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+}
+
+.panel_box {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.panel_box_border {
+    border-right: 1px solid rgba(0,0,0,0.25);
+}

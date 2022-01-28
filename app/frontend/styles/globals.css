@@ -58,10 +58,15 @@ a {
   z-index: 0;
 } 
 
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
 :root {
   --bs-primary: #141850;
   --bs-primary-rgb: 20,24,80;
   --bs-secondary: #ED7966;
   --bs-secondary-rgb: 237,121,102;
+  --checkout-address-padding: 20px;
 }
 

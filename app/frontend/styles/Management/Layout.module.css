@@ -1,5 +1,6 @@
 .page {
     display: flex;
+    width: 100%;
     min-height: calc(100vh - 64px);
 }
 
@@ -34,4 +35,13 @@
 .page_content {
     padding: 20px;
     flex-grow: 1;
+    max-width: 80%;
+}
+
+.a:hover {
+    transition: 1s;
+}
+
+.a:hover {
+    color: #ED7966;
 }

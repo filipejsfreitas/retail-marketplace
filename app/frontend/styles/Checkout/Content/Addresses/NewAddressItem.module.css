@@ -1,0 +1,13 @@
+.box {
+    border: 1px solid var(--bs-secondary);
+    background-color: #e5e5e5;
+    padding: var(--checkout-address-padding);
+    max-width: 90vw;
+    width: 30%;
+    margin: 0px;
+    color: var(--bs-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

@@ -20,6 +20,12 @@
     justify-content: space-between;
 }
 
+.bot_payment {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .margin {
     flex: 0 1 100px;
 }

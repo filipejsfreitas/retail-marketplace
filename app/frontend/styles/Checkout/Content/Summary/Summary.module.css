@@ -51,6 +51,13 @@
     font-size: 30px;
 }
 
+.title_payment {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    text-align: center;
+}
+
 .line {
     border-top: 1px dashed #000000;
     margin-top: 5px;

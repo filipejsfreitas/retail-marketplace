@@ -1,0 +1,4502 @@
+[
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000000"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000f7"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cd"
+  },
+  "date": "19/8/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000001"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800014f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bc"
+  },
+  "date": "25/2/2021",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000002"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80003aa"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "29/5/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000003"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000aa"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003af"
+  },
+  "date": "16/4/2022",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000004"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800033a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d3"
+  },
+  "date": "19/6/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000005"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000e5"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dd"
+  },
+  "date": "11/4/2022",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000006"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000325"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dd"
+  },
+  "date": "25/5/2022",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000007"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000355"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b7"
+  },
+  "date": "3/10/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000008"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800005b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b4"
+  },
+  "date": "8/1/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000009"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800023a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "14/8/2022",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600000a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000148"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "12/2/2021",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600000b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000050"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "30/3/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600000c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000305"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "30/7/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600000d"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002e4"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bc"
+  },
+  "date": "18/5/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600000e"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000d4"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "29/12/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600000f"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800036b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "17/4/2022",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000010"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002de"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c9"
+  },
+  "date": "1/1/2022",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000011"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000379"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dc"
+  },
+  "date": "5/4/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000012"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002b9"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c1"
+  },
+  "date": "7/4/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000013"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000395"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b5"
+  },
+  "date": "26/1/2021",
+  "rating": 3,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000014"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000320"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c0"
+  },
+  "date": "21/3/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000015"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000186"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "29/4/2022",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000016"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000b2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ba"
+  },
+  "date": "22/9/2022",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000017"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000326"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "22/5/2022",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000018"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000341"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "6/6/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000019"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000336"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "21/4/2022",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600001a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000203"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cc"
+  },
+  "date": "9/9/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600001b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000cc"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003af"
+  },
+  "date": "7/4/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600001c"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800008c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b0"
+  },
+  "date": "5/4/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600001d"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000068"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "21/8/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600001e"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800027d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "22/8/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600001f"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002a3"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003af"
+  },
+  "date": "24/3/2021",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000020"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001c3"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dd"
+  },
+  "date": "14/7/2021",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000021"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ed"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "19/6/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000022"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000205"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "7/8/2022",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000023"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000cb"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "22/7/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000024"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800011a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b5"
+  },
+  "date": "8/9/2022",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000025"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800013b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "20/12/2021",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000026"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000ce"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dc"
+  },
+  "date": "5/1/2022",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000027"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800008a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "21/8/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000028"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000201"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ad"
+  },
+  "date": "4/2/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000029"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000102"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d0"
+  },
+  "date": "12/5/2021",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600002a"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000269"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d1"
+  },
+  "date": "24/11/2021",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600002b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001b6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d3"
+  },
+  "date": "30/4/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600002c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800032b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d7"
+  },
+  "date": "25/5/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600002d"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000291"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d0"
+  },
+  "date": "20/8/2022",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600002e"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000ee"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d1"
+  },
+  "date": "2/7/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600002f"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000201"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c8"
+  },
+  "date": "14/3/2022",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000030"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002fa"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "2/3/2021",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000031"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ea"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "24/8/2021",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000032"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002bc"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "26/4/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000033"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001f8"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bf"
+  },
+  "date": "3/3/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000034"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000093"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "24/12/2021",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000035"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800013e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "7/4/2021",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000036"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000232"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "12/11/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000037"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000116"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ad"
+  },
+  "date": "26/6/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000038"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000b3"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ad"
+  },
+  "date": "20/6/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000039"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000194"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "17/2/2021",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600003a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800019d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "11/3/2021",
+  "rating": 4,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600003b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800015c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "28/2/2021",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600003c"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001d0"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b5"
+  },
+  "date": "28/9/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600003d"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000259"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "20/4/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600003e"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000152"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "23/9/2022",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600003f"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000296"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b0"
+  },
+  "date": "5/7/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000040"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000088"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b5"
+  },
+  "date": "18/12/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000041"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000cd"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "1/12/2021",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000042"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80003aa"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "24/8/2022",
+  "rating": 3,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000043"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002f0"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "30/8/2021",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000044"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000115"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d6"
+  },
+  "date": "16/9/2022",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000045"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800029b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "27/1/2022",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000046"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80003a4"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c4"
+  },
+  "date": "28/2/2022",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000047"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002b1"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b7"
+  },
+  "date": "22/6/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000048"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800013a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c9"
+  },
+  "date": "1/3/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000049"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002aa"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b6"
+  },
+  "date": "17/11/2021",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600004a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000164"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d5"
+  },
+  "date": "28/6/2022",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600004b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000106"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003af"
+  },
+  "date": "18/2/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600004c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000257"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "6/8/2022",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600004d"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800026b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003af"
+  },
+  "date": "20/5/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600004e"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001e7"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b6"
+  },
+  "date": "13/9/2022",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600004f"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000382"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003db"
+  },
+  "date": "21/8/2022",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000050"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000159"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "18/9/2022",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000051"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000391"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "16/4/2021",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000052"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002a9"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c0"
+  },
+  "date": "3/7/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000053"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800037a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d3"
+  },
+  "date": "6/3/2022",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000054"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000373"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "7/2/2022",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000055"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000294"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "30/5/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000056"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000fe"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "31/5/2021",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000057"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000086"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "20/5/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000058"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000179"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "13/6/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000059"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000309"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "31/5/2021",
+  "rating": 4,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600005a"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000345"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cb"
+  },
+  "date": "26/3/2022",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600005b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ca"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "15/10/2021",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600005c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000295"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "22/3/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600005d"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000374"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "9/2/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600005e"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80003a2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "28/8/2022",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600005f"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000142"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b4"
+  },
+  "date": "13/5/2021",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000060"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000077"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "30/9/2022",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000061"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000e0"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cc"
+  },
+  "date": "25/8/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000062"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800024d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "28/9/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000063"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800025b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003db"
+  },
+  "date": "21/8/2021",
+  "rating": 3,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000064"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000080"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c1"
+  },
+  "date": "26/9/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000065"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800020f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "26/4/2021",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000066"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800019b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "27/3/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000067"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800025f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c9"
+  },
+  "date": "7/3/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000068"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800027e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cc"
+  },
+  "date": "5/9/2022",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000069"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000140"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "20/6/2021",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600006a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001d1"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "18/9/2021",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600006b"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002d1"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "1/4/2022",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600006c"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000168"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c7"
+  },
+  "date": "10/5/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600006d"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000156"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003af"
+  },
+  "date": "30/1/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600006e"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000292"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "24/7/2021",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600006f"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800013b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cd"
+  },
+  "date": "13/8/2022",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000070"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002e8"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "7/6/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000071"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800011a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d9"
+  },
+  "date": "7/2/2022",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000072"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000330"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d6"
+  },
+  "date": "8/7/2022",
+  "rating": 4,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000073"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000217"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d9"
+  },
+  "date": "29/8/2022",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000074"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000117"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "6/9/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000075"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ce"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c9"
+  },
+  "date": "2/2/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000076"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000dc"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d6"
+  },
+  "date": "1/9/2021",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000077"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800023f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b6"
+  },
+  "date": "1/2/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000078"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000141"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c8"
+  },
+  "date": "27/3/2021",
+  "rating": 4,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000079"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000066"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c8"
+  },
+  "date": "6/6/2022",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600007a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000180"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c4"
+  },
+  "date": "1/12/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600007b"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000291"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "12/3/2022",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600007c"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001d6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "18/12/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600007d"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800008a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003be"
+  },
+  "date": "13/8/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600007e"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002a6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b0"
+  },
+  "date": "25/4/2021",
+  "rating": 3,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600007f"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800017f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "11/12/2021",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000080"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000dd"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "28/6/2021",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000081"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800019b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "28/4/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000082"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002b1"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "23/2/2021",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000083"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800024f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bc"
+  },
+  "date": "24/11/2021",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000084"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800011a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "22/4/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000085"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000123"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ad"
+  },
+  "date": "11/2/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000086"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800031e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "26/9/2022",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000087"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000086"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ad"
+  },
+  "date": "5/2/2022",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000088"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000206"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "18/2/2021",
+  "rating": 3,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000089"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000336"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "24/5/2021",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600008a"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000292"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cc"
+  },
+  "date": "25/4/2022",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600008b"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80003aa"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "19/6/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600008c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800037d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cb"
+  },
+  "date": "23/10/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600008d"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000185"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003be"
+  },
+  "date": "12/3/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600008e"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001c2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dc"
+  },
+  "date": "1/3/2021",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600008f"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002ba"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "22/3/2021",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000090"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001a6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dc"
+  },
+  "date": "25/4/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000091"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000e2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "27/3/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000092"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001a3"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d0"
+  },
+  "date": "10/11/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000093"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800034b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bf"
+  },
+  "date": "8/7/2021",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000094"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800031b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "16/7/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000095"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001cf"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "8/8/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000096"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000180"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dd"
+  },
+  "date": "25/6/2021",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000097"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002c4"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "27/2/2022",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000098"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000279"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "17/7/2022",
+  "rating": 4,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000099"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000cf"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "3/6/2021",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600009a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800023b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "24/5/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600009b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800017f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "6/5/2022",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600009c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000321"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "6/9/2021",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600009d"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000096"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c9"
+  },
+  "date": "16/1/2022",
+  "rating": 4,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600009e"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000392"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "10/3/2022",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600009f"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000339"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c8"
+  },
+  "date": "24/1/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a0"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001fb"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "3/5/2021",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a1"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001d5"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "27/1/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a2"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000c0"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "30/12/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a3"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000c8"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c5"
+  },
+  "date": "11/9/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a4"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000a9"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bb"
+  },
+  "date": "23/10/2021",
+  "rating": 4,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a5"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800010a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d6"
+  },
+  "date": "11/4/2022",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a6"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800033b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "7/11/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a7"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000087"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "5/8/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a8"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800029b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cb"
+  },
+  "date": "9/7/2022",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000a9"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000186"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "15/3/2022",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000aa"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002ab"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b4"
+  },
+  "date": "9/6/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ab"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000083"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d9"
+  },
+  "date": "16/12/2021",
+  "rating": 4,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ac"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002e1"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "23/1/2021",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ad"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001af"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c0"
+  },
+  "date": "18/7/2022",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ae"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000152"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b6"
+  },
+  "date": "1/2/2022",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000af"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000235"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d1"
+  },
+  "date": "1/5/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b0"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800027a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "11/6/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b1"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000211"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "23/2/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b2"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000059"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cd"
+  },
+  "date": "7/7/2022",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b3"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800032d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "14/11/2021",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b4"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000063"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "7/7/2022",
+  "rating": 4,
+  "shipping_rating": 4,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b5"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000173"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ba"
+  },
+  "date": "11/6/2021",
+  "rating": 4,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b6"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000c9"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b0"
+  },
+  "date": "5/6/2022",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b7"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800012c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b6"
+  },
+  "date": "19/4/2022",
+  "rating": 3,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b8"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001d6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "24/3/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000b9"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002c9"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "16/4/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ba"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800010a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "17/7/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000bb"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800038f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d1"
+  },
+  "date": "2/8/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000bc"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ba"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "27/8/2022",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000bd"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800029f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "17/1/2021",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000be"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000314"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ba"
+  },
+  "date": "1/6/2022",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000bf"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800030d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bf"
+  },
+  "date": "24/10/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c0"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000f7"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cb"
+  },
+  "date": "3/11/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c1"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000198"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "9/7/2022",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c2"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000f0"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b7"
+  },
+  "date": "2/9/2022",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c3"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000378"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cd"
+  },
+  "date": "18/1/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c4"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000102"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ca"
+  },
+  "date": "20/6/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c5"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000384"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c0"
+  },
+  "date": "19/11/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c6"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002a1"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bf"
+  },
+  "date": "19/2/2022",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c7"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000a9"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b5"
+  },
+  "date": "16/2/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c8"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ac"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "2/2/2021",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000c9"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001d2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "24/10/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ca"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000288"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ba"
+  },
+  "date": "17/4/2021",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000cb"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000062"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b8"
+  },
+  "date": "23/4/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000cc"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000be"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003af"
+  },
+  "date": "8/7/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000cd"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000c0"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "15/1/2021",
+  "rating": 4,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ce"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000e9"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "3/4/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000cf"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001f5"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "29/9/2022",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d0"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800011d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "31/1/2021",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d1"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000c6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "4/4/2021",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d2"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000349"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c3"
+  },
+  "date": "29/5/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d3"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000153"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ba"
+  },
+  "date": "23/1/2022",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d4"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800015e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "12/7/2021",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d5"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000288"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cf"
+  },
+  "date": "25/8/2022",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d6"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000191"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cc"
+  },
+  "date": "6/1/2022",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d7"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000336"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "31/7/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d8"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000e4"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003be"
+  },
+  "date": "15/6/2021",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000d9"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80003a3"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d7"
+  },
+  "date": "16/7/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000da"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000182"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "5/2/2022",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000db"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002ad"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d9"
+  },
+  "date": "9/6/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000dc"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000107"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d5"
+  },
+  "date": "22/3/2022",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000dd"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001de"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b0"
+  },
+  "date": "12/9/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000de"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001f7"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c1"
+  },
+  "date": "14/9/2021",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000df"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000134"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c1"
+  },
+  "date": "13/8/2022",
+  "rating": 3,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e0"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000301"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dc"
+  },
+  "date": "2/7/2022",
+  "rating": 4,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e1"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800009d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "1/6/2022",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e2"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800030c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "27/3/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e3"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000ce"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "28/5/2022",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e4"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800019e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dd"
+  },
+  "date": "12/1/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e5"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000272"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b7"
+  },
+  "date": "25/5/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e6"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000166"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "16/7/2021",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e7"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000156"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cc"
+  },
+  "date": "10/5/2022",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e8"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800031f"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d6"
+  },
+  "date": "29/4/2021",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000e9"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000146"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b0"
+  },
+  "date": "13/3/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ea"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800006c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bd"
+  },
+  "date": "28/1/2022",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000eb"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000275"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c5"
+  },
+  "date": "11/11/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ec"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000311"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b7"
+  },
+  "date": "13/4/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ed"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002fd"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003db"
+  },
+  "date": "26/7/2021",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ee"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ed"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "13/3/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ef"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ff"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "1/7/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f0"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ee"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cb"
+  },
+  "date": "12/5/2022",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f1"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000253"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "30/3/2022",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f2"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000d2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b6"
+  },
+  "date": "11/6/2022",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f3"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000057"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "27/11/2021",
+  "rating": 5,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f4"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000391"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "11/9/2022",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f5"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000186"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "10/4/2022",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f6"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000250"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d1"
+  },
+  "date": "15/8/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f7"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000301"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ca"
+  },
+  "date": "1/4/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f8"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001b6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "9/10/2021",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000f9"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000108"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "6/11/2021",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000fa"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800013d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "14/7/2022",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000fb"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000b6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dd"
+  },
+  "date": "14/5/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000fc"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001a2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bb"
+  },
+  "date": "2/9/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000fd"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000dd"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d6"
+  },
+  "date": "7/7/2021",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000fe"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800026c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b6"
+  },
+  "date": "14/10/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f60000ff"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000153"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d8"
+  },
+  "date": "30/6/2022",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000100"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000053"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "9/7/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000101"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001be"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c8"
+  },
+  "date": "4/7/2022",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000102"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000db"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c3"
+  },
+  "date": "18/9/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000103"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002b8"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "11/9/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000104"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000290"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d3"
+  },
+  "date": "19/8/2022",
+  "rating": 2,
+  "shipping_rating": 5,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000105"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000251"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dd"
+  },
+  "date": "25/8/2022",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000106"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800033d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d4"
+  },
+  "date": "14/10/2021",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000107"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000204"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ca"
+  },
+  "date": "24/9/2022",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000108"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800011e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cb"
+  },
+  "date": "21/10/2021",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000109"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800014d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bc"
+  },
+  "date": "27/4/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600010a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000188"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b9"
+  },
+  "date": "9/2/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600010b"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002e3"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "27/4/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600010c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800025e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "30/1/2021",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600010d"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001d6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b3"
+  },
+  "date": "26/9/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600010e"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000180"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b1"
+  },
+  "date": "1/6/2021",
+  "rating": 5,
+  "shipping_rating": 4,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600010f"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800009e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003dc"
+  },
+  "date": "23/1/2021",
+  "rating": 2,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000110"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800034e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d5"
+  },
+  "date": "22/9/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000111"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800032d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c5"
+  },
+  "date": "18/1/2021",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000112"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800007e"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c5"
+  },
+  "date": "13/9/2022",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000113"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800033a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c3"
+  },
+  "date": "31/1/2021",
+  "rating": 5,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000114"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000257"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bb"
+  },
+  "date": "19/9/2022",
+  "rating": 1,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000115"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800007c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003cd"
+  },
+  "date": "14/1/2022",
+  "rating": 5,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000116"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001e6"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003bb"
+  },
+  "date": "5/1/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000117"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca8000327"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003da"
+  },
+  "date": "20/1/2021",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000118"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80001ab"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c7"
+  },
+  "date": "22/2/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000119"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800015b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d2"
+  },
+  "date": "27/9/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600011a"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000ae"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003be"
+  },
+  "date": "1/11/2021",
+  "rating": 1,
+  "shipping_rating": 4,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600011b"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000d2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ae"
+  },
+  "date": "10/2/2021",
+  "rating": 1,
+  "shipping_rating": 1,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600011c"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002b0"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c6"
+  },
+  "date": "30/8/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600011d"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800029a"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "4/3/2022",
+  "rating": 3,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600011e"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800037c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b7"
+  },
+  "date": "18/7/2022",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600011f"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000180"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c3"
+  },
+  "date": "4/9/2022",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000120"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000192"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003db"
+  },
+  "date": "28/2/2022",
+  "rating": 4,
+  "shipping_rating": 1,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000121"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002b2"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "11/3/2022",
+  "rating": 4,
+  "shipping_rating": 2,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000122"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000245"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c9"
+  },
+  "date": "30/6/2022",
+  "rating": 2,
+  "shipping_rating": 2,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000123"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800016b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ce"
+  },
+  "date": "18/8/2022",
+  "rating": 3,
+  "shipping_rating": 2,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000124"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800016c"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003ac"
+  },
+  "date": "24/11/2021",
+  "rating": 1,
+  "shipping_rating": 5,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000125"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000228"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b5"
+  },
+  "date": "17/6/2021",
+  "rating": 4,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000126"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca800014d"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c2"
+  },
+  "date": "7/4/2021",
+  "rating": 3,
+  "shipping_rating": 3,
+  "support_rating": 1
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000127"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca80000ad"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b5"
+  },
+  "date": "10/7/2021",
+  "rating": 1,
+  "shipping_rating": 3,
+  "support_rating": 4
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000128"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000095"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003b2"
+  },
+  "date": "21/7/2021",
+  "rating": 2,
+  "shipping_rating": 4,
+  "support_rating": 3
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f6000129"
+  },
+  "client_id": {
+   "$oid": "61e9c3e9fc13ae7ca8000055"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003d3"
+  },
+  "date": "4/7/2021",
+  "rating": 5,
+  "shipping_rating": 5,
+  "support_rating": 2
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600012a"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca800027b"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003c9"
+  },
+  "date": "5/3/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 5
+ },
+ {
+  "_id": {
+   "$oid": "61e9f86dfc13ae46f600012b"
+  },
+  "client_id": {
+   "$oid": "61e9c3eafc13ae7ca80002a1"
+  },
+  "seller_id": {
+   "$oid": "61e9c3eafc13ae7ca80003be"
+  },
+  "date": "4/2/2022",
+  "rating": 2,
+  "shipping_rating": 1,
+  "support_rating": 3
+ }
+]

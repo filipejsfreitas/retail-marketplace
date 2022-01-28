@@ -1,35 +1,43 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
-
-import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import config from 'config';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
-import { useExpressServer, getMetadataArgsStorage } from 'routing-controllers';
-import { routingControllersToSpec } from 'routing-controllers-openapi';
 import swaggerUi from 'swagger-ui-express';
-import { dbConnection } from '@/databases/mongodb';
-import { errorMiddleware } from '@middlewares/error.middleware';
-import { logger, stream } from '@utils/logger';
+import passport from 'passport';
+
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { getMetadataArgsStorage, useExpressServer } from 'routing-controllers';
+import { routingControllersToSpec } from 'routing-controllers-openapi';
+import { dbConnection } from './databases/mongodb';
+import { errorMiddleware } from './middlewares/express/error.middleware';
+import { logger, stream } from './utils/logger';
+import { AppLocalStrategy } from './middlewares/passport/appLocalStrategy.middleware';
+import { AppJwtStrategy } from './middlewares/passport/jwtStrategy.middleware';
+import { authMiddleware } from './middlewares/routing-controllers/auth.middleware';
 
 export class App {
-  public app: express.Application;
-  public port: string | number;
-  public env: string;
+  private readonly app: express.Application;
+  private readonly port: string | number;
+  private readonly env: string;
+
+  private readonly controllers: Function[];
 
   constructor(controllers: Function[]) {
     this.app = express();
     this.port = process.env.PORT || 3000;
     this.env = process.env.NODE_ENV || 'development';
+    this.controllers = controllers;
+  }
 
+  public init() {
     this.connectToDatabase();
     this.initializeMiddlewares();
-    this.initializeRoutes(controllers);
-    this.initializeSwagger(controllers);
+    this.initializePassport();
+    this.initializeRoutes();
+    this.initializeSwagger();
     this.initializeErrorHandling();
   }
 
@@ -45,19 +53,20 @@ export class App {
   public getServer() {
     return this.app;
   }
-  
+
   private connectToDatabase() {
     if (this.env !== 'production') {
       mongoose.set('debug', true);
     }
 
-    mongoose.connect(dbConnection.url, dbConnection.options as mongoose.ConnectOptions)
+    mongoose
+      .connect(dbConnection.url, dbConnection.options as mongoose.ConnectOptions)
       .then(() => logger.info('Connected to the database.'))
-      .catch(e => logger.error('Error connecting to the database.'));
+      .catch(_ => logger.error('Error connecting to the database.'));
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(config.get('log.format'), { stream }));
+    this.app.use(morgan(process.env.LOG_FORMAT, { stream }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
@@ -67,22 +76,32 @@ export class App {
     this.app.use(express.static('./public'));
   }
 
-  private initializeRoutes(controllers: Function[]) {
-    require('class-transformer')['classToPlain'] = function (obj: any)  {
+  private initializePassport() {
+    passport.use('local', AppLocalStrategy);
+    // passport.use(AppGoogleStrategy);
+    passport.use('jwt', AppJwtStrategy);
+
+    this.app.use(passport.initialize());
+  }
+
+  private initializeRoutes() {
+    const classToPlain = require('class-transformer')['classToPlain'];
+    require('class-transformer')['classToPlain'] = function (obj: any, options) {
       return JSON.parse(JSON.stringify(obj));
     };
 
     useExpressServer(this.app, {
       cors: {
-        origin: config.get('cors.origin'),
-        credentials: config.get('cors.credentials'),
+        origin: process.env.CORS_ORIGIN,
+        credentials: process.env.CORS_CREDENTIALS,
       },
-      controllers: controllers,
+      controllers: this.controllers,
       defaultErrorHandler: false,
+      authorizationChecker: authMiddleware,
     });
   }
 
-  private initializeSwagger(controllers: Function[]) {
+  private initializeSwagger() {
     const { defaultMetadataStorage } = require('class-transformer/cjs/storage');
 
     const schemas = validationMetadatasToSchemas({
@@ -90,25 +109,24 @@ export class App {
       refPointerPrefix: '#/components/schemas/',
     });
 
-    const routingControllersOptions = {
-      controllers: controllers,
-    };
-
     const storage = getMetadataArgsStorage();
-    const spec = routingControllersToSpec(storage, routingControllersOptions, {
+    const routingControllerOptions = { controllers: this.controllers };
+
+    const spec = routingControllersToSpec(storage, routingControllerOptions, {
+      info: {
+        title: 'Retail Marketplace API',
+        description: null,
+        version: '1.0.0',
+      },
       components: {
         schemas,
         securitySchemes: {
-          basicAuth: {
-            scheme: 'basic',
+          bearerAuth: {
             type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
           },
         },
-      },
-      info: {
-        description: null,
-        title: 'Retail Marketplace API',
-        version: '1.0.0',
       },
     });
 

@@ -9,17 +9,17 @@ export default function Basket({quantity,basket}) {
           Basket <span className={styles.titleProdN}>({`${quantity}`} products)</span>
         </div>
         <div className={styles.items}>
-          {basket[0].map(({ id, img, title, price, quantity, seller, categorie, stock, max_quantity }) => (
+          {basket[0].map(({ _id, image, name, price, quantity, seller, category, stock, max_quantity }) => (
               <Item
                 basket={basket}
-                key={id}
-                id={id}
-                img={img}
-                title={title}
+                key={_id}
+                id={_id}
+                img={image}
+                title={name}
                 price={price}
                 quantity={quantity}
                 seller={seller}
-                categorie={categorie}
+                category={category}
                 stock={stock}
                 max_quantity={max_quantity}
               />

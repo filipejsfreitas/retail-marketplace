@@ -1,12 +1,15 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { Button } from 'react-bootstrap'
 import { useRouter } from 'next/router'
+import { UserType } from 'hooks/useToken'
 import Link from 'next/link'
 
 import OutsideHandler from 'components/NavBar/Dropdown/OutsideHandler'
 
 import styles from 'styles/NavBar/Dropdown/Dropdown.module.css'
+import TokenContext from 'components/Context/TokenContext'
+import useFetchAuth from 'hooks/useFetchAuth'
 
 // Custom dropdown component with animation
 // Needs to be given a btnRef prop with the reference
@@ -25,6 +28,9 @@ const Dropdown = (props) => {
 
   const [showDropdown, setshowDropdown] = props.state;
 
+  const { token, removeToken, userType } = useContext(TokenContext)
+  const { fetchAuth } = useFetchAuth()
+  
   return (
     <CSSTransition
       in={showDropdown}
@@ -42,19 +48,25 @@ const Dropdown = (props) => {
         state={[showDropdown, setshowDropdown]}
         buttonRef={buttonRef}
       >
-        { props.user
+        {userType
           ?
           <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top_user}>
               <div className={styles.dd_top_user_welcome_div}>
                 Welcome
-                <div>{props.user.username}</div>
+                <div>{(token.clientInfo || token.sellerInfo || { firstName: "" }).firstName}</div>
               </div>
               <div>
-                <Button className={styles.dd_logoutBtn} variant="secondary" onClick={ () => router.push('/logout') }>Log Out</Button>
+                <Button className={styles.dd_logoutBtn} variant="secondary" onClick={async () => {
+                  removeToken()
+                  fetchAuth(`${process.env.NEXT_PUBLIC_HOST}/auth/logout`,{
+                    method: 'POST',
+                  })
+                  setshowDropdown(false)
+                }}>Log Out</Button>
               </div>
             </div>
-            <div className={styles.dd_bot_user}>
+            {userType === UserType.CLIENT && <div className={styles.dd_bot_user}>
               Your Account
               <div className={styles.dd_bot_user_interior}>
                 <Link href="/account/info">Account</Link>
@@ -62,22 +74,31 @@ const Dropdown = (props) => {
                 <Link href="/account/address">Addresses</Link>
                 <Link href="/account/favorites">Favorites</Link>
               </div>
-            </div>
+            </div>}
+            {userType === UserType.SELLER && <div className={styles.dd_bot_user}>
+              Manage Products
+              <div className={styles.dd_bot_user_interior}>
+                <Link href="/seller">Home</Link>
+                <Link href="/seller/proposal/list">Manage Proposals</Link>
+              </div>
+            </div>}
           </div>
-          :
+          : !token ?
           <div ref={nodeRef} className={styles.dd_wrapper}>
             <div className={styles.dd_top}>
               Welcome
             </div>
             <div className={styles.dd_bot}>
-              <Button variant="secondary" onClick={ () => router.push('/login') } >Log In</Button>
-              <Button variant="secondary" onClick={ () => router.push('/register') } >Register</Button>
+              <Button variant="secondary" onClick={() => router.push('/login')} >Log In</Button>
+              <Button variant="secondary" onClick={() => router.push('/register')} >Register</Button>
             </div>
           </div>
+          :
+          <div> </div>
         }
       </OutsideHandler>
     </CSSTransition>
   );
-};      
+};
 
 export default Dropdown

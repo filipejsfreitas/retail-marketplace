@@ -1,0 +1,51 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo
+    expose: ["27017"]
+#    ports:
+#      - "27017:27017"
+    logging:
+      driver: none
+
+  ai:
+    build: flaskServer/
+    expose: ["5000"]
+
+  api:
+    build: backend/
+    environment:
+      - MONGODB_HOST=mongo
+      - MONGODB_DATABASE=retail-marketplace
+      - FLASK_URL=http://ai:5000
+      - PORT=3001
+    links:
+      - mongo:mongo
+      - ai:ai
+    expose: ["3001", "4000"]
+    ports:
+      - "3001:3001"
+
+  web:
+    build: frontend/
+    environment:
+      - API_HOSTNAME=api
+      - API_PORT=3001
+      - PUBLIC_API_HOSTNAME=localhost
+      - PUBLIC_API_PORT=3001
+    links:
+      - api:api
+    ports:
+      - "3000:3000"
+
+  populate:
+    build: populate/
+    profiles: ["with-populate"]
+    entrypoint: ["bash", "-c", "\
+      while [[ $$(curl -s -w '%{http_code}' -L 'http://api:3001/' -o /dev/null) == '000' ]]; do echo '...'; sleep 5; done;\
+      while [[ $$(curl -s -w '%{http_code}' -L 'http://ai:5000/' -o /dev/null) == '000' ]]; do echo '...'; sleep 5; done;\
+      python main.py --db retail-marketplace --dbhost mongo --host api --port 3001"]
+    links:
+      - mongo:mongo
+      - api:api
+      - ai:ai

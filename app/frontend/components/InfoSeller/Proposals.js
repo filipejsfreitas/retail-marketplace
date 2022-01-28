@@ -1,10 +1,7 @@
-import { Col, Container, Row , Button, ListGroup, ListGroupItem} from "react-bootstrap";
+import { Col, Container, Row , Button, ListGroup} from "react-bootstrap";
 import styles from 'styles/infoseller.module.css'
-import { computeStars } from "components/Product/Product";
-import Status from "components/common/Status";
 
-const Proposals = () =>{ 
-    
+const Proposals = ({info}) =>{ 
     const proposal = [
         {
         name : "Smartphone Xiaomi Poco X3 Pro 6.67 8GB/256GB Dual SIM Frost Blue",
@@ -23,8 +20,7 @@ const Proposals = () =>{
         stock : 0
         }
     ]
-    
-    
+
     return(
     <>
         <Row className={styles.proposalTitle}>
@@ -32,39 +28,7 @@ const Proposals = () =>{
         </Row>
         <Container className={styles.rootProposal}>
             <ListGroup>
-            {Object.values(proposal).map((key, value) => (
-                <ListGroupItem  key={value}>
-                    <Row>
-                        <div className={styles.list}>
-                            <div className={styles.itemImg}>
-                                <img
-                                  className={styles.imgDiv}              
-                                  src={key.photo}
-                                />
-                            </div >
-                            <div className={styles.itemInfoWrapper}>
-                                <div className={styles.itemInfo}>
-                                    <div className={styles.title} >{key.name}</div>
-                                    <div className={styles.categorie}>{key.categorie}</div>
-                                    <div className={styles.stars}>{computeStars(key.stars)}</div>
-                                    <span className={styles.status}><Status stock={key.stock}/></span>
-                                </div>
-                                <div className={styles.priceWrapper}>
-                                    <div className={styles.price}>
-                                        {key.price}€
-                                    </div>
-                                    <div className={styles.price}>
-                                        <Button type="submit" variant="secundary"  className={styles.button}
-                                         disabled={(key.stock <= 0 ? true: false)}>
-                                            ADD TO CARD
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Row>
-                </ListGroupItem>
-                ))}
+                {info}
             </ListGroup>
         </Container>
     </>

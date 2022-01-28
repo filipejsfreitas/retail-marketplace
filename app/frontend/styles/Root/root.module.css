@@ -103,3 +103,19 @@
     align-items: center;
     background-color: #ffffff;
 }
+
+.rootFavoritos {
+    height: 400px;
+    width: 250px;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.frame {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(5,1fr);
+    align-items: center;
+    margin-left: 60px;
+    margin-right: 60px;
+}

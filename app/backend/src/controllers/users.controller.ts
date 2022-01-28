@@ -1,9 +1,10 @@
-import { Controller, Param, Body, Get, Post, Put, Delete, HttpCode, UseBefore } from 'routing-controllers';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
-import { CreateUserDto } from '@dtos/users.dto';
-import { User } from '@interfaces/users.interface';
-import { UserService } from '@services/users.service';
-import { validationMiddleware } from '@middlewares/validation.middleware';
+import { CreateClientWithUserDto } from '../dtos/users.dto';
+import { User } from '../interfaces/users.interface';
+import { UserService } from '../services/users.service';
+import { validationMiddleware } from '../middlewares/express/validation.middleware';
+import { UserModel } from '../models/users.model';
 
 @Controller()
 export class UsersController {
@@ -12,7 +13,7 @@ export class UsersController {
   @Get('/users')
   @OpenAPI({ summary: 'Return a list of users' })
   async getUsers() {
-    const findAllUsersData: User[] = await this.userService.findAllUser();
+    const findAllUsersData: UserModel[] = await this.userService.findAllUser();
     return { data: findAllUsersData, message: 'findAll' };
   }
 
@@ -25,17 +26,17 @@ export class UsersController {
 
   @Post('/users')
   @HttpCode(201)
-  @UseBefore(validationMiddleware(CreateUserDto, 'body'))
+  @UseBefore(validationMiddleware(CreateClientWithUserDto, 'body'))
   @OpenAPI({ summary: 'Create a new user' })
-  async createUser(@Body() userData: CreateUserDto) {
+  async createUser(@Body() userData: CreateClientWithUserDto) {
     const createUserData: User = await this.userService.createUser(userData);
     return { data: createUserData, message: 'created' };
   }
 
   @Put('/users/:id')
-  @UseBefore(validationMiddleware(CreateUserDto, 'body', true))
+  @UseBefore(validationMiddleware(CreateClientWithUserDto, 'body', true))
   @OpenAPI({ summary: 'Update a user' })
-  async updateUser(@Param('id') userId: string, @Body() userData: CreateUserDto) {
+  async updateUser(@Param('id') userId: string, @Body() userData: CreateClientWithUserDto) {
     const updateUserData: User = await this.userService.updateUser(userId, userData);
     return { data: updateUserData, message: 'updated' };
   }

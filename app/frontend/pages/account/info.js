@@ -1,66 +1,60 @@
 import Account from "components/Account"
-import AccountPanel from "components/AccountPanel"
-import { AccountPanelEditButtons, AccountPanelForm } from "components/AccountPanel"
-import { Row, Col, Button } from "react-bootstrap"
-import styles from 'styles/account.module.css'
+import { Row, Col, Button, Spinner, Container, Form } from "react-bootstrap"
 import Error from "next/error"
+import useClientInfo from "hooks/useClientInfo"
+import { useState, useRef } from "react"
+
+import addrstyles from 'styles/Account/address.module.css'
 
 import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper";
 
+function EditableText({ refs, value, edit, as, rows }) {
+    return edit ?
+        <Form.Control as={as} rows={rows} ref={refs} size="sm" defaultValue={value} style={{ "marginLeft": "10px" }} /> :
+        <div style={{ "minHeight": "31px", "marginLeft": "10px" }}>{value}</div>
+}
+
+
 export default function AccountInfo({ categories }) {
-    if( !categories )
+    if (!categories)
         return (<Error statusCode={503} />)
+
+    const refs = { firstName: useRef(), lastName: useRef(), phoneNumber: useRef() }
+    const { clientInfo, edit: editClientInfo, loading, pending } = useClientInfo()
+    const [edit, setEdit] = useState(false)
 
     return (
         <Account categories={categories} selected="info">
-            <h4>Account Information</h4>
-            <AccountPanel title="Contact Information"
-                fields={
-                    [
-                        [<AccountPanelForm label="First Name:" />, <AccountPanelForm label="Last Name:" />],
-                        [<AccountPanelForm label="Email:" />],
-                        [<AccountPanelForm label="Phone Number:" />]
-                    ]
-                } >
-                <Row nogutters="true"> <Col></Col>
-                    <Col lg="auto" >
-                        <a href={"/404"}>
-                            <Button variant="primary" className={styles.btn_panel}> Edit </Button>
-                        </a>
+            <Row>
+                <Col lg="auto"><h4>Account Information</h4></Col>
+                {(loading || pending) ? <Col lg="auto"><Spinner animation="border" size="sm" /></Col> : undefined}
+            </Row>
+            {loading ? <></> : <Container className={addrstyles.address_panel}>
+                <h5>First Name:</h5>
+                <EditableText refs={refs.firstName} value={clientInfo.firstName} edit={edit} />
+                <h5>Last Name:</h5>
+                <EditableText refs={refs.lastName} value={clientInfo.lastName} edit={edit} />
+                <h5>Phone Number:</h5>
+                <EditableText refs={refs.phoneNumber} value={clientInfo.phoneNumber} edit={edit} />
+                <br />
+                <Row hidden={loading || pending}>
+                    <Col />
+                    <Col hidden={edit} lg="auto">
+                        <Button variant="secondary" onClick={() => setEdit(true)}>Edit</Button>
+                    </Col>
+                    <Col hidden={!edit} lg="auto">
+                        <Button variant="secondary" onClick={async () => {
+                            if (!Object.values(refs).every(v => v.current.value)) return
+                            const req = Object.keys(refs).reduce((a, key) => ({ ...a, [key]: refs[key].current.value }), {})
+                            await editClientInfo(req)
+                            setEdit(false)
+                        }}>Save</Button>
+                    </Col>
+                    <Col hidden={!edit} lg="auto">
+                        <Button variant="secondary" onClick={() => setEdit(false)}>Cancel</Button>
                     </Col>
                 </Row>
-            </AccountPanel>
-            <AccountPanel title="Shipping Address"
-                fields={
-                    [
-                        [<AccountPanelForm label="Name:" />, <AccountPanelForm label="Phone Number:" />],
-                        [<AccountPanelForm label="Country:" />, <AccountPanelForm label="City:" />],
-                        [<AccountPanelForm label="Address:" />],
-                        [<AccountPanelForm label="ZIP code:" />, <AccountPanelForm label="Number/Floor:" />],
-                        [<AccountPanelForm label="NIF:" />],
-                    ]
-                } >
-                <Row nogutters="true"> <Col></Col>
-                    <Col lg="auto" >
-                        <a href={"/account/address"}>
-                            <Button variant="primary" className={styles.btn_panel}> Edit </Button>
-                        </a>
-                    </Col>
-                </Row>
-            </AccountPanel>
-            <AccountPanel title="Default Billing Address"
-                fields={
-                    [
-                        [<AccountPanelForm label="Name:" />, <AccountPanelForm label="Phone Number:" />],
-                        [<AccountPanelForm label="Country:" />, <AccountPanelForm label="City:" />],
-                        [<AccountPanelForm label="Address:" />],
-                        [<AccountPanelForm label="ZIP code:" />, <AccountPanelForm label="Number/Floor:" />],
-                        [<AccountPanelForm label="NIF:" />],
-                    ]
-                } >
-                <AccountPanelEditButtons />
-            </AccountPanel>
-
+            </Container>}
         </Account>
     );
 }
@@ -73,15 +67,15 @@ export default function AccountInfo({ categories }) {
 // In development (npm run dev) this function is called on every 
 // request
 export async function getStaticProps() {
-  
+
     const categories = await fetchCategories();
     const revTime = revalidateTime()
-  
+
     return {
-      props: {
-        categories,
-      },
-  
-      revalidate: revTime, 
+        props: {
+            categories,
+        },
+
+        revalidate: revTime,
     }
-  }
+}

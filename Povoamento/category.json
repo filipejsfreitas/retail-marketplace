@@ -1,0 +1,8 @@
+[{"_id":{"$oid":"61e9ed3efc13ae591100044c"},"level":0,"name":"Electronic"},
+{"_id":{"$oid":"61e9ed3efc13ae591100044d"},"parent_id":"61e9ed3efc13ae591100044c","level":1,"name": "Computers and accessories"},
+{"_id":{"$oid":"61e9f326fc13ae215e001271"},"parent_id":"61e9ed3efc13ae591100044c","level":1,"name":"Processors"},
+{"_id":{"$oid":"61e9ed3efc13ae591100044e"},"parent_id":"61e9ed3efc13ae591100044c","level":1,"name":"Gaming"},
+{"_id":{"$oid":"61e9ed3efc13ae591100044f"},"parent_id":"61e9ed3efc13ae591100044c","level":1,"name":"Phones"},
+{"_id":{"$oid":"61e9ed3efc13ae5911000450"},"parent_id":"61e9ed3efc13ae591100044c","level":1,"name":"TV"},
+{"_id":{"$oid":"61e9ed3efc13ae5911000451"},"parent_id":"61e9ed3efc13ae591100044c","level":1,"name":"video and sound"},
+{"_id":{"$oid":"61e9ed3efc13ae5911000452"},"parent_id":"61e9ed3efc13ae591100044c","level":1,"name":"Accessories"}]

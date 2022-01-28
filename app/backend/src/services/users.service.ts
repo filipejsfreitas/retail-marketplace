@@ -1,16 +1,15 @@
 import bcrypt from 'bcrypt';
-import { CreateUserDto } from '@dtos/users.dto';
-import { HttpException } from '@exceptions/HttpException';
-import { User } from '@interfaces/users.interface';
-import { UserModel } from '@models/users.model';
-import { isEmpty } from '@utils/util';
+import { CreateClientWithUserDto } from '../dtos/users.dto';
+import { HttpException } from '../exceptions/HttpException';
+import { User } from '../interfaces/users.interface';
+import { UserModel } from '../models/users.model';
+import { isEmpty } from '../utils/util';
 
 export class UserService {
   public users = UserModel;
 
-  public async findAllUser(): Promise<User[]> {
-    const users: User[] = await this.users.find();
-    return users;
+  public async findAllUser(): Promise<UserModel[]> {
+    return UserModel.find();
   }
 
   public async findUserById(userId: string): Promise<User> {
@@ -22,7 +21,7 @@ export class UserService {
     return findUser;
   }
 
-  public async createUser(userData: CreateUserDto): Promise<User> {
+  public async createUser(userData: CreateClientWithUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     const findUser: User = await this.users.findOne({ email: userData.email });
@@ -34,7 +33,7 @@ export class UserService {
     return createUserData;
   }
 
-  public async updateUser(userId: string, userData: CreateUserDto): Promise<User> {
+  public async updateUser(userId: string, userData: CreateClientWithUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     if (userData.email) {

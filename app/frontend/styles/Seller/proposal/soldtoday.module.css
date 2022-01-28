@@ -1,0 +1,38 @@
+.panel_details {
+    position: relative;
+    width: 370px;;
+    height: 238px;
+}
+
+
+.row {
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.icon {
+    background-color: #ffffff;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    display:flex; 
+    justify-content: center;
+    margin-left: 137px;
+    margin-top: 10px;
+}
+
+
+.stock{
+    position: static;
+    font-family: Fira Sans;
+    text-align: center;
+    color: #000000;
+    position: static;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 60px;
+    margin-top: 20px;
+}

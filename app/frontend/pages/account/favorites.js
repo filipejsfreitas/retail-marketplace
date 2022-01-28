@@ -7,15 +7,28 @@ import fetchCategories, { revalidateTime } from "helper/DynamicCategoriesHelper"
 import rootstyles from 'styles/Root/root.module.css'
 import styles from "styles/favorites.module.css"
 
+
+const Favorite = ({favorite}) => {
+    const { data: product } =
+          useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/${favorite}`)
+    return <ProductPreview product={product} />
+}
+
+const GetFavorites = ({favorites}) =>{
+    return favorites.map(favorite => <Favorite favorite={favorite}/>)
+}
+
 export default function Favorites({ categories }) {
-    const { data: products } =
-        useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/list`, { default: [] })
-    //console.log(products)
+    const { data: client, loading } =
+         useFetchData(`${process.env.NEXT_PUBLIC_HOST}/client`, { default: {} })
     return <Layout categories={categories} >
         <h2 className={rootstyles.titles}>Favorites</h2>
-        <div className={styles.frame}>
-            {products.map(product => <ProductPreview key={product._id} product={product} />)}
-        </div>
+
+        {loading ? <></> : 
+            <div className={styles.frame}>
+                <GetFavorites favorites={client.favoriteProducts}/>
+            </div>
+        }
     </Layout>
 }
 

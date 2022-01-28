@@ -57,14 +57,14 @@ const  RecomendedProducts = (props) => {
               {/*Adicionar ${process.env.NEXT_PUBLIC_HOST} ao src da img/*/}
               <img
                 className={styles.recommendedPhoto}              
-                src={(key.images[0] && `${key.images[0]}`) || fallback}
+                src={(key.images[0] && `${process.env.NEXT_PUBLIC_HOST}/${key.images[0]}`) || fallback}
               />
               </div >
               <div className={styles.textProd}>
                 <div className={styles.product_name}>{`${key.name}`}</div>
                 <Row>
                     <Col className={styles.product_stars}> {computeStars(key.score)} </Col>  
-                    <Col className={styles.product_price}>{key.price}€</Col>
+                    <Col className={styles.product_price}>{key.best_offer}€</Col>
                 </Row>
               </div>
               </a>

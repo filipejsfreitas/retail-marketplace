@@ -1,5 +1,5 @@
 import { Container, ListGroup, Button, Table, Row, Col, ListGroupItem } from "react-bootstrap"
-import React from "react"
+import React, { useEffect } from "react"
 import styles from 'styles/Product/product.module.css'
 import RecomendedProducts from "./Carousel2"
 import CarouselComponent from "./Carousel"
@@ -8,7 +8,9 @@ import Reviews from "./Review"
 import MyModal from "./Comment"
 import Proposals from "./Proposals"
 import {useState} from "react";
-
+import { setFavoriteOff, setFavoriteOn } from "helper/ProductPageHelper"
+import Link from "next/link";
+import useFetchAuth from "hooks/useFetchAuth"
 
 export function computeStars(stars) {
     var r = []
@@ -25,33 +27,24 @@ export function computeStars(stars) {
 const Product = (props) => {
     
     const [modalShow, setModalShow] = React.useState(false);
-    const recomended = [
-        {
-          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/s/l/slb_2.jpg"],
-          name: "Very nice and long pruduct pruduct pruduct name",
-          price: "20",
-          score: 2
-        },
-        {
-          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/p/r/product-p006585-11615_21.jpg"],
-          name: "Very nice and long pruduct product name",
-          price: "20",
-          score: 2
-        },
-        {
-          images:["https://static.pcdiga.com/media/catalog/product/cache/7800e686cb8ccc75494e29411e232323/1/1/11_p025674.jpg"],
-          name: "Very nice and long name",
-          price: "20",
-          score: 4
-        },
-        {
-          images:[],
-          name: "Very nice and long pruduct name",
-          price: "40",
-          score: 3
+    const recommended = props.recommended
+    
+    const favoriteProducts = props.favs
+    const [fav, setfav] = useState(null)
+    
+    const isLog = favoriteProducts == null ? false : true
+
+    useEffect(async () => {
+        if (favoriteProducts == null) {
+            setfav(false)
         }
-      ]
-    const [fav, setfav] = useState(false)
+        else if (favoriteProducts.favoriteProducts.includes(idP)) {
+            setfav(true)
+        } else {
+            setfav(false)
+        }
+    }, [])
+
     const appStyles={
       background:"#ffffff",
       border: 0,
@@ -59,19 +52,37 @@ const Product = (props) => {
       outline: 0,
       boxShadow:"0px 0px 0px 0px black"
     }
-        
-    const prod = props.props
+    
+    const prod = props.prod
+    const idP = prod._ids
     const proposals = props.proposals
+    const cats = props.cats
+    const catsOrd = []
+        cats.map(cat =>
+            catsOrd.push(cat.name)
+        )
+    catsOrd.reverse()
     const commentsOrd = prod.comments.sort((a, b) =>  new Date(b.date) - new Date(a.date))
+    const { fetchAuth } = useFetchAuth()
     return (            
            <>
             <Row md={12}>
-                {/*Ver os argumentos da categoria que vem no pedido para completar*/}
-                <div> Home<BsArrowRightCircle className={styles.arrow}/>
-                      Tecnologia<BsArrowRightCircle className={styles.arrow}/>  
-                      Smartphones<BsArrowRightCircle className={styles.arrow}/> 
-                      {prod.name}
+                <div className={styles.title}> 
+                  <Link href="/">Home</Link>
+                      {catsOrd.map((cat, i) => {
+                        const url = catsOrd.slice(0, i+1).reduce((acc, cat) => acc.concat("/").concat(cat), "")
+                        return (
+                          <span key={i}>
+                            <BsArrowRightCircle className={styles.arrow}/>
+                              <Link href={url}>
+                                {cat}
+                              </Link>
+                          </span>
+                        )
+                        }
+                      )}
                 </div>
+                
 
                 <Col md={6}>
                     <Row>
@@ -79,11 +90,11 @@ const Product = (props) => {
                             <CarouselComponent props={prod.images}/>
                         </Container>
                     </Row>
-                    <Row>
-                        <Container className={styles.carousel}>
+                    <Row>{recommended &&
+                        <Container className={styles.carousel}> 
                             <h3 className={styles.technicalDescription}>Also Recommended:</h3>
-                            <RecomendedProducts props={recomended} />
-                        </Container>
+                            <RecomendedProducts props={recommended} />
+                        </Container>}
                     </Row>
                 </Col>
                 <Col md={6}>
@@ -93,8 +104,13 @@ const Product = (props) => {
                             <Row className={styles.prodStats} >
                                 <Col>
                                     <div className={styles.favorite}>
-                                        <Button style={appStyles}
-                                                onClick={() => setfav(f => !f)}
+                                        <Button id="buttonFav" style={appStyles}
+                                                disabled={isLog ? false : true}
+                                                onClick={async()  => {
+                                                    const reply = await (fav ? setFavoriteOff(idP,fetchAuth) : setFavoriteOn(idP,fetchAuth))
+                                                    if(reply == 1)
+                                                        setfav(f => !f)
+                                                }}
                                                 >
                                             <div className={styles.buttonFav} >{!fav ? <BsHeart/> : <BsHeartFill/>} Favorite</div>
                                         </Button>
@@ -107,22 +123,23 @@ const Product = (props) => {
                                 </Col>
                             </Row>
                             <Row>
-                                <Proposals proposals={proposals}/>
+                                <Proposals proposals={proposals} isLog={isLog}/>
                             </Row>
                         </Container>
 
                         <Container className={styles.table1}>
                             <Table responsive borderless >
                                 <tbody>
-                                    <th> 
-                                        {Object.values(prod.characteristic).map((key, value) => (
+                                    <th>{prod.characteristic ?  
+                                        Object.values(prod.characteristic).map((key, value) => (
                                           <tr key={value}>{key.name}</tr>
-                                        ))}
+                                        )) : []}
                                     </th>
                                     <td>
-                                        {Object.values(prod.characteristic).map((key, value) => (
+                                        {prod.characteristic ? 
+                                        Object.values(prod.characteristic).map((key, value) => (
                                             <tr key={value}>{key.value}</tr>
-                                        ))}
+                                        )) : []}
                                     </td>
                                 </tbody>
                             </Table>
@@ -130,33 +147,25 @@ const Product = (props) => {
                         <div className={styles.description}>{prod.description}</div>
                         <h3 className={styles.technicalDescription}>Technical Description</h3>
                             <ListGroup>
-                                {Object.values(prod.tecnical).map((key, value) => (
+                                {prod.tecnical ?
+                                Object.values(prod.tecnical).map((key, value) => (
                                 <ListGroupItem  key={value}><span className={styles.description2}>{key.split(":")[0]+":"}</span> <span>{key.split(":")[1]}</span></ListGroupItem>
-                                ))}      
+                                )) : []}      
                             </ListGroup>
                     </Container> 
                 </Col>   
             </Row>
     
             <Row md={12}>
-                <div className={styles.reviewTop}>
-                <span className={styles.reviewName}>Reviews</span>
-                <span>
-                    <Button type="submit" 
-                        variant="secundary"
-                        className={styles.buttonComment}
-                        onClick={() => setModalShow(true)}>
-                    New Review
-                    </Button>
-                    <MyModal
-                      show={modalShow}
-                      onHide={() => setModalShow(false)}
-                      id={prod._id}
-                    />
-                </span>
-                </div>
                 <Container className={styles.panelReviews}>
-                    <Reviews props1={commentsOrd} id={prod._id}/>
+                    <Reviews 
+                        prod={prod} 
+                        id={prod._id} 
+                        modalShow={modalShow} 
+                        setModalShow={setModalShow} 
+                        isLog={isLog} 
+                        props1={commentsOrd} 
+                        id={prod._id}/>
                 </Container> 
             </Row>
         </>

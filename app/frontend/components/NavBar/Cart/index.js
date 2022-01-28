@@ -23,6 +23,11 @@ const Cart = (props) => {
 
     const total = calc_total(cart);
 
+    const toCheckout = () => {
+        props.handleClose()
+        router.push("/checkout")
+    }
+
     return (
         <Offcanvas show={props.show} onHide={props.handleClose} placement="end" style={{width: "450px"}}>
             <Offcanvas.Header className={`${styles.topRec} p-0 justify-content-between`} >
@@ -38,7 +43,7 @@ const Cart = (props) => {
                     <div className={styles.total}>
                         {`Total: ${total}€`}
                     </div>
-                    <Button variant="secondary" className={styles.checkoutBtn} onClick={ () => router.push("/checkout") } >
+                    <Button variant="secondary" className={styles.checkoutBtn} onClick={toCheckout} >
                         Checkout
                     </Button>
                 </Container>

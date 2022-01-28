@@ -3,9 +3,12 @@
     grid-auto-flow: dense;
     grid-template-columns: repeat(5,1fr);
     align-items: center;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
-.arrow{
+
+.arrow {
     vertical-align: middle;
     margin-top: -2.7px;
     margin-left: 5px;
@@ -13,7 +16,7 @@
 
 }
 
-.title{
+.title {
     font-size: 25px;
     font-weight: 300;
     margin-left: 30px;

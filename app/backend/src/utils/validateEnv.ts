@@ -1,8 +1,30 @@
-import { cleanEnv, port, str } from 'envalid';
+import { bool, cleanEnv, host, port, str, url } from 'envalid';
+import dotenv from 'dotenv';
 
 export const validateEnv = () => {
-  cleanEnv(process.env, {
-    NODE_ENV: str(),
-    PORT: port(),
+  dotenv.config();
+  return cleanEnv(process.env, {
+    PORT: port({ devDefault: 4000 }),
+    NODE_ENV: str({ devDefault: 'development' }),
+
+    MONGODB_HOST: host({ devDefault: 'localhost' }),
+    MONGODB_PORT: port({ devDefault: 4000 }),
+    MONGODB_USERNAME: str({ default: '' }),
+    MONGODB_PASSWORD: str({ default: '' }),
+    MONGODB_DATABASE: str({ devDefault: 'retailmarketplace' }),
+
+    FLASK_URL: url({ devDefault: 'http://localhost:5000' }),
+
+    SECRET_KEY: str({ devDefault: 'SecretKey' }),
+    JWT_ISSUER: str({ devDefault: 'retail-marketplace' }),
+    JWT_AUDIENCE: str({ devDefault: 'retail-marketplace' }),
+
+    CORS_ORIGIN: str({ devDefault: '*', default: '*' }),
+    CORS_CREDENTIALS: bool({ devDefault: false, default: true }),
+
+    LOG_FORMAT: str({ devDefault: 'dev', default: 'prod' }),
+    LOG_DIR: str({ default: './logs' }),
   });
 };
+
+export type NodeJSEnvironment = ReturnType<typeof validateEnv>;

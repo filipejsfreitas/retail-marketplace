@@ -15,7 +15,7 @@ export function revalidateTime() {
 // Helper function that handles the fetch of the categories
 // currently in the database via the backend API 
 export default async function fetchCategories() {
-    const categories = await fetch(`${process.env.HOST}/category/`)
+    const categories = await fetch(`${process.env.API_HOST}/category/`)
                             .then( (res) => res.json() )
                             .then( (data) => data.data )
                             .catch( () => false)

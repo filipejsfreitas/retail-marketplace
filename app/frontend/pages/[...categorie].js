@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { BsArrowRightCircle} from "react-icons/bs";
 import Link from "next/link";
 import Error from "next/error";
+import useFetchData from "hooks/useFetchData"
 
 export const getStaticPaths = async () => {
     
@@ -35,7 +36,10 @@ export const getStaticPaths = async () => {
       fallback: false
     }
 }
-  
+
+const GetProductsCategory = ({products}) =>{
+  return products.map(product => <ProductPreview product={product} />)
+}
 
 export default function Categories({categories}){
   const router = useRouter()
@@ -45,8 +49,14 @@ export default function Categories({categories}){
 
   if ( !categories )
     return <Error statusCode={503} ></Error>
+  
+  const catToFetch = cats[cats.length -1] 
 
+  const { data: products, loading } =
+        useFetchData(`${process.env.NEXT_PUBLIC_HOST}/product/category/${catToFetch}`, {when : catToFetch})
+  
   return ( 
+    
     <Layout categories={categories}>
       <Row md={12}>
         <div className={styles.title}> 
@@ -55,7 +65,7 @@ export default function Categories({categories}){
                 const url = cats.slice(0, i+1).reduce((acc, cat) => acc.concat("/").concat(cat), "")
                 return (
                   <span key={i}>
-                    <BsArrowRightCircle className={styles.arrow}/>
+                    <BsArrowRightCircle className={styles.arrow}/>                    
                       <Link href={url}>
                         {cat}
                       </Link>
@@ -65,17 +75,13 @@ export default function Categories({categories}){
               )}
         </div>
       </Row>
-            
+      {loading ? <></> :
       <Row md={12}>
           <Container className={styles.frame}>
-              <ProductPreview />
-              <ProductPreview />
-              <ProductPreview />
-              <ProductPreview />
-              <ProductPreview />
-              <ProductPreview />
+            <GetProductsCategory products={products}  key={catToFetch}/>
           </Container>
       </Row>
+      }
     </Layout>
   )
 }
